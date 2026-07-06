@@ -1,0 +1,270 @@
+/* ===========================
+   HIMNARIO IPU MOYOBAMBA
+   styles.css
+=========================== */
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial, Helvetica, sans-serif;
+}
+
+body{
+    background:#f5f7fb;
+    color:#222;
+}
+
+/* HEADER */
+
+header{
+    background:#0d47a1;
+    color:white;
+    text-align:center;
+    padding:20px;
+    box-shadow:0 2px 10px rgba(0,0,0,.2);
+}
+
+header h1{
+    font-size:28px;
+}
+
+header p{
+    margin-top:5px;
+    font-size:15px;
+}
+
+/* BUSCADOR */
+
+.busqueda{
+    padding:15px;
+}
+
+#buscar{
+    width:100%;
+    padding:14px;
+    border-radius:10px;
+    border:none;
+    outline:none;
+    font-size:16px;
+    border:2px solid #0d47a1;
+}
+
+/* MENÚ */
+
+.menu{
+    display:flex;
+    justify-content:center;
+    gap:10px;
+    flex-wrap:wrap;
+    padding:10px;
+}
+
+.menu button{
+
+    background:#1565c0;
+    color:white;
+
+    border:none;
+
+    padding:12px 18px;
+
+    border-radius:8px;
+
+    cursor:pointer;
+
+    transition:.3s;
+
+    font-size:15px;
+
+}
+
+.menu button:hover{
+
+    background:#0d47a1;
+
+}
+
+/* CONTENIDO */
+
+main{
+
+    padding:15px;
+
+}
+
+/* TARJETAS */
+
+.card{
+
+    background:white;
+
+    margin-bottom:15px;
+
+    border-radius:12px;
+
+    padding:15px;
+
+    box-shadow:0 3px 10px rgba(0,0,0,.12);
+
+    transition:.3s;
+
+}
+
+.card:hover{
+
+    transform:translateY(-3px);
+
+}
+
+.numero{
+
+    color:#1565c0;
+
+    font-weight:bold;
+
+    font-size:18px;
+
+}
+
+.titulo{
+
+    margin-top:5px;
+
+    font-size:22px;
+
+    font-weight:bold;
+
+}
+
+.letra{
+
+    margin-top:12px;
+
+    white-space:pre-line;
+
+    line-height:1.8;
+
+    font-size:17px;
+
+}
+
+/* BOTONES */
+
+.botones{
+
+    margin-top:15px;
+
+    display:flex;
+
+    gap:10px;
+
+    flex-wrap:wrap;
+
+}
+
+.botones button{
+
+    border:none;
+
+    cursor:pointer;
+
+    padding:10px 15px;
+
+    border-radius:8px;
+
+    background:#1976d2;
+
+    color:white;
+
+    transition:.3s;
+
+}
+
+.botones button:hover{
+
+    background:#0d47a1;
+
+}
+
+/* FOOTER */
+
+footer{
+
+    text-align:center;
+
+    padding:20px;
+
+    color:#777;
+
+}
+
+/* MODO OSCURO */
+
+.dark{
+
+    background:#121212;
+
+    color:white;
+
+}
+
+.dark .card{
+
+    background:#1f1f1f;
+
+    color:white;
+
+}
+
+.dark #buscar{
+
+    background:#222;
+
+    color:white;
+
+    border-color:#42a5f5;
+
+}
+
+.dark footer{
+
+    color:#ccc;
+
+}
+
+/* RESPONSIVE */
+
+@media(max-width:700px){
+
+header h1{
+
+font-size:24px;
+
+}
+
+.titulo{
+
+font-size:20px;
+
+}
+
+.letra{
+
+font-size:16px;
+
+}
+
+.menu{
+
+flex-direction:column;
+
+}
+
+.menu button{
+
+width:100%;
+
+}
+
+}
