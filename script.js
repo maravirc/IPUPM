@@ -60,7 +60,7 @@ function mostrarHimnos(datos) {
         <button class="btnPantalla"
             onclick="pantallaCompleta(${himno.numero})">
 
-            ⛶ Pantalla completa
+            ⛶
 
         </button>
 
