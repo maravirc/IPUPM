@@ -297,5 +297,38 @@ width:100%;
     background:#1b5e20;
 
 }
+.cabecera-himno{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    margin-bottom:10px;
+
+}
+
+.btnPantalla{
+
+    border:none;
+
+    background:none;
+
+    color:#1565c0;
+
+    cursor:pointer;
+
+    font-size:14px;
+
+    font-weight:bold;
+
+}
+
+.btnPantalla:hover{
+
+    text-decoration:underline;
+
+}
 
 }

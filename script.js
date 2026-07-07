@@ -41,7 +41,20 @@ function mostrarHimnos(datos) {
         const esFavorito = favoritos.includes(himno.numero);
 
         card.innerHTML = `
-            <div class="numero">Himno ${himno.numero}</div>
+           <div class="cabecera-himno">
+
+    <div class="numero">
+        Himno ${himno.numero}
+    </div>
+
+    <button class="btnPantalla"
+        onclick="pantallaCompleta(${himno.numero})">
+
+        ⛶ Pantalla completa
+
+    </button>
+
+</div>
 
             <div class="titulo">${himno.titulo}</div>
 
@@ -236,3 +249,25 @@ btnInstalar.addEventListener("click", async ()=>{
     btnInstalar.style.display = "none";
 
 });
+
+function pantallaCompleta(numero){
+
+    const card = [...document.querySelectorAll(".card")];
+
+    const tarjeta = card.find(c =>
+        c.innerHTML.includes(`Himno ${numero}`)
+    );
+
+    if(!tarjeta) return;
+
+    if(document.fullscreenElement){
+
+        document.exitFullscreen();
+
+    }else{
+
+        tarjeta.requestFullscreen();
+
+    }
+
+}
