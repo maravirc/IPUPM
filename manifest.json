@@ -1,21 +1,26 @@
 {
-    "name": "Himnario IPU Moyobamba",
-    "short_name": "Himnario IPU",
-    "start_url": ".",
-    "display": "standalone",
-    "background_color": "#0d47a1",
-    "theme_color": "#0d47a1",
-    "orientation": "portrait",
-    "icons": [
-      {
-        "src": "icons/icon-192.png",
-        "sizes": "192x192",
-        "type": "image/png"
-      },
-      {
-        "src": "icons/icon-512.png",
-        "sizes": "512x512",
-        "type": "image/png"
-      }
-    ]
-  }
+  "name": "Himnario IPU Moyobamba",
+  "short_name": "Himnario IPU",
+  "description": "Himnario digital de la Iglesia Pentecostal Unida de Moyobamba",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#0d47a1",
+  "orientation": "portrait",
+
+  "icons": [
+    {
+      "src": "icons/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "icons/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}

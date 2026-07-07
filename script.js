@@ -186,3 +186,53 @@ ${himno.letra}`
 
 // Iniciar
 cargarHimnos();
+
+// ==========================
+// INSTALAR PWA
+// ==========================
+
+let eventoInstalacion;
+
+const btnInstalar = document.getElementById("btnInstalar");
+
+
+window.addEventListener("beforeinstallprompt", (e)=>{
+
+    e.preventDefault();
+
+    eventoInstalacion = e;
+
+    btnInstalar.style.display = "block";
+
+});
+
+
+btnInstalar.addEventListener("click", async ()=>{
+
+    if(!eventoInstalacion){
+        return;
+    }
+
+
+    eventoInstalacion.prompt();
+
+
+    const resultado = await eventoInstalacion.userChoice;
+
+
+    if(resultado.outcome === "accepted"){
+
+        console.log("Aplicación instalada");
+
+    }else{
+
+        console.log("Instalación cancelada");
+
+    }
+
+
+    eventoInstalacion = null;
+
+    btnInstalar.style.display = "none";
+
+});

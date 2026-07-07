@@ -1,0 +1,56 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512">
+  <!-- Fondo azul profundo con bordes redondeados -->
+  <rect width="512" height="512" rx="100" fill="#0a2a44"/>
+  
+  <!-- Degradado de fondo sutil -->
+  <defs>
+    <linearGradient id="fondoGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#0e3a6b;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#061a33;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="dorado" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#f4d03f;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#b7950b;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+  
+  <rect width="512" height="512" rx="100" fill="url(#fondoGrad)"/>
+  
+  <!-- Luz dorada (rayo diagonal) -->
+  <polygon points="350,50 450,150 380,200 280,100" fill="url(#dorado)" opacity="0.3"/>
+  <polygon points="370,30 470,130 420,160 320,60" fill="url(#dorado)" opacity="0.15"/>
+  
+  <!-- Biblia abierta -->
+  <g transform="translate(256, 260)">
+    <!-- Páginas izquierdas -->
+    <path d="M-10,-80 Q-50,-75 -80,-60 L-80,60 Q-50,45 -10,50 L-10,-80 Z" fill="#f5f0dc" stroke="#d4c9a8" stroke-width="2"/>
+    <!-- Páginas derechas -->
+    <path d="M10,-80 Q50,-75 80,-60 L80,60 Q50,45 10,50 L10,-80 Z" fill="#f5f0dc" stroke="#d4c9a8" stroke-width="2"/>
+    <!-- Lomo -->
+    <rect x="-10" y="-80" width="20" height="130" rx="3" fill="#8b0000"/>
+    <!-- Líneas de texto en página izquierda -->
+    <line x1="-60" y1="-50" x2="-25" y2="-50" stroke="#c0b090" stroke-width="2" opacity="0.5"/>
+    <line x1="-60" y1="-35" x2="-25" y2="-35" stroke="#c0b090" stroke-width="2" opacity="0.5"/>
+    <line x1="-60" y1="-20" x2="-40" y2="-20" stroke="#c0b090" stroke-width="2" opacity="0.5"/>
+    <!-- Líneas de texto en página derecha -->
+    <line x1="25" y1="-50" x2="60" y2="-50" stroke="#c0b090" stroke-width="2" opacity="0.5"/>
+    <line x1="25" y1="-35" x2="60" y2="-35" stroke="#c0b090" stroke-width="2" opacity="0.5"/>
+    <line x1="25" y1="-20" x2="45" y2="-20" stroke="#c0b090" stroke-width="2" opacity="0.5"/>
+    <!-- Resplandor dorado en las páginas -->
+    <ellipse cx="0" cy="0" rx="50" ry="40" fill="#f4d03f" opacity="0.2"/>
+  </g>
+  
+  <!-- Nota musical 🎵 (estilizada) -->
+  <g transform="translate(220, 160)" fill="#f4d03f">
+    <ellipse cx="0" cy="0" rx="12" ry="9" fill="#f4d03f"/>
+    <ellipse cx="25" cy="-5" rx="12" ry="9" fill="#f4d03f"/>
+    <line x1="10" y1="0" x2="10" y2="-50" stroke="#f4d03f" stroke-width="4"/>
+    <line x1="35" y1="-5" x2="35" y2="-55" stroke="#f4d03f" stroke-width="4"/>
+    <path d="M10,-50 Q20,-60 35,-55" stroke="#f4d03f" stroke-width="4" fill="none"/>
+  </g>
+  
+  <!-- Pequeños destellos de luz -->
+  <circle cx="380" cy="120" r="5" fill="#f4d03f" opacity="0.6"/>
+  <circle cx="400" cy="100" r="3" fill="#f4d03f" opacity="0.4"/>
+  <circle cx="360" cy="140" r="4" fill="#f4d03f" opacity="0.5"/>
+</svg>

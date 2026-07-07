@@ -286,4 +286,16 @@ width:100%;
 
 }
 
+#btnInstalar{
+
+    background:#2e7d32;
+
+}
+
+#btnInstalar:hover{
+
+    background:#1b5e20;
+
+}
+
 }
