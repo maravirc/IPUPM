@@ -1,6 +1,6 @@
 {
-  "name": "Himnario IPU Moyobamba",
-  "short_name": "Himnario IPU",
+  "name": "Himnario IPUP Moyobamba",
+  "short_name": "Himnario IPUP",
   "description": "Himnario digital de la Iglesia Pentecostal Unida de Moyobamba",
   "start_url": "./",
   "scope": "./",
