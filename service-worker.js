@@ -1,27 +1,95 @@
-const CACHE_NAME = "himnario-ipu-v1";
+const CACHE_NAME = "himnario-ipu-v2";
 
 const urlsToCache = [
-  "./",
-  "./index.html",
-  "./styles.css",
-  "./script.js",
-  "./data/himnos.json"
+    "./",
+    "./index.html",
+    "./styles.css",
+    "./script.js",
+    "./manifest.json"
 ];
 
-// INSTALAR CACHE
+
+// INSTALAR NUEVA VERSION
 self.addEventListener("install", event => {
-  event.waitUntil(
-    caches.open(CACHE_NAME)
-    .then(cache => cache.addAll(urlsToCache))
-  );
+
+    event.waitUntil(
+
+        caches.open(CACHE_NAME)
+        .then(cache => {
+
+            return cache.addAll(urlsToCache);
+
+        })
+
+    );
+
+    self.skipWaiting();
+
 });
 
-// INTERCEPTAR PETICIONES
+
+// ACTIVAR Y LIMPIAR VERSIONES ANTIGUAS
+self.addEventListener("activate", event => {
+
+    event.waitUntil(
+
+        caches.keys()
+        .then(cacheNames => {
+
+            return Promise.all(
+
+                cacheNames.map(cache => {
+
+                    if(cache !== CACHE_NAME){
+
+                        return caches.delete(cache);
+
+                    }
+
+                })
+
+            );
+
+        })
+
+    );
+
+    self.clients.claim();
+
+});
+
+
+// PETICIONES
 self.addEventListener("fetch", event => {
-  event.respondWith(
-    caches.match(event.request)
-    .then(response => {
-      return response || fetch(event.request);
-    })
-  );
+
+
+    // Para los JSON siempre buscar la versión nueva
+    if(
+        event.request.url.includes(".json")
+    ){
+
+        event.respondWith(
+
+            fetch(event.request)
+            .catch(()=>caches.match(event.request))
+
+        );
+
+        return;
+
+    }
+
+
+    // Para archivos normales usar caché
+    event.respondWith(
+
+        caches.match(event.request)
+        .then(response => {
+
+            return response || fetch(event.request);
+
+        })
+
+    );
+
 });
