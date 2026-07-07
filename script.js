@@ -137,9 +137,20 @@ document.getElementById("btnFavoritos").addEventListener("click", () => {
 });
 
 // Mostrar todos
-document.getElementById("btnHimnos").addEventListener("click", () => {
+document.getElementById("btnHimnos").addEventListener("click", async () => {
 
-    mostrarHimnos(himnos);
+    try {
+
+        const respuesta = await fetch("data/himnos.json");
+        himnos = await respuesta.json();
+
+        mostrarHimnos(himnos);
+
+    } catch (error) {
+
+        console.error(error);
+
+    }
 
 });
 
