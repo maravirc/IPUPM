@@ -356,50 +356,11 @@ width:100%;
 
 }
 
-.card:fullscreen .titulo{
-
-    font-size:38px;
-
-    text-align:center;
-
-    margin-bottom:25px;
-
-}
-
-.card:fullscreen .numero{
-
-    font-size:24px;
-
-    font-weight:bold;
-
-}
-
-.card:fullscreen .letra{
-
-    font-size:28px;
-
-    line-height:1.8;
-
-    margin-top:20px;
-
-}
-
-.card:fullscreen .botones{
-
-    display:none;
-
-}
 .card:fullscreen .cabecera-himno{
 
     position:sticky;
 
     top:0;
-
-    background:#1565c0;
-
-    padding:20px;
-
-    z-index:1000;
 
     display:flex;
 
@@ -407,16 +368,13 @@ width:100%;
 
     align-items:center;
 
-    box-shadow:0 3px 8px rgba(0,0,0,.3);
+    background:#1565c0;
 
-}
-.card:fullscreen .numero{
+    padding:20px;
 
-    color:#FFD54F;
+    z-index:999;
 
-    font-size:22px;
-
-    font-weight:bold;
+    box-shadow:0 3px 10px rgba(0,0,0,.35);
 
 }
 
@@ -426,7 +384,15 @@ width:100%;
 
     font-size:34px;
 
-    margin-top:10px;
+    margin-top:8px;
+
+}
+
+.card:fullscreen .numero{
+
+    color:#FFD54F;
+
+    font-size:22px;
 
 }
 
@@ -438,7 +404,33 @@ width:100%;
 
     line-height:2;
 
-    margin-top:0;
+}
+
+.btnSalir{
+
+    background:#d32f2f;
+
+    color:white;
+
+    border:none;
+
+    border-radius:50%;
+
+    width:45px;
+
+    height:45px;
+
+    cursor:pointer;
+
+    font-size:22px;
+
+    margin-left:10px;
+
+}
+
+.btnPantalla{
+
+    margin-right:8px;
 
 }
 

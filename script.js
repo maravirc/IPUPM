@@ -41,10 +41,18 @@ function mostrarHimnos(datos) {
         const esFavorito = favoritos.includes(himno.numero);
 
         card.innerHTML = `
-           <div class="cabecera-himno">
+<div class="cabecera-himno">
 
-    <div class="numero">
-        Himno ${himno.numero}
+    <div>
+
+        <div class="numero">
+            Himno ${himno.numero}
+        </div>
+
+        <div class="titulo">
+            ${himno.titulo}
+        </div>
+
     </div>
 
     <button class="btnPantalla"
@@ -56,7 +64,7 @@ function mostrarHimnos(datos) {
 
 </div>
 
-            <div class="titulo">${himno.titulo}</div>
+            
 
             <div class="letra">
 ${himno.letra}
@@ -71,6 +79,13 @@ ${himno.letra}
                 <button onclick="compartir(${himno.numero})">
                     📤 Compartir
                 </button>
+
+                <button class="btnSalir"
+    onclick="salirPantallaCompleta(event)">
+
+    ✕
+
+</button>
 
             </div>
         `;
@@ -252,21 +267,27 @@ btnInstalar.addEventListener("click", async ()=>{
 
 function pantallaCompleta(numero){
 
-    const card = [...document.querySelectorAll(".card")];
+    const tarjetas = document.querySelectorAll(".card");
 
-    const tarjeta = card.find(c =>
-        c.innerHTML.includes(`Himno ${numero}`)
-    );
+    tarjetas.forEach(card=>{
 
-    if(!tarjeta) return;
+        if(card.innerHTML.includes(`Himno ${numero}`)){
+
+            card.requestFullscreen();
+
+        }
+
+    });
+
+}
+
+function salirPantallaCompleta(event){
+
+    event.stopPropagation();
 
     if(document.fullscreenElement){
 
         document.exitFullscreen();
-
-    }else{
-
-        tarjeta.requestFullscreen();
 
     }
 
