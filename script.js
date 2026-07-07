@@ -68,6 +68,25 @@ ${himno.letra}
 
 }
 
+// Botón Coros
+document.getElementById("btnCoros").addEventListener("click", async () => {
+
+    try {
+
+        const respuesta = await fetch("data/coros.json");
+        himnos = await respuesta.json();
+
+        mostrarHimnos(himnos);
+
+    } catch (error) {
+
+        lista.innerHTML = "<h2>No se pudieron cargar los coros.</h2>";
+        console.error(error);
+
+    }
+
+});
+
 // Buscar
 buscar.addEventListener("keyup", () => {
 
