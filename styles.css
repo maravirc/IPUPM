@@ -334,23 +334,25 @@ width:100%;
    PANTALLA COMPLETA
 =========================== */
 
+/* ===========================
+   PANTALLA COMPLETA
+=========================== */
+
 .card:fullscreen{
 
-    background: white;
+    background:#0d47a1;
 
-    padding:40px;
+    color:white;
 
     width:100vw;
 
     height:100vh;
 
-    overflow-y:auto;
-
-    border-radius:0;
-
     margin:0;
 
-    box-sizing:border-box;
+    padding:0;
+
+    overflow-y:auto;
 
 }
 
@@ -379,6 +381,64 @@ width:100%;
     line-height:1.8;
 
     margin-top:20px;
+
+}
+
+.card:fullscreen .botones{
+
+    display:none;
+
+}
+.card:fullscreen .cabecera-himno{
+
+    position:sticky;
+
+    top:0;
+
+    background:#1565c0;
+
+    padding:20px;
+
+    z-index:1000;
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    box-shadow:0 3px 8px rgba(0,0,0,.3);
+
+}
+.card:fullscreen .numero{
+
+    color:#FFD54F;
+
+    font-size:22px;
+
+    font-weight:bold;
+
+}
+
+.card:fullscreen .titulo{
+
+    color:white;
+
+    font-size:34px;
+
+    margin-top:10px;
+
+}
+
+.card:fullscreen .letra{
+
+    padding:30px;
+
+    font-size:30px;
+
+    line-height:2;
+
+    margin-top:0;
 
 }
 
