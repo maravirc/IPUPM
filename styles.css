@@ -440,4 +440,69 @@ width:100%;
 
 }
 
+.acciones{
+
+    display:flex;
+
+    gap:10px;
+
+    align-items:center;
+
+}
+
+.btnPantalla,
+.btnSalir{
+
+    width:40px;
+
+    height:40px;
+
+    border:none;
+
+    border-radius:50%;
+
+    cursor:pointer;
+
+    font-size:18px;
+
+}
+
+.btnPantalla{
+
+    background:#1565c0;
+
+    color:white;
+
+}
+
+.btnSalir{
+
+    background:#d32f2f;
+
+    color:white;
+
+}
+
+.btnSalir{
+
+    display:none;
+
+}
+
+.card:fullscreen .btnPantalla{
+
+    display:none;
+
+}
+
+.card:fullscreen .btnSalir{
+
+    display:inline-flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+}
+
 }

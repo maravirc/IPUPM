@@ -55,12 +55,23 @@ function mostrarHimnos(datos) {
 
     </div>
 
-    <button class="btnPantalla"
-        onclick="pantallaCompleta(${himno.numero})">
+    <div class="acciones">
 
-        ⛶ Pantalla completa
+        <button class="btnPantalla"
+            onclick="pantallaCompleta(${himno.numero})">
 
-    </button>
+            ⛶ Pantalla completa
+
+        </button>
+
+        <button class="btnSalir"
+            onclick="salirPantallaCompleta(event)">
+
+            ✕
+
+        </button>
+
+    </div>
 
 </div>
 
@@ -80,12 +91,6 @@ ${himno.letra}
                     📤 Compartir
                 </button>
 
-                <button class="btnSalir"
-    onclick="salirPantallaCompleta(event)">
-
-    ✕
-
-</button>
 
             </div>
         `;
