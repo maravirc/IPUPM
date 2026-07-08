@@ -152,6 +152,11 @@ buscar.addEventListener("keyup", () => {
 
     mostrarHimnos(resultado);
 
+lista.scrollIntoView({
+    behavior: "smooth",
+    block: "start"
+});
+
 });
 
 // Favoritos
