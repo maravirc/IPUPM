@@ -129,27 +129,26 @@ buscar.addEventListener("keyup", () => {
 
     const texto = buscar.value.trim().toLowerCase();
 
-    console.clear();
-    console.log("Texto buscado:", texto);
+    let resultado;
 
-    const resultado = himnos.filter(h => {
+    // Si escribió solo números
+    if (/^\d+$/.test(texto)) {
 
-        console.log(
-            "Himno:",
-            h.numero,
-            "Comparación:",
+        resultado = himnos.filter(h =>
             h.numero.toString().includes(texto)
         );
 
-        return (
-            h.numero.toString().includes(texto) ||
+    } else {
+
+        resultado = himnos.filter(h =>
+
             h.titulo.toLowerCase().includes(texto) ||
+
             h.letra.toLowerCase().includes(texto)
+
         );
 
-    });
-
-    console.log("Resultado:", resultado);
+    }
 
     mostrarHimnos(resultado);
 
