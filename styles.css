@@ -112,153 +112,98 @@ main{
 
 }
 
-/* ============================================
-   TARJETAS DE HIMNOS (ESTILO MINIMALISTA)
-============================================ */
+/* TARJETAS */
 
-.card {
-    background: white;
-    margin-bottom: 16px;
-    border-radius: 12px;
-    padding: 18px 20px 14px;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
-    transition: all 0.3s ease;
-    border: 1px solid #f0f2f5;
+.card{
+
+    background:white;
+
+    margin-bottom:15px;
+
+    border-radius:12px;
+
+    padding:15px;
+
+    box-shadow:0 3px 10px rgba(0,0,0,.12);
+
+    transition:.3s;
+
 }
 
-.card:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
+.card:hover{
+
+    transform:translateY(-3px);
+
 }
 
-/* --- CABECERA: NÚMERO Y TÍTULO EN UNA LÍNEA --- */
-.cabecera-himno {
-    display: flex;
-    justify-content: space-between;
-    align-items: baseline;
-    margin-bottom: 8px;
-    padding-bottom: 4px;
-    border-bottom: 1px solid #eef2f7;
+.numero{
+
+    color:#1565c0;
+
+    font-weight:bold;
+
+    font-size:18px;
+
 }
 
-.numero {
-    color: #0d47a1;
-    font-weight: 700;
-    font-size: 15px;
-    letter-spacing: 0.3px;
+.titulo{
+
+    margin-top:5px;
+
+    font-size:22px;
+
+    font-weight:bold;
+
 }
 
-.titulo {
-    font-size: 19px;
-    font-weight: 700;
-    color: #0a1a2e;
-    letter-spacing: -0.2px;
-    margin-top: 0;
+.letra{
+
+    margin-top:-14px;
+
+    white-space:pre-line;
+
+    line-height:1.4;
+
+    font-size:30px;
+
 }
 
-/* --- BOTÓN PANTALLA COMPLETA --- */
-.btnPantalla {
-    border: none;
-    background: none;
-    color: #7a8a9e;
-    cursor: pointer;
-    font-size: 16px;
-    padding: 4px 8px;
-    border-radius: 6px;
-    transition: all 0.2s ease;
+/* BOTONES */
+
+.botones{
+
+    margin-top:15px;
+
+    display:flex;
+
+    gap:10px;
+
+    flex-wrap:wrap;
+
 }
 
-.btnPantalla:hover {
-    background: #f0f4f9;
-    color: #0d47a1;
-    text-decoration: none;
+.botones button{
+
+    border:none;
+
+    cursor:pointer;
+
+    padding:10px 15px;
+
+    border-radius:8px;
+
+    background:#1976d2;
+
+    color:white;
+
+    transition:.3s;
+
 }
 
-/* --- LETRA DEL HIMNO --- */
-.letra {
-    white-space: pre-line;
-    line-height: 1.8;
-    font-size: 16px;
-    color: #1f2a3f;
-    font-weight: 400;
-    padding: 4px 0;
-    margin-top: 0;
-}
+.botones button:hover{
 
-/* --- CORO RESALTADO --- */
-.letra .coro {
-    display: block;
-    background: #f5f8ff;
-    padding: 12px 16px;
-    border-radius: 8px;
-    margin: 10px 0 8px;
-    border-left: 3px solid #0d47a1;
-    color: #0a2a5a;
-    font-weight: 500;
-}
+    background:#0d47a1;
 
-/* --- BOTONES DE ACCIÓN --- */
-.botones {
-    margin-top: 12px;
-    display: flex;
-    gap: 8px;
-    flex-wrap: wrap;
-    padding-top: 10px;
-    border-top: 1px solid #f0f2f5;
-}
-
-.botones button {
-    border: none;
-    cursor: pointer;
-    padding: 6px 14px;
-    border-radius: 20px;
-    background: #f0f4f9;
-    color: #0d47a1;
-    font-weight: 600;
-    font-size: 13px;
-    transition: all 0.2s ease;
-}
-
-.botones button:hover {
-    background: #0d47a1;
-    color: white;
-}
-
-.botones button:active {
-    transform: scale(0.96);
-}
-
-/* --- BOTÓN FAVORITO (cuando está activo) --- */
-.botones button.btn-fav {
-    background: #fff3e0;
-    color: #e65100;
-}
-
-.botones button.btn-fav:hover {
-    background: #f57f17;
-    color: white;
-}
-
-/* --- BOTÓN COMPARTIR --- */
-.botones button.btn-share {
-    background: #e8f5e9;
-    color: #2e7d32;
-}
-
-.botones button.btn-share:hover {
-    background: #2e7d32;
-    color: white;
-}
-
-/* --- BOTÓN COPIAR --- */
-.botones button:last-child:not(.btn-fav):not(.btn-share) {
-    background: #e8eaf6;
-    color: #3949ab;
-}
-
-.botones button:last-child:not(.btn-fav):not(.btn-share):hover {
-    background: #3949ab;
-    color: white;
 }
 
 /* FOOTER */
@@ -273,284 +218,290 @@ footer{
 
 }
 
-/* ===========================
-   MODO OSCURO
-=========================== */
+/* MODO OSCURO */
 
 .dark{
+
     background:#121212;
+
     color:white;
+
 }
 
 .dark .card{
+
     background:#1f1f1f;
+
     color:white;
-    border-color: #2a2a2a;
+
 }
 
 .dark #buscar{
+
     background:#222;
+
     color:white;
+
     border-color:#42a5f5;
+
 }
 
 .dark footer{
+
     color:#ccc;
+
 }
 
-.dark .cabecera-himno {
-    border-bottom-color: #2a2a2a;
-}
-
-.dark .numero {
-    color: #64b5f6;
-}
-
-.dark .titulo {
-    color: #f0f6fc;
-}
-
-.dark .letra {
-    color: #d0d7de;
-}
-
-.dark .letra .coro {
-    background: #1a2744;
-    border-left-color: #42a5f5;
-    color: #b3d4fc;
-}
-
-.dark .btnPantalla {
-    color: #7a8a9e;
-}
-
-.dark .btnPantalla:hover {
-    background: #1a2744;
-    color: #64b5f6;
-}
-
-.dark .botones {
-    border-top-color: #2a2a2a;
-}
-
-.dark .botones button {
-    background: #1a2744;
-    color: #64b5f6;
-}
-
-.dark .botones button:hover {
-    background: #1e88e5;
-    color: white;
-}
-
-.dark .botones button.btn-fav {
-    background: #3e2723;
-    color: #ffab40;
-}
-
-.dark .botones button.btn-fav:hover {
-    background: #f57f17;
-    color: white;
-}
-
-.dark .botones button.btn-share {
-    background: #1b3a1b;
-    color: #66bb6a;
-}
-
-.dark .botones button.btn-share:hover {
-    background: #2e7d32;
-    color: white;
-}
-
-.dark .botones button:last-child:not(.btn-fav):not(.btn-share) {
-    background: #1a1a3a;
-    color: #7986cb;
-}
-
-.dark .botones button:last-child:not(.btn-fav):not(.btn-share):hover {
-    background: #3949ab;
-    color: white;
-}
-
-/* ===========================
-   RESPONSIVE
-=========================== */
+/* RESPONSIVE */
 
 @media(max-width:700px){
 
-    header h1{
-        font-size:24px;
-    }
+header h1{
 
-    .titulo{
-        font-size:17px;
-    }
+font-size:24px;
 
-    .letra{
-        font-size:15px;
-        line-height:1.7;
-    }
-
-    .menu{
-        flex-direction:column;
-    }
-
-    .menu button{
-        width:100%;
-    }
-
-    #btnInstalar{
-        background:#2e7d32;
-    }
-
-    #btnInstalar:hover{
-        background:#1b5e20;
-    }
-
-    .card {
-        padding: 14px 16px 12px;
-        border-radius: 10px;
-    }
-
-    .numero {
-        font-size: 14px;
-    }
-
-    .botones button {
-        font-size: 12px;
-        padding: 5px 12px;
-    }
-
-    main {
-        margin-top: 340px;
-    }
 }
 
-@media(max-width:480px){
+.titulo{
 
-    .card {
-        padding: 12px 14px 10px;
-        border-radius: 10px;
-        margin-bottom: 12px;
-    }
+font-size:20px;
 
-    .cabecera-himno {
-        flex-wrap: wrap;
-        gap: 2px;
-    }
-
-    .titulo {
-        font-size: 15px;
-    }
-
-    .numero {
-        font-size: 13px;
-    }
-
-    .letra {
-        font-size: 14px;
-        line-height: 1.6;
-    }
-
-    .botones {
-        gap: 5px;
-        padding-top: 8px;
-    }
-
-    .botones button {
-        font-size: 11px;
-        padding: 4px 10px;
-    }
 }
+
+.letra{
+
+font-size:26px;
+
+}
+
+.menu{
+
+flex-direction:column;
+
+}
+
+.menu button{
+
+width:100%;
+
+}
+
+#btnInstalar{
+
+    background:#2e7d32;
+
+}
+
+#btnInstalar:hover{
+
+    background:#1b5e20;
+
+}
+.cabecera-himno{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    margin-bottom:10px;
+
+}
+
+.btnPantalla{
+
+    border:none;
+
+    background:none;
+
+    color:#1565c0;
+
+    cursor:pointer;
+
+    font-size:14px;
+
+    font-weight:bold;
+
+}
+
+.btnPantalla:hover{
+
+    text-decoration:underline;
+
+}
+/* ===========================
+   PANTALLA COMPLETA
+=========================== */
 
 /* ===========================
    PANTALLA COMPLETA
 =========================== */
 
-.card:fullscreen {
-    background: #0d47a1;
-    color: white;
-    width: 100vw;
-    height: 100vh;
-    margin: 0;
-    padding: 0;
-    overflow-y: auto;
-    border-radius: 0;
-    border: none;
+.card:fullscreen{
+
+    background:#0d47a1;
+
+    color:white;
+
+    width:100vw;
+
+    height:100vh;
+
+    margin:0;
+
+    padding:0;
+
+    overflow-y:auto;
+
 }
 
-.card:fullscreen .cabecera-himno {
-    position: sticky;
-    top: 0;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    background: rgba(13, 71, 161, 0.95);
-    backdrop-filter: blur(12px);
-    padding: 16px 20px;
-    z-index: 999;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+.card:fullscreen .cabecera-himno{
+
+    position:sticky;
+
+    top:0;
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    background:#1565c0;
+
+    padding:20px;
+
+    z-index:999;
+
+    box-shadow:0 3px 10px rgba(0,0,0,.35);
+
 }
 
-.card:fullscreen .numero {
-    color: #FFD54F;
-    font-size: 16px;
+.card:fullscreen .titulo{
+
+    color:white;
+
+    font-size:34px;
+
+    margin-top:8px;
+
 }
 
-.card:fullscreen .titulo {
-    color: white;
-    font-size: 26px;
-    margin-top: 0;
+.card:fullscreen .numero{
+
+    color:#FFD54F;
+
+    font-size:22px;
+
 }
 
-.card:fullscreen .letra {
-    padding: 24px 24px 32px;
-    font-size: 22px;
-    line-height: 1.7;
-    color: #e3edfb;
+.card:fullscreen .letra{
+
+    padding:30px;
+
+    font-size:30px;
+
+    line-height:1.4;
+
 }
 
-.card:fullscreen .letra .coro {
-    background: rgba(255, 255, 255, 0.06);
-    border-left-color: #FFD54F;
-    color: #FFD54F;
+.btnSalir{
+
+    background:#d32f2f;
+
+    color:white;
+
+    border:none;
+
+    border-radius:50%;
+
+    width:45px;
+
+    height:45px;
+
+    cursor:pointer;
+
+    font-size:22px;
+
+    margin-left:10px;
+
 }
 
-.card:fullscreen .botones {
-    display: none;
+.btnPantalla{
+
+    margin-right:8px;
+
 }
 
-.card:fullscreen .btnPantalla {
-    display: none;
+.card:fullscreen .botones{
+
+    display:none;
+
 }
 
-.card:fullscreen .btnSalir {
-    display: inline-flex;
-    justify-content: center;
-    align-items: center;
-    background: rgba(214, 40, 40, 0.85);
-    color: white;
-    border: none;
-    border-radius: 50%;
-    width: 38px;
-    height: 38px;
-    cursor: pointer;
-    font-size: 18px;
-    transition: all 0.2s ease;
+.acciones{
+
+    display:flex;
+
+    gap:10px;
+
+    align-items:center;
+
 }
 
-.card:fullscreen .btnSalir:hover {
-    background: #d32f2f;
-    transform: scale(1.05);
+.btnPantalla,
+.btnSalir{
+
+    width:40px;
+
+    height:40px;
+
+    border:none;
+
+    border-radius:50%;
+
+    cursor:pointer;
+
+    font-size:18px;
+
 }
 
-.btnSalir {
-    display: none;
+.btnPantalla{
+
+    background:#1565c0;
+
+    color:white;
+
 }
 
-.acciones {
-    display: flex;
-    gap: 10px;
-    align-items: center;
+.btnSalir{
+
+    background:#d32f2f;
+
+    color:white;
+
+}
+
+.btnSalir{
+
+    display:none;
+
+}
+
+.card:fullscreen .btnPantalla{
+
+    display:none;
+
+}
+
+.card:fullscreen .btnSalir{
+
+    display:inline-flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+}
 }
