@@ -127,17 +127,29 @@ document.getElementById("btnCoros").addEventListener("click", async () => {
 // Buscar
 buscar.addEventListener("keyup", () => {
 
-    const texto = buscar.value.toLowerCase();
+    const texto = buscar.value.trim().toLowerCase();
 
-    const resultado = himnos.filter(h =>
+    console.clear();
+    console.log("Texto buscado:", texto);
 
-        h.titulo.toLowerCase().includes(texto) ||
+    const resultado = himnos.filter(h => {
 
-        h.letra.toLowerCase().includes(texto) ||
+        console.log(
+            "Himno:",
+            h.numero,
+            "Comparación:",
+            h.numero.toString().includes(texto)
+        );
 
-        h.numero.toString().includes(texto)
+        return (
+            h.numero.toString().includes(texto) ||
+            h.titulo.toLowerCase().includes(texto) ||
+            h.letra.toLowerCase().includes(texto)
+        );
 
-    );
+    });
+
+    console.log("Resultado:", resultado);
 
     mostrarHimnos(resultado);
 
