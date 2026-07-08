@@ -78,7 +78,7 @@ function mostrarHimnos(datos) {
             
 
 <div class="letra">
-${formatearLetra(himno.letra)}
+${himno.letra}
 </div>
 
             <div class="botones">
