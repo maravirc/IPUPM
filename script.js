@@ -101,20 +101,6 @@ ${formatearLetra(himno.letra)}
 
 }
 
-function formatearLetra(texto){
-
-    return texto
-    .replace(/\*\*Coro:\*\*/g,
-    '<div class="coro-titulo">CORO</div>')
-
-    .replace(
-    /¡Dios, manda tu gran poder![\s\S]*?corazón\./g,
-    '<div class="coro-box">$&</div>'
-    )
-
-    .replace(/\n/g,"<br>");
-
-}
 
 // Botón Coros
 document.getElementById("btnCoros").addEventListener("click", async () => {
