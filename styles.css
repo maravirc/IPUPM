@@ -1,5 +1,6 @@
 /* ===========================
    HIMNARIO IPU MOYOBAMBA
+   styles.css
 =========================== */
 
 *{
@@ -13,114 +14,79 @@ body{
     background:#f5f7fb;
     color:#222;
 }
-
-/*===========================
-    BARRA SUPERIOR
-===========================*/
-
 .topbar{
 
-    position:fixed;
+    position: fixed;
 
-    top:0;
+    top: 0;
 
-    left:0;
+    left: 0;
 
-    width:100%;
+    width: 100%;
 
-    background:#f5f7fb;
+    background: #f5f7fb;
 
-    z-index:1000;
+    z-index: 1000;
 
-    box-shadow:0 3px 10px rgba(0,0,0,.15);
+    box-shadow: 0 2px 10px rgba(0,0,0,.15);
 
 }
 
-/*===========================
-    HEADER
-===========================*/
+/* HEADER */
 
 header{
-
     background:#0d47a1;
-
     color:white;
-
     text-align:center;
-
     padding:20px;
-
+    box-shadow:0 2px 10px rgba(0,0,0,.2);
 }
 
 header h1{
-
     font-size:28px;
-
 }
 
 header p{
-
     margin-top:5px;
-
     font-size:15px;
-
 }
 
-/*===========================
-    BUSCADOR
-===========================*/
+/* BUSCADOR */
 
 .busqueda{
-
     padding:15px;
-
 }
 
 #buscar{
-
     width:100%;
-
     padding:14px;
-
     border-radius:10px;
-
-    border:2px solid #1565c0;
-
+    border:none;
     outline:none;
-
     font-size:16px;
-
+    border:2px solid #0d47a1;
 }
 
-/*===========================
-    MENÚ
-===========================*/
+/* MENÚ */
 
 .menu{
-
     display:flex;
-
     justify-content:center;
-
     gap:10px;
-
-    padding:10px;
-
     flex-wrap:wrap;
-
+    padding:10px;
 }
 
 .menu button{
 
     background:#1565c0;
-
     color:white;
 
     border:none;
 
-    border-radius:10px;
-
     padding:12px 18px;
+
+    border-radius:8px;
 
     cursor:pointer;
 
@@ -136,21 +102,7 @@ header p{
 
 }
 
-#btnInstalar{
-
-    background:#2e7d32;
-
-}
-
-#btnInstalar:hover{
-
-    background:#1b5e20;
-
-}
-
-/*===========================
-    CONTENIDO
-===========================*/
+/* CONTENIDO */
 
 main{
 
@@ -160,23 +112,19 @@ main{
 
 }
 
-/*===========================
-    TARJETAS
-===========================*/
+/* TARJETAS */
 
 .card{
 
     background:white;
 
-    border-radius:18px;
+    margin-bottom:15px;
 
-    padding:20px;
+    border-radius:12px;
 
-    margin-bottom:20px;
+    padding:15px;
 
-    border-top:6px solid #1565c0;
-
-    box-shadow:0 6px 18px rgba(0,0,0,.12);
+    box-shadow:0 3px 10px rgba(0,0,0,.12);
 
     transition:.3s;
 
@@ -188,134 +136,43 @@ main{
 
 }
 
-/*===========================
-    CABECERA DEL HIMNO
-===========================*/
-
-.cabecera-himno{
-
-    display:flex;
-
-    justify-content:space-between;
-
-    align-items:flex-start;
-
-    margin-bottom:15px;
-
-    border-bottom:2px solid #BBDEFB;
-
-    padding-bottom:15px;
-
-}
-
 .numero{
 
     color:#1565c0;
 
-    font-size:18px;
-
     font-weight:bold;
+
+    font-size:18px;
 
 }
 
 .titulo{
 
-    margin-top:8px;
-
-    color:#0d47a1;
-
-    font-size:28px;
-
-    font-weight:bold;
-
-    text-transform:uppercase;
-
-    line-height:1.2;
-
-}
-
-/*===========================
-    BOTONES SUPERIORES
-===========================*/
-
-.acciones{
-
-    display:flex;
-
-    gap:8px;
-
-}
-
-.btnPantalla,
-.btnSalir{
-
-    width:42px;
-
-    height:42px;
-
-    border:none;
-
-    border-radius:50%;
-
-    cursor:pointer;
-
-    font-size:18px;
-
-    transition:.3s;
-
-}
-
-.btnPantalla{
-
-    background:#1565c0;
-
-    color:white;
-
-}
-
-.btnPantalla:hover{
-
-    background:#0d47a1;
-
-}
-
-.btnSalir{
-
-    background:#d32f2f;
-
-    color:white;
-
-    display:none;
-
-}
-
-.btnSalir:hover{
-
-    background:#b71c1c;
-
-}
-
-/*===========================
-    LETRA
-===========================*/
-
-.letra{
-
-    white-space:pre-line;
+    margin-top:5px;
 
     font-size:22px;
 
-    line-height:1.8;
-
-    color:#333;
+    font-weight:bold;
 
 }
 
-/*===========================
-    BOTONES INFERIORES
-===========================*/
+.letra{
+
+    margin-top:-14px;
+
+    white-space:pre-line;
+
+    line-height:1.4;
+
+    font-size:30px;
+
+}
+
+/* BOTONES */
 
 .botones{
+
+    margin-top:15px;
 
     display:flex;
 
@@ -323,23 +180,21 @@ main{
 
     flex-wrap:wrap;
 
-    margin-top:20px;
-
 }
 
 .botones button{
 
     border:none;
 
-    border-radius:8px;
+    cursor:pointer;
 
     padding:10px 15px;
 
-    cursor:pointer;
-
-    color:white;
+    border-radius:8px;
 
     background:#1976d2;
+
+    color:white;
 
     transition:.3s;
 
@@ -351,9 +206,7 @@ main{
 
 }
 
-/*===========================
-    FOOTER
-===========================*/
+/* FOOTER */
 
 footer{
 
@@ -361,13 +214,11 @@ footer{
 
     padding:20px;
 
-    color:#666;
+    color:#777;
 
 }
 
-/*===========================
-    MODO OSCURO
-===========================*/
+/* MODO OSCURO */
 
 .dark{
 
@@ -385,12 +236,6 @@ footer{
 
 }
 
-.dark .letra{
-
-    color:white;
-
-}
-
 .dark #buscar{
 
     background:#222;
@@ -401,154 +246,84 @@ footer{
 
 }
 
-/*===========================
-    PANTALLA COMPLETA
-===========================*/
+.dark footer{
 
-.card:fullscreen{
-
-    background:#0d47a1;
-
-    color:white;
-
-    width:100vw;
-
-    height:100vh;
-
-    padding:0;
-
-    margin:0;
-
-    overflow-y:auto;
+    color:#ccc;
 
 }
 
-.card:fullscreen .cabecera-himno{
+/* RESPONSIVE */
 
-    position:sticky;
+@media(max-width:700px){
 
-    top:0;
+header h1{
 
-    background:#1565c0;
+font-size:24px;
 
-    padding:20px;
+}
+
+.titulo{
+
+font-size:20px;
+
+}
+
+.letra{
+
+font-size:26px;
+
+}
+
+.menu{
+
+flex-direction:column;
+
+}
+
+.menu button{
+
+width:100%;
+
+}
+
+#btnInstalar{
+
+    background:#2e7d32;
+
+}
+
+#btnInstalar:hover{
+
+    background:#1b5e20;
+
+}
+.cabecera-himno{
 
     display:flex;
 
     justify-content:space-between;
 
-    align-items:flex-start;
-
-    z-index:999;
-
-    box-shadow:0 3px 10px rgba(0,0,0,.35);
-
-}
-
-.card:fullscreen .numero{
-
-    color:#FFD54F;
-
-    font-size:22px;
-
-}
-
-.card:fullscreen .titulo{
-
-    color:white;
-
-    font-size:34px;
-
-}
-
-.card:fullscreen .letra{
-
-    padding:30px;
-
-    font-size:30px;
-
-    line-height:2;
-
-    color:white;
-
-}
-
-.card:fullscreen .botones{
-
-    display:none;
-
-}
-
-.card:fullscreen .btnPantalla{
-
-    display:none;
-
-}
-
-.card:fullscreen .btnSalir{
-
-    display:flex;
-
-    justify-content:center;
-
     align-items:center;
 
+    margin-bottom:10px;
+
 }
 
-/*===========================
-    RESPONSIVE
-===========================*/
+.btnPantalla{
 
-@media(max-width:700px){
+    border:none;
 
-    main{
+    background:none;
 
-        margin-top:300px;
+    color:#1565c0;
 
-    }
+    cursor:pointer;
 
-    header h1{
+    font-size:14px;
 
-        font-size:24px;
+    font-weight:bold;
 
-    }
-
-    .titulo{
-
-        font-size:22px;
-
-    }
-
-    .letra{
-
-        font-size:18px;
-
-    }
-
-    .menu{
-
-        flex-direction:column;
-
-    }
-
-    .menu button{
-
-        width:100%;
-
-    }
-
-    .card:fullscreen .titulo{
-
-        font-size:28px;
-
-    }
-
-    .card:fullscreen .letra{
-
-        font-size:24px;
-
-    }
-
+}
 
 .btnPantalla:hover{
 
