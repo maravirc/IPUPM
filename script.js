@@ -17,6 +17,8 @@ async function cargarHimnos() {
         const respuesta = await fetch("data/himnos.json");
         himnos = await respuesta.json();
 
+        console.log(himnos);
+
         mostrarHimnos(himnos);
 
     } catch (error) {
@@ -109,6 +111,7 @@ document.getElementById("btnCoros").addEventListener("click", async () => {
 
         const respuesta = await fetch("data/coros.json");
         himnos = await respuesta.json();
+        console.log(himnos);
 
         mostrarHimnos(himnos);
 
@@ -177,6 +180,7 @@ document.getElementById("btnHimnos").addEventListener("click", async () => {
 
         const respuesta = await fetch("data/himnos.json");
         himnos = await respuesta.json();
+        console.log(himnos);
 
         mostrarHimnos(himnos);
 
