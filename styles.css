@@ -505,4 +505,197 @@ width:100%;
 
 }
 
+/* =========================
+   DISEÑO HIMNOS
+========================= */
+
+
+.card{
+
+    background:#eaf2ff;
+
+    border-radius:25px;
+
+    padding:25px;
+
+    border:1px solid #c5d9ff;
+
+}
+
+
+
+/* CABECERA */
+
+.cabecera-himno{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    border-bottom:2px solid #9bbbe8;
+
+    padding-bottom:15px;
+
+    margin-bottom:20px;
+
+}
+
+
+.numero{
+
+    color:#0d47a1;
+
+    font-size:30px;
+
+    font-weight:bold;
+
+}
+
+
+.titulo{
+
+    color:#1565c0;
+
+    font-size:24px;
+
+    text-align:center;
+
+    margin-top:10px;
+
+}
+
+
+
+/* LETRA */
+
+.letra{
+
+    font-family:Georgia, serif;
+
+    font-size:25px;
+
+    line-height:1.8;
+
+    color:#263238;
+
+    padding:15px;
+
+}
+
+
+
+/* CORO */
+
+.coro-titulo{
+
+    text-align:center;
+
+    color:#1565c0;
+
+    font-weight:bold;
+
+    font-size:14px;
+
+    margin-top:25px;
+
+}
+
+
+
+.coro-box{
+
+    background:#bbdefb;
+
+    border-radius:25px;
+
+    padding:20px;
+
+    margin:15px 0;
+
+    text-align:center;
+
+    color:#0d47a1;
+
+    font-size:24px;
+
+    font-weight:bold;
+
+    border:1px solid #90caf9;
+
+}
+
+
+/* BOTON PANTALLA */
+
+.btnPantalla{
+
+    background:#1565c0;
+
+    color:white;
+
+    border:none;
+
+    width:40px;
+
+    height:40px;
+
+    border-radius:50%;
+
+    font-size:20px;
+
+}
+
+
+.btnPantalla:hover{
+
+    background:#0d47a1;
+
+}
+
+
+
+/* CELULAR */
+
+@media(max-width:700px){
+
+
+.card{
+
+    padding:18px;
+
+}
+
+
+.numero{
+
+    font-size:26px;
+
+}
+
+
+.titulo{
+
+    font-size:22px;
+
+}
+
+
+.letra{
+
+    font-size:22px;
+
+}
+
+
+.coro-box{
+
+    font-size:20px;
+
+}
+
+
+}
+
 }

@@ -77,9 +77,9 @@ function mostrarHimnos(datos) {
 
             
 
-            <div class="letra">
-${himno.letra}
-            </div>
+<div class="letra">
+${formatearLetra(himno.letra)}
+</div>
 
             <div class="botones">
 
@@ -98,6 +98,21 @@ ${himno.letra}
         lista.appendChild(card);
 
     });
+
+}
+
+function formatearLetra(texto){
+
+    return texto
+    .replace(/\*\*Coro:\*\*/g,
+    '<div class="coro-titulo">CORO</div>')
+
+    .replace(
+    /¡Dios, manda tu gran poder![\s\S]*?corazón\./g,
+    '<div class="coro-box">$&</div>'
+    )
+
+    .replace(/\n/g,"<br>");
 
 }
 
