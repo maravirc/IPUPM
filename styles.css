@@ -504,4 +504,338 @@ width:100%;
     align-items:center;
 
 }
+
+/*se creo y se puede borrar*/
+
+/* ===========================
+   TARJETAS DE HIMNOS (MEJORADAS)
+=========================== */
+
+.card {
+    background: white;
+    margin-bottom: 20px;
+    border-radius: 20px;
+    padding: 0;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06), 0 1px 4px rgba(0, 0, 0, 0.03);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    border: 1px solid rgba(255, 255, 255, 0.6);
+    overflow: hidden;
+    position: relative;
+}
+
+/* Borde superior degradado animado */
+.card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, #0d47a1, #42a5f5, #0d47a1);
+    background-size: 200% 100%;
+    animation: shimmer 3s ease-in-out infinite;
+    z-index: 1;
+}
+
+@keyframes shimmer {
+    0%, 100% { background-position: 0% 0%; }
+    50% { background-position: 100% 0%; }
+}
+
+.card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 12px 40px rgba(13, 71, 161, 0.10);
+}
+
+/* --- CABECERA DEL HIMNO --- */
+.cabecera-himno {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 18px 20px 10px 20px;
+    background: linear-gradient(135deg, #f8faff, #eef4fb);
+}
+
+/* --- NÚMERO DEL HIMNO --- */
+.numero {
+    color: #0d47a1;
+    font-weight: 700;
+    font-size: 13px;
+    background: white;
+    padding: 4px 14px;
+    border-radius: 30px;
+    letter-spacing: 0.3px;
+    display: inline-block;
+    box-shadow: 0 2px 8px rgba(13, 71, 161, 0.08);
+}
+
+/* --- TÍTULO DEL HIMNO --- */
+.titulo {
+    font-size: 22px;
+    font-weight: 800;
+    color: #0a1a2e;
+    letter-spacing: -0.3px;
+    margin-top: 4px;
+    font-family: 'Playfair Display', serif;
+}
+
+/* --- LETRA DEL HIMNO --- */
+.letra {
+    padding: 8px 20px 16px 20px;
+    white-space: pre-line;
+    line-height: 1.7;
+    font-size: 18px;
+    color: #1f2a3f;
+    font-weight: 400;
+}
+
+/* --- CORO RESALTADO --- */
+.letra .coro {
+    display: block;
+    background: linear-gradient(135deg, #f0f7ff, #e3edfb);
+    padding: 14px 18px;
+    border-radius: 12px;
+    margin: 12px 0 8px;
+    border-left: 4px solid #0d47a1;
+    font-style: italic;
+    color: #0a2a5a;
+    font-weight: 500;
+}
+
+/* --- BOTONES DE ACCIÓN --- */
+.botones {
+    padding: 0 20px 18px 20px;
+    margin-top: 4px;
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.botones button {
+    border: none;
+    cursor: pointer;
+    padding: 9px 16px;
+    border-radius: 30px;
+    background: #1565c0;
+    color: white;
+    font-weight: 600;
+    font-size: 13px;
+    transition: all 0.25s ease;
+    box-shadow: 0 3px 12px rgba(13, 71, 161, 0.15);
+}
+
+.botones button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(13, 71, 161, 0.25);
+}
+
+.botones button:active {
+    transform: scale(0.95);
+}
+
+/* --- BOTÓN FAVORITO --- */
+.botones button.btn-fav {
+    background: linear-gradient(135deg, #f9a825, #f57f17);
+    box-shadow: 0 3px 12px rgba(245, 127, 23, 0.2);
+}
+
+.botones button.btn-fav:hover {
+    box-shadow: 0 8px 25px rgba(245, 127, 23, 0.35);
+}
+
+/* --- BOTÓN COMPARTIR --- */
+.botones button.btn-share {
+    background: linear-gradient(135deg, #43a047, #2e7d32);
+    box-shadow: 0 3px 12px rgba(46, 125, 50, 0.2);
+}
+
+.botones button.btn-share:hover {
+    box-shadow: 0 8px 25px rgba(46, 125, 50, 0.35);
+}
+
+/* --- BOTÓN COPIAR --- */
+.botones button:last-child:not(.btn-fav):not(.btn-share) {
+    background: linear-gradient(135deg, #5c6bc0, #3949ab);
+}
+
+/* ===========================
+   MODO OSCURO (solo tarjetas)
+=========================== */
+
+.dark .card {
+    background: #161b22;
+    border-color: #30363d;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
+}
+
+.dark .card::before {
+    background: linear-gradient(90deg, #1e88e5, #64b5f6, #1e88e5);
+}
+
+.dark .cabecera-himno {
+    background: linear-gradient(135deg, #1a2744, #0d1f3c);
+}
+
+.dark .numero {
+    background: #1a2d4a;
+    color: #64b5f6;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+}
+
+.dark .titulo {
+    color: #f0f6fc;
+}
+
+.dark .letra {
+    color: #d0d7de;
+}
+
+.dark .letra .coro {
+    background: #1a2744;
+    border-left-color: #42a5f5;
+    color: #b3d4fc;
+}
+
+.dark .botones button {
+    background: linear-gradient(135deg, #1e88e5, #0d47a1);
+}
+
+.dark .botones button.btn-fav {
+    background: linear-gradient(135deg, #f9a825, #e65100);
+}
+
+.dark .botones button.btn-share {
+    background: linear-gradient(135deg, #388e3c, #1b5e20);
+}
+
+/* ===========================
+   PANTALLA COMPLETA (solo tarjetas)
+=========================== */
+
+.card:fullscreen {
+    background: linear-gradient(145deg, #0a1a35, #0d47a1);
+    color: white;
+    width: 100vw;
+    height: 100vh;
+    margin: 0;
+    padding: 0;
+    overflow-y: auto;
+    border-radius: 0;
+    border: none;
+}
+
+.card:fullscreen::before {
+    display: none;
+}
+
+.card:fullscreen .cabecera-himno {
+    background: rgba(13, 71, 161, 0.92);
+    backdrop-filter: blur(12px);
+    padding: 20px 28px;
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.3);
+}
+
+.card:fullscreen .numero {
+    background: rgba(255, 213, 79, 0.2);
+    color: #FFD54F;
+    font-size: 16px;
+}
+
+.card:fullscreen .titulo {
+    color: white;
+    font-size: 34px;
+    margin-top: 8px;
+}
+
+.card:fullscreen .letra {
+    padding: 30px 35px 40px;
+    font-size: 26px;
+    line-height: 1.7;
+    color: #e3edfb;
+}
+
+.card:fullscreen .letra .coro {
+    background: rgba(255, 255, 255, 0.06);
+    border-left-color: #FFD54F;
+    color: #FFD54F;
+    padding: 20px 24px;
+}
+
+.card:fullscreen .botones {
+    display: none;
+}
+
+/* ===========================
+   RESPONSIVE (solo tarjetas)
+=========================== */
+
+@media (max-width: 700px) {
+    .titulo {
+        font-size: 20px;
+    }
+
+    .letra {
+        font-size: 16px;
+        line-height: 1.6;
+        padding: 6px 16px 14px 16px;
+    }
+
+    .cabecera-himno {
+        padding: 14px 16px 8px 16px;
+    }
+
+    .botones {
+        padding: 0 16px 14px 16px;
+    }
+
+    .botones button {
+        font-size: 12px;
+        padding: 8px 14px;
+    }
+
+    .card:fullscreen .letra {
+        font-size: 20px;
+        padding: 20px;
+    }
+
+    .card:fullscreen .titulo {
+        font-size: 26px;
+    }
+}
+
+@media (max-width: 480px) {
+    .card {
+        border-radius: 16px;
+        margin-bottom: 14px;
+    }
+
+    .cabecera-himno {
+        padding: 12px 14px 6px 14px;
+    }
+
+    .titulo {
+        font-size: 18px;
+    }
+
+    .letra {
+        font-size: 15px;
+        padding: 4px 14px 12px 14px;
+        line-height: 1.6;
+    }
+
+    .numero {
+        font-size: 12px;
+        padding: 3px 12px;
+    }
+
+    .botones {
+        padding: 0 14px 12px 14px;
+        gap: 6px;
+    }
+
+    .botones button {
+        font-size: 11px;
+        padding: 6px 12px;
+    }
+}
 }
