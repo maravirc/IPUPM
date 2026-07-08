@@ -152,10 +152,11 @@ buscar.addEventListener("keyup", () => {
 
     mostrarHimnos(resultado);
 
-lista.scrollIntoView({
-    behavior: "smooth",
-    block: "start"
-});
+    // Volver al inicio de la lista
+    window.scrollTo({
+        top: 0,
+        behavior: "smooth"
+    });
 
 });
 
