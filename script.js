@@ -24,7 +24,7 @@ function actualizarTitulo(tipo, cantidad = 0) {
     
     const textos = {
         'himnos': 'Himnos',
-        'coros': 'Coros',
+        'coros': 'Adoración y Alabanzas',
         'favoritos': 'Favoritos'
     };
     
