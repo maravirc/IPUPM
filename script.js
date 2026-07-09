@@ -196,7 +196,7 @@ function showUpdateNotification() {
 }
 
 // ==========================
-// FUNCIÓN PRINCIPAL DE ACTUALIZACIÓN
+// FUNCIÓN PRINCIPAL DE ACTUALIZACIÓN CON CIERRE
 // ==========================
 
 function realizarActualizacion() {
@@ -215,20 +215,46 @@ function realizarActualizacion() {
         // Enviar mensaje para activar el nuevo service worker
         swRegistration.waiting.postMessage('skipWaiting');
         
-        // Esperar un momento y luego recargar
+        // Esperar un momento para que se complete la actualización
         setTimeout(() => {
-            // Cerrar la aplicación (si está en PWA)
-            if (window.matchMedia('(display-mode: standalone)').matches) {
-                // Estamos en modo PWA, cerrar y abrir
-                window.close();
-                // Si no se cierra, recargar
-                setTimeout(() => {
+            // Mostrar mensaje de cierre
+            mostrarToast('📱 Cerrando aplicación...');
+            
+            // Cerrar la aplicación después de 1.5 segundos
+            setTimeout(() => {
+                // Intentar cerrar la aplicación
+                try {
+                    // Si está en modo PWA (instalada)
+                    if (window.matchMedia('(display-mode: standalone)').matches) {
+                        // Intentar cerrar la ventana
+                        window.close();
+                        
+                        // Si no se cierra, intentar con un método alternativo
+                        setTimeout(() => {
+                            // Forzar cierre en Android
+                            if (navigator.userAgent.match(/Android/i)) {
+                                // En Android, intentar salir
+                                window.location.href = 'about:blank';
+                            }
+                            // En iOS, intentar salir
+                            if (navigator.userAgent.match(/iPhone|iPad|iPod/i)) {
+                                window.location.href = 'about:blank';
+                            }
+                            // Si todo falla, recargar
+                            setTimeout(() => {
+                                window.location.reload();
+                            }, 500);
+                        }, 1000);
+                    } else {
+                        // Si está en navegador, recargar
+                        window.location.reload();
+                    }
+                } catch (e) {
+                    console.log('Error al cerrar:', e);
+                    // Si hay error, recargar
                     window.location.reload();
-                }, 500);
-            } else {
-                // Estamos en navegador normal, recargar
-                window.location.reload();
-            }
+                }
+            }, 1500);
         }, 1000);
     } else {
         // Si no hay service worker esperando, recargar directamente
