@@ -350,8 +350,105 @@
                         "titulo": "Lléname",
                         "letra": "1\nTe vengo a buscar,\nhoy necesito adorarte,\nme vengo a postrar,\nhoy necesito llenarme.\n\nQue tu presencia llene todo este lugar,\nque tu presencia llene todo este altar,\nlléname, lléname de ti.\n\nOh, oh, de ti,\noh, mi Dios,\nlléname, luz de mi vida,\nlléname, fuente de agua viva,\nlléname, es mi deseo,\nlléname, Jesús, mi anhelo.\n\nQue tu presencia llene todo este lugar,\nque tu presencia llene todo este altar,\nlléname, lléname de ti,\nlléname de ti, mi Dios.",
                         "tipo": "coro"
-                    }
-                
+                    },
+                    
+                        {
+                            "numero": 60,
+                            "titulo": "He pecado contra ti",
+                            "letra": "1\nHe pecado contra ti,\nhe pecado contra ti,\nte fallé,\nlastimé tu corazón.\n\nCrea en mí un corazón limpio\nque te ame, mi Señor,\ncrea en mí un corazón limpio\nque te ame, mi Señor.\n\nNo quites de mí\ntu Santo Espíritu,\nporque sin él no puedo vivir,\nporque sin él no puedo vivir.\n\nSin tu Espíritu\nno puedo vivir, mi Dios,\nsin tu presencia, mi Dios,\nno puedo vivir, mi Dios, sin ti.",
+                            "tipo": "coro"
+                        },
+                        {
+                            "numero": 61,
+                            "titulo": "Exáltate, Señor",
+                            "letra": "1\nMe postro ante ti, mi Dios, mi Rey,\nes mucho lo que tú me has perdonado,\nun corazón agradecido es lo que traigo a ti,\nhoy derramo mi ser para ungirte, Rey.\n\n**Coro:**\nExáltate, Señor, exáltate, Señor,\nque se llene esta casa con tu gloria,\nexáltate, Señor, exáltate, Señor,\nque se llene con tu gloria este lugar.",
+                            "tipo": "coro"
+                        },
+                        {
+                            "numero": 62,
+                            "titulo": "Espíritu Santo",
+                            "letra": "1\n**Coro:**\nEspíritu Santo, ayúdame, te pido,\nEspíritu Santo, eres mi amigo, consuélame,\nEspíritu Santo, ayúdame, te pido,\nEspíritu Santo, eres mi amigo, consuélame.\n\nMis enemigos se levantaron contra mí y\ndicen: \"para él no hay salvación\".\nMis enemigos se levantaron contra mí y\ndicen: \"para él no hay salvación\".\n\n**Coro:**\nEspíritu Santo, ayúdame, te pido,\nEspíritu Santo, eres mi amigo, consuélame,\nEspíritu Santo, ayúdame, te pido,\nEspíritu Santo, eres mi amigo, consuélame.\n\n2\nCuando pasas un momento en el desierto\ny sientes un silencio y no encuentras respuesta,\nhay una palabra profética para ti:\ncuando Dios está en silencio\nes porque está preparando algo\npara tu vida, solo espéralo.\n\n**Coro:**\nEspíritu Santo, ayúdame, te pido,\nEspíritu Santo, eres mi amigo, consuélame,\nEspíritu Santo, ayúdame, te pido,\nEspíritu Santo, eres mi amigo, consuélame.",
+                            "tipo": "coro"
+                        },
+                        {
+                            "numero": 63,
+                            "titulo": "Creo en ti, Jesús",
+                            "letra": "1\nQuiero levantar a ti mis manos,\nmaravilloso Jesús, milagroso Señor,\ny llena este lugar con tu presencia\ny haz descender tu poder\na los que estamos aquí.\n\nY creo en ti, Jesús,\ny en lo que harás en mí,\nen mí, en mí.\n\n**Coro:**\nRecibe toda la gloria,\nrecibe toda la honra,\nprecioso Señor Jesús.",
+                            "tipo": "coro"
+                        },
+                        {
+                            "numero": 64,
+                            "titulo": "Salmos 18",
+                            "letra": "1\nTe amo, Jehová, fortaleza mía,\nroca mía, castillo mío, mi libertador,\nmi Dios, en quien yo confiaré,\nmi escudo eres tú\ny la fuerza de mi salvación.\n\n**Coro:**\nMi alto refugio eres tú, Señor.\n\nEn mi angustia invoqué a Jehová\ny él oyó mi oración.",
+                            "tipo": "coro"
+                        },
+                        {
+                            "numero": 65,
+                            "titulo": "Temprano yo te buscaré",
+                            "letra": "1\nTemprano yo te buscaré,\nde madrugada yo me acercaré a ti,\nmi alma te anhela y tiene sed\npara ver tu gloria y tu poder.\n\n**Coro:**\nMi socorro has sido tú,\nen la sombra de tus alas yo me gozaré,\nmi alma está apegada a ti,\nporque tu diestra me ha sostenido,\noh, tu diestra me ha sostenido.",
+                            "tipo": "coro"
+                        },
+                        {
+                            "numero": 66,
+                            "titulo": "Porque para siempre es Dios",
+                            "letra": "1\nPorque para siempre es Dios,\nsu misericordia es.\n\n**Coro:**\nMejor que la vida es, mi alma lo sabe bien,\nporque para siempre es Dios,\nsu misericordia es.\n\n**Coro 2:**\nMas basta que el ancho mar,\nmás alta que el cielo está,\nporque para siempre es Dios,\nsu misericordia es.",
+                            "tipo": "coro"
+                        },
+                        {
+                            "numero": 67,
+                            "titulo": "Porque tú eres bueno",
+                            "letra": "1\nPorque tú eres bueno, porque para siempre tu misericordia es.\n\n**Coro 1:**\nCada mañana al despertar,\nsé que en ti puedo confiar,\nme sostienes con tu gran fidelidad.\n\n2\nPorque tú eres bueno, porque tu justicia,\njusticia perfecta es.\n\n**Coro 2:**\nEn ella yo me deleitaré,\nen tu verdad caminaré,\npor tus sendas de justicia, guíame.",
+                            "tipo": "coro"
+                        },
+                        {
+                            "numero": 68,
+                            "titulo": "Sopla en mí",
+                            "letra": "1\nSopla en mí, sopla en mí,\nEspíritu Santo, sopla en mí.\n\n**Coro:**\nAyer ya pasó, te necesito hoy,\nEspíritu Santo, sopla en mí.",
+                            "tipo": "coro"
+                        },
+                        {
+                            "numero": 69,
+                            "titulo": "Mi Dios es grande",
+                            "letra": "1\nMi Dios es grande, puede mover montes,\nme cuida en el valle, refugio encuentro en él,\nmi Dios es grande, él es quien me sana,\nes mi fortaleza, reina con poder.\n\n**Coro:**\nMi Dios es grande, grande, grande, grande,\nél es santo, él es santo, él es santo, él es santo,\nmi Dios es grande, grande.\n\nÉl es digno, él es digno, él es digno, él es digno,\nmi Dios es grande, grande.\n\nMi refugio, mi refugio, mi refugio, mi refugio,\nmi Dios es grande, grande.\n\nÉl es mi roca, es mi roca, es mi roca, es mi roca,\nmi Dios es grande, grande.",
+                            "tipo": "coro"
+                        },
+                        {
+                            "numero": 70,
+                            "titulo": "Way Maker (Aquí estás)",
+                            "letra": "1\nAquí estás, te vemos mover,\nte adoraré, te adoraré,\naquí estás, obrando en mí,\nte adoraré, te adoraré.\n\n**Coro:**\nMilagroso, abres camino, cumples\npromesas, luz en tinieblas,\nmi Dios, así eres tú.\n\n**Pre-coro:**\nAsí eres tú, así eres tú,\nasí eres tú, así eres tú.\n\n**Fuga:**\nAunque no pueda ver, estás obrando,\naunque no pueda ver, estás obrando,\nsiempre estás, siempre estás obrando,\nsiempre estás, siempre estás obrando.\n\n2\nAquí estás, sanando mi corazón,\nte adoraré, te adoraré,\naquí estás, tocando mi corazón,\nte adoraré, te adoraré.",
+                            "tipo": "coro"
+                        },
+                        {
+                            "numero": 71,
+                            "titulo": "Atráeme a ti",
+                            "letra": "1\nAtráeme a ti, no me dejes ir,\nrindo todo una vez más\na cambio de tu amistad.\n\nYo te anhelo a ti, solamente a ti,\npues nadie más en tu lugar\nme abrazará con tanto amor,\nguíame, Señor, de regreso a ti.\n\n**Coro:**\nTe anhelo a ti, Señor, te necesito,\nte anhelo a ti, dime que cerca estás.",
+                            "tipo": "coro"
+                        },
+                        {
+                            "numero": 72,
+                            "titulo": "La tierra canta",
+                            "letra": "1\nSe abren los cielos, se escucha un sonido celestial,\nunido a las voces de un pueblo que te quiere adorar.\n\n**Pre-coro:**\nEl Espíritu de Dios se mueve libre en este lugar,\nel Padre alegre está al ver la novia unirse a adorar.\n\n**Coro:**\nLa tierra canta, el cielo adora,\ny todos gritan que tú eres santo.\n\n**Fuga:**\nÁngeles se unen hoy,\ncantamos a una sola voz: santo, santo.",
+                            "tipo": "coro"
+                        },
+                        {
+                            "numero": 73,
+                            "titulo": "Tú eres Rey",
+                            "letra": "1\nOh perfecto, inigualable Dios,\ntu amor inexplicable,\ntu reino inigualable,\nasombroso, coronado estás,\nen trono de victoria,\nvestido estás de gloria.\n\n**Pre-coro:**\nPor los siglos de los siglos\ntu reino se establecerá,\ndigno de gloria, digno de honor,\ndigno de toda adoración.\n\n**Coro:**\nTú eres Rey, tú eres Rey, tú eres Rey.\n\n**Fuga:**\nHoy perfumamos tu trono,\nhoy perfumamos tu trono,\nhoy perfumamos tu trono,\nrecibe alabanza.",
+                            "tipo": "coro"
+                        },
+                        {
+                            "numero": 74,
+                            "titulo": "Preciosa sangre",
+                            "letra": "1\nPreciosa sangre se derramó,\npreciosa sangre fluyó por amor.\n\n**Pre-coro:**\nSobre ti el dolor, tus venas lloraron,\nJesús, Jesús, Jesús.\n\n**Coro:**\nHay poder en la sangre\nque fluyó por amor,\nhay poder en la sangre\nque él derramó.\n\n2\nPreciosa sangre que me purificó,\npreciosa sangre que me transformó.\n\n**Fuga:**\nTu sangre me transformó, tu sangre me perdonó,\ntu sangre me limpió, tu sangre me sanó,\ntu sangre me salvó.",
+                            "tipo": "coro"
+                        },
+                        {
+                            "numero": 75,
+                            "titulo": "Atrae mi corazón",
+                            "letra": "1\nEs a ti a quien anhelo, es por ti que yo suspiro,\nmás allá del velo,\nyo voy a decirte que te quiero.\n\n**Coro:**\nAtrae mi corazón, atrae mi corazón,\natrae mi corazón, Jesús, me muero\nde amor por ti.\n\nQuiero que el mundo sepa, quiero que el\nmundo vea que tú eres mi amado,\nJesús, y yo soy tuyo, solo tuyo.\n\n**Fuga:**\nYo en ti y tú en mí, Jesús, ese es el pacto.\nYo quiero tu visión en mis ojos,\nquiero tu canción en mis labios\ny tu corazón en mi pecho.",
+                            "tipo": "coro"
+                        }
+                                    
             
         
     
