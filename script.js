@@ -1,6 +1,6 @@
 // ==========================
 // HIMNARIO IPU MOYOBAMBA
-// script.js - VERSIÓN SIMPLIFICADA
+// script.js - SOLO CIERRE
 // ==========================
 
 let himnos = [];
@@ -25,7 +25,6 @@ async function cargarHimnos() {
     }
 }
 
-// Mostrar himnos
 function mostrarHimnos(datos) {
     lista.innerHTML = "";
 
@@ -189,7 +188,7 @@ function salirPantallaCompleta(event) {
 }
 
 // ==========================
-// BOTÓN DE CIERRE DE APP - SOLO ESO
+// BOTÓN DE CIERRE - SOLO ESO
 // ==========================
 
 const btnCerrarApp = document.getElementById('btnCerrarApp');
@@ -200,74 +199,42 @@ btnCerrarApp.addEventListener('click', function(e) {
 });
 
 function cerrarApp() {
-    console.log('Intentando cerrar la aplicación...');
+    console.log('Cerrando aplicación...');
     
-    // Verificar si estamos en Android
     const isAndroid = navigator.userAgent.match(/Android/i);
     const isStandalone = window.matchMedia('(display-mode: standalone)').matches;
     
-    // MÉTODO 1: window.close()
-    try {
-        window.close();
-        console.log('Método 1: window.close()');
-    } catch (e) {
-        console.log('Error en window.close():', e);
-    }
+    // Intentar cerrar con todos los métodos posibles
+    try { window.close(); } catch(e) {}
     
-    // MÉTODO 2: Para Android PWA
     if (isAndroid) {
-        // Chrome en Android
         try {
             if (window.chrome && window.chrome.app) {
                 window.chrome.app.window.current().close();
-                console.log('Método 2: chrome.app.window.close()');
             }
-        } catch (e) {
-            console.log('Error en chrome.app:', e);
-        }
+        } catch(e) {}
         
-        // Redirigir a about:blank
         setTimeout(() => {
-            try {
-                window.location.href = 'about:blank';
-                console.log('Método 3: about:blank');
-            } catch (e) {
-                console.log('Error en about:blank:', e);
-            }
+            try { window.location.href = 'about:blank'; } catch(e) {}
         }, 300);
         
-        // Intentar ir al home de Android
         setTimeout(() => {
             try {
                 window.location.href = 'intent://#Intent;action=android.intent.action.MAIN;category=android.intent.category.HOME;end';
-                console.log('Método 4: Intent home');
-            } catch (e) {
-                console.log('Error en intent:', e);
-            }
+            } catch(e) {}
         }, 600);
     }
     
-    // MÉTODO 5: Si está en PWA standalone
     if (isStandalone) {
         setTimeout(() => {
-            try {
-                // Intentar salir con history
-                window.history.go(-window.history.length);
-                console.log('Método 5: history.go()');
-            } catch (e) {
-                console.log('Error en history:', e);
-            }
+            try { window.history.go(-window.history.length); } catch(e) {}
         }, 900);
     }
     
-    // MÉTODO 6: Último recurso - recargar con parámetro
     setTimeout(() => {
         try {
             window.location.href = window.location.href.split('?')[0] + '?close=true';
-            console.log('Método 6: recargar con parámetro');
-        } catch (e) {
-            console.log('Error en recarga con parámetro:', e);
-        }
+        } catch(e) {}
     }, 1200);
 }
 
@@ -276,16 +243,11 @@ function cerrarApp() {
 // ==========================
 
 if (window.location.search.includes('close=true')) {
-    console.log('Detectado parámetro de cierre');
     setTimeout(() => {
-        try {
-            window.close();
-            setTimeout(() => {
-                window.location.href = 'about:blank';
-            }, 300);
-        } catch (e) {
-            console.log('Error en cierre por parámetro:', e);
-        }
+        try { window.close(); } catch(e) {}
+        setTimeout(() => {
+            try { window.location.href = 'about:blank'; } catch(e) {}
+        }, 300);
     }, 500);
 }
 
