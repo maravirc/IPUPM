@@ -1,6 +1,6 @@
 // ==========================
 // HIMNARIO IPU MOYOBAMBA
-// script.js
+// script.js - VERSIÓN SIMPLIFICADA
 // ==========================
 
 let himnos = [];
@@ -189,140 +189,104 @@ function salirPantallaCompleta(event) {
 }
 
 // ==========================
-// BOTÓN DE CIERRE DE APP (ENGANCHE)
+// BOTÓN DE CIERRE DE APP - SOLO ESO
 // ==========================
 
-const btnConfiguracion = document.getElementById('btnConfiguracion');
+const btnCerrarApp = document.getElementById('btnCerrarApp');
 
-btnConfiguracion.addEventListener('click', function() {
+btnCerrarApp.addEventListener('click', function(e) {
+    e.preventDefault();
     cerrarApp();
 });
 
 function cerrarApp() {
-    // Mostrar mensaje de cierre
-    mostrarToast('📱 Cerrando aplicación...');
+    console.log('Intentando cerrar la aplicación...');
     
     // Verificar si estamos en Android
     const isAndroid = navigator.userAgent.match(/Android/i);
     const isStandalone = window.matchMedia('(display-mode: standalone)').matches;
     
-    console.log('Cerrando app - Android:', isAndroid, 'Standalone:', isStandalone);
-    
-    // Método 1: window.close()
+    // MÉTODO 1: window.close()
     try {
         window.close();
-        console.log('Método 1: window.close() ejecutado');
+        console.log('Método 1: window.close()');
     } catch (e) {
         console.log('Error en window.close():', e);
     }
     
-    // Método 2: Para Android PWA
-    if (isAndroid && isStandalone) {
-        // Intentar con chrome.app
+    // MÉTODO 2: Para Android PWA
+    if (isAndroid) {
+        // Chrome en Android
         try {
             if (window.chrome && window.chrome.app) {
                 window.chrome.app.window.current().close();
-                console.log('Método 2: chrome.app.window.close() ejecutado');
+                console.log('Método 2: chrome.app.window.close()');
             }
         } catch (e) {
-            console.log('Error en chrome.app.window.close():', e);
+            console.log('Error en chrome.app:', e);
         }
         
-        // Método 3: Redirigir a about:blank
+        // Redirigir a about:blank
         setTimeout(() => {
             try {
                 window.location.href = 'about:blank';
-                console.log('Método 3: about:blank ejecutado');
+                console.log('Método 3: about:blank');
             } catch (e) {
                 console.log('Error en about:blank:', e);
             }
-        }, 500);
+        }, 300);
         
-        // Método 4: Intentar ir al home de Android
+        // Intentar ir al home de Android
         setTimeout(() => {
             try {
                 window.location.href = 'intent://#Intent;action=android.intent.action.MAIN;category=android.intent.category.HOME;end';
-                console.log('Método 4: Intent de home ejecutado');
+                console.log('Método 4: Intent home');
             } catch (e) {
                 console.log('Error en intent:', e);
             }
-        }, 1000);
+        }, 600);
     }
     
-    // Método 5: Si no se cierra, recargar (como último recurso)
+    // MÉTODO 5: Si está en PWA standalone
+    if (isStandalone) {
+        setTimeout(() => {
+            try {
+                // Intentar salir con history
+                window.history.go(-window.history.length);
+                console.log('Método 5: history.go()');
+            } catch (e) {
+                console.log('Error en history:', e);
+            }
+        }, 900);
+    }
+    
+    // MÉTODO 6: Último recurso - recargar con parámetro
     setTimeout(() => {
         try {
-            if (!document.hidden) {
-                window.location.reload();
-                console.log('Método 5: Recarga ejecutada');
-            }
+            window.location.href = window.location.href.split('?')[0] + '?close=true';
+            console.log('Método 6: recargar con parámetro');
         } catch (e) {
-            console.log('Error en recarga:', e);
+            console.log('Error en recarga con parámetro:', e);
         }
-    }, 1500);
+    }, 1200);
 }
 
 // ==========================
-// TOAST NOTIFICATIONS
+// DETECTAR CIERRE POR PARÁMETRO
 // ==========================
 
-function mostrarToast(mensaje) {
-    // Eliminar toast existente
-    const toastExistente = document.querySelector('.toast-notification');
-    if (toastExistente) {
-        toastExistente.remove();
-    }
-    
-    // Crear toast
-    const toast = document.createElement('div');
-    toast.className = 'toast-notification';
-    toast.textContent = mensaje;
-    document.body.appendChild(toast);
-    
-    // Estilos del toast
-    const style = document.createElement('style');
-    style.textContent = `
-        .toast-notification {
-            position: fixed;
-            bottom: 100px;
-            left: 50%;
-            transform: translateX(-50%);
-            background: rgba(0,0,0,0.85);
-            color: white;
-            padding: 14px 28px;
-            border-radius: 14px;
-            font-size: 14px;
-            z-index: 10001;
-            animation: toastSlideUp 0.4s ease;
-            backdrop-filter: blur(10px);
-            max-width: 90%;
-            text-align: center;
-            box-shadow: 0 8px 30px rgba(0,0,0,0.4);
-            border: 1px solid rgba(255,255,255,0.1);
-            font-weight: 500;
-        }
-        
-        @keyframes toastSlideUp {
-            from {
-                opacity: 0;
-                transform: translateX(-50%) translateY(30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateX(-50%) translateY(0);
-            }
-        }
-    `;
-    document.head.appendChild(style);
-    
-    // Auto-cerrar después de 3 segundos
+if (window.location.search.includes('close=true')) {
+    console.log('Detectado parámetro de cierre');
     setTimeout(() => {
-        toast.style.opacity = '0';
-        toast.style.transition = 'opacity 0.4s ease';
-        setTimeout(() => {
-            toast.remove();
-        }, 400);
-    }, 3000);
+        try {
+            window.close();
+            setTimeout(() => {
+                window.location.href = 'about:blank';
+            }, 300);
+        } catch (e) {
+            console.log('Error en cierre por parámetro:', e);
+        }
+    }, 500);
 }
 
 // ==========================
