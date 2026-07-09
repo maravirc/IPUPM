@@ -222,38 +222,8 @@ function realizarActualizacion() {
             
             // Cerrar la aplicación después de 1.5 segundos
             setTimeout(() => {
-                // Intentar cerrar la aplicación
-                try {
-                    // Si está en modo PWA (instalada)
-                    if (window.matchMedia('(display-mode: standalone)').matches) {
-                        // Intentar cerrar la ventana
-                        window.close();
-                        
-                        // Si no se cierra, intentar con un método alternativo
-                        setTimeout(() => {
-                            // Forzar cierre en Android
-                            if (navigator.userAgent.match(/Android/i)) {
-                                // En Android, intentar salir
-                                window.location.href = 'about:blank';
-                            }
-                            // En iOS, intentar salir
-                            if (navigator.userAgent.match(/iPhone|iPad|iPod/i)) {
-                                window.location.href = 'about:blank';
-                            }
-                            // Si todo falla, recargar
-                            setTimeout(() => {
-                                window.location.reload();
-                            }, 500);
-                        }, 1000);
-                    } else {
-                        // Si está en navegador, recargar
-                        window.location.reload();
-                    }
-                } catch (e) {
-                    console.log('Error al cerrar:', e);
-                    // Si hay error, recargar
-                    window.location.reload();
-                }
+                // MÉTODOS PARA CERRAR EN ANDROID
+                cerrarAppAndroid();
             }, 1500);
         }, 1000);
     } else {
@@ -262,6 +232,122 @@ function realizarActualizacion() {
             window.location.reload();
         }, 1000);
     }
+}
+
+// ==========================
+// FUNCIÓN ESPECIAL PARA CERRAR EN ANDROID
+// ==========================
+
+function cerrarAppAndroid() {
+    // Verificar si estamos en Android
+    const isAndroid = navigator.userAgent.match(/Android/i);
+    const isStandalone = window.matchMedia('(display-mode: standalone)').matches;
+    
+    console.log('Intentando cerrar app - Android:', isAndroid, 'Standalone:', isStandalone);
+    
+    // MÉTODO 1: Intentar cerrar con window.close()
+    try {
+        window.close();
+        console.log('Método 1: window.close() ejecutado');
+    } catch (e) {
+        console.log('Error en window.close():', e);
+    }
+    
+    // MÉTODO 2: Para Android PWA - Usar un intent de cierre
+    if (isAndroid && isStandalone) {
+        try {
+            // Intentar forzar el cierre en Android
+            // Esto funciona en algunas versiones de Android
+            if (window.chrome && window.chrome.app) {
+                window.chrome.app.window.current().close();
+                console.log('Método 2: chrome.app.window.close() ejecutado');
+            }
+        } catch (e) {
+            console.log('Error en chrome.app.window.close():', e);
+        }
+        
+        // MÉTODO 3: Usar un intent de Android (funciona en algunos navegadores)
+        try {
+            // Intentar usar el sistema de Android para cerrar
+            const intent = 'intent://#Intent;action=android.intent.action.MAIN;category=android.intent.category.HOME;end';
+            window.location.href = intent;
+            console.log('Método 3: Intent de Android ejecutado');
+        } catch (e) {
+            console.log('Error en intent de Android:', e);
+        }
+        
+        // MÉTODO 4: Redirigir a about:blank (esto cierra la app en algunos casos)
+        try {
+            setTimeout(() => {
+                window.location.href = 'about:blank';
+                console.log('Método 4: about:blank ejecutado');
+            }, 500);
+        } catch (e) {
+            console.log('Error en about:blank:', e);
+        }
+        
+        // MÉTODO 5: Usar la API de Activity (solo para Android WebView)
+        try {
+            if (window.Android) {
+                window.Android.closeApp();
+                console.log('Método 5: Android.closeApp() ejecutado');
+            }
+        } catch (e) {
+            console.log('Error en Android.closeApp():', e);
+        }
+        
+        // MÉTODO 6: Recargar y luego intentar cerrar (como último recurso)
+        setTimeout(() => {
+            try {
+                // Si todo falla, intentar recargar con un parámetro especial
+                window.location.href = window.location.href + '?close=true';
+                console.log('Método 6: Recarga con parámetro ejecutado');
+            } catch (e) {
+                console.log('Error en recarga con parámetro:', e);
+            }
+        }, 1000);
+    }
+    
+    // MÉTODO 7: Si no es Android o no está en modo standalone, recargar
+    if (!isAndroid || !isStandalone) {
+        setTimeout(() => {
+            window.location.reload();
+            console.log('Método 7: Recarga normal ejecutada');
+        }, 1000);
+    }
+    
+    // MÉTODO 8: Último recurso - Cerrar con un timeout
+    setTimeout(() => {
+        try {
+            // Esto puede funcionar en algunos navegadores
+            if (window.history && window.history.length > 1) {
+                window.history.go(-window.history.length);
+                console.log('Método 8: history.go() ejecutado');
+            }
+        } catch (e) {
+            console.log('Error en history.go():', e);
+        }
+    }, 2000);
+}
+
+// ==========================
+// DETECTAR CIERRE POR PARÁMETRO
+// ==========================
+
+// Si la URL tiene ?close=true, intentar cerrar nuevamente
+if (window.location.search.includes('close=true')) {
+    console.log('Detectado parámetro de cierre, intentando cerrar...');
+    setTimeout(() => {
+        try {
+            window.close();
+            // Si no se cierra, intentar con about:blank
+            setTimeout(() => {
+                window.location.href = 'about:blank';
+            }, 500);
+        } catch (e) {
+            console.log('Error en cierre por parámetro:', e);
+        }
+    }, 1000);
 }
 
 // Detectar mensajes del Service Worker
