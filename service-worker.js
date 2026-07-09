@@ -1,5 +1,5 @@
-const CACHE_NAME = "himnario-ipu-v9"; // Cambia la versión cuando actualices
-const VERSION = "v9";
+const CACHE_NAME = "himnario-ipu-v10"; // Cambia la versión cuando actualices
+const VERSION = "v10";
 
 const urlsToCache = [
     "./",
