@@ -191,20 +191,51 @@ function showUpdateNotification() {
     
     // Manejar clic en el botón de actualización
     document.getElementById('updateAppBtn').addEventListener('click', () => {
-        if (swRegistration && swRegistration.waiting) {
-            swRegistration.waiting.postMessage('skipWaiting');
-            
-            const btn = document.getElementById('updateAppBtn');
-            btn.textContent = 'Actualizando...';
-            btn.disabled = true;
-            
-            setTimeout(() => {
-                window.location.reload();
-            }, 800);
-        } else {
-            window.location.reload();
-        }
+        realizarActualizacion();
     });
+}
+
+// ==========================
+// FUNCIÓN PRINCIPAL DE ACTUALIZACIÓN
+// ==========================
+
+function realizarActualizacion() {
+    // Mostrar mensaje de actualización
+    const btn = document.getElementById('updateAppBtn') || document.getElementById('btnActualizarDesdeMenu');
+    if (btn) {
+        btn.textContent = '🔄 Actualizando...';
+        btn.disabled = true;
+    }
+    
+    // Mostrar toast de actualización
+    mostrarToast('🔄 Actualizando aplicación...');
+    
+    // Si hay un service worker esperando
+    if (swRegistration && swRegistration.waiting) {
+        // Enviar mensaje para activar el nuevo service worker
+        swRegistration.waiting.postMessage('skipWaiting');
+        
+        // Esperar un momento y luego recargar
+        setTimeout(() => {
+            // Cerrar la aplicación (si está en PWA)
+            if (window.matchMedia('(display-mode: standalone)').matches) {
+                // Estamos en modo PWA, cerrar y abrir
+                window.close();
+                // Si no se cierra, recargar
+                setTimeout(() => {
+                    window.location.reload();
+                }, 500);
+            } else {
+                // Estamos en navegador normal, recargar
+                window.location.reload();
+            }
+        }, 1000);
+    } else {
+        // Si no hay service worker esperando, recargar directamente
+        setTimeout(() => {
+            window.location.reload();
+        }, 1000);
+    }
 }
 
 // Detectar mensajes del Service Worker
@@ -474,12 +505,8 @@ btnActualizarDesdeMenu.addEventListener('click', async () => {
             await swRegistration.update();
             
             if (swRegistration.waiting) {
-                btn.textContent = '⬇️ Actualizando...';
-                swRegistration.waiting.postMessage('skipWaiting');
-                
-                setTimeout(() => {
-                    window.location.reload();
-                }, 800);
+                // Hay actualización disponible - usar función centralizada
+                realizarActualizacion();
             } else {
                 btn.textContent = '✅ Ya está actualizado';
                 mostrarToast('✅ Tu app ya está en la última versión');
