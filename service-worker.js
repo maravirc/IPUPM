@@ -1,5 +1,5 @@
-const CACHE_NAME = "himnario-ipu-v7"; // Incrementa la versión
-const VERSION = "v7"; // Para tracking
+const CACHE_NAME = "himnario-ipu-v8"; // Cambia la versión cuando actualices
+const VERSION = "v8";
 
 const urlsToCache = [
     "./",
@@ -27,14 +27,13 @@ self.addEventListener("activate", event => {
         .then(cacheNames => {
             return Promise.all(
                 cacheNames.map(cache => {
-                    if(cache !== CACHE_NAME){
+                    if (cache !== CACHE_NAME) {
                         return caches.delete(cache);
                     }
                 })
             );
         })
         .then(() => {
-            // Notificar a los clientes que se ha actualizado
             return self.clients.claim();
         })
     );
@@ -43,7 +42,7 @@ self.addEventListener("activate", event => {
 // PETICIONES
 self.addEventListener("fetch", event => {
     // Para los JSON siempre buscar la versión nueva
-    if(event.request.url.includes(".json")){
+    if (event.request.url.includes(".json")) {
         event.respondWith(
             fetch(event.request, { cache: 'no-store' })
             .catch(() => caches.match(event.request))
