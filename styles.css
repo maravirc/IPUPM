@@ -1,841 +1,439 @@
-/* ===========================
-   HIMNARIO IPU MOYOBAMBA
-   styles.css
-=========================== */
+/* ==========================
+   BOTÓN DE CONFIGURACIÓN (ENGANCHE)
+   ========================== */
 
-*{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
-    font-family:Arial, Helvetica, sans-serif;
-}
-
-body{
-    background:#f5f7fb;
-    color:#222;
-}
-.topbar{
-
+   .header-actions {
     position: fixed;
-
-    top: 0;
-
-    left: 0;
-
-    width: 100%;
-
-    background: #f5f7fb;
-
-    z-index: 1000;
-
-    box-shadow: 0 2px 10px rgba(0,0,0,.15);
-
+    top: 15px;
+    right: 15px;
+    z-index: 1001;
 }
 
-/* HEADER */
-
-header{
-    background:#0d47a1;
-    color:white;
-    text-align:center;
-    padding:20px;
-    box-shadow:0 2px 10px rgba(0,0,0,.2);
-}
-
-header h1{
-    font-size:28px;
-}
-
-header p{
-    margin-top:5px;
-    font-size:15px;
-}
-
-/* BUSCADOR */
-
-.busqueda{
-    padding:15px;
-}
-
-#buscar{
-    width:100%;
-    padding:14px;
-    border-radius:10px;
-    border:none;
-    outline:none;
-    font-size:16px;
-    border:2px solid #0d47a1;
-}
-
-/* MENÚ */
-
-.menu{
-    display:flex;
-    justify-content:center;
-    gap:10px;
-    flex-wrap:wrap;
-    padding:10px;
-}
-
-.menu button{
-
-    background:#1565c0;
-    color:white;
-
-    border:none;
-
-    padding:12px 18px;
-
-    border-radius:8px;
-
-    cursor:pointer;
-
-    transition:.3s;
-
-    font-size:15px;
-
-}
-
-.menu button:hover{
-
-    background:#0d47a1;
-
-}
-
-/* CONTENIDO */
-
-main{
-
-    padding:15px;
-
-    margin-top:320px;
-
-}
-
-/* TARJETAS */
-
-.card{
-
-    background:white;
-
-    margin-bottom:15px;
-
-    border-radius:12px;
-
-    padding:15px;
-
-    box-shadow:0 3px 10px rgba(0,0,0,.12);
-
-    transition:.3s;
-
-}
-
-.card:hover{
-
-    transform:translateY(-3px);
-
-}
-
-.numero{
-
-    color:#1565c0;
-
-    font-weight:bold;
-
-    font-size:18px;
-
-}
-
-.titulo{
-
-    margin-top:5px;
-
-    font-size:22px;
-
-    font-weight:bold;
-
-}
-
-.letra{
-
-    margin-top:-14px;
-
-    white-space:pre-line;
-
-    line-height:1.4;
-
-    font-size:30px;
-
-}
-
-/* BOTONES */
-
-.botones{
-
-    margin-top:15px;
-
-    display:flex;
-
-    gap:10px;
-
-    flex-wrap:wrap;
-
-}
-
-.botones button{
-
-    border:none;
-
-    cursor:pointer;
-
-    padding:10px 15px;
-
-    border-radius:8px;
-
-    background:#1976d2;
-
-    color:white;
-
-    transition:.3s;
-
-}
-
-.botones button:hover{
-
-    background:#0d47a1;
-
-}
-
-/* FOOTER */
-
-footer{
-
-    text-align:center;
-
-    padding:20px;
-
-    color:#777;
-
-}
-
-/* MODO OSCURO */
-
-.dark{
-
-    background:#121212;
-
-    color:white;
-
-}
-
-.dark .card{
-
-    background:#1f1f1f;
-
-    color:white;
-
-}
-
-.dark #buscar{
-
-    background:#222;
-
-    color:white;
-
-    border-color:#42a5f5;
-
-}
-
-.dark footer{
-
-    color:#ccc;
-
-}
-
-/* RESPONSIVE */
-
-@media(max-width:700px){
-
-header h1{
-
-font-size:24px;
-
-}
-
-.titulo{
-
-font-size:20px;
-
-}
-
-.letra{
-
-font-size:26px;
-
-}
-
-.menu{
-
-flex-direction:column;
-
-}
-
-.menu button{
-
-width:100%;
-
-}
-
-#btnInstalar{
-
-    background:#2e7d32;
-
-}
-
-#btnInstalar:hover{
-
-    background:#1b5e20;
-
-}
-.cabecera-himno{
-
-    display:flex;
-
-    justify-content:space-between;
-
-    align-items:center;
-
-    margin-bottom:10px;
-
-}
-
-.btnPantalla{
-
-    border:none;
-
-    background:none;
-
-    color:#1565c0;
-
-    cursor:pointer;
-
-    font-size:14px;
-
-    font-weight:bold;
-
-}
-
-.btnPantalla:hover{
-
-    text-decoration:underline;
-
-}
-/* ===========================
-   PANTALLA COMPLETA
-=========================== */
-
-/* ===========================
-   PANTALLA COMPLETA
-=========================== */
-
-.card:fullscreen{
-
-    background:#0d47a1;
-
-    color:white;
-
-    width:100vw;
-
-    height:100vh;
-
-    margin:0;
-
-    padding:0;
-
-    overflow-y:auto;
-
-}
-
-.card:fullscreen .cabecera-himno{
-
-    position:sticky;
-
-    top:0;
-
-    display:flex;
-
-    justify-content:space-between;
-
-    align-items:center;
-
-    background:#1565c0;
-
-    padding:20px;
-
-    z-index:999;
-
-    box-shadow:0 3px 10px rgba(0,0,0,.35);
-
-}
-
-.card:fullscreen .titulo{
-
-    color:white;
-
-    font-size:34px;
-
-    margin-top:8px;
-
-}
-
-.card:fullscreen .numero{
-
-    color:#FFD54F;
-
-    font-size:22px;
-
-}
-
-.card:fullscreen .letra{
-
-    padding:30px;
-
-    font-size:30px;
-
-    line-height:1.4;
-
-}
-
-.btnSalir{
-
-    background:#d32f2f;
-
-    color:white;
-
-    border:none;
-
-    border-radius:50%;
-
-    width:45px;
-
-    height:45px;
-
-    cursor:pointer;
-
-    font-size:22px;
-
-    margin-left:10px;
-
-}
-
-.btnPantalla{
-
-    margin-right:8px;
-
-}
-
-.card:fullscreen .botones{
-
-    display:none;
-
-}
-
-.acciones{
-
-    display:flex;
-
-    gap:10px;
-
-    align-items:center;
-
-}
-
-.btnPantalla,
-.btnSalir{
-
-    width:40px;
-
-    height:40px;
-
-    border:none;
-
-    border-radius:50%;
-
-    cursor:pointer;
-
-    font-size:18px;
-
-}
-
-.btnPantalla{
-
-    background:#1565c0;
-
-    color:white;
-
-}
-
-.btnSalir{
-
-    background:#d32f2f;
-
-    color:white;
-
-}
-
-.btnSalir{
-
-    display:none;
-
-}
-
-.card:fullscreen .btnPantalla{
-
-    display:none;
-
-}
-
-.card:fullscreen .btnSalir{
-
-    display:inline-flex;
-
-    justify-content:center;
-
-    align-items:center;
-
-}
-
-/*se creo y se puede borrar*/
-
-/* ===========================
-   TARJETAS DE HIMNOS (MEJORADAS)
-=========================== */
-
-.card {
-    background: white;
-    margin-bottom: 20px;
-    border-radius: 20px;
-    padding: 0;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06), 0 1px 4px rgba(0, 0, 0, 0.03);
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    border: 1px solid rgba(255, 255, 255, 0.6);
-    overflow: hidden;
+.btn-engranaje {
+    background: rgba(255, 255, 255, 0.95);
+    border: none;
+    border-radius: 50%;
+    width: 48px;
+    height: 48px;
+    font-size: 22px;
+    cursor: pointer;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255,255,255,0.3);
     position: relative;
 }
 
-/* Borde superior degradado animado */
-.card::before {
-    content: '';
+.btn-engranaje:hover {
+    transform: rotate(90deg) scale(1.05);
+    box-shadow: 0 6px 25px rgba(0,0,0,0.3);
+}
+
+.btn-engranaje:active {
+    transform: rotate(90deg) scale(0.95);
+}
+
+/* Badge de actualización */
+.badge-actualizacion {
+    background: #ff4757;
+    color: white;
+    border-radius: 50%;
+    width: 22px;
+    height: 22px;
+    font-size: 11px;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     position: absolute;
+    top: -6px;
+    right: -6px;
+    animation: pulse 2s infinite;
+    box-shadow: 0 2px 10px rgba(255, 71, 87, 0.4);
+}
+
+@keyframes pulse {
+    0%, 100% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.15);
+    }
+}
+
+/* ==========================
+   MENÚ DE CONFIGURACIÓN
+   ========================== */
+
+.menu-configuracion {
+    position: fixed;
     top: 0;
     left: 0;
     right: 0;
-    height: 4px;
-    background: linear-gradient(90deg, #0d47a1, #42a5f5, #0d47a1);
-    background-size: 200% 100%;
-    animation: shimmer 3s ease-in-out infinite;
-    z-index: 1;
+    bottom: 0;
+    background: rgba(0,0,0,0.6);
+    z-index: 9999;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    animation: fadeIn 0.3s ease;
+    backdrop-filter: blur(5px);
 }
 
-@keyframes shimmer {
-    0%, 100% { background-position: 0% 0%; }
-    50% { background-position: 100% 0%; }
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
 }
 
-.card:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 12px 40px rgba(13, 71, 161, 0.10);
+.menu-content {
+    background: white;
+    border-radius: 20px;
+    max-width: 420px;
+    width: 90%;
+    max-height: 80vh;
+    overflow-y: auto;
+    box-shadow: 0 25px 80px rgba(0,0,0,0.4);
+    animation: slideUp 0.3s ease;
 }
 
-/* --- CABECERA DEL HIMNO --- */
-.cabecera-himno {
+@keyframes slideUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px) scale(0.95);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+.menu-header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 18px 20px 10px 20px;
-    background: linear-gradient(135deg, #f8faff, #eef4fb);
+    padding: 20px 24px;
+    border-bottom: 1px solid #eee;
+    background: linear-gradient(135deg, #f8f9fa, #e9ecef);
+    border-radius: 20px 20px 0 0;
 }
 
-/* --- NÚMERO DEL HIMNO --- */
-.numero {
-    color: #0d47a1;
-    font-weight: 700;
-    font-size: 13px;
-    background: white;
-    padding: 4px 14px;
-    border-radius: 30px;
-    letter-spacing: 0.3px;
-    display: inline-block;
-    box-shadow: 0 2px 8px rgba(13, 71, 161, 0.08);
-}
-
-/* --- TÍTULO DEL HIMNO --- */
-.titulo {
-    font-size: 22px;
-    font-weight: 800;
-    color: #0a1a2e;
-    letter-spacing: -0.3px;
-    margin-top: 4px;
-    font-family: 'Playfair Display', serif;
-}
-
-/* --- LETRA DEL HIMNO --- */
-.letra {
-    padding: 8px 20px 16px 20px;
-    white-space: pre-line;
-    line-height: 1.7;
+.menu-header h3 {
+    margin: 0;
     font-size: 18px;
-    color: #1f2a3f;
-    font-weight: 400;
-}
-
-/* --- CORO RESALTADO --- */
-.letra .coro {
-    display: block;
-    background: linear-gradient(135deg, #f0f7ff, #e3edfb);
-    padding: 14px 18px;
-    border-radius: 12px;
-    margin: 12px 0 8px;
-    border-left: 4px solid #0d47a1;
-    font-style: italic;
-    color: #0a2a5a;
-    font-weight: 500;
-}
-
-/* --- BOTONES DE ACCIÓN --- */
-.botones {
-    padding: 0 20px 18px 20px;
-    margin-top: 4px;
-    display: flex;
-    gap: 10px;
-    flex-wrap: wrap;
-}
-
-.botones button {
-    border: none;
-    cursor: pointer;
-    padding: 9px 16px;
-    border-radius: 30px;
-    background: #1565c0;
-    color: white;
+    color: #333;
     font-weight: 600;
+}
+
+.btn-cerrar-menu {
+    background: none;
+    border: none;
+    font-size: 22px;
+    cursor: pointer;
+    color: #999;
+    padding: 5px 10px;
+    transition: all 0.3s ease;
+    border-radius: 50%;
+    width: 36px;
+    height: 36px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.btn-cerrar-menu:hover {
+    background: rgba(0,0,0,0.05);
+    color: #333;
+    transform: rotate(90deg);
+}
+
+.menu-body {
+    padding: 16px 24px 24px 24px;
+}
+
+.opcion-menu {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 14px 0;
+    border-bottom: 1px solid #f0f0f0;
+    transition: all 0.2s ease;
+}
+
+.opcion-menu:last-child {
+    border-bottom: none;
+}
+
+.opcion-menu:hover {
+    background: rgba(0,0,0,0.02);
+    margin: 0 -12px;
+    padding: 14px 12px;
+    border-radius: 8px;
+}
+
+.icono-opcion {
+    font-size: 26px;
+    width: 44px;
+    text-align: center;
+    flex-shrink: 0;
+}
+
+.texto-opcion {
+    flex: 1;
+    min-width: 0;
+}
+
+.texto-opcion strong {
+    display: block;
+    font-size: 15px;
+    color: #333;
+    font-weight: 600;
+}
+
+.texto-opcion small {
+    font-size: 12px;
+    color: #999;
+    display: block;
+    margin-top: 2px;
+}
+
+.btn-actualizar-menu {
+    background: linear-gradient(135deg, #667eea, #764ba2);
+    border: none;
+    color: white;
+    padding: 8px 18px;
+    border-radius: 20px;
     font-size: 13px;
-    transition: all 0.25s ease;
-    box-shadow: 0 3px 12px rgba(13, 71, 161, 0.15);
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    white-space: nowrap;
+    flex-shrink: 0;
 }
 
-.botones button:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 8px 25px rgba(13, 71, 161, 0.25);
+.btn-actualizar-menu:hover {
+    transform: scale(1.05);
+    box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
 }
 
-.botones button:active {
+.btn-actualizar-menu:active {
     transform: scale(0.95);
 }
 
-/* --- BOTÓN FAVORITO --- */
-.botones button.btn-fav {
-    background: linear-gradient(135deg, #f9a825, #f57f17);
-    box-shadow: 0 3px 12px rgba(245, 127, 23, 0.2);
+.btn-actualizar-menu:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+    transform: none !important;
 }
 
-.botones button.btn-fav:hover {
-    box-shadow: 0 8px 25px rgba(245, 127, 23, 0.35);
+.btn-cache {
+    background: linear-gradient(135deg, #ff6b6b, #ee5a24);
 }
 
-/* --- BOTÓN COMPARTIR --- */
-.botones button.btn-share {
-    background: linear-gradient(135deg, #43a047, #2e7d32);
-    box-shadow: 0 3px 12px rgba(46, 125, 50, 0.2);
+.btn-cache:hover {
+    box-shadow: 0 4px 15px rgba(238, 90, 36, 0.4);
 }
 
-.botones button.btn-share:hover {
-    box-shadow: 0 8px 25px rgba(46, 125, 50, 0.35);
+/* ==========================
+   TOAST NOTIFICATIONS
+   ========================== */
+
+.toast-notification {
+    position: fixed;
+    bottom: 100px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgba(0,0,0,0.85);
+    color: white;
+    padding: 14px 28px;
+    border-radius: 14px;
+    font-size: 14px;
+    z-index: 10001;
+    animation: toastSlideUp 0.4s ease;
+    backdrop-filter: blur(10px);
+    max-width: 90%;
+    text-align: center;
+    box-shadow: 0 8px 30px rgba(0,0,0,0.4);
+    border: 1px solid rgba(255,255,255,0.1);
+    font-weight: 500;
 }
 
-/* --- BOTÓN COPIAR --- */
-.botones button:last-child:not(.btn-fav):not(.btn-share) {
-    background: linear-gradient(135deg, #5c6bc0, #3949ab);
+@keyframes toastSlideUp {
+    from {
+        opacity: 0;
+        transform: translateX(-50%) translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(-50%) translateY(0);
+    }
 }
 
-/* ===========================
-   MODO OSCURO (solo tarjetas)
-=========================== */
+/* ==========================
+   MODO OSCURO - MENÚ DE CONFIGURACIÓN
+   ========================== */
 
-.dark .card {
-    background: #161b22;
-    border-color: #30363d;
-    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
+.dark .menu-content {
+    background: #1a1a2e;
+    box-shadow: 0 25px 80px rgba(0,0,0,0.8);
 }
 
-.dark .card::before {
-    background: linear-gradient(90deg, #1e88e5, #64b5f6, #1e88e5);
-}
-
-.dark .cabecera-himno {
+.dark .menu-header {
     background: linear-gradient(135deg, #1a2744, #0d1f3c);
+    border-bottom-color: #2a2a4a;
 }
 
-.dark .numero {
-    background: #1a2d4a;
-    color: #64b5f6;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
-}
-
-.dark .titulo {
+.dark .menu-header h3 {
     color: #f0f6fc;
 }
 
-.dark .letra {
-    color: #d0d7de;
+.dark .btn-cerrar-menu {
+    color: #888;
 }
 
-.dark .letra .coro {
-    background: #1a2744;
-    border-left-color: #42a5f5;
-    color: #b3d4fc;
+.dark .btn-cerrar-menu:hover {
+    background: rgba(255,255,255,0.05);
+    color: #fff;
 }
 
-.dark .botones button {
-    background: linear-gradient(135deg, #1e88e5, #0d47a1);
+.dark .opcion-menu {
+    border-bottom-color: #2a2a4a;
 }
 
-.dark .botones button.btn-fav {
-    background: linear-gradient(135deg, #f9a825, #e65100);
+.dark .opcion-menu:hover {
+    background: rgba(255,255,255,0.03);
 }
 
-.dark .botones button.btn-share {
-    background: linear-gradient(135deg, #388e3c, #1b5e20);
+.dark .texto-opcion strong {
+    color: #f0f6fc;
 }
 
-/* ===========================
-   PANTALLA COMPLETA (solo tarjetas)
-=========================== */
-
-.card:fullscreen {
-    background: linear-gradient(145deg, #0a1a35, #0d47a1);
-    color: white;
-    width: 100vw;
-    height: 100vh;
-    margin: 0;
-    padding: 0;
-    overflow-y: auto;
-    border-radius: 0;
-    border: none;
+.dark .texto-opcion small {
+    color: #888;
 }
 
-.card:fullscreen::before {
-    display: none;
+.dark .btn-engranaje {
+    background: rgba(26, 26, 46, 0.95);
+    border-color: rgba(255,255,255,0.1);
+    color: #fff;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.4);
 }
 
-.card:fullscreen .cabecera-himno {
-    background: rgba(13, 71, 161, 0.92);
-    backdrop-filter: blur(12px);
-    padding: 20px 28px;
-    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.3);
+.dark .btn-engranaje:hover {
+    box-shadow: 0 6px 25px rgba(0,0,0,0.6);
 }
 
-.card:fullscreen .numero {
-    background: rgba(255, 213, 79, 0.2);
-    color: #FFD54F;
-    font-size: 16px;
-}
+/* ==========================
+   RESPONSIVE - MENÚ DE CONFIGURACIÓN
+   ========================== */
 
-.card:fullscreen .titulo {
-    color: white;
-    font-size: 34px;
-    margin-top: 8px;
-}
-
-.card:fullscreen .letra {
-    padding: 30px 35px 40px;
-    font-size: 26px;
-    line-height: 1.7;
-    color: #e3edfb;
-}
-
-.card:fullscreen .letra .coro {
-    background: rgba(255, 255, 255, 0.06);
-    border-left-color: #FFD54F;
-    color: #FFD54F;
-    padding: 20px 24px;
-}
-
-.card:fullscreen .botones {
-    display: none;
-}
-
-/* ===========================
-   RESPONSIVE (solo tarjetas)
-=========================== */
-
-@media (max-width: 700px) {
-    .titulo {
-        font-size: 20px;
+@media (max-width: 600px) {
+    .header-actions {
+        top: 10px;
+        right: 10px;
     }
-
-    .letra {
-        font-size: 16px;
-        line-height: 1.6;
-        padding: 6px 16px 14px 16px;
-    }
-
-    .cabecera-himno {
-        padding: 14px 16px 8px 16px;
-    }
-
-    .botones {
-        padding: 0 16px 14px 16px;
-    }
-
-    .botones button {
-        font-size: 12px;
-        padding: 8px 14px;
-    }
-
-    .card:fullscreen .letra {
-        font-size: 20px;
-        padding: 20px;
-    }
-
-    .card:fullscreen .titulo {
-        font-size: 26px;
-    }
-}
-
-@media (max-width: 480px) {
-    .card {
-        border-radius: 16px;
-        margin-bottom: 14px;
-    }
-
-    .cabecera-himno {
-        padding: 12px 14px 6px 14px;
-    }
-
-    .titulo {
+    
+    .btn-engranaje {
+        width: 42px;
+        height: 42px;
         font-size: 18px;
     }
-
-    .letra {
-        font-size: 15px;
-        padding: 4px 14px 12px 14px;
-        line-height: 1.6;
+    
+    .badge-actualizacion {
+        width: 20px;
+        height: 20px;
+        font-size: 10px;
+        top: -5px;
+        right: -5px;
     }
-
-    .numero {
-        font-size: 12px;
-        padding: 3px 12px;
+    
+    .menu-content {
+        width: 95%;
+        margin: 10px;
     }
-
-    .botones {
-        padding: 0 14px 12px 14px;
-        gap: 6px;
+    
+    .menu-header {
+        padding: 16px 20px;
     }
-
-    .botones button {
-        font-size: 11px;
-        padding: 6px 12px;
+    
+    .menu-header h3 {
+        font-size: 16px;
+    }
+    
+    .menu-body {
+        padding: 12px 16px 16px 16px;
+    }
+    
+    .opcion-menu {
+        padding: 12px 0;
+        flex-wrap: wrap;
+        gap: 8px;
+    }
+    
+    .opcion-menu:hover {
+        margin: 0 -8px;
+        padding: 12px 8px;
+    }
+    
+    .icono-opcion {
+        font-size: 22px;
+        width: 36px;
+    }
+    
+    .texto-opcion strong {
+        font-size: 14px;
+    }
+    
+    .btn-actualizar-menu {
+        width: 100%;
+        padding: 10px;
+        margin-top: 4px;
+        font-size: 14px;
+        justify-content: center;
+    }
+    
+    .toast-notification {
+        bottom: 80px;
+        padding: 12px 20px;
+        font-size: 13px;
+        max-width: 95%;
     }
 }
+
+/* Ajustes para pantallas muy pequeñas */
+@media (max-width: 380px) {
+    .btn-engranaje {
+        width: 38px;
+        height: 38px;
+        font-size: 16px;
+    }
+    
+    .menu-header h3 {
+        font-size: 14px;
+    }
+}
+
+/* ==========================
+   AJUSTE PARA QUE EL MENÚ NO TAPE EL TOPBAR
+   ========================== */
+
+/* Asegurar que el topbar esté por debajo del menú */
+.topbar {
+    z-index: 999;
+}
+
+/* El menú de configuración debe estar por encima de todo */
+.menu-configuracion {
+    z-index: 9999;
+}
+
+/* El botón de engranaje debe estar por encima del topbar */
+.header-actions {
+    z-index: 1001;
 }

@@ -192,15 +192,12 @@ function showUpdateNotification() {
     // Manejar clic en el botón de actualización
     document.getElementById('updateAppBtn').addEventListener('click', () => {
         if (swRegistration && swRegistration.waiting) {
-            // Enviar mensaje al service worker para que se active
             swRegistration.waiting.postMessage('skipWaiting');
             
-            // Mostrar mensaje de actualización
             const btn = document.getElementById('updateAppBtn');
             btn.textContent = 'Actualizando...';
             btn.disabled = true;
             
-            // Recargar después de un momento
             setTimeout(() => {
                 window.location.reload();
             }, 800);
@@ -398,3 +395,231 @@ function salirPantallaCompleta(event) {
         document.exitFullscreen();
     }
 }
+
+// ==========================
+// MENÚ DE CONFIGURACIÓN
+// ==========================
+
+// Variables del menú
+const btnConfiguracion = document.getElementById('btnConfiguracion');
+const menuConfiguracion = document.getElementById('menuConfiguracion');
+const cerrarMenu = document.getElementById('cerrarMenu');
+const btnActualizarDesdeMenu = document.getElementById('btnActualizarDesdeMenu');
+const btnLimpiarCache = document.getElementById('btnLimpiarCache');
+const versionActual = document.getElementById('versionActual');
+const contadorFavoritos = document.getElementById('contadorFavoritos');
+
+// Badge de actualización
+let badgeActualizacion = null;
+
+// Mostrar/Ocultar menú
+btnConfiguracion.addEventListener('click', () => {
+    abrirMenu();
+});
+
+cerrarMenu.addEventListener('click', () => {
+    cerrarMenuConfiguracion();
+});
+
+// Cerrar menú al hacer clic fuera
+menuConfiguracion.addEventListener('click', (e) => {
+    if (e.target === menuConfiguracion) {
+        cerrarMenuConfiguracion();
+    }
+});
+
+// Cerrar con tecla ESC
+document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && menuConfiguracion.style.display !== 'none') {
+        cerrarMenuConfiguracion();
+    }
+});
+
+function abrirMenu() {
+    menuConfiguracion.style.display = 'flex';
+    actualizarInfoMenu();
+    document.body.style.overflow = 'hidden';
+}
+
+function cerrarMenuConfiguracion() {
+    menuConfiguracion.style.display = 'none';
+    document.body.style.overflow = '';
+}
+
+function actualizarInfoMenu() {
+    // Actualizar versión
+    const version = localStorage.getItem('appVersion') || 'v1.0.0';
+    if (versionActual) versionActual.textContent = version;
+    
+    // Actualizar contador de favoritos
+    const favoritos = JSON.parse(localStorage.getItem("favoritos")) || [];
+    if (contadorFavoritos) {
+        contadorFavoritos.textContent = `${favoritos.length} himnos`;
+    }
+}
+
+// ==========================
+// ACTUALIZAR DESDE EL MENÚ
+// ==========================
+
+btnActualizarDesdeMenu.addEventListener('click', async () => {
+    const btn = btnActualizarDesdeMenu;
+    const textoOriginal = btn.textContent;
+    
+    btn.textContent = '🔍 Buscando...';
+    btn.disabled = true;
+    
+    try {
+        if (swRegistration) {
+            await swRegistration.update();
+            
+            if (swRegistration.waiting) {
+                btn.textContent = '⬇️ Actualizando...';
+                swRegistration.waiting.postMessage('skipWaiting');
+                
+                setTimeout(() => {
+                    window.location.reload();
+                }, 800);
+            } else {
+                btn.textContent = '✅ Ya está actualizado';
+                mostrarToast('✅ Tu app ya está en la última versión');
+                
+                setTimeout(() => {
+                    btn.textContent = textoOriginal;
+                    btn.disabled = false;
+                }, 3000);
+            }
+        } else {
+            btn.textContent = '🔄 Actualizando...';
+            setTimeout(() => {
+                window.location.reload();
+            }, 500);
+        }
+    } catch (error) {
+        console.error('Error al actualizar:', error);
+        btn.textContent = '❌ Error';
+        mostrarToast('❌ Error al buscar actualizaciones');
+        
+        setTimeout(() => {
+            btn.textContent = textoOriginal;
+            btn.disabled = false;
+        }, 3000);
+    }
+});
+
+// ==========================
+// LIMPIAR CACHÉ
+// ==========================
+
+btnLimpiarCache.addEventListener('click', async () => {
+    const btn = btnLimpiarCache;
+    const textoOriginal = btn.textContent;
+    
+    btn.textContent = '⏳ Limpiando...';
+    btn.disabled = true;
+    
+    try {
+        if ('caches' in window) {
+            const cacheNames = await caches.keys();
+            await Promise.all(
+                cacheNames.map(cacheName => caches.delete(cacheName))
+            );
+            mostrarToast('✅ Caché limpiado correctamente');
+            
+            setTimeout(() => {
+                btn.textContent = textoOriginal;
+                btn.disabled = false;
+            }, 2000);
+        } else {
+            mostrarToast('❌ Tu navegador no soporta esta función');
+            btn.textContent = textoOriginal;
+            btn.disabled = false;
+        }
+    } catch (error) {
+        console.error('Error al limpiar caché:', error);
+        mostrarToast('❌ Error al limpiar caché');
+        btn.textContent = textoOriginal;
+        btn.disabled = false;
+    }
+});
+
+// ==========================
+// TOAST NOTIFICATIONS
+// ==========================
+
+function mostrarToast(mensaje) {
+    // Eliminar toast existente
+    const toastExistente = document.querySelector('.toast-notification');
+    if (toastExistente) {
+        toastExistente.remove();
+    }
+    
+    // Crear toast
+    const toast = document.createElement('div');
+    toast.className = 'toast-notification';
+    toast.textContent = mensaje;
+    document.body.appendChild(toast);
+    
+    // Auto-cerrar después de 3 segundos
+    setTimeout(() => {
+        toast.style.opacity = '0';
+        toast.style.transition = 'opacity 0.4s ease';
+        setTimeout(() => {
+            toast.remove();
+        }, 400);
+    }, 3000);
+}
+
+// ==========================
+// BADGE DE ACTUALIZACIÓN
+// ==========================
+
+function mostrarBadgeActualizacion() {
+    if (badgeActualizacion) return;
+    
+    badgeActualizacion = document.createElement('span');
+    badgeActualizacion.className = 'badge-actualizacion';
+    badgeActualizacion.textContent = '1';
+    
+    const btn = document.getElementById('btnConfiguracion');
+    btn.style.position = 'relative';
+    btn.appendChild(badgeActualizacion);
+}
+
+// ==========================
+// SOBRESCRIBIR showUpdateNotification
+// ==========================
+
+// Guardar la función original si existe
+const originalShowUpdate = window.showUpdateNotification;
+
+// Nueva función que incluye el badge
+window.showUpdateNotification = function() {
+    // Llamar a la función original si existe
+    if (typeof originalShowUpdate === 'function') {
+        originalShowUpdate();
+    }
+    
+    // Mostrar badge en el engranaje
+    mostrarBadgeActualizacion();
+    
+    // Actualizar el botón en el menú
+    const btn = document.getElementById('btnActualizarDesdeMenu');
+    if (btn) {
+        btn.textContent = '🔔 Actualizar ahora';
+        btn.style.background = 'linear-gradient(135deg, #ff6b6b, #ee5a24)';
+    }
+};
+
+// ==========================
+// INICIALIZAR VERSIÓN
+// ==========================
+
+// Guardar versión en localStorage la primera vez
+if (!localStorage.getItem('appVersion')) {
+    localStorage.setItem('appVersion', 'v1.0.0');
+}
+
+// ==========================
+// FIN MENÚ DE CONFIGURACIÓN
+// ==========================
