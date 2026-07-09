@@ -2,6 +2,19 @@
     {
         "numero": 1,
         "titulo": "En el nombre de Jesús",
-        "letra": "1\nEn el Nombre de Jesús\nme acerco ante tu Presencia, ¡Oh Señor!\nen el Nombre de Jesús\na ofrecerte mi ofrenda, ¡Oh Señor!\n\n**Coro:**\nEs alabanza, adoración\nlo que te ofrezco Señor\nen el Nombre maravilloso de Jesús."
+        "letra": "1\nEn el Nombre de Jesús\nme acerco ante tu Presencia, ¡Oh Señor!\nen el Nombre de Jesús\na ofrecerte mi ofrenda, ¡Oh Señor!\n\n**Coro:**\nEs alabanza, adoración\nlo que te ofrezco Señor\nen el Nombre maravilloso de Jesús.",
+        "tipo": "coro"
+    },
+    {
+        "numero": 30,
+        "titulo": "Cuán bello es el Señor",
+        "letra": "1\nCuan bello es el Señor,\ncuan hermoso es el Señor,\ncuan bello es el Señor,\nhoy le quiero adorar.\n\n**Coro:**\nLa belleza de mi Señor\nnunca se agotará,\nla hermosura de mi Señor\nsiempre resplandecerá.",
+        "tipo": "coro"
+    },
+    {
+        "numero": 31,
+        "titulo": "En lo suave de tu presencia",
+        "letra": "1\nEn lo suave de tu presencia\nquiero vivir,\nen lo suave de tu presencia, quiero morar.\n\n**Coro:**\nY permanecer el tiempo que sea necesario,\nhasta que te formes tú en mí,\ny permanecer el tiempo\nque sea necesario,\nhasta que te veas solo tú.",
+        "tipo": "coro"
     }
   ]
