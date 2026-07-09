@@ -1,5 +1,5 @@
-const CACHE_NAME = "himnario-ipu-v6"; // Incrementa la versión
-const VERSION = "v6"; // Para tracking
+const CACHE_NAME = "himnario-ipu-v7"; // Incrementa la versión
+const VERSION = "v7"; // Para tracking
 
 const urlsToCache = [
     "./",
