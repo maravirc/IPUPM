@@ -1,6 +1,6 @@
 // ==========================
 // HIMNARIO IPU MOYOBAMBA
-// script.js - SOLO CIERRE
+// script.js - CON TÍTULO DINÁMICO
 // ==========================
 
 let himnos = [];
@@ -8,6 +8,37 @@ let favoritos = JSON.parse(localStorage.getItem("favoritos")) || [];
 
 const lista = document.getElementById("lista");
 const buscar = document.getElementById("buscar");
+const tituloSeccion = document.getElementById("tituloSeccion");
+const subtitulo = document.getElementById("subtitulo");
+
+// ==========================
+// FUNCIÓN PARA ACTUALIZAR TÍTULO
+// ==========================
+
+function actualizarTitulo(tipo, cantidad = 0) {
+    const iconos = {
+        'himnos': '📖',
+        'coros': '🎵',
+        'favoritos': '⭐'
+    };
+    
+    const textos = {
+        'himnos': 'Himnos',
+        'coros': 'Coros',
+        'favoritos': 'Favoritos'
+    };
+    
+    const icono = iconos[tipo] || '📖';
+    const texto = textos[tipo] || 'Himnos';
+    
+    if (tipo === 'favoritos') {
+        tituloSeccion.innerHTML = `<h2>⭐ Favoritos <span class="contador">(${cantidad})</span></h2>`;
+        subtitulo.textContent = 'Tus himnos y coros favoritos';
+    } else {
+        tituloSeccion.innerHTML = `<h2>${icono} ${texto} <span class="contador">(${cantidad})</span></h2>`;
+        subtitulo.textContent = `Iglesia Pentecostal Unida - Moyobamba • ${texto}`;
+    }
+}
 
 // ==========================
 // CARGAR HIMNOS
@@ -17,8 +48,9 @@ async function cargarHimnos() {
     try {
         const respuesta = await fetch("data/himnos.json");
         himnos = await respuesta.json();
-        console.log(himnos);
+        console.log('Himnos cargados:', himnos.length);
         mostrarHimnos(himnos);
+        actualizarTitulo('himnos', himnos.length);
     } catch (error) {
         lista.innerHTML = "<h2>No se pudieron cargar los himnos.</h2>";
         console.error(error);
@@ -33,11 +65,14 @@ function mostrarHimnos(datos) {
         card.className = "card";
 
         const esFavorito = favoritos.includes(himno.numero);
+        
+        // Detectar si es coro (puedes ajustar según tu estructura)
+        const esCoro = himno.tipo === 'coro' || himno.numero.toString().startsWith('C');
 
         card.innerHTML = `
             <div class="cabecera-himno">
                 <div>
-                    <div class="numero">Himno ${himno.numero}</div>
+                    <div class="numero">${esCoro ? '🎵' : '📖'} ${himno.numero}</div>
                     <div class="titulo">${himno.titulo}</div>
                 </div>
                 <div class="acciones">
@@ -60,20 +95,70 @@ function mostrarHimnos(datos) {
     });
 }
 
-// Botón Coros
+// ==========================
+// BOTÓN COROS
+// ==========================
+
 document.getElementById("btnCoros").addEventListener("click", async () => {
     try {
         const respuesta = await fetch("data/coros.json");
         himnos = await respuesta.json();
-        console.log(himnos);
+        console.log('Coros cargados:', himnos.length);
+        
+        // Marcar todos como coros
+        himnos = himnos.map(h => ({ ...h, tipo: 'coro' }));
+        
         mostrarHimnos(himnos);
+        actualizarTitulo('coros', himnos.length);
+        
+        // Limpiar búsqueda
+        buscar.value = '';
     } catch (error) {
         lista.innerHTML = "<h2>No se pudieron cargar los coros.</h2>";
         console.error(error);
     }
 });
 
-// Buscar
+// ==========================
+// BOTÓN HIMNOS
+// ==========================
+
+document.getElementById("btnHimnos").addEventListener("click", async () => {
+    try {
+        const respuesta = await fetch("data/himnos.json");
+        himnos = await respuesta.json();
+        console.log('Himnos cargados:', himnos.length);
+        
+        // Marcar todos como himnos
+        himnos = himnos.map(h => ({ ...h, tipo: 'himno' }));
+        
+        mostrarHimnos(himnos);
+        actualizarTitulo('himnos', himnos.length);
+        
+        // Limpiar búsqueda
+        buscar.value = '';
+    } catch (error) {
+        console.error(error);
+    }
+});
+
+// ==========================
+// BOTÓN FAVORITOS
+// ==========================
+
+document.getElementById("btnFavoritos").addEventListener("click", () => {
+    const listaFavoritos = himnos.filter(h => favoritos.includes(h.numero));
+    mostrarHimnos(listaFavoritos);
+    actualizarTitulo('favoritos', listaFavoritos.length);
+    
+    // Limpiar búsqueda
+    buscar.value = '';
+});
+
+// ==========================
+// BUSCAR
+// ==========================
+
 buscar.addEventListener("keyup", () => {
     const texto = buscar.value.trim().toLowerCase();
     let resultado;
@@ -88,13 +173,24 @@ buscar.addEventListener("keyup", () => {
     }
 
     mostrarHimnos(resultado);
+    
+    // Actualizar título según lo que se está mostrando
+    if (resultado.length > 0) {
+        const primerItem = resultado[0];
+        const tipo = primerItem.tipo === 'coro' ? 'coros' : 'himnos';
+        actualizarTitulo(tipo, resultado.length);
+    }
+    
     window.scrollTo({
         top: 0,
         behavior: "smooth"
     });
 });
 
-// Favoritos
+// ==========================
+// FAVORITOS
+// ==========================
+
 function favorito(numero) {
     if (favoritos.includes(numero)) {
         favoritos = favoritos.filter(n => n !== numero);
@@ -106,25 +202,10 @@ function favorito(numero) {
     mostrarHimnos(himnos);
 }
 
-// Mostrar favoritos
-document.getElementById("btnFavoritos").addEventListener("click", () => {
-    const listaFavoritos = himnos.filter(h => favoritos.includes(h.numero));
-    mostrarHimnos(listaFavoritos);
-});
+// ==========================
+// COMPARTIR
+// ==========================
 
-// Mostrar todos
-document.getElementById("btnHimnos").addEventListener("click", async () => {
-    try {
-        const respuesta = await fetch("data/himnos.json");
-        himnos = await respuesta.json();
-        console.log(himnos);
-        mostrarHimnos(himnos);
-    } catch (error) {
-        console.error(error);
-    }
-});
-
-// Compartir
 async function compartir(numero) {
     const himno = himnos.find(h => h.numero === numero);
     if (!himno) return;
@@ -132,15 +213,32 @@ async function compartir(numero) {
     if (navigator.share) {
         navigator.share({
             title: himno.titulo,
-            text: `Himno ${himno.numero}\n\n${himno.titulo}\n\n${himno.letra}`
+            text: `${himno.tipo === 'coro' ? '🎵 Coro' : '📖 Himno'} ${himno.numero}\n\n${himno.titulo}\n\n${himno.letra}`
         });
     } else {
         alert("Tu navegador no admite compartir.");
     }
 }
 
-// Iniciar
-cargarHimnos();
+// ==========================
+// PANTALLA COMPLETA
+// ==========================
+
+function pantallaCompleta(numero) {
+    const tarjetas = document.querySelectorAll(".card");
+    tarjetas.forEach(card => {
+        if (card.innerHTML.includes(`${numero}`)) {
+            card.requestFullscreen();
+        }
+    });
+}
+
+function salirPantallaCompleta(event) {
+    event.stopPropagation();
+    if (document.fullscreenElement) {
+        document.exitFullscreen();
+    }
+}
 
 // ==========================
 // INSTALAR PWA
@@ -171,24 +269,8 @@ btnInstalar.addEventListener("click", async () => {
     btnInstalar.style.display = "none";
 });
 
-function pantallaCompleta(numero) {
-    const tarjetas = document.querySelectorAll(".card");
-    tarjetas.forEach(card => {
-        if (card.innerHTML.includes(`Himno ${numero}`)) {
-            card.requestFullscreen();
-        }
-    });
-}
-
-function salirPantallaCompleta(event) {
-    event.stopPropagation();
-    if (document.fullscreenElement) {
-        document.exitFullscreen();
-    }
-}
-
 // ==========================
-// BOTÓN DE CIERRE - SOLO ESO
+// BOTÓN DE CIERRE
 // ==========================
 
 const btnCerrarApp = document.getElementById('btnCerrarApp');
@@ -204,7 +286,6 @@ function cerrarApp() {
     const isAndroid = navigator.userAgent.match(/Android/i);
     const isStandalone = window.matchMedia('(display-mode: standalone)').matches;
     
-    // Intentar cerrar con todos los métodos posibles
     try { window.close(); } catch(e) {}
     
     if (isAndroid) {
@@ -238,10 +319,6 @@ function cerrarApp() {
     }, 1200);
 }
 
-// ==========================
-// DETECTAR CIERRE POR PARÁMETRO
-// ==========================
-
 if (window.location.search.includes('close=true')) {
     setTimeout(() => {
         try { window.close(); } catch(e) {}
@@ -250,6 +327,12 @@ if (window.location.search.includes('close=true')) {
         }, 300);
     }, 500);
 }
+
+// ==========================
+// INICIAR
+// ==========================
+
+cargarHimnos();
 
 // ==========================
 // FIN

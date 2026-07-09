@@ -17,7 +17,7 @@
 <body>
 
 <!-- ========================== -->
-<!-- SOLO BOTÓN DE CIERRE -->
+<!-- BOTÓN DE CIERRE -->
 <!-- ========================== -->
 
 <div class="header-actions">
@@ -33,7 +33,7 @@
 <div class="topbar">
     <header>
         <h1>📖 Himnario IPUP</h1>
-        <p>Iglesia Pentecostal Unida - Moyobamba</p>
+        <p id="subtitulo">Iglesia Pentecostal Unida - Moyobamba</p>
     </header>
 
     <section class="busqueda">
@@ -46,7 +46,7 @@
 
     <nav class="menu">
         <button id="btnHimnos">📖 Himnos</button>
-        <button id="btnCoros">🎵 Adoracion y Alabanzas</button>
+        <button id="btnCoros">🎵 Coros</button>
         <button id="btnFavoritos">⭐ Favoritos</button>
         <button id="btnInstalar" style="display:none;">
             📲 Instalar App
@@ -55,6 +55,11 @@
 </div>
 
 <main>
+    <!-- Título de la sección actual -->
+    <div id="tituloSeccion" class="titulo-seccion">
+        <h2>📖 Himnos</h2>
+    </div>
+    
     <div id="lista">
         <!-- Aquí aparecerán los himnos -->
     </div>

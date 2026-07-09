@@ -936,4 +936,48 @@ footer{
         height: 42px;
         font-size: 18px;
     }
+    /* ==========================
+   TÍTULO DE SECCIÓN
+   ========================== */
+
+.titulo-seccion {
+    padding: 10px 15px 5px 15px;
+    margin-bottom: 10px;
+}
+
+.titulo-seccion h2 {
+    font-size: 22px;
+    color: #0d47a1;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin: 0;
+}
+
+.titulo-seccion .contador {
+    font-size: 14px;
+    color: #666;
+    font-weight: 400;
+}
+
+/* MODO OSCURO */
+.dark .titulo-seccion h2 {
+    color: #64b5f6;
+}
+
+.dark .titulo-seccion .contador {
+    color: #999;
+}
+
+/* RESPONSIVE */
+@media (max-width: 700px) {
+    .titulo-seccion h2 {
+        font-size: 18px;
+    }
+    
+    .titulo-seccion .contador {
+        font-size: 12px;
+    }
+}
 }
