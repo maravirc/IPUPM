@@ -72,7 +72,7 @@ function mostrarHimnos(datos) {
         card.innerHTML = `
             <div class="cabecera-himno">
                 <div>
-                    <div class="numero">${esCoro ? 'Adoración y Alabanzas'+'🎵' : '📖'} ${himno.numero}</div>
+                    <div class="numero">${esCoro ? 'Adoración y Alabanzas'+'🎵' : 'Himnos'+'📖'} ${himno.numero}</div>
                     <div class="titulo">${himno.titulo}</div>
                 </div>
                 <div class="acciones">
