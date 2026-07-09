@@ -878,3 +878,62 @@ footer{
 .header-actions {
     z-index: 1001;
 }
+/* ==========================
+   BOTÓN DE CIERRE (ENGANCHE)
+   ========================== */
+
+   .header-actions {
+    position: fixed;
+    top: 15px;
+    right: 15px;
+    z-index: 1001;
+}
+
+.btn-engranaje {
+    background: rgba(255, 255, 255, 0.95);
+    border: none;
+    border-radius: 50%;
+    width: 48px;
+    height: 48px;
+    font-size: 22px;
+    cursor: pointer;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255,255,255,0.3);
+    position: relative;
+}
+
+.btn-engranaje:hover {
+    transform: rotate(90deg) scale(1.05);
+    box-shadow: 0 6px 25px rgba(0,0,0,0.3);
+}
+
+.btn-engranaje:active {
+    transform: rotate(90deg) scale(0.95);
+}
+
+/* MODO OSCURO */
+.dark .btn-engranaje {
+    background: rgba(26, 26, 46, 0.95);
+    border-color: rgba(255,255,255,0.1);
+    color: #fff;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.4);
+}
+
+/* RESPONSIVE */
+@media (max-width: 600px) {
+    .header-actions {
+        top: 10px;
+        right: 10px;
+    }
+    
+    .btn-engranaje {
+        width: 42px;
+        height: 42px;
+        font-size: 18px;
+    }
+}

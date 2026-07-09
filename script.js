@@ -10,360 +10,9 @@ const lista = document.getElementById("lista");
 const buscar = document.getElementById("buscar");
 
 // ==========================
-// SISTEMA DE ACTUALIZACIÓN AUTOMÁTICA
+// CARGAR HIMNOS
 // ==========================
 
-let newVersionAvailable = false;
-let swRegistration = null;
-
-// Registrar el Service Worker con sistema de actualización
-if ('serviceWorker' in navigator) {
-    window.addEventListener('load', () => {
-        navigator.serviceWorker.register('./service-worker.js')
-            .then(registration => {
-                swRegistration = registration;
-                console.log('Service Worker registrado con éxito');
-                
-                // Verificar actualizaciones periódicamente (cada 5 minutos)
-                setInterval(() => {
-                    checkForUpdates();
-                }, 300000); // 5 minutos
-                
-                // Verificar al volver a la página
-                document.addEventListener('visibilitychange', () => {
-                    if (!document.hidden) {
-                        checkForUpdates();
-                    }
-                });
-            })
-            .catch(error => {
-                console.log('Error al registrar Service Worker:', error);
-            });
-    });
-}
-
-// Función para verificar actualizaciones
-function checkForUpdates() {
-    if (!swRegistration) return;
-    
-    swRegistration.update()
-        .then(() => {
-            // Verificar si hay una nueva versión esperando
-            if (swRegistration.waiting) {
-                showUpdateNotification();
-            }
-        })
-        .catch(error => {
-            console.log('Error al verificar actualizaciones:', error);
-        });
-}
-
-// Escuchar cambios en el Service Worker
-if (navigator.serviceWorker) {
-    navigator.serviceWorker.addEventListener('controllerchange', () => {
-        console.log('Service Worker actualizado');
-    });
-}
-
-// Mostrar notificación de actualización
-function showUpdateNotification() {
-    // Evitar duplicados
-    if (document.querySelector('.update-notification')) return;
-    
-    // Crear el elemento de notificación
-    const notification = document.createElement('div');
-    notification.className = 'update-notification';
-    notification.innerHTML = `
-        <div class="update-content">
-            <div class="update-icon">📲</div>
-            <div class="update-text">
-                <h3>¡Nueva versión disponible!</h3>
-                <p>Se han añadido nuevos himnos y mejoras</p>
-            </div>
-            <button id="updateAppBtn" class="update-btn">Actualizar ahora</button>
-        </div>
-    `;
-    
-    document.body.appendChild(notification);
-    
-    // Añadir estilos de la notificación
-    const style = document.createElement('style');
-    style.textContent = `
-        .update-notification {
-            position: fixed;
-            bottom: 20px;
-            left: 50%;
-            transform: translateX(-50%);
-            background: linear-gradient(135deg, #1a1a2e, #16213e);
-            color: #fff;
-            padding: 16px 24px;
-            border-radius: 16px;
-            box-shadow: 0 10px 40px rgba(0,0,0,0.4);
-            z-index: 10000;
-            max-width: 90%;
-            width: 500px;
-            animation: slideUp 0.5s ease-out;
-            border: 1px solid rgba(255,255,255,0.1);
-        }
-        
-        @keyframes slideUp {
-            from {
-                opacity: 0;
-                transform: translateX(-50%) translateY(30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateX(-50%) translateY(0);
-            }
-        }
-        
-        .update-content {
-            display: flex;
-            align-items: center;
-            gap: 16px;
-            flex-wrap: wrap;
-        }
-        
-        .update-icon {
-            font-size: 32px;
-            flex-shrink: 0;
-        }
-        
-        .update-text {
-            flex: 1;
-            min-width: 150px;
-        }
-        
-        .update-text h3 {
-            margin: 0;
-            font-size: 16px;
-            font-weight: 600;
-            color: #fff;
-        }
-        
-        .update-text p {
-            margin: 4px 0 0 0;
-            font-size: 13px;
-            color: rgba(255,255,255,0.8);
-        }
-        
-        .update-btn {
-            background: linear-gradient(135deg, #667eea, #764ba2);
-            border: none;
-            color: white;
-            padding: 10px 24px;
-            border-radius: 25px;
-            font-weight: 600;
-            font-size: 14px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            flex-shrink: 0;
-        }
-        
-        .update-btn:hover {
-            transform: scale(1.05);
-            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
-        }
-        
-        .update-btn:active {
-            transform: scale(0.95);
-        }
-        
-        @media (max-width: 600px) {
-            .update-notification {
-                bottom: 10px;
-                padding: 12px 16px;
-                width: 95%;
-            }
-            
-            .update-content {
-                flex-direction: column;
-                text-align: center;
-                gap: 12px;
-            }
-            
-            .update-btn {
-                width: 100%;
-            }
-        }
-    `;
-    document.head.appendChild(style);
-    
-    // Manejar clic en el botón de actualización
-    document.getElementById('updateAppBtn').addEventListener('click', () => {
-        realizarActualizacion();
-    });
-}
-
-// ==========================
-// FUNCIÓN PRINCIPAL DE ACTUALIZACIÓN CON CIERRE
-// ==========================
-
-function realizarActualizacion() {
-    // Mostrar mensaje de actualización
-    const btn = document.getElementById('updateAppBtn') || document.getElementById('btnActualizarDesdeMenu');
-    if (btn) {
-        btn.textContent = '🔄 Actualizando...';
-        btn.disabled = true;
-    }
-    
-    // Mostrar toast de actualización
-    mostrarToast('🔄 Actualizando aplicación...');
-    
-    // Si hay un service worker esperando
-    if (swRegistration && swRegistration.waiting) {
-        // Enviar mensaje para activar el nuevo service worker
-        swRegistration.waiting.postMessage('skipWaiting');
-        
-        // Esperar un momento para que se complete la actualización
-        setTimeout(() => {
-            // Mostrar mensaje de cierre
-            mostrarToast('📱 Cerrando aplicación...');
-            
-            // Cerrar la aplicación después de 1.5 segundos
-            setTimeout(() => {
-                // MÉTODOS PARA CERRAR EN ANDROID
-                cerrarAppAndroid();
-            }, 1500);
-        }, 1000);
-    } else {
-        // Si no hay service worker esperando, recargar directamente
-        setTimeout(() => {
-            window.location.reload();
-        }, 1000);
-    }
-}
-
-// ==========================
-// FUNCIÓN ESPECIAL PARA CERRAR EN ANDROID
-// ==========================
-
-function cerrarAppAndroid() {
-    // Verificar si estamos en Android
-    const isAndroid = navigator.userAgent.match(/Android/i);
-    const isStandalone = window.matchMedia('(display-mode: standalone)').matches;
-    
-    console.log('Intentando cerrar app - Android:', isAndroid, 'Standalone:', isStandalone);
-    
-    // MÉTODO 1: Intentar cerrar con window.close()
-    try {
-        window.close();
-        console.log('Método 1: window.close() ejecutado');
-    } catch (e) {
-        console.log('Error en window.close():', e);
-    }
-    
-    // MÉTODO 2: Para Android PWA - Usar un intent de cierre
-    if (isAndroid && isStandalone) {
-        try {
-            // Intentar forzar el cierre en Android
-            // Esto funciona en algunas versiones de Android
-            if (window.chrome && window.chrome.app) {
-                window.chrome.app.window.current().close();
-                console.log('Método 2: chrome.app.window.close() ejecutado');
-            }
-        } catch (e) {
-            console.log('Error en chrome.app.window.close():', e);
-        }
-        
-        // MÉTODO 3: Usar un intent de Android (funciona en algunos navegadores)
-        try {
-            // Intentar usar el sistema de Android para cerrar
-            const intent = 'intent://#Intent;action=android.intent.action.MAIN;category=android.intent.category.HOME;end';
-            window.location.href = intent;
-            console.log('Método 3: Intent de Android ejecutado');
-        } catch (e) {
-            console.log('Error en intent de Android:', e);
-        }
-        
-        // MÉTODO 4: Redirigir a about:blank (esto cierra la app en algunos casos)
-        try {
-            setTimeout(() => {
-                window.location.href = 'about:blank';
-                console.log('Método 4: about:blank ejecutado');
-            }, 500);
-        } catch (e) {
-            console.log('Error en about:blank:', e);
-        }
-        
-        // MÉTODO 5: Usar la API de Activity (solo para Android WebView)
-        try {
-            if (window.Android) {
-                window.Android.closeApp();
-                console.log('Método 5: Android.closeApp() ejecutado');
-            }
-        } catch (e) {
-            console.log('Error en Android.closeApp():', e);
-        }
-        
-        // MÉTODO 6: Recargar y luego intentar cerrar (como último recurso)
-        setTimeout(() => {
-            try {
-                // Si todo falla, intentar recargar con un parámetro especial
-                window.location.href = window.location.href + '?close=true';
-                console.log('Método 6: Recarga con parámetro ejecutado');
-            } catch (e) {
-                console.log('Error en recarga con parámetro:', e);
-            }
-        }, 1000);
-    }
-    
-    // MÉTODO 7: Si no es Android o no está en modo standalone, recargar
-    if (!isAndroid || !isStandalone) {
-        setTimeout(() => {
-            window.location.reload();
-            console.log('Método 7: Recarga normal ejecutada');
-        }, 1000);
-    }
-    
-    // MÉTODO 8: Último recurso - Cerrar con un timeout
-    setTimeout(() => {
-        try {
-            // Esto puede funcionar en algunos navegadores
-            if (window.history && window.history.length > 1) {
-                window.history.go(-window.history.length);
-                console.log('Método 8: history.go() ejecutado');
-            }
-        } catch (e) {
-            console.log('Error en history.go():', e);
-        }
-    }, 2000);
-}
-
-// ==========================
-// DETECTAR CIERRE POR PARÁMETRO
-// ==========================
-
-// Si la URL tiene ?close=true, intentar cerrar nuevamente
-if (window.location.search.includes('close=true')) {
-    console.log('Detectado parámetro de cierre, intentando cerrar...');
-    setTimeout(() => {
-        try {
-            window.close();
-            // Si no se cierra, intentar con about:blank
-            setTimeout(() => {
-                window.location.href = 'about:blank';
-            }, 500);
-        } catch (e) {
-            console.log('Error en cierre por parámetro:', e);
-        }
-    }, 1000);
-}
-
-// Detectar mensajes del Service Worker
-if (navigator.serviceWorker) {
-    navigator.serviceWorker.addEventListener('message', event => {
-        if (event.data === 'update-available') {
-            showUpdateNotification();
-        }
-    });
-}
-
-// ==========================
-// FIN SISTEMA DE ACTUALIZACIÓN
-// ==========================
-
-// Cargar himnos
 async function cargarHimnos() {
     try {
         const respuesta = await fetch("data/himnos.json");
@@ -540,147 +189,78 @@ function salirPantallaCompleta(event) {
 }
 
 // ==========================
-// MENÚ DE CONFIGURACIÓN
+// BOTÓN DE CIERRE DE APP (ENGANCHE)
 // ==========================
 
-// Variables del menú
 const btnConfiguracion = document.getElementById('btnConfiguracion');
-const menuConfiguracion = document.getElementById('menuConfiguracion');
-const cerrarMenu = document.getElementById('cerrarMenu');
-const btnActualizarDesdeMenu = document.getElementById('btnActualizarDesdeMenu');
-const btnLimpiarCache = document.getElementById('btnLimpiarCache');
-const versionActual = document.getElementById('versionActual');
-const contadorFavoritos = document.getElementById('contadorFavoritos');
 
-// Badge de actualización
-let badgeActualizacion = null;
-
-// Mostrar/Ocultar menú
-btnConfiguracion.addEventListener('click', () => {
-    abrirMenu();
+btnConfiguracion.addEventListener('click', function() {
+    cerrarApp();
 });
 
-cerrarMenu.addEventListener('click', () => {
-    cerrarMenuConfiguracion();
-});
-
-// Cerrar menú al hacer clic fuera
-menuConfiguracion.addEventListener('click', (e) => {
-    if (e.target === menuConfiguracion) {
-        cerrarMenuConfiguracion();
-    }
-});
-
-// Cerrar con tecla ESC
-document.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape' && menuConfiguracion.style.display !== 'none') {
-        cerrarMenuConfiguracion();
-    }
-});
-
-function abrirMenu() {
-    menuConfiguracion.style.display = 'flex';
-    actualizarInfoMenu();
-    document.body.style.overflow = 'hidden';
-}
-
-function cerrarMenuConfiguracion() {
-    menuConfiguracion.style.display = 'none';
-    document.body.style.overflow = '';
-}
-
-function actualizarInfoMenu() {
-    // Actualizar versión
-    const version = localStorage.getItem('appVersion') || 'v1.0.0';
-    if (versionActual) versionActual.textContent = version;
+function cerrarApp() {
+    // Mostrar mensaje de cierre
+    mostrarToast('📱 Cerrando aplicación...');
     
-    // Actualizar contador de favoritos
-    const favoritos = JSON.parse(localStorage.getItem("favoritos")) || [];
-    if (contadorFavoritos) {
-        contadorFavoritos.textContent = `${favoritos.length} himnos`;
-    }
-}
-
-// ==========================
-// ACTUALIZAR DESDE EL MENÚ
-// ==========================
-
-btnActualizarDesdeMenu.addEventListener('click', async () => {
-    const btn = btnActualizarDesdeMenu;
-    const textoOriginal = btn.textContent;
+    // Verificar si estamos en Android
+    const isAndroid = navigator.userAgent.match(/Android/i);
+    const isStandalone = window.matchMedia('(display-mode: standalone)').matches;
     
-    btn.textContent = '🔍 Buscando...';
-    btn.disabled = true;
+    console.log('Cerrando app - Android:', isAndroid, 'Standalone:', isStandalone);
     
+    // Método 1: window.close()
     try {
-        if (swRegistration) {
-            await swRegistration.update();
-            
-            if (swRegistration.waiting) {
-                // Hay actualización disponible - usar función centralizada
-                realizarActualizacion();
-            } else {
-                btn.textContent = '✅ Ya está actualizado';
-                mostrarToast('✅ Tu app ya está en la última versión');
-                
-                setTimeout(() => {
-                    btn.textContent = textoOriginal;
-                    btn.disabled = false;
-                }, 3000);
+        window.close();
+        console.log('Método 1: window.close() ejecutado');
+    } catch (e) {
+        console.log('Error en window.close():', e);
+    }
+    
+    // Método 2: Para Android PWA
+    if (isAndroid && isStandalone) {
+        // Intentar con chrome.app
+        try {
+            if (window.chrome && window.chrome.app) {
+                window.chrome.app.window.current().close();
+                console.log('Método 2: chrome.app.window.close() ejecutado');
             }
-        } else {
-            btn.textContent = '🔄 Actualizando...';
-            setTimeout(() => {
-                window.location.reload();
-            }, 500);
+        } catch (e) {
+            console.log('Error en chrome.app.window.close():', e);
         }
-    } catch (error) {
-        console.error('Error al actualizar:', error);
-        btn.textContent = '❌ Error';
-        mostrarToast('❌ Error al buscar actualizaciones');
         
+        // Método 3: Redirigir a about:blank
         setTimeout(() => {
-            btn.textContent = textoOriginal;
-            btn.disabled = false;
-        }, 3000);
+            try {
+                window.location.href = 'about:blank';
+                console.log('Método 3: about:blank ejecutado');
+            } catch (e) {
+                console.log('Error en about:blank:', e);
+            }
+        }, 500);
+        
+        // Método 4: Intentar ir al home de Android
+        setTimeout(() => {
+            try {
+                window.location.href = 'intent://#Intent;action=android.intent.action.MAIN;category=android.intent.category.HOME;end';
+                console.log('Método 4: Intent de home ejecutado');
+            } catch (e) {
+                console.log('Error en intent:', e);
+            }
+        }, 1000);
     }
-});
-
-// ==========================
-// LIMPIAR CACHÉ
-// ==========================
-
-btnLimpiarCache.addEventListener('click', async () => {
-    const btn = btnLimpiarCache;
-    const textoOriginal = btn.textContent;
     
-    btn.textContent = '⏳ Limpiando...';
-    btn.disabled = true;
-    
-    try {
-        if ('caches' in window) {
-            const cacheNames = await caches.keys();
-            await Promise.all(
-                cacheNames.map(cacheName => caches.delete(cacheName))
-            );
-            mostrarToast('✅ Caché limpiado correctamente');
-            
-            setTimeout(() => {
-                btn.textContent = textoOriginal;
-                btn.disabled = false;
-            }, 2000);
-        } else {
-            mostrarToast('❌ Tu navegador no soporta esta función');
-            btn.textContent = textoOriginal;
-            btn.disabled = false;
+    // Método 5: Si no se cierra, recargar (como último recurso)
+    setTimeout(() => {
+        try {
+            if (!document.hidden) {
+                window.location.reload();
+                console.log('Método 5: Recarga ejecutada');
+            }
+        } catch (e) {
+            console.log('Error en recarga:', e);
         }
-    } catch (error) {
-        console.error('Error al limpiar caché:', error);
-        mostrarToast('❌ Error al limpiar caché');
-        btn.textContent = textoOriginal;
-        btn.disabled = false;
-    }
-});
+    }, 1500);
+}
 
 // ==========================
 // TOAST NOTIFICATIONS
@@ -699,6 +279,42 @@ function mostrarToast(mensaje) {
     toast.textContent = mensaje;
     document.body.appendChild(toast);
     
+    // Estilos del toast
+    const style = document.createElement('style');
+    style.textContent = `
+        .toast-notification {
+            position: fixed;
+            bottom: 100px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(0,0,0,0.85);
+            color: white;
+            padding: 14px 28px;
+            border-radius: 14px;
+            font-size: 14px;
+            z-index: 10001;
+            animation: toastSlideUp 0.4s ease;
+            backdrop-filter: blur(10px);
+            max-width: 90%;
+            text-align: center;
+            box-shadow: 0 8px 30px rgba(0,0,0,0.4);
+            border: 1px solid rgba(255,255,255,0.1);
+            font-weight: 500;
+        }
+        
+        @keyframes toastSlideUp {
+            from {
+                opacity: 0;
+                transform: translateX(-50%) translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(-50%) translateY(0);
+            }
+        }
+    `;
+    document.head.appendChild(style);
+    
     // Auto-cerrar después de 3 segundos
     setTimeout(() => {
         toast.style.opacity = '0';
@@ -710,55 +326,5 @@ function mostrarToast(mensaje) {
 }
 
 // ==========================
-// BADGE DE ACTUALIZACIÓN
-// ==========================
-
-function mostrarBadgeActualizacion() {
-    if (badgeActualizacion) return;
-    
-    badgeActualizacion = document.createElement('span');
-    badgeActualizacion.className = 'badge-actualizacion';
-    badgeActualizacion.textContent = '1';
-    
-    const btn = document.getElementById('btnConfiguracion');
-    btn.style.position = 'relative';
-    btn.appendChild(badgeActualizacion);
-}
-
-// ==========================
-// SOBRESCRIBIR showUpdateNotification
-// ==========================
-
-// Guardar la función original si existe
-const originalShowUpdate = window.showUpdateNotification;
-
-// Nueva función que incluye el badge
-window.showUpdateNotification = function() {
-    // Llamar a la función original si existe
-    if (typeof originalShowUpdate === 'function') {
-        originalShowUpdate();
-    }
-    
-    // Mostrar badge en el engranaje
-    mostrarBadgeActualizacion();
-    
-    // Actualizar el botón en el menú
-    const btn = document.getElementById('btnActualizarDesdeMenu');
-    if (btn) {
-        btn.textContent = '🔔 Actualizar ahora';
-        btn.style.background = 'linear-gradient(135deg, #ff6b6b, #ee5a24)';
-    }
-};
-
-// ==========================
-// INICIALIZAR VERSIÓN
-// ==========================
-
-// Guardar versión en localStorage la primera vez
-if (!localStorage.getItem('appVersion')) {
-    localStorage.setItem('appVersion', 'v1.0.0');
-}
-
-// ==========================
-// FIN MENÚ DE CONFIGURACIÓN
+// FIN
 // ==========================
