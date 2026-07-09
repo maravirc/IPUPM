@@ -6,6 +6,7 @@ const urlsToCache = [
     "./index.html",
     "./styles.css",
     "./script.js",
+    "./himnos.json",
     "./manifest.json"
 ];
 
