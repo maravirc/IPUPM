@@ -1,4 +1,4 @@
-const CACHE_NAME = "himnario-ipu-v4";
+const CACHE_NAME = "himnario-ipu-v5";
 
 const urlsToCache = [
     "./",
