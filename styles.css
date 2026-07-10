@@ -447,6 +447,9 @@ footer{
     main{
         margin-top:360px;
     }
+    .titulo-seccion h2 {
+        font-size: 22px;
+    }
 }
 
 /* ==========================
