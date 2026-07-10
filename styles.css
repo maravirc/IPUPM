@@ -906,7 +906,7 @@ footer{
 }
 /* ==========================
    BOTÓN DE CIERRE (ENGANCHE)
-   ========================== */
+   ========================== 
 
    .header-actions {
     position: fixed;
@@ -941,7 +941,7 @@ footer{
 .btn-engranaje:active {
     transform: rotate(90deg) scale(0.95);
 }
-
+*/
 /* MODO OSCURO */
 .dark .btn-engranaje {
     background: rgba(26, 26, 46, 0.95);

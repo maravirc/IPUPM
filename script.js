@@ -273,60 +273,60 @@ btnInstalar.addEventListener("click", async () => {
 // BOTÓN DE CIERRE
 // ==========================
 
-const btnCerrarApp = document.getElementById('btnCerrarApp');
+// const btnCerrarApp = document.getElementById('btnCerrarApp');
 
-btnCerrarApp.addEventListener('click', function(e) {
-    e.preventDefault();
-    cerrarApp();
-});
+// btnCerrarApp.addEventListener('click', function(e) {
+//     e.preventDefault();
+//     cerrarApp();
+// });
 
-function cerrarApp() {
-    console.log('Cerrando aplicación...');
+// function cerrarApp() {
+//     console.log('Cerrando aplicación...');
     
-    const isAndroid = navigator.userAgent.match(/Android/i);
-    const isStandalone = window.matchMedia('(display-mode: standalone)').matches;
+//     const isAndroid = navigator.userAgent.match(/Android/i);
+//     const isStandalone = window.matchMedia('(display-mode: standalone)').matches;
     
-    try { window.close(); } catch(e) {}
+//     try { window.close(); } catch(e) {}
     
-    if (isAndroid) {
-        try {
-            if (window.chrome && window.chrome.app) {
-                window.chrome.app.window.current().close();
-            }
-        } catch(e) {}
+//     if (isAndroid) {
+//         try {
+//             if (window.chrome && window.chrome.app) {
+//                 window.chrome.app.window.current().close();
+//             }
+//         } catch(e) {}
         
-        setTimeout(() => {
-            try { window.location.href = 'about:blank'; } catch(e) {}
-        }, 300);
+//         setTimeout(() => {
+//             try { window.location.href = 'about:blank'; } catch(e) {}
+//         }, 300);
         
-        setTimeout(() => {
-            try {
-                window.location.href = 'intent://#Intent;action=android.intent.action.MAIN;category=android.intent.category.HOME;end';
-            } catch(e) {}
-        }, 600);
-    }
+//         setTimeout(() => {
+//             try {
+//                 window.location.href = 'intent://#Intent;action=android.intent.action.MAIN;category=android.intent.category.HOME;end';
+//             } catch(e) {}
+//         }, 600);
+//     }
     
-    if (isStandalone) {
-        setTimeout(() => {
-            try { window.history.go(-window.history.length); } catch(e) {}
-        }, 900);
-    }
+//     if (isStandalone) {
+//         setTimeout(() => {
+//             try { window.history.go(-window.history.length); } catch(e) {}
+//         }, 900);
+//     }
     
-    setTimeout(() => {
-        try {
-            window.location.href = window.location.href.split('?')[0] + '?close=true';
-        } catch(e) {}
-    }, 1200);
-}
+//     setTimeout(() => {
+//         try {
+//             window.location.href = window.location.href.split('?')[0] + '?close=true';
+//         } catch(e) {}
+//     }, 1200);
+// }
 
-if (window.location.search.includes('close=true')) {
-    setTimeout(() => {
-        try { window.close(); } catch(e) {}
-        setTimeout(() => {
-            try { window.location.href = 'about:blank'; } catch(e) {}
-        }, 300);
-    }, 500);
-}
+// if (window.location.search.includes('close=true')) {
+//     setTimeout(() => {
+//         try { window.close(); } catch(e) {}
+//         setTimeout(() => {
+//             try { window.location.href = 'about:blank'; } catch(e) {}
+//         }, 300);
+//     }, 500);
+// }
 
 // ==========================
 // INICIAR
