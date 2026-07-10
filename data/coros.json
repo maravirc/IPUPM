@@ -496,5 +496,1169 @@
         "titulo": "Los enemigos del Señor",
         "letra": "1\nLos enemigos del Señor están cayendo,\nlos adversarios del Señor perecerán,\nporque grande y fuerte es nuestro Dios,\npoderoso es él,\nvictorioso es el Señor sobre todo mal.\n\n**Coro:**\nMayor es el que está conmigo,\nmás fuerte es el que está aquí.",
         "tipo": "coro"
+    },
+    {
+        "numero": 88,
+        "titulo": "Remolineando",
+        "letra": "1\nHay muchas formas\nde alabar tu nombre\ny exaltarte, oh Jehová.\n\nHay muchas formas de magnificarte,\npero ahora lo haré así.\n\n**Coro:**\nRemolineando, remolineando,\ncelebraré a Jehová,\nremolineando, remolineando,\nme haré más vil por causa de Jehová.\nLara, lara, lara, lara.\n\nSaco mi vida del anonimato,\nme dio corona, vestido real.\nAsí es Jehová que exalta al pequeño,\npor causa de él yo me haré más vil.",
+        "tipo": "coro"
+    },
+    {
+        "numero": 89,
+        "titulo": "David, David danzaba",
+        "letra": "1\nDavid, David danzaba\nen la presencia del Señor\ny el pueblo se regocijaba.\n\n**Coro:**\nPorque David andaba\nconforme al corazón de Jehová.\n\nDavid, David peleó contra\nel oso y el león y el pueblo\nse regocijaba,\nSaúl mató a mil, David a sus\ndiez mil y el pueblo se regocijaba.",
+        "tipo": "coro"
+    },
+    {
+        "numero": 90,
+        "titulo": "Sé que estás aquí",
+        "letra": "1\nYo sé que estás aquí, mi Señor,\nyo sé que estás aquí,\nmi alma te alaba\nporque sé que estás aquí.",
+        "tipo": "coro"
+    },
+    {
+        "numero": 91,
+        "titulo": "El Victorioso vive en mí",
+        "letra": "1\nEl Victorioso vive en mí,\nlas circunstancias no me mueven a mí,\nel Victorioso vive en mí.\n\n**Coro:**\nYo cantaré y danzaré,\ncelebraré la victoria del Señor,\nno temeré al pelear,\npues la victoria es del Señor.",
+        "tipo": "coro"
+    },
+    {
+        "numero": 92,
+        "titulo": "El Poderoso de Israel",
+        "letra": "1\nÉl es el Poderoso de Israel,\nel Poderoso de Israel,\nsu voz se oirá, nadie lo detendrá,\nal Poderoso de Israel.\n\n**Coro:**\nY de noche cantaremos,\ncelebrando su poder,\ncon alegría de corazón,\ncomo el que va con la flauta\nal monte de Jehová,\ncelebraremos su poder.\n\nY los ojos de los ciegos\nse abrirán y ellos verán,\nlos oídos de los sordos oirán,\nel cojo saltará, con el arpa danzará,\nla lengua de los mudos cantará.",
+        "tipo": "coro"
+    },
+    {
+        "numero": 93,
+        "titulo": "El Señor está en este lugar",
+        "letra": "1\nEl Señor está en este lugar.\n\n**Coro:**\nPara sanar, para librar,\npara romper toda obra de maldad,\npara sanar, para librar mi alma.",
+        "tipo": "coro"
+    },
+    {
+        "numero": 94,
+        "titulo": "No hay santo",
+        "letra": "1\nNo hay santo como el Señor,\nnuestro Dios.\n\n**Coro:**\nPor eso, no, no puedo parar de alabarte,\nno, no puedo parar de alabarte,\nno, no puedo parar de alabarte, Cristo.\n\nToda rodilla se doblará ante él,\nes Jesucristo Dios por siempre,\ny toda lengua confesará ante él,\nes Jesucristo Dios por siempre.",
+        "tipo": "coro"
+    },
+    {
+        "numero": 95,
+        "titulo": "Maravilloso es el Señor",
+        "letra": "1\nMaravilloso es el Señor Jesús\nque reina con poder,\nmaravilloso es el Señor Jesús\nque reina con poder.\n\n**Coro:**\nÉl es mi Rey, él es mi Rey,\ny en su casa danzaré,\nél es mi Rey, él es mi Rey,\ny en su casa danzaré.",
+        "tipo": "coro"
+    },
+    {
+        "numero": 96,
+        "titulo": "Yo digo sí al Señor",
+        "letra": "1\nYo digo sí al Señor,\nél es muy grande, hace cosas grandes,\nyo digo sí, sí, sí al Señor.\n\nHe sido probado,\nhe sido lavado,\nhe ido a las aguas,\nen su nombre bautizado.\nÉl es muy grande, hace cosas grandes,\nyo digo sí, sí, sí al Señor.",
+        "tipo": "coro"
+    },
+    {
+        "numero": 97,
+        "titulo": "Él es el Rey",
+        "letra": "1\nÉl es el Rey, infinito en poder,\nél es el Rey de los cielos,\nseré para él siervo fiel,\npues mi vida compró con su amor.\nÉl es el Rey, lo confiesa mi ser,\nél es Rey de los siglos,\nmi vida la rindo a sus pies,\nél es el Rey de mi corazón.\n\n**Coro:**\nÉl es el Rey, él es el Rey de mi vida,\nél es el Rey, reina con autoridad,\nsu reino eterno, su trono en el cielo es,\nél es el Rey que viene a su pueblo a llevar.",
+        "tipo": "coro"
+    },
+    {
+        "numero": 98,
+        "titulo": "Maestro de Galilea",
+        "letra": "1\nEl Maestro de Galilea\nestá pasando por aquí,\ny déjalo que te toque\ny recibe la bendición.\n\nY cuando él pasa todo se transforma,\nla alegría viene, la tristeza va.",
+        "tipo": "coro"
+    },
+    {
+        "numero": 99,
+        "titulo": "Hay alegría en mi corazón",
+        "letra": "1\nHay alegría en mi corazón\nporque Jesús ya me salvó,\nen el libro de la vida\nmi nombre escrito ya está.\n\nCuando me llamen por mi nombre\nyo feliz responderé,\npor la corona de la vida\nque el Señor Jesús me premiará.",
+        "tipo": "coro"
+    },
+    {
+        "numero": 100,
+        "titulo": "Oh, ven conmigo, hermano",
+        "letra": "1\nVen conmigo, hermano, vamos a alabar,\nvamos a alabar a nuestro Salvador.\n\nDiré yo a Jehová: Fortaleza mía,\ncastillo mío, en ti confiaré.\n\nEn las luchas y en las pruebas vamos a alabar,\nvamos a alabar a nuestro Salvador.\n\nTomados de las manos vamos a alabar,\nvamos a alabar a nuestro Salvador.\n\nUnidos como hermanos vamos a alabar,\nvamos a alabar a nuestro Salvador.",
+        "tipo": "coro"
+    },
+    {
+        "numero": 101,
+        "titulo": "Con todo mi corazón",
+        "letra": "1\nCon todo mi corazón te amo, mi Dios,\nnada en esta vida ni la muerte\nme apartará de tu gran amor.\n\nYo no tengo miedo a nada\nporque contigo estoy\ny tu brazo lleno de amor\nme protege cada día, Señor,\nde los pies a la cabeza,\nmi alma, cuerpo y espíritu\nte pertenecen, hazme hacer\ntu voluntad, mi amado Señor.",
+        "tipo": "coro"
+    },
+    {
+        "numero": 102,
+        "titulo": "Como corderito saltaré",
+        "letra": "1\nCon alegría yo cantaré\nalabanzas a mi Señor.\n\n**Coro:**\nComo cordero yo saltaré,\nen tu presencia me gozaré.\n\nBautízame, lléname, mi Señor,\ncon tu Espíritu avívame,\ntu fuego está en mi corazón,\nrenovando todo mi ser.",
+        "tipo": "coro"
+    },
+    {
+        "numero": 103,
+        "titulo": "Oh, Jesús, yo te amo",
+        "letra": "1\nOh, Jesús, yo te amo,\ncomo las águilas volaré,\ncomo corderito yo saltaré.\n\nSaltando y danzando\nte alabaré y dando una\nvuelta me gozaré.",
+        "tipo": "coro"
+    },
+    {
+        "numero": 104,
+        "titulo": "Espíritu Santo",
+        "letra": "1\nEspíritu Santo, bienvenido eres,\ndonde tú estás, allí hay sanidad,\ndonde tú estás, allí hay libertad,\nEspíritu Santo de Dios.\n\nLíname con tu fuego en mi corazón,\nJesús de Nazaret, pasa por aquí,\nlléname, Señor, con tu gran poder,\nJesús de Nazaret, pasa por aquí,\nbautízame, Señor, con el fuego celestial.",
+        "tipo": "coro"
+    },
+    {
+        "numero": 105,
+        "titulo": "Tu palabra, oh Señor",
+        "letra": "1\nTu palabra, oh Señor,\nes más dulce que la miel,\nme da gozo, me da paz y\nme habla de tu amor.\n\nHay riquezas en el mundo aquí,\npero todo, Señor, se acabará.",
+        "tipo": "coro"
+    },
+    {
+        "numero": 106,
+        "titulo": "Cuando estaba yo lejos",
+        "letra": "1\nCuando estaba yo lejos del Señor,\ncayó la buena semilla en mi corazón,\nesa semilla fue la palabra de Dios,\nque cambió mi vida para la gloria de Dios.\n\nBendito Jehová, bendito Jesús,\nla honra y la gloria sea para ti.",
+        "tipo": "coro"
+    },
+    {
+        "numero": 107,
+        "titulo": "Si me dices adónde vas",
+        "letra": "1\nSi me dices a dónde vas,\nyo voy a alabar al Señor.\n\n¿Y cómo lo vas a hacer?\nVoy a cantar,\nvoy a danzar en Espíritu\ny en verdad.",
+        "tipo": "coro"
+    },
+    {
+        "numero": 108,
+        "titulo": "Como la vara de Aarón",
+        "letra": "1\nComo la vara de Aarón, Señor,\nquiero reverdecer.\n\nYo quiero, Padre, reverdecer,\nquiero ser lleno de tu poder,\nyo quiero, Padre, reverdecer,\nquiero ser lleno de tu poder.",
+        "tipo": "coro"
+    },
+    {
+        "numero": 109,
+        "titulo": "Libre Cristo me hizo libre",
+        "letra": "1\nLibre, Cristo me hizo libre,\nmuriendo en la cruz,\nJesús me libertó.\n\nGloria, gloria, aleluya,\nJesús me libertó, muriendo en la cruz.",
+        "tipo": "coro"
+    },
+    {
+        "numero": 110,
+        "titulo": "Cristo ha roto las cadenas",
+        "letra": "1\nCristo ha roto las cadenas\nque han liberado a su pueblo.",
+        "tipo": "coro"
+    },
+    {
+        "numero": 111,
+        "titulo": "Qué más puedo ofrecerte",
+        "letra": "1\n¿Qué más puedo ofrecerte?\nSolamente mi corazón,\nsolamente mi corazón te\no frezco a ti, Señor, solamente,\nmi corazón te lo ofrezco a ti, Señor.\n\n**Coro:**\nMi vida, mi vida, tú lo sabes, oh Señor,\nmi vida, hermano, pertenece a\nJesús, mi vida, hermana,\npertenece a Jesús.",
+        "tipo": "coro"
+    },
+    {
+        "numero": 112,
+        "titulo": "Nada soy sin ti",
+        "letra": "1\n¿Cómo podré, Señor, dejar de amarte?\n¿Cómo, Señor, tu amor traicionar,\nsi me has dado tantas cosas imposibles\nde borrar?\n\nNada soy sin ti, sin ti nada soy,\ntodo lo que tengo te lo debo a ti, Señor.\n\nTu sangre me limpió, tu fuego me llenó,\nentendió mi corazón\nque sin ti, que sin ti, nada soy.",
+        "tipo": "coro"
+    },
+    {
+        "numero": 113,
+        "titulo": "Clama a mí, dice el Señor",
+        "letra": "1\nClama a mí, dice el Señor,\nyo te responderé.\n\nEn el tiempo de gozo, en el tiempo de dolor,\nclama a mí, dice el Señor, yo te responderé.\n\nSi te sientes enfermo\ny no tienes sanidad,\nclama a mí, dice el Señor, yo te responderé.\n\nSi no tienes dinero\ny no tienes quien te dé,\nclama a mí, dice el Señor, yo te responderé.",
+        "tipo": "coro"
+    },
+    {
+        "numero": 114,
+        "titulo": "Jehová es mi luz",
+        "letra": "1\nJehová es mi luz\ny mi salvación,\nJehová es la fortaleza de mi vida,\n¿de quién temeré?\nJehová es la fortaleza de mi vida.\n\n**Coro:**\nAunque un ejército\nacampe contra mí,\nno temerá mi corazón,\naunque contra mí\nse levante en guerra,\nyo estaré confiado\nen mi Salvador.",
+        "tipo": "coro"
+    },
+    {
+        "numero": 115,
+        "titulo": "Viva la fe",
+        "letra": "1\nViva la fe, viva la esperanza,\nviva el amor,\nque viva Cristo,\nque viva, que viva Cristo,\nque viva el Rey.",
+        "tipo": "coro"
+    },
+    {
+        "numero": 116,
+        "titulo": "Con todas mis fuerzas",
+        "letra": "1\nCon todas mis fuerzas yo te amo,\nyo te amo, mi Dios, porque eres\nlo que más quiero, te necesito cada\ndía más. Cada célula de mi ser\nte anhela, mi Señor, porque\neres el sustento\nque necesito para vivir.\n\n**Coro:**\nMás unción quiere mi ser,\ndel Espíritu Santo, lléname,\nen el Espíritu te adoraré,\ncon danzas te alabaré.",
+        "tipo": "coro"
+    },
+    {
+        "numero": 117,
+        "titulo": "Jesús, tú eres mi Rey",
+        "letra": "1\nJesús, tú eres mi Rey,\nmi amado en quien me deleito,\nen tu presencia me gozo hoy,\ntu gran amor me hace feliz,\ntus delicias son para mí,\nmi adoración es para ti,\ncontigo yo soy feliz,\nmi ser se alegra en ti.",
+        "tipo": "coro"
+    },
+    {
+        "numero": 118,
+        "titulo": "Yo soy feliz",
+        "letra": "1\nYo soy feliz, pero muy feliz,\nporque vivo con mi Dios.\n\n**Coro:**\nA su lado nada me faltará,\nlo que necesito siempre me da.\n\nYo tengo gozo, pero mucho gozo,\ncanto alegre con mi Dios.\n\nSi vienen problemas o ataques\ncontra mí, yo no tengo miedo,\nporque Dios cuida de mí.",
+        "tipo": "coro"
+    },
+    {
+        "numero": 119,
+        "titulo": "Te exaltaré, mi Dios",
+        "letra": "1\nTe exaltaré, mi Dios, mi Rey,\ny bendeciré tu nombre\neternamente y para siempre,\ncada día te bendeciré.\n\nY alabaré tu nombre,\neternamente y para siempre,\ngrande eres Jehová y digno\nde suprema alabanza,\ny su grandeza inescrutable,\ncada día te bendeciré.",
+        "tipo": "coro"
+    },
+    {
+        "numero": 120,
+        "titulo": "En Israel es grande tu nombre",
+        "letra": "1\nEn Israel es grande tu nombre,\nDios es conocido en Judá,\nglorioso eres tú,\nmajestuoso es tu nombre y temible\nen toda la tierra, su nombre es Jehová.\n\n**Coro:**\nDigno, digno, digno, digno, digno, digno,\ndigno, digno, digno eres tú, Jehová.\n\nGlorioso eres tú,\nmajestuoso es tu nombre y temible\nen toda la tierra, su nombre es Jehová.",
+        "tipo": "coro"
+    },
+    {
+        "numero": 121,
+        "titulo": "¡Únete más!",
+        "letra": "1\nÚnete más y alabaremos,\nal Dios del cielo que es Jehová de los ejércitos,\nmi alma se goza cuando él está,\ncuando le alabo a Jehová.",
+        "tipo": "coro"
+    },
+    {
+        "numero": 122,
+        "titulo": "Yo te adoro",
+        "letra": "1\nYo te adoro, Señor, con todo mi ser,\nyo con salmo te alabaré,\nyo te adoro, Señor, con todo mi ser,\ntodo el día te bendeciré.\n\nPues tú glorioso eres, Señor,\ny tu nombre digno de alabar,\nhaz mi corazón puro y santo\nante ti, yo te adoro con todo mi corazón.\n\nYo te amo, yo confío en ti,\nyo te amo, en la roca me refugiaré.",
+        "tipo": "coro"
+    },
+    {
+        "numero": 123,
+        "titulo": "Ven, ven, ven",
+        "letra": "1\nVen, ven, ven, Cristo a ti te llama,\nven, ven, ven, no esperes mañana,\nno te olvides que él murió por ti\npara darte vida, vida eterna\ny salvación.",
+        "tipo": "coro"
+    },
+    {
+        "numero": 124,
+        "titulo": "Un paso más",
+        "letra": "1\nUn paso más, un paso más de fe,\nun paso más, un paso más de fe.\n\nAdelante, hermanos, adelante, hermanas,\nque allá en el cielo nos espera el galardón.",
+        "tipo": "coro"
+    },
+    {
+        "numero": 125,
+        "titulo": "Bendecidos, muy bendecidos",
+        "letra": "1\nSi alguien te pregunta por allí\ncómo estás, cómo estás,\nsi alguien te pregunta por allí,\nrespóndeles así:\n\nBendecidos, muy bendecidos,\nbendecidos porque Cristo vive en mí.",
+        "tipo": "coro"
+    },
+    {
+        "numero": 126,
+        "titulo": "Pon aceite a mi lámpara, Señor",
+        "letra": "1\nPon aceite a mi lámpara, Señor,\nque yo quiero servirte con amor,\npon aceite a mi lámpara, Señor,\nSeñor Jesús, tú eres mi vida,\nSeñor Jesús, tú eres mi amor,\nsalvaste mi alma perdida, por eso te\nalabo con el corazón, con el corazón.\n\nEstarás tú velando como las diez vírgenes,\nya a la media noche llegó el esposo y\nlas que estaban apercibidas fueron con él.",
+        "tipo": "coro"
+    },
+    {
+        "numero": 127,
+        "titulo": "Dime si tú amas a Cristo",
+        "letra": "1\nDime si tú amas, amas a Cristo,\ndime si tú amas, amas a Dios,\nyo quiero saber\nsi tú amas al Señor.\n\nAbraza a tu hermano, si amas a Cristo,\nabraza a tu hermano, si amas a Dios.\n\n**Coro:**\nYo quiero saber si tú amas al Señor.\n\nDa una vuelta entera, si amas a Cristo,\nda una vuelta entera, si amas a Dios.",
+        "tipo": "coro"
+    },
+    {
+        "numero": 128,
+        "titulo": "Esta hora nos vamos a gozar",
+        "letra": "1\nEsta hora nos vamos a gozar\ncon Jesús el Nazareno,\ninvitamos al Espíritu Santo\npara que este culto se ponga bueno.\n\nSí, sí, nos vamos a gozar\ncon Jesús el Nazareno.",
+        "tipo": "coro"
+    },
+    {
+        "numero": 129,
+        "titulo": "Despiértate, tú que duermes",
+        "letra": "1\nDespiértate, tú que duermes,\nlevántate de los muertos\ny te alumbrará Cristo Jesús.\n\n**Coro:**\nAviva el fuego, el fuego que hay en ti,\nno descuides el don que Cristo puso en ti.\n\nY toda la iglesia, aviva el fuego,\ny todos los hermanos, aviva el fuego.",
+        "tipo": "coro"
+    },
+    {
+        "numero": 130,
+        "titulo": "Has aumentado",
+        "letra": "1\nHas aumentado, oh Dios, tus maravillas,\nenumerarlas no puedo,\nsi yo anunciaré y hablaré de ellas,\nno hay tiempo para terminar.\nHas aumentado, oh Dios, tus maravillas\nya no puedo contarlas,\nmisericordia me das día tras día,\ntu canto en mi boca estará.\n\n**Coro:**\nGrandes son tus obras, poderío y majestad,\ntuyo es todo imperio, toda gloria y potestad,\ngrande es tu dominio, el universo lleno\nestá de tu poder, grande eres tú.",
+        "tipo": "coro"
+    },
+    {
+        "numero": 131,
+        "titulo": "Te amo, Jehová, fortaleza mía",
+        "letra": "1\nTe amo, Jehová, fortaleza mía,\nroca mía, castillo mío,\nen la angustia clamé a Jehová,\nroca mía, castillo mío,\nroca mía, en ti yo confiaré.",
+        "tipo": "coro"
+    },
+    {
+        "numero": 132,
+        "titulo": "Estamos buscando avivamiento",
+        "letra": "1\nEstamos buscando un avivamiento,\nestamos buscando que baje el poder,\nel poder del Santo, el poder del Santo,\nel poder del Santo nombre de Jesús.",
+        "tipo": "coro"
+    },
+    {
+        "numero": 133,
+        "titulo": "Una cosa sé",
+        "letra": "1\nUna cosa sé: que habiendo sido ciego,\nahora veo la luz de mi Jesús,\nla luz divina que me dio Jesús\ncuando por la fe yo vine al Salvador.\n\nY los fariseos decían sin cesar:\n\"Ese hombre es pecador,\nese hombre es pecador\".\nSi es pecador, yo no lo sé,\nlo único que sé es que él me salvó.",
+        "tipo": "coro"
+    },
+    {
+        "numero": 134,
+        "titulo": "A creer",
+        "letra": "1\nDime qué reporte vas a creer,\nyo creeré al reporte de Dios.\n\nTu reporte dice: salvo soy,\ntu reporte dice: sano soy,\ntu reporte dice: libre soy,\ntu reporte dice: victoria.\n\nHay victoria en el nombre de Jesús,\nno podrá el enemigo\ndañar a nuestras almas,\nporque hay victoria en el nombre de Jesús.",
+        "tipo": "coro"
+    },
+    {
+        "numero": 135,
+        "titulo": "Solamente en Cristo",
+        "letra": "1\nSolamente en Cristo,\nsolamente en él,\nla salvación se encuentra en él,\nno hay otro nombre\ndado a los hombres,\nsolamente en Cristo,\nsolamente en él.",
+        "tipo": "coro"
+    },
+    {
+        "numero": 136,
+        "titulo": "Una mirada de fe",
+        "letra": "1\nUna mirada de fe,\nuna mirada al Señor,\nes la que puede\nsalvar al pecador.\n\nY si tú vienes a Cristo Jesús,\nél te perdonará,\nporque una mirada de fe\nes la que te puede salvar.",
+        "tipo": "coro"
+    },
+    {
+        "numero": 137,
+        "titulo": "Ninguna religión",
+        "letra": "1\nNinguna religión\npodrá cambiar tu ser,\nla sangre de Jesús\nsolo lo puede hacer.\n\nRíndete a él, ríndete a él,\nríndete a Cristo y salvo serás.",
+        "tipo": "coro"
+    },
+    {
+        "numero": 138,
+        "titulo": "Solo Dios hace al hombre feliz",
+        "letra": "1\nSolo Dios hace al hombre feliz,\nla vida es nada,\ntodo se acaba,\nsolo Dios hace al hombre feliz.",
+        "tipo": "coro"
+    },
+    {
+        "numero": 139,
+        "titulo": "Solo Dios hace al hombre feliz (2)",
+        "letra": "1\nSolo Dios hace al hombre feliz,\nsolo Dios hace al hombre feliz.\n\nLa vida es nada,\ntodo se acaba,\nsolo Dios hace al hombre feliz.",
+        "tipo": "coro"
+    },
+    {
+        "numero": 140,
+        "titulo": "Sí importa la iglesia",
+        "letra": "1\nSi importa a la iglesia a que tú vayas,\nporque todas no predican la verdad,\ny de todas las iglesias que da el mundo,\na mí me gusta la Pentecostal.\n\nPorque da vida, porque es unida,\nporque se siente el Espíritu de Dios.",
+        "tipo": "coro"
+    },
+    {
+        "numero": 141,
+        "titulo": "Mira que tú no sabes",
+        "letra": "1\nMira que tú no sabes\nlo que en la iglesia pasó,\nlo que pasó,\nque el Espíritu Santo\nsobre la iglesia se derramó.",
+        "tipo": "coro"
+    },
+    {
+        "numero": 142,
+        "titulo": "La gloria de Jehová",
+        "letra": "1\nLa gloria de Jehová cayó en el Sinaí\nyaquel monte temblaba\nporque Dios estaba ahí.\n\nDios estaba ahí, Dios estaba ahí,\nyaquel monte temblaba\nporque Dios estaba ahí.",
+        "tipo": "coro"
+    },
+    {
+        "numero": 143,
+        "titulo": "Ardiendo el fuego",
+        "letra": "1\nArdiendo el fuego en mi alma está,\ngloriosa llama que limpiará,\n¡oh aleluya! mi alma ardiendo está.\n\nOh Señor, quiero que ardas en mi ser,\ncomo la zarza quiero arder con tu poder,\nen nuevas lenguas quiero hablar, como Señor,\nestoy ardiendo con el fuego celestial.\nQuiero alabarte y adorarte solo a ti,\ncomo se adora en espíritu y verdad,\nOh Señor, quiero que ardas en mi ser,\ncomo la zarza quiero arder con tu poder.",
+        "tipo": "coro"
+    },
+    {
+        "numero": 144,
+        "titulo": "Cristo es la peña",
+        "letra": "1\nCristo es la peña de Horeb\nque está brotando\nagua de vida saludable para ti.\nVen a beberla, que es\nmás dulce que la miel,\nrefresca el alma,\nrefresca todo tu ser.\nCristo es la peña de Horeb.",
+        "tipo": "coro"
+    },
+    {
+        "numero": 145,
+        "titulo": "Estoy listo",
+        "letra": "1\nEstoy listo, sí él me llama,\nyo estaré en la viña del Señor,\nyo estaré en la viña,\ntrabajando en la viña del Señor.",
+        "tipo": "coro"
+    },
+    {
+        "numero": 146,
+        "titulo": "Va bajando ya",
+        "letra": "1\nVa bajando ya, va bajando\nla gloria de Jehová,\nsi su pueblo empieza a orar,\nel Señor responderá,\nva bajando la gloria de Jehová.",
+        "tipo": "coro"
+    },
+    {
+        "numero": 147,
+        "titulo": "Arrepentíos, dice Pedro",
+        "letra": "1\nArrepentíos, dijo Pedro,\nen el nombre de Jesús,\ny mándese a bautizar\npara el perdón de los pecados\ny recibiréis el don\ndel Santo Espíritu de Dios.",
+        "tipo": "coro"
+    },
+    {
+        "numero": 148,
+        "titulo": "En esta reunión",
+        "letra": "1\nEn esta reunión Cristo está,\nél ha prometido estar\ndonde hay dos o tres\nen mi nombre estén,\nallí estaré, allí estaré, allí estaré.\n\nYo lo siento en mí, yo lo siento en mí,\nsu Espíritu me hace cantar.",
+        "tipo": "coro"
+    },
+    {
+        "numero": 149,
+        "titulo": "Mi Dios donde quiera está",
+        "letra": "1\nMi Dios donde quiera está,\naleluya, gloria a Dios,\naleluya, gloria a Dios.\n\nSi lo buscas en el cielo,\nsi lo buscas en el mar,\nsi lo buscas en tu vida,\nallí lo encontrarás.",
+        "tipo": "coro"
+    },
+    {
+        "numero": 150,
+        "titulo": "No te he dicho",
+        "letra": "1\nNo te he dicho que si creyeres\nverás la gloria de Dios,\nverás la gloria de Dios,\nno te he dicho\nque si creyeres\nverás la gloria de Dios.",
+        "tipo": "coro"
+    },
+    {
+        "numero": 151,
+        "titulo": "Si has conocido al Señor",
+        "letra": "1\nSi has conocido al Señor, alábale,\nporque él habita en medio de la alabanza,\nno, no, no a la distancia, no,\nacércate al altar que allí está el Señor.",
+        "tipo": "coro"
+    },
+    {
+        "numero": 152,
+        "titulo": "Gozo, gozo yo quería",
+        "letra": "1\nGozo, gozo yo quería,\npero lo buscaba donde no había,\npero vino Cristo,\nel autor de la vida,\nél me dio el gozo\nque tanto yo quería.",
+        "tipo": "coro"
+    },
+    {
+        "numero": 153,
+        "titulo": "Llama a tu puerta",
+        "letra": "1\nLlama a tu puerta el Salvador,\n¡oh amigo!, ¿por qué no escuchas?\nllama a tu puerta el Salvador,\nábrele ahora, llama a tu puerta el Salvador,\nríndete a Cristo, llama a tu puerta el Salvador,\nél te ama tanto, llama a tu puerta el Salvador.",
+        "tipo": "coro"
+    },
+    {
+        "numero": 154,
+        "titulo": "Levanten la bandera",
+        "letra": "1\nLevanten la bandera\nlos hijos del Señor,\ncuando Cristo venga,\ntodo será canto,\ntodos cantaremos\n¡gloria al Señor!",
+        "tipo": "coro"
+    },
+    {
+        "numero": 155,
+        "titulo": "Grande es el Señor",
+        "letra": "1\nGrande es el Señor,\ncreador del universo,\ncanta y danza al Rey que viene pronto,\nde felicidad el corazón nos llena,\ngrande es el Señor.\n\nOh, oh, oh, hosanna al Altísimo,\noh, oh, oh, hosanna al Altísimo,\noh, oh, oh, hosanna al Altísimo,\ngrande es el Señor.",
+        "tipo": "coro"
+    },
+    {
+        "numero": 156,
+        "titulo": "Pues tú glorioso",
+        "letra": "1\nPues tú glorioso eres, Señor,\ny tu nombre es digno de alabar,\nhaz mi corazón puro y santo ante ti,\nyo te adoro con todo mi corazón.\n\nYo te adoro, Señor, con todo mi ser,\nyo con salmos te alabaré,\nyo te adoro, Señor, con todo mi ser,\ntodo el día te bendeciré.\n\nPues tú glorioso eres, Señor,\ny tu nombre es digno de alabar,\nhaz mi corazón puro y santo ante ti,\nyo te adoro con todo mi corazón.\n\nYo te amo,\nyo confío en ti,\nyo te amo,\nen la roca me refugiaré.",
+        "tipo": "coro"
+    },
+    {
+        "numero": 157,
+        "titulo": "Ahora mismo, Señor",
+        "letra": "1\nAhora mismo, Señor,\nyo te pido que\nrompas las cadenas\ny que las puertas\ndel cielo sean abiertas\ny de poder mi alma sea llena.",
+        "tipo": "coro"
+    },
+    {
+        "numero": 158,
+        "titulo": "Espíritu de Dios",
+        "letra": "1\nEspíritu de Dios, desciende sobre mí\ny dame más poder para poder vencer.\n\nYo sé que Cristo viene,\nespero su venida,\ny el que está preparado con él\nse irá para arriba,\npara arriba, para arriba,\npara arriba y no para abajo,\nsubiendo, subiendo y no bajando.",
+        "tipo": "coro"
+    },
+    {
+        "numero": 159,
+        "titulo": "Algo está descendiendo",
+        "letra": "1\nAlgo está descendiendo\nen la iglesia del Señor,\nalgo está descendiendo\nen la iglesia del Señor.\n\nY eso es el Espíritu Santo.\n\nOh gloria, aleluya,\naleluya, gloria a Dios.\n\nPrepárate para que sientas\nel Espíritu de Dios,\ny eso es el Espíritu Santo.\n\nY déjalo que se mueva\ndentro de tu corazón,\ny eso es el Espíritu Santo.\n\nOh gloria, oh aleluya,\naleluya, gloria a Dios.",
+        "tipo": "coro"
+    },
+    {
+        "numero": 160,
+        "titulo": "Él reina",
+        "letra": "1\nVamos a pelear contra las fuerzas del mal\npara liberar nuestra nación,\niglesia de Jesús, no esperes más,\ntoma tus armas, ven a pelear.\n\nAl enemigo hoy vencemos en el nombre de Jesús,\nsomos ejército de Dios, nada nos podrá detener.\n\n**Coro:**\nPorque él reina, él reina,\n¡él reina con poder!",
+        "tipo": "coro"
+    },
+    {
+        "numero": 161,
+        "titulo": "Esta alegría",
+        "letra": "1\nEsta alegría\nno va a salir, no va a salir,\nesta alegría no va a salir\nporque está dentro de mi corazón.\n\nEl fuego cae, cae, cae,\nlos males salen, salen,\nel creyente alaba su Señor.",
+        "tipo": "coro"
+    },
+    {
+        "numero": 162,
+        "titulo": "Este gozo que yo siento",
+        "letra": "1\nEste gozo que yo siento en mi alma\nsolo Cristo me lo pudo dar,\nsolo Cristo me lo pudo dar.\n\nPero qué felicidad,\ncantemos todos en coro\na nuestro Padre Celestial.",
+        "tipo": "coro"
+    },
+    {
+        "numero": 163,
+        "titulo": "Yo le alabo de corazón",
+        "letra": "1\nYo le alabo de corazón,\nyo le alabo con mi voz,\ny si me falta la voz,\nyo le alabo con las manos;\ny si me faltan las manos,\nyo lo alabo con los pies;\ny si me faltan los pies,\nyo le alabo con el alma;\ny si me falta el alma,\nes que ya me fui con él.",
+        "tipo": "coro"
+    },
+    {
+        "numero": 164,
+        "titulo": "No hay Dios tan grande como tú",
+        "letra": "1\nNo hay Dios tan grande como tú,\nno lo hay, no lo hay,\nno hay Dios que pueda hacer\nlas obras como las que haces tú.\n\nNo es con espada, ni con ejército, mas\ncon su Santo Espíritu,\ny esas almas se salvarán\ncon su Santo Espíritu.",
+        "tipo": "coro"
+    },
+    {
+        "numero": 165,
+        "titulo": "Nos vamos a gozar",
+        "letra": "1\nNos vamos a gozar,\na las bodas del Cordero\nnos vamos a gozar.\n\nY luego nos iremos a la\npatria celestial a morar con\nJesucristo por toda la eternidad.",
+        "tipo": "coro"
+    },
+    {
+        "numero": 166,
+        "titulo": "En el Salmo 22",
+        "letra": "1\nEn el Salmo 22, la Biblia lo testifica:\nDios habita en la alabanza,\nen la alabanza él habita.\n\nY si le alabas, te gozas, y si le alabas,\ny si le adoras, te gozas, y si le adoras,\ny si le sirves, te gozas, y si le sirves.\n\nEl apóstol Pedro sanaba a los enfermos\ny no era la sombra, ni tampoco Pedro,\nera que Pedro tenía el Espíritu del Nazareno,\nNazareno, Nazareno, el Espíritu del Nazareno.\n\nSi tú le alabas, te gozas, si tú le alabas,\nalaba a Dios, ¡aleluya!, alábale que él vive.",
+        "tipo": "coro"
+    },
+    {
+        "numero": 167,
+        "titulo": "En el altar de Dios",
+        "letra": "1\nEn el altar de Dios,\nen el altar de Dios,\nel fuego está encendido\nen el altar de Dios.\n\n**Coro:**\nNadie lo podrá apagar,\nnadie lo podrá apagar,\nporque el fuego del Señor\nestá en mi corazón.",
+        "tipo": "coro"
+    },
+    {
+        "numero": 168,
+        "titulo": "Esta es la iglesia",
+        "letra": "1\nEsta es la iglesia del Señor,\ncasa de Dios, puerta del cielo,\nél la llamó su casa de oración,\nporque esta es la iglesia del Señor.\n\nAquí se siente la presencia de Dios,\nyo siento el fuego del Espíritu Santo,\nyo siento gozo, yo siento paz,\nsiento el amor que Dios me da.",
+        "tipo": "coro"
+    },
+    {
+        "numero": 169,
+        "titulo": "Me libertó",
+        "letra": "1\nMe libertó,\nrompiendo hierros de esclavitud,\nsiento la gloria de mi Jesús,\n¡oh! gloria a Dios, él me libertó.",
+        "tipo": "coro"
+    },
+    {
+        "numero": 170,
+        "titulo": "Esta es una fiesta pentecostal",
+        "letra": "1\nEsta es una fiesta, fiesta pentecostal,\nesta es una fiesta, no es un funeral.\n\nCon gozo y alegría vamos a celebrar\nque Jesucristo vive\ny en la tumba no está.",
+        "tipo": "coro"
+    },
+    {
+        "numero": 171,
+        "titulo": "Levántate, Señor",
+        "letra": "1\nLevántate, levántate, Señor,\nque tus enemigos huyan delante de ti,\nmas los justos se alegrarán,\ncantarán con regocijo,\nel Señor se ha levantado,\nha triunfado con poder.\n\nPoderoso, vencedor, León de Judá,\nhombre de guerra,\nCristo.",
+        "tipo": "coro"
+    },
+    {
+        "numero": 172,
+        "titulo": "Cantad a Jehová cántico",
+        "letra": "1\nCantad a Jehová cántico nuevo,\nah, ah, ah,\ncantad a Jehová, toda la tierra,\nah, ah, ah.\n\n**Pre-coro:**\nCantad a Jehová y bendecid\nsu nombre,\nanunciad de él su salvación.\n\n**Coro:**\nPorque grande es Jehová,\ndivino de suprema alabanza.",
+        "tipo": "coro"
+    },
+    {
+        "numero": 173,
+        "titulo": "Con óleo de alegría",
+        "letra": "1\nCon óleo de alegría me has ungido,\ncon gozo y con pandero danzaré,\ndelante de tu pueblo redimido,\nla gloria de tu nombre alabaré,\ncon el pandero.\n\nToda la noche sin parar\ncantando alabanzas al Señor,\ndiciéndole en su gloria y majestad\nque él es el Rey de Israel.",
+        "tipo": "coro"
+    },
+    {
+        "numero": 174,
+        "titulo": "Grita, canta, danza",
+        "letra": "1\nGrita, canta, danza,\nalegremente en su presencia,\ngira, salta, dando vueltas para\nCristo. Él vive, vive para siempre,\nél es el Rey.\n\nRemolineando, remolineando,\ncelebraré a Jehová,\nremolineando, remolineando,\nme haré más vil por causa de Jehová.",
+        "tipo": "coro"
+    },
+    {
+        "numero": 175,
+        "titulo": "Alza tus ojos y mira",
+        "letra": "1\nAlza tus ojos y mira,\nla cosecha está lista,\nel tiempo ha llegado,\nla mies está madura,\nesfuérzate y sé valiente,\nlevántate y predica\na todas las naciones\nque Cristo es la vida.\n\n**Coro:**\nY será llena la tierra de su gloria,\nse cubrirá como las aguas\ncubren la mar.\n\nAvívame, avívame,\navívame con tu Espíritu.",
+        "tipo": "coro"
+    },
+    {
+        "numero": 176,
+        "titulo": "Yo soy testigo",
+        "letra": "1\nYo soy testigo del poder de Dios,\ngrandes maravillas él ha hecho en mí,\nyo era ciego, mas ahora veo la luz,\nla luz divina que me dio Jesús.\n\nNunca Cristo me ha dejado,\nnunca me ha desamparado,\nni en la noche oscura,\nni en el día de prueba,\nJesucristo nunca me desamparará.",
+        "tipo": "coro"
+    },
+    {
+        "numero": 177,
+        "titulo": "Conozco un hombre de poder",
+        "letra": "1\nConozco un hombre de poder,\nun hombre de poder,\nmi ayuda a luchar,\nmi ayuda a vencer,\nsu nombre es Jesús.\n\nEs fuerte más que el viento,\nsu gloria es más que el mar,\nnunca se acaba su amor,\nen él puedo yo confiar.",
+        "tipo": "coro"
+    },
+    {
+        "numero": 178,
+        "titulo": "Bendito sea",
+        "letra": "1\nBendito sea Jehová, la Roca,\npor toda la eternidad,\nmi escondedero y mi refugio\neres tú, oh bendito Jehová.\n\nEn tu palabra esperaré\ny mi confianza en ti pondré,\n¡oh gloria, gloria!, ¡oh aleluya!,\namén, amén.",
+        "tipo": "coro"
+    },
+    {
+        "numero": 179,
+        "titulo": "Era una escalera",
+        "letra": "1\nEra una escalera\nla que Jacob veía,\nángeles bajaban, ángeles subían,\npero era la gloria de Dios\nlo que Jacob veía.",
+        "tipo": "coro"
+    },
+    {
+        "numero": 180,
+        "titulo": "Has cambiado mi lamento en baile",
+        "letra": "1\nHas cambiado mi lamento en baile,\nme ceñiste todo de alegría,\npor tanto a ti cantaré,\ngloria mía, y nunca estaré callado,\nJehová, Dios mío, te alabaré,\nte alabaré para siempre,\nporque has cambiado mi lamento en baile,\nJehová, Dios mío, te alabaré.",
+        "tipo": "coro"
+    },
+    {
+        "numero": 181,
+        "titulo": "Donde está el Espíritu",
+        "letra": "1\nDonde está el Espíritu de Dios,\nhay libertad,\ndonde está el Espíritu de Dios,\nallí siempre hay libertad,\nlibertad,\ndonde está el Espíritu de Dios,\nallí siempre hay libertad.",
+        "tipo": "coro"
+    },
+    {
+        "numero": 182,
+        "titulo": "Quién nos podrá separar",
+        "letra": "1\n¿Quién nos podrá separar del amor de Cristo?\n¿Quién nos podrá separar del amor de Dios?\nNi la vida, ni la muerte,\nni lo alto, ni lo profundo, ni ángeles,\nni potestades,\nnada podrá separar\ndel amor de Dios.",
+        "tipo": "coro"
+    },
+    {
+        "numero": 183,
+        "titulo": "Ya viene Cristo",
+        "letra": "1\nYa viene Cristo, señales hay,\nalmas salvadas viene a llevar.\nLos que durmieron se quedarán,\nlos que velaron se irán con él.\n\nMe voy con él,\nyo no me quedo, me voy con él.",
+        "tipo": "coro"
+    },
+    {
+        "numero": 184,
+        "titulo": "Estoy alegre",
+        "letra": "1\nEstoy alegre, alegre muy alegre,\nestoy alegre porque Cristo me salvó,\npor eso canto, yo canto aleluya,\npor eso canto, aleluya, ¡gloria a Dios!",
+        "tipo": "coro"
+    },
+    {
+        "numero": 185,
+        "titulo": "Hiciste libre",
+        "letra": "1\nLibre, tú me hiciste libre,\nlibre, Señor,\nrotas fueron las cadenas\nque estaban atando a mi corazón.",
+        "tipo": "coro"
+    },
+    {
+        "numero": 186,
+        "titulo": "Hermano, comienza a pedir",
+        "letra": "1\nHermano, comienza a pedir\nel fuego de Dios,\nfuego, fuego, fuego del cielo queremos,\nfuego, fuego, fuego del Consolador.\n\nAquí se canta, aquí se ora, se alaba a Dios\na toda hora, aleluya, amén, amén.\n\nSiento un fuego que me está quemando,\nel Espíritu de Dios me está bautizando,\naleluya, amén, amén.",
+        "tipo": "coro"
+    },
+    {
+        "numero": 187,
+        "titulo": "Yo no sé, has venido",
+        "letra": "1\nYo no sé a lo que tú has venido,\npero yo vine a alabar a Dios,\nyo vine, yo vine, yo vine\na alabar a Dios.",
+        "tipo": "coro"
+    },
+    {
+        "numero": 188,
+        "titulo": "El gozo que tengo",
+        "letra": "1\nEl gozo que siento yo\nel mundo no me lo dio,\ny como no me lo dio,\nno me lo puede quitar.\n\nSi empezamos a cantar,\neste lugar tiembla,\nsi empezamos a orar,\nhablaremos nuevas lenguas.\n\nElías oró, y el fuego cayó,\noró Josué y el sol se paró.",
+        "tipo": "coro"
+    },
+    {
+        "numero": 189,
+        "titulo": "Ya llegó",
+        "letra": "1\nYa llegó, ya está aquí,\nel Espíritu Santo ya llegó,\ncomo un rayo cayendo sobre mí,\ndéjalo que se mueva,\ncomo un rayo cayendo sobre mí,\nque quema, que quema y quema.",
+        "tipo": "coro"
+    },
+    {
+        "numero": 190,
+        "titulo": "La iglesia pide fuego",
+        "letra": "1\nFuego, fuego, la iglesia pide fuego,\nhermano querido, pide tú también,\nporque mi Cristo viene\na llevar su iglesia a Jerusalén.",
+        "tipo": "coro"
+    },
+    {
+        "numero": 191,
+        "titulo": "Como un rayo",
+        "letra": "1\nComo un rayo cayendo sobre mí,\nque quema, que quema y quema,\ncomo un rayo cayendo sobre mí,\nque quema, que quema y quema.",
+        "tipo": "coro"
+    },
+    {
+        "numero": 192,
+        "titulo": "Que no se apague el fuego",
+        "letra": "1\nQue no se apague el fuego que hay en mi corazón,\nque no se apague el fuego, que siga ardiendo más y más.\n\nTengo gozo, Señor, dame paz y amor,\nporque voy a morar más allá del sol.",
+        "tipo": "coro"
+    },
+    {
+        "numero": 193,
+        "titulo": "Mira lo que hizo",
+        "letra": "1\nMira lo que hizo mi Señor,\nlos cielos y la tierra,\nlos mares y los árboles,\nmira lo que hizo mi Señor.\n\nMira lo que hizo mi Señor,\nél me salvó, él me libertó,\nmira lo que hizo mi Señor.\n\nCaminando por la senda voy,\nde pruebas en pruebas,\nvictoria tras victoria,\ncaminando por la senda voy.\n\nEl enemigo ya vencido está,\nJesús lo venció,\nmuriendo en la cruz,\nel enemigo ya vencido está.",
+        "tipo": "coro"
+    },
+    {
+        "numero": 194,
+        "titulo": "Gózate delante del Señor",
+        "letra": "1\nGózate delante del Señor,\nporque él es tu Rey,\nél es, él es, él es, él es tu Rey.\n\nGózate delante del Señor,\nporque él es tu Roca,\nél es, él es, él es, él es tu Roca.\n\nGózate delante del Señor,\nporque él es tu Escudo,\nél es, él es, él es, él es tu Escudo.\n\nHaré un altar para ti\ncon sacrificio de alabanza,\ncon júbilo y danza, y cantaré a Jehová,\nque descienda el fuego de Dios.",
+        "tipo": "coro"
+    },
+    {
+        "numero": 195,
+        "titulo": "Oh moradora de Sión",
+        "letra": "1\nOh moradora de Sión, alaba\na Jehová, grandes son sus maravillas.\n\nSobre los montes y collados\na mi amado buscaré,\ngrande es su hermosura,\ny al estar en su presencia\ngozoso danzaré, al Señor alabaré.\n\nGrande es Jehová, digno de alabar,\ntú eres grande, Jehová,\ngrande es tu nombre.",
+        "tipo": "coro"
+    },
+    {
+        "numero": 196,
+        "titulo": "Con mi Dios",
+        "letra": "1\nCon mi Dios yo saltaré los muros,\ncon mi Dios ejército derribaré,\nél adiestra mis manos\npara la batalla,\npuedo tomar con mis manos\nel arco de bronce,\nel escudo, la roca mía,\nel fuego de mi salvación,\nmi alto refugio, mi fortaleza,\nél es mi libertad.",
+        "tipo": "coro"
+    },
+    {
+        "numero": 197,
+        "titulo": "Cómo es posible",
+        "letra": "1\nCristo rompe las cadenas,\nlas cadenas del pecado\ny nos da seguridad.\n\n¿Cómo es posible vivir sin mi Jesús,\nsi el fundamento de mi vida eres tú?\nTú me libraste del infierno\ny de la muerte,\n¿cómo es posible vivir sin mi Jesús?",
+        "tipo": "coro"
+    },
+    {
+        "numero": 198,
+        "titulo": "Este es el Cristo",
+        "letra": "1\nEste es el Cristo que yo predico\ny no me canso de predicar,\nél sana a los enfermos,\nreprende a los demonios\ny calma la tempestad.\n\nSi tú supieras quién es el Señor,\narrepentido vendrías a él,\nsu santa sangre la dio el Salvador\npara salvar al más vil pecador.",
+        "tipo": "coro"
+    },
+    {
+        "numero": 199,
+        "titulo": "Lluvias caerán",
+        "letra": "1\nLluvias caerán, lluvias de gran poder,\nlluvias caerán, lluvias de gran poder.\n\nAvivamiento hay en mí, todo lo debo\na mi Señor Jesús, avivamiento hay en mí,\nqué bueno es el Señor, qué bueno es,\nqué bueno es,\nque con su Santo Espíritu me bautizó.",
+        "tipo": "coro"
+    },
+    {
+        "numero": 200,
+        "titulo": "Oh, qué contento",
+        "letra": "1\nOh, qué contento estoy,\noh, qué contento estoy,\nJesús viene en las nubes,\ncon mi hermano yo me voy.\n\nQué bueno es cantar\ncuando hay gratitud,\nestaré cantando alegre\npor toda la eternidad.",
+        "tipo": "coro"
+    },
+    {
+        "numero": 201,
+        "titulo": "Aunque otros canten",
+        "letra": "1\nAunque otros canten\npara otros dioses\nhechos de metal, de madera o de bronce,\nyo alabaré el nombre de Jesús,\nel nombre de Jesús alabaré.\n\nPorque somos sus sacerdotes,\nllamados a ministrar en su presencia,\ny ahora alabaremos el santo nombre,\nbendito de Jesús.",
+        "tipo": "coro"
+    },
+    {
+        "numero": 202,
+        "titulo": "Dios está aquí, qué precioso es",
+        "letra": "1\nDios está aquí, qué precioso es,\nél lo prometió donde están dos o tres.\n\nQuédate, Señor, en cada corazón,\nquédate, Señor, aquí.\n\nOh, Cristo mío,\nhaz en mi alma un altar\npara adorarte con devoción,\npara beber del agua de la vida\ny así saciar la sed de mi corazón.",
+        "tipo": "coro"
+    },
+    {
+        "numero": 203,
+        "titulo": "Un palacio tengo",
+        "letra": "1\nUn palacio tengo allá,\nmás lindo que el sol,\ncon mi buen Jesús,\nbendito Cristo,\ncontigo estaré\nen el más allá.\n\nSi tú quieres ir al cielo,\nven al Señor,\nven sin demorar.\n\nDios está llenándonos\ncon fuego y poder,\nla iglesia triunfará.\n\nNuestro Cristo amado\nes la Piedra Angular,\nla iglesia triunfará.\n\nSí, Señor, sí, Señor,\nacuérdate de mí\nen el más allá.",
+        "tipo": "coro"
+    },
+    {
+        "numero": 204,
+        "titulo": "Cristo no está muerto",
+        "letra": "1\nCristo no está muerto, él está vivo,\nlo siento en mis manos, lo siento en\nmis pies, lo siento en todo mi ser.\n\nLa tengo sí, la tengo,\nla unción está sobre mí, no la entiendo,\npero la tengo.",
+        "tipo": "coro"
+    },
+    {
+        "numero": 205,
+        "titulo": "Así como el relámpago",
+        "letra": "1\nAsí como el relámpago,\nasí como el relámpago,\nasí será la venida del Señor.\n\nHay que estar orando,\nhay que estar velando,\nasí será la venida del Señor.",
+        "tipo": "coro"
+    },
+    {
+        "numero": 206,
+        "titulo": "Yo tengo gozo en mi alma",
+        "letra": "1\nYo tengo gozo en mi alma,\ngozo en mi alma,\ngozo en mi alma y en mi ser,\n¡aleluya, gloria a Dios!\nson como ríos de agua viva,\nríos de agua viva hay en mi ser.\n\nYo tengo paz en mi alma,\npaz en mi alma,\npaz en mi alma y en mi ser,\n¡aleluya, gloria a Dios!\nson como ríos de agua viva,\nríos de agua viva hay en mi ser.",
+        "tipo": "coro"
+    },
+    {
+        "numero": 207,
+        "titulo": "El nombre de Jesús",
+        "letra": "1\nEl nombre de Jesús es poder,\nel nombre de Jesús, victoria es,\nel nombre de Jesús, levantado está,\nel nombre de Jesús, sublime es.\n\n**Coro:**\nYo le canto y le alabo,\nyo le exalto y le adoro,\nporque el nombre de Jesús\nes poder.",
+        "tipo": "coro"
+    },
+    {
+        "numero": 208,
+        "titulo": "Mi vida está llena de bendiciones",
+        "letra": "1\nMi vida está llena de bendiciones,\ntodo lo que yo tocare bendecido será.\n\nMi vida está llena de bendiciones,\ntodo lo que yo tocare bendecido será,\nmi vida está llena de bendiciones.",
+        "tipo": "coro"
+    },
+    {
+        "numero": 209,
+        "titulo": "Jesús está pasando por aquí",
+        "letra": "1\nJesús está pasando por aquí.\n\nCuando él pasa todo se transforma,\nse va la tristeza, llega la alegría,\ncuando él pasa todo se transforma,\nllega la alegría para ti y para mí.\n\nEn victoria estoy\nen medio de las pruebas,\ncanto con gozo y alabo al Señor,\naunque vengan pruebas y\ntribulaciones,\nCristo está conmigo y\nen victoria estoy.",
+        "tipo": "coro"
+    },
+    {
+        "numero": 210,
+        "titulo": "Vamos cantando",
+        "letra": "1\nVamos cantando hasta que baje el poder,\nla gloria a él, la gloria a él,\nvamos cantando hasta que baje el poder.\n\nAlza tus manos y alaba a tu Señor,\nla gloria a él, la gloria a él,\nvamos cantando hasta que baje el poder.\n\nNo te avergüences y alaba a tu Señor,\nla gloria a él, la gloria a él,\nno te avergüences y alaba a tu Señor.",
+        "tipo": "coro"
+    },
+    {
+        "numero": 211,
+        "titulo": "Aquí estoy",
+        "letra": "1\nAquí estoy, te ofrezco todo lo que soy,\naquí estoy, un sacrificio quiero ser,\ntoma mi ser, mi vida entrego a ti.\n\nPorque tú eres mi Dios,\neres digno de adoración,\nuna ofrenda de amor seré para ti.",
+        "tipo": "coro"
+    },
+    {
+        "numero": 212,
+        "titulo": "Alabad a Jehová",
+        "letra": "1\nAlabad a Jehová, naciones todas,\npueblos todos, alabadle,\nporque ha engrandecido\nsobre nosotros su misericordia.\n\nY la verdad de Jehová\nes para siempre, aleluya, amén.",
+        "tipo": "coro"
+    },
+    {
+        "numero": 213,
+        "titulo": "Oh Poder Pentecostal",
+        "letra": "1\nOh Poder Pentecostal, ¡ven hoy a mí!\nOh Poder Pentecostal, ¡ven hoy a mí!\nYo quiero sentir el gozo\nde ese fuego tan glorioso,\nOh Poder Pentecostal, ¡ven hoy a mí!",
+        "tipo": "coro"
+    },
+    {
+        "numero": 214,
+        "titulo": "Precioso es mi Cristo",
+        "letra": "1\nPrecioso es mi Cristo,\nes el lirio de los valles,\nla Rosa de Sarón,\noh, cuánto yo le amo,\nes el todo preferido en mi ser.",
+        "tipo": "coro"
+    },
+    {
+        "numero": 215,
+        "titulo": "Te amo",
+        "letra": "1\nTe amo, te amo,\nes todo lo que puedo decir,\nte adoro, te adoro,\ntodo mi ser confía en ti.\nYo te amaré y te adoraré,\nno importa lo que pueda venir,\nen ti, Señor, siempre confiaré\ny te amaré hasta el fin.",
+        "tipo": "coro"
+    },
+    {
+        "numero": 216,
+        "titulo": "Sigo a Jesucristo",
+        "letra": "1\nSigo, sigo, sigo a Jesucristo,\ntras Jesús es la luz, yo le seguiré,\nsigo, sigo, sigo a Jesucristo,\ndonde quiera que él me guíe,\nyo le seguiré.",
+        "tipo": "coro"
+    },
+    {
+        "numero": 217,
+        "titulo": "Qué alegre los creyentes",
+        "letra": "1\nQué alegre los creyentes\nque alaban al Señor,\nqué alegre los creyentes\nque alaban al Señor.\n\nYa no hay tristeza,\nya no hay dolor\npara los creyentes\nque alaban al Señor.",
+        "tipo": "coro"
+    },
+    {
+        "numero": 218,
+        "titulo": "Yo no sé a lo que tú has venido",
+        "letra": "1\nYo no sé a lo que tú has venido,\npero yo vine a alabar a Dios.\n\nAleluya, aleluya,\nyo vine a alabar a Dios.\n\nHubo un cambio en mi vida,\nsolo Dios lo pudo hacer,\nsolo Dios lo pudo hacer,\ncantando todos en coro a nuestro\nPadre celestial.",
+        "tipo": "coro"
+    },
+    {
+        "numero": 219,
+        "titulo": "Te damos gracias, Señor",
+        "letra": "1\nTe damos gracias, Señor,\npor el amor que nos das,\nunidos en Jesucristo\ntenemos que trabajar.\n\nSí, sí, sí, con Cristo nos iremos,\ntomados de la mano iremos\ncon él y le alabaremos.",
+        "tipo": "coro"
+    },
+    {
+        "numero": 220,
+        "titulo": "Yo sé que el Señor",
+        "letra": "1\nYo sé que el Señor\nsu mano ha puesto en mí,\noh, qué maravilla es él,\nyo sé que el Señor\nsu mano ha puesto en mí.\n\nMi alma tiene sed\ndel poder de Dios.\n¿Cómo yo no voy a ver a Jesús\nsi su Santo Espíritu está aquí?\nÉl está aquí\nmorando en mi corazón.",
+        "tipo": "coro"
+    },
+    {
+        "numero": 221,
+        "titulo": "Yo sé que mi Redentor",
+        "letra": "1\nYo sé que mi Redentor\nnos tiene que levantar\ndel polvo de donde estés\na otro mejor lugar.\n\nConfía, hermano, confía,\nnos tiene que levantar\ndel polvo de donde estés\na otro mejor lugar.\n\nTen fe, hermano, ten fe,\nnos tiene que levantar\ndel polvo de donde estés\na otro mejor lugar.",
+        "tipo": "coro"
+    },
+    {
+        "numero": 222,
+        "titulo": "Cuando yo oro",
+        "letra": "1\nCuando yo oro, alguien me toca,\nes la mano del Señor.\nGloria, gloria, gloria, gloria, aleluya,\ny es la mano del Señor.\n\nCuando estoy enfermo,\nalguien me sana,\nes la mano del Señor.",
+        "tipo": "coro"
+    },
+    {
+        "numero": 223,
+        "titulo": "Qué bueno es Jesucristo",
+        "letra": "1\nQué bueno es Jesucristo\nque me salvó a mí,\ny por ser tan bueno\nquiere salvarte a ti.\n\nQué bueno es, qué bueno es,\nqué bueno es el Señor,\ny por ser tan bueno\nquiere salvarte a ti.",
+        "tipo": "coro"
+    },
+    {
+        "numero": 224,
+        "titulo": "Mira qué lindo",
+        "letra": "1\nMira qué lindo, qué lindo\nes el Señor,\nnada iguala a su belleza,\nnada iguala a su amor,\nporque todo lo que hace\nlo hace con amor.",
+        "tipo": "coro"
+    },
+    {
+        "numero": 225,
+        "titulo": "Carmelo",
+        "letra": "1\nElías oraba en el monte Carmelo\npara que el fuego bajara de los cielos,\ny cuando él oró, el fuego cayó y\ntodo el holocausto allí se consumió.\n\nPero que baje el fuego,\nque se encienda la llama,\nque se encienda la llama con su poder.\n\nNo te dejaré sino me bendices,\nno te dejaré aunque raye el alba.\n\nBendíceme, bendíceme,\nbendíceme ahora,\nahora, ahora, bendíceme ahora.",
+        "tipo": "coro"
+    },
+    {
+        "numero": 226,
+        "titulo": "Aquel fuego que cayó a ciento veinte",
+        "letra": "1\nAquel fuego que cayó a ciento veinte una vez,\nme hizo pentecostal de la cabeza a los pies,\nme hizo pentecostal\nde la cabeza a los pies,\nme hizo pentecostal\nde la cabeza a los pies.\n\nNadie lo podrá apagar, porque está encendido,\nestá encendido, encendido,\nestá encendido y nadie lo podrá apagar.\n\nFuego pentecostal\nde la cabeza a los pies.",
+        "tipo": "coro"
+    },
+    {
+        "numero": 227,
+        "titulo": "Si tuviera fe",
+        "letra": "1\nSi tuviera fe\ncomo un grano de mostaza,\neso lo dijo el Señor.\n\nTú le dirías a la santa montaña: muévete, muévete,\nse moverá, se moverá,\nesa montaña se moverá.",
+        "tipo": "coro"
+    },
+    {
+        "numero": 228,
+        "titulo": "Como las aguas del río",
+        "letra": "1\nComo las aguas del río\ncuando llegan a la mar,\nasí llegó la gloria de Dios a mi corazón.\n\nAhora sí libre soy, ahora sí salvo soy,\nahora siento el poder de la presencia de Dios.",
+        "tipo": "coro"
+    },
+    {
+        "numero": 229,
+        "titulo": "Vamos a la casa de David",
+        "letra": "1\nVamos a la casa de David,\nministra en la presencia del Señor,\ncantando alabanzas\ncon banderas y arpas,\nen alegres danzas cantaré.\n\n**Pre-coro 1:**\nEn el tabernáculo de David,\nDios es exaltado allí.\n\n**Coro:**\nDetrás de las ovejas te llamé,\ntú eres una lámpara, Israel,\ny esa es mi promesa:\nque a uno de tus hijos\ntrono para siempre le daré.",
+        "tipo": "coro"
+    },
+    {
+        "numero": 230,
+        "titulo": "Hay una llama",
+        "letra": "1\nHay una llama que arde en mí,\nun gran poder que está en ti,\nme está quemando tu fuego santo,\npuedo sentirlo, está aquí.\n\n**Coro:**\nFuego, fuego del Señor,\nfuego, fuego,\nfuego purificador.",
+        "tipo": "coro"
+    },
+    {
+        "numero": 231,
+        "titulo": "Llegó el tiempo",
+        "letra": "1\nLlegó el tiempo, llegó la hora de adorar\nal Rey,\neste es el tiempo, esta es la hora\nde adorar al Rey.\n\n**Coro:**\nY su iglesia se levanta para adorar,\ncelebrando con gran gozo,\nel Rey está aquí.",
+        "tipo": "coro"
+    },
+    {
+        "numero": 232,
+        "titulo": "Es que mi copa está rebosando",
+        "letra": "1\nEs que mi copa está rebosando\ndel gozo del Espíritu de Dios.\n\n**Coro:**\nCon gritos de júbilo te alabaré,\nante tu presencia yo danzaré,\nporque Jesucristo es el\nVencedor y su Santo Espíritu\nllena mi ser.",
+        "tipo": "coro"
+    },
+    {
+        "numero": 233,
+        "titulo": "Eres Señor Vencedor",
+        "letra": "1\nEres Señor Vencedor, el invencible eres\ncampeón, ganador en batallas, eres mi Rey,\nmi Dios, el que cuida a su pueblo.\n\n**Coro:**\nPor eso yo te canto y te alabo porque sé\nque me proteges porque estoy de tu lado,\npor eso yo te canto y te adoro porque sé\nque nunca jamás me dejarás desamparado.",
+        "tipo": "coro"
+    },
+    {
+        "numero": 234,
+        "titulo": "Cuando pienso en lo mucho",
+        "letra": "1\nCuando pienso en lo mucho\nque hizo por mí,\ncuando pienso en el día\nque me liberó,\nquiero cantar, cantar, cantar,\ncantar, cantar\n(danzar, correr, gritar).",
+        "tipo": "coro"
+    },
+    {
+        "numero": 235,
+        "titulo": "Está cayendo",
+        "letra": "1\nDios sea exaltado, sus enemigos\nsean esparcidos,\nvenciendo en el reino de las tinieblas\ncon alabanza.\n\nSubiré a las montañas, gritaré a\nlas naciones\nque el reino de las tinieblas está cayendo.\n\nEstá cayendo,\nya se cayó.",
+        "tipo": "coro"
+    },
+    {
+        "numero": 236,
+        "titulo": "Cuando el Señor hiciere",
+        "letra": "1\nCuando el Señor hiciere volver la\ncautividad, seremos como los que sueñan,\nmi boca se llenará de risa, mis labios de tu\nalabanza. Entonces dirán las naciones:\n\"Grandes cosas ha hecho el Señor\".\n\n**Coro:**\nMe gozaré, me gozaré, me gozaré, me\ngozaré en Jehová,\npues ha llevado todo mi dolor,\nme ha hecho libre.\n\nAsí como David danzaba, así como David\ncantaba, así como David fluía en su\npresencia.\n\nYo cantaré, yo danzaré, en su presencia\nme gozaré y solo en ti me alegraré porque\ntú eres mi Dios y mi Rey.",
+        "tipo": "coro"
+    },
+    {
+        "numero": 237,
+        "titulo": "Vino celestial",
+        "letra": "1\nÉl ha cambiado mi lamento\nen alabanza,\nceñido mi vida con su Santo Espíritu,\nha transformado el agua en vino,\nha derramado su fresca unción\ny su Espíritu ministra vino celestial.\n\n**Coro:**\nHay vino celestial\nque se derrama en este lugar.\n\nLléname, lléname\nde tu vino celestial.",
+        "tipo": "coro"
+    },
+    {
+        "numero": 238,
+        "titulo": "Levántate, Señor",
+        "letra": "1\nLevántate, levántate, Señor,\nque tus enemigos huyan delante de ti.\n\nMas los justos se alegrarán,\ncantarán con regocijo,\nel Señor se ha levantado,\nha triunfado con poder.",
+        "tipo": "coro"
+    },
+    {
+        "numero": 239,
+        "titulo": "Adoremos al Rey",
+        "letra": "1\nAquí está el Poderoso,\naquí están los redimidos,\naquí están todos los hijos de Jesucristo.\nJesús es Dios, y le exaltamos,\nJesús es Rey, a él sea la gloria,\naquí están todos los hijos de Jesucristo.\n\nAdoremos al Rey,\ndaremos al Rey\npoder y gloria, unción y victoria\nsalen de tu trono.\nAdoremos al Rey, adoremos al Rey,\nlevanten las manos los hijos de Dios,\nllénense de poder.",
+        "tipo": "coro"
+    },
+    {
+        "numero": 240,
+        "titulo": "Espíritu de Dios, desciende",
+        "letra": "1\nEspíritu de Dios, desciende,\nEspíritu de Dios, desciende sobre mí.\n\nManda el fuego, Señor, manda el fuego,\nSeñor, del poder de tu Espíritu en este\nlugar.\n\nYo lo puedo sentir, en todo mi ser, la\nlibertad que hay en él.\nYo lo puedo sentir, en todo mi ser, su\nEspíritu me impulsa a danzar.",
+        "tipo": "coro"
+    },
+    {
+        "numero": 241,
+        "titulo": "Los enemigos de Jehová",
+        "letra": "1\nLos enemigos de Jehová\nson tenidos por vanidad,\nsus adversarios también\nson como el tamo ante él.\n\nPues Jehová es vencedor,\nJehová es el Señor,\nJehová es el Dios de los dioses.\n\nDecapitó a Dagón,\ndios de los filisteos,\ncortándole las dos manos,\nlo redujo a vanidad.\nAvergonzó a Baal\ny a todos sus profetas,\nfue grande la victoria\nque Jehová mostró.\n\nJehová es vencedor,\nJehová es el Señor.",
+        "tipo": "coro"
+    },
+    {
+        "numero": 242,
+        "titulo": "El camino del Señor es perfecto",
+        "letra": "1\nEl camino del Señor es perfecto,\nla palabra del Señor es poder,\nes el arma y escudo de todos los que en\nél confían.\nCristo es mi fortaleza, es mi escudo,\ncon él paso en medio de un batallón y él\nadiestra mis manos, me prepara para pelear.\n\n**Pre-coro:**\nPorque ¿quién es Dios, si no nuestro Dios?\n¿Quién es mi Roca, si no nuestro Dios? Oh, oh.\n\n**Coro:**\nAleluya, aleluya, aleluya.\n\n**Fuga:**\nPerseguí a mis enemigos y los alcancé, los\ndestruí y los atravesé, bajo los pies del\nSeñor cayeron,\nno se levantarán más.",
+        "tipo": "coro"
+    },
+    {
+        "numero": 243,
+        "titulo": "Los muros caerán",
+        "letra": "1\nCuando le canto, la tierra se estremece, los muros caerán,\ncuando le adoro, se rompen las cadenas, los muros caerán.\n\n**Coro:**\nLos muros caerán, los muros caerán,\nal sonar mi cántico, caerán.\n\nLos muros caerán, los muros caerán,\ncon grito de júbilo, caerán.\n\nCuando yo danzo aumenta Dios mis fuerzas, los muros caerán,\ncuando yo grito, mis enemigos huyen, los muros caerán.",
+        "tipo": "coro"
+    },
+    {
+        "numero": 244,
+        "titulo": "Nombre sobre todo nombre",
+        "letra": "1\nSu nombre sobre todo nombre, su nombre poderoso es,\nsu nombre me guarda y me libra, su nombre sobre todo nombre,\nsu nombre es Jesús.\n\n**Pre-coro:**\nLevantamos nuestras voces, hay poder en el nombre de Jesús.\n\n**Coro:**\nHay libertad aquí, aquí, hay libertad para danzar.",
+        "tipo": "coro"
+    },
+    {
+        "numero": 245,
+        "titulo": "El Señor marchando va",
+        "letra": "1\nEl Señor marchando va y su pueblo junto a él está,\nsu gloria en nuestras vidas brillará.\nSu victoria nos ha dado ya, y su brazo nos fortalecerá,\nlucharé hasta la tierra conquistar.\n\n**Coro:**\nEn mi vida el capitán es Cristo,\nmarcharemos ante su presencia,\nno hay arma que nos pueda derrotar.",
+        "tipo": "coro"
+    },
+    {
+        "numero": 246,
+        "titulo": "En el Apocalipsis del 1 al 7",
+        "letra": "1\nEn el Apocalipsis del 1 al 7 está,\nla venida de Jesucristo en gloria\ny majestad,\nel día y la hora nadie lo sabrá.\n\nÉl viene en una nube\ny todo ojo le verá,\nle verá, todo ojo le verá.",
+        "tipo": "coro"
+    },
+    {
+        "numero": 247,
+        "titulo": "Como ladrón en la noche",
+        "letra": "1\nComo ladrón en la noche,\nasí será la venida del\nHijo del Hombre,\nasí lo dice la Biblia y\nla Biblia no puede mentir.\n\nQue su venida será como\nladrón en la noche.",
+        "tipo": "coro"
+    },
+    {
+        "numero": 248,
+        "titulo": "Satúrame, Señor",
+        "letra": "1\nSatúrame, Señor,\ncon tu Espíritu,\ny déjame sentir\nel fuego de tu amor\naquí en mi corazón, Señor.",
+        "tipo": "coro"
+    },
+    {
+        "numero": 249,
+        "titulo": "Tres cosas",
+        "letra": "1\nTres cosas quiero yo\nque tú me des, Señor,\ny esas tres cosas son:\namor y santidad\ny el Espíritu Santo\npara poder vencer.",
+        "tipo": "coro"
+    },
+    {
+        "numero": 250,
+        "titulo": "Quién, quién, quién como Jehová",
+        "letra": "1\nQuién, quién, quién como Jehová,\nquién con su poder al mar abrió.\n\nY oirán las naciones lo que hizo,\ntemblarán cuando vean sus prodigios\ny su pueblo alabará con panderos,\ndanzarán y dirán: quién, quién\ncomo Jehová.",
+        "tipo": "coro"
+    },
+    {
+        "numero": 251,
+        "titulo": "Estamos de fiesta",
+        "letra": "1\nEstamos de fiesta con Jesús,\nal cielo queremos ir,\ny todos reunidos en la fiesta\nes Cristo quien va a servir.\n\nPoderoso es el Señor,\nél sana, él salva,\npoderoso es el Señor.",
+        "tipo": "coro"
+    },
+    {
+        "numero": 252,
+        "titulo": "Salvador, Sanador",
+        "letra": "1\nSalvador, Sanador, Cristo es para mí,\nRey de Paz, Dios de amor,\nyo le amo, sí,\námame, guárdame en tu santo amor,\nCristo Rey de Gloria es mi Salvador.\n\nÉl es todo, todo, todo para mí,\nél es mi padre, él es mi madre,\nél es mi hermano, él es mi hermana,\nél es todo para mí.",
+        "tipo": "coro"
+    },
+    {
+        "numero": 253,
+        "titulo": "Funda tu casa",
+        "letra": "1\nFunda tu casa sobre la Roca,\nque Jesucristo te ayudará,\nsi corren ríos y soplan vientos,\npero tu casa no caerá.",
+        "tipo": "coro"
+    },
+    {
+        "numero": 254,
+        "titulo": "Alábale, mi hermano",
+        "letra": "1\nAlábale, mi hermano,\nalábale al Señor,\nalábale, mi hermano,\ncon todo el corazón.\n\nMira que la vida es de él,\nmira que la vida depende de él.\n\nAlza tus manos con alegría,\nalza tus manos con gozo y armonía,\nbate tus manos con alegría,\nbate tus manos con gozo y armonía.",
+        "tipo": "coro"
+    },
+    {
+        "numero": 255,
+        "titulo": "Esta es una fiesta pentecostal",
+        "letra": "1\nY esta es una fiesta, fiesta pentecostal,\ny esta es una fiesta, no es un funeral,\ncon gozo y alegría vamos a celebrar\nque Jesucristo vive, en la tumba no está.\n\n**Coro:**\nMi Dios no es Dios de muertos,\nél es Dios de vivos, y si tú estás vivo,\nvamos a alabar a Dios.\n\nMas la hora viene y ahora es, cuando\ntodo cristiano debe de alabar a Dios.\n\nOh Pablo y Silas, a medianoche,\na medianoche cantaban al Señor,\nlos presos oían, hubo un terremoto,\nlas puertas se abrieron y se rompieron\nlas cadenas.",
+        "tipo": "coro"
+    },
+    {
+        "numero": 256,
+        "titulo": "Vamos a alabar a Jehová",
+        "letra": "1\nVamos a alabar a Jehová\ncon panderos y danzas,\nen la tierra se canta y en el\ncielo se oye,\nasí, así, así se alaba a Dios,\nlevanten las manos todos,\nasí se alaba a Dios.",
+        "tipo": "coro"
+    },
+    {
+        "numero": 257,
+        "titulo": "A su nombre",
+        "letra": "1\nMaravilloso es el Señor,\nTodo Poderoso es nuestro Dios,\na su nombre, gloria.\n\nOh, qué bueno es mi Jesús\nque murió por mí en la cruz,\nmis pecados perdonó,\na su nombre, gloria.\n\nDios está presente, pide\nlo que quieras.",
+        "tipo": "coro"
+    },
+    {
+        "numero": 258,
+        "titulo": "En el monte Sinaí",
+        "letra": "1\nEn el monte Sinaí se\nmovía el poder de Dios,\nse movía el poder de Dios.\n\nAquí también se mueve,\nse mueve el poder de Dios,\nse mueve el poder de Dios.\n\nAquí se alaba a Dios\ncon mucha alegría y gozo,\nasí se alaba a Dios.",
+        "tipo": "coro"
+    },
+    {
+        "numero": 259,
+        "titulo": "Abre mis ojos, oh Cristo",
+        "letra": "1\nAbre mis ojos, oh Cristo,\nabre mis ojos, te pido,\nyo quiero verte, yo quiero verte\ny contemplar tu majestad,\ny el resplandor de tu gloria,\nderrama tu amor y poder,\ncuando cantamos: Santo, Santo.\n\nSanto, Santo, Santo,\nSanto, Santo, Santo,\nSanto, Santo, Santo,\nyo quiero verte.",
+        "tipo": "coro"
+    },
+    {
+        "numero": 260,
+        "titulo": "Cómo he de expresar",
+        "letra": "1\n¿Cómo he de expresar\nla gratitud que hay en mi ser\npara Dios, mi Redentor,\nquien me restauró?\nYo no era nada\ncuando él me tomó\ny ahora yo soy\nun príncipe de pueblo.\n\n**Coro:**\nNo hay Dios, no hay Dios,\nno hay Dios como mi Dios,\nmaravilloso, maravilloso,\nmaravilloso es nuestro Dios.",
+        "tipo": "coro"
+    },
+    {
+        "numero": 261,
+        "titulo": "Hay vida en Jesús",
+        "letra": "1\nHay vida, hay vida en Jesús.\n\n**Pre-coro:**\nYo voy a morar en la patria celestial,\nporque hay vida, hay vida en Jesús.\n\nHay gozo, hay gozo en Jesús.\n\n**Coro:**\nYo vivo, Señor, porque tú vives,\nporque tú vives, Señor, es que yo vivo,\nme das consuelo, me das abrigo y\nen la aflicción tú, Señor, estás conmigo.\n\nSoy salvo, Señor, pues me salvaste,\npues me salvaste, Señor, eternamente,\nyo voy al cielo, voy a la gloria,\nporque, Señor, tú me diste la victoria.\n\nHay vida, hay vida en Jesús.\n\n**Pre-coro:**\nYo quiero morar en la patria celestial,\nporque hay vida, hay vida en Jesús.\n\nHay gozo, hay gozo en Jesús.",
+        "tipo": "coro"
+    },
+    {
+        "numero": 262,
+        "titulo": "Regocíjate, moradora de Sión",
+        "letra": "1\nRegocíjate, oh moradora\nde Sion, en tu Rey,\ngrande es el Señor,\ndigno de suprema alabanza,\ngrande es el Señor, digno de adoración,\neres digno de suprema alabanza.",
+        "tipo": "coro"
+    },
+    {
+        "numero": 263,
+        "titulo": "Libre yo soy libre",
+        "letra": "1\nLibre yo soy libre,\nlas cadenas del pecado han sido rotas,\nlibre yo soy libre\npara cantar, para danzar, para gozar.\n\nHemos vencido al enemigo\npor la sangre de Jesucristo,\nyo soy libre.",
+        "tipo": "coro"
+    },
+    {
+        "numero": 264,
+        "titulo": "Aquel que caminó",
+        "letra": "1\nAquel que caminó sobre las aguas,\nél está aquí, aquí caminando,\nestá a tu lado,\nestá a mi lado,\n¿lo sientes tú?\nlo siento yo.\nAquí, aquí está Jesús,\naquí, aquí caminando.",
+        "tipo": "coro"
+    },
+    {
+        "numero": 265,
+        "titulo": "Bueno es alabarte",
+        "letra": "1\nBueno es alabarte, Jehová,\ny cantar salmos a tu nombre,\nanunciar por la mañana su\nmisericordia y su fidelidad de noche.\n\n¿Quién es el que vive? Cristo es el que vive.\n¿Quién es el que salva? Cristo es el que salva.\n¿Quién es el que bautiza? Cristo es quien bautiza.\n¿Quién es el que viene? Cristo es el que viene.\n\nAnunciar por la mañana su\nmisericordia y su fidelidad de noche.",
+        "tipo": "coro"
+    },
+    {
+        "numero": 266,
+        "titulo": "Vamos a romper las cadenas",
+        "letra": "1\nVamos a romper las cadenas\nen el nombre, en el nombre de Jesús.\n\n**Coro:**\nOh, ven, libérate,\ncelebra victorioso,\nlas cadenas rotas son,\noh, oh, ven y deléitate en Dios,\nprorrumpe en jubilosas\nalabanzas al Señor.\n\nVamos a romper,\nvamos a romper,\nvamos a romper,\nvamos a romper.",
+        "tipo": "coro"
+    },
+    {
+        "numero": 267,
+        "titulo": "Jesucristo no está en la tumba",
+        "letra": "1\nJesucristo no está en la tumba,\ntampoco está en un madero,\nJesucristo resucitó y ahora se\nencuentra en el cielo.\n\nY de allí ha de venir\na levantar a su pueblo.\n\nHermano, hay que estar\nseguro de que Cristo viene de nuevo,\nlevanta tu mano al cielo\ny glorifica al Cordero.",
+        "tipo": "coro"
+    },
+    {
+        "numero": 268,
+        "titulo": "Amigo, Cristo te invita",
+        "letra": "1\nAmigo, Cristo te invita\na que te arrepientas en esta noche,\nsi a Cristo tú no recibes,\ntu salvación perderás.\n\nTu salvación perderás,\npor tus pecados la perderás.",
+        "tipo": "coro"
+    },
+    {
+        "numero": 269,
+        "titulo": "Séllame, Señor",
+        "letra": "1\nSéllame, Señor,\ncon el sello de tu nombre\ny no me dejes fuera de tu reino.\n\nYo quiero estar contigo\npor toda la vida eterna.",
+        "tipo": "coro"
+    },
+    {
+        "numero": 270,
+        "titulo": "Quiero cantar una linda canción",
+        "letra": "1\nQuiero cantar una linda canción\nde un hombre que me transformó,\nquiero cantar una linda canción\nde aquel que mi vida cambió.\n\n**Coro:**\nEs mi amigo Jesús,\nes mi amigo más fiel,\nél es Dios, él es Rey,\nes amor y verdad.\n\nSolo en él encontré\nesa paz que busqué,\nsolo en él encontré\nla felicidad.",
+        "tipo": "coro"
+    },
+    {
+        "numero": 271,
+        "titulo": "Un feliz cumpleaños",
+        "letra": "1\nUn feliz cumpleaños Cristo te dará,\ntodos te deseamos la felicidad y\nrogamos todos por un día feliz.\nQue Dios te bendiga hoy\ny siempre, amén.",
+        "tipo": "coro"
+    },
+    {
+        "numero": 272,
+        "titulo": "Ama si quieres ser feliz",
+        "letra": "1\nAma si quieres ser feliz,\nama y todo cambiará,\nama y así comprenderás\nla alegría de vivir.\n\n**Coro:**\nTe amo, mi hermano,\nte amo, mi hermana,\nte amo, mi hermano,\nporque lo que Cristo ha hecho en mí.",
+        "tipo": "coro"
+    },
+    {
+        "numero": 273,
+        "titulo": "Hay una promesa en la Biblia",
+        "letra": "1\nHay una promesa en la Biblia\nque es para ti y para mí,\ncielo nuevo, tierra nueva, donde\nqueremos ir.\n\nSi tú te vas, yo también\npara la Nueva Jerusalén.",
+        "tipo": "coro"
+    },
+    {
+        "numero": 274,
+        "titulo": "Su gloria cubrió los cielos",
+        "letra": "1\nSu gloria cubrió los cielos\ny la tierra se llenó de su alabanza,\nsu resplandor fue como la luz, rayos\nbrillantes salían de sus manos,\nallí estaba escondido su poder.",
+        "tipo": "coro"
+    },
+    {
+        "numero": 275,
+        "titulo": "Bueno es alabar",
+        "letra": "1\nBueno es alabarte, Señor, tu nombre,\ndarte gloria, honra y honor por siempre,\nbueno es alabarte, Jesús,\ny gozarme en tu poder.\n\nPorque grande eres tú, grandes son tus obras,\nporque grande eres tú, grande es tu amor,\ngrande es tu gloria.",
+        "tipo": "coro"
+    },
+    {
+        "numero": 276,
+        "titulo": "Te alabarán, oh Jehová",
+        "letra": "1\nTe alabarán, oh Jehová, todos los reyes,\ntodos los reyes de la tierra,\nporque han oído los dichos de tu boca\ny cantarán de los caminos de Jehová.\n\nPorque la gloria de Jehová es grande,\nporque Jehová es excelso en sus caminos,\nporque Jehová atiende al humilde,\nmas mira de lejos al altivo.",
+        "tipo": "coro"
+    },
+    {
+        "numero": 277,
+        "titulo": "Si el diablo viene",
+        "letra": "1\nSi el diablo viene a tu corazón\ny te dice: \"Déjame entrar\",\ndile: no, no, no, Cristo vive en mí,\nno hay lugar para ti.\n\nLa sangre de Cristo tiene poder,\nla sangre de Cristo tiene poder,\nhoy vence.",
+        "tipo": "coro"
+    },
+    {
+        "numero": 278,
+        "titulo": "Allá en el Monte Horeb",
+        "letra": "1\nAllá en el Monte Horeb, una zarza ardía,\nMoisés quería saber por qué la zarza ardía\ny no se consumía, quería saber,\noyó una voz del cielo que le decía:\n\nQuita, quita, quita las sandalias de tus pies,\nporque el lugar que pisas santo es.",
+        "tipo": "coro"
+    },
+    {
+        "numero": 279,
+        "titulo": "Si en verdad eres cristiano",
+        "letra": "1\nSi en verdad eres cristiano,\ndi amén, amén,\nsi en verdad eres cristiano,\ntestifica con tu vida,\nsi en verdad eres cristiano,\ndi amén, amén.\n\nDa las palmas, gloria a Dios,\ntaconea, un salto da, los 5.",
+        "tipo": "coro"
+    },
+    {
+        "numero": 280,
+        "titulo": "Una arquilla en el río",
+        "letra": "1\nUna arquilla en el río flotaba,\nun hermoso niño allí lloraba,\nla princesa lo cargó\ny del agua lo sacó,\nDios cuidó al niño\ny me cuida a mí.",
+        "tipo": "coro"
+    },
+    {
+        "numero": 281,
+        "titulo": "Hay tormentas",
+        "letra": "1\nHay tormentas en todo lugar,\nhay tormentas en todo lugar,\nDios es fuerte, mas yo soy débil,\nme agarro bien de su poder.",
+        "tipo": "coro"
     }
 ]
