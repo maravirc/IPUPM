@@ -144,7 +144,7 @@ main{
 .numero{
     color:#0d47a1;
     font-weight:700;
-    font-size:13px;
+    font-size:22px;
     background:white;
     padding:4px 14px;
     border-radius:30px;
@@ -361,7 +361,7 @@ footer{
     }
 
     .letra{
-        font-size:16px;
+        font-size:20px;
         line-height:1.6;
         padding:6px 16px 14px 16px;
     }
