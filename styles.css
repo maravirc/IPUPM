@@ -250,6 +250,8 @@ footer{
     overflow-y:auto;
     border-radius:0;
     border:none;
+    display: flex;           /* ← NUEVO */
+    flex-direction: column;  /* ← NUEVO */
 }
 
 .card:fullscreen::before{
@@ -257,10 +259,19 @@ footer{
 }
 
 .card:fullscreen .cabecera-himno{
-    background:rgba(13,71,161,0.92);
+    /* background:rgba(13,71,161,0.92);
+    backdrop-filter:blur(12px);
+    padding:20px 28px;
+    box-shadow:0 4px 30px rgba(0,0,0,0.3); */
+
+    position: sticky;        /* ← NUEVO: Fija la cabecera */
+    top: 0;                  /* ← NUEVO: Se pega arriba */
+    z-index: 999;            /* ← NUEVO: Por encima del contenido */
+    background:rgba(13,71,161,0.95);
     backdrop-filter:blur(12px);
     padding:20px 28px;
     box-shadow:0 4px 30px rgba(0,0,0,0.3);
+    flex-shrink: 0;          /* ← NUEVO: Evita que se encoja */
 }
 
 .card:fullscreen .numero{
@@ -280,6 +291,8 @@ footer{
     font-size:26px;
     line-height:1.7;
     color:#e3edfb;
+    flex: 1;               /* ← NUEVO: Ocupa el espacio restante */
+    overflow-y: auto;      /* ← NUEVO: Scroll si es necesario */
 }
 
 .card:fullscreen .botones{
