@@ -1173,6 +1173,38 @@ footer{
 }
 
 /* ==========================
+   RESPONSIVE - PC
+   ========================== */
+
+/* Para pantallas medianas (laptops) */
+@media (max-width: 1024px) {
+    .btn-ver-mas {
+        padding: 14px 35px;
+        font-size: 16px;
+        min-width: 240px;
+    }
+    
+    .ver-mas::before,
+    .ver-mas::after {
+        width: 50%;
+    }
+}
+
+/* Para tablets */
+@media (max-width: 768px) {
+    .btn-ver-mas {
+        padding: 13px 30px;
+        font-size: 15px;
+        min-width: 200px;
+    }
+    
+    .ver-mas::before,
+    .ver-mas::after {
+        width: 60%;
+    }
+}
+
+/* ==========================
    RESPONSIVE - MÓVIL
    ========================== */
 
