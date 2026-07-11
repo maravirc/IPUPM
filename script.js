@@ -278,15 +278,17 @@ document.getElementById("btnFavoritos").addEventListener("click", () => {
 });
 
 // ==========================
-// BUSCAR - CORREGIDO
+// BUSCAR - CORREGIDO (BUSCA POR TÍTULO)
 // ==========================
 
 let timeoutBusqueda;
 
+// 🔥 FUNCIÓN PARA QUITAR ACENTOS
 function quitarAcentos(texto) {
     return texto.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
 }
 
+// 🔥 FUNCIÓN PARA LIMPIAR TEXTO (quita signos, comas, puntos, espacios extras)
 function limpiarTexto(texto) {
     return quitarAcentos(texto)
         .toLowerCase()
@@ -295,11 +297,13 @@ function limpiarTexto(texto) {
         .trim();
 }
 
+// 🔥 BUSCADOR EN TIEMPO REAL - SOLO POR TÍTULO
 buscar.addEventListener("input", function() {
     clearTimeout(timeoutBusqueda);
     
     const textoOriginal = this.value.trim();
     
+    // Si se borró todo, mostrar todos los datos
     if (textoOriginal === '') {
         resetearPaginacion();
         if (tipoActual === 'himnos') {
@@ -322,6 +326,7 @@ buscar.addEventListener("input", function() {
         return;
     }
     
+    // 🔥 IMPORTANTE: Usar los datos correctos según la sección
     let datosABuscar = [];
     if (tipoActual === 'himnos') {
         datosABuscar = datosHimnosCache;
@@ -335,8 +340,10 @@ buscar.addEventListener("input", function() {
         });
     }
     
+    // Limpiar el texto de búsqueda
     const textoBusqueda = limpiarTexto(textoOriginal);
     
+    // Si después de limpiar queda vacío, mostrar todo
     if (textoBusqueda === '') {
         resetearPaginacion();
         mostrarHimnos(datosABuscar);
@@ -351,18 +358,21 @@ buscar.addEventListener("input", function() {
         return;
     }
     
+    // 🔥 BUSCAR SOLO POR TÍTULO (no en la letra)
     let resultado;
     if (/^\d+$/.test(textoBusqueda)) {
+        // Si es número, buscar por número
         resultado = datosABuscar.filter(h => 
             h.numero.toString().includes(textoBusqueda)
         );
     } else {
+        // Buscar solo en el TÍTULO
         resultado = datosABuscar.filter(h => {
             const tituloLimpio = limpiarTexto(h.titulo);
-            const letraLimpia = limpiarTexto(h.letra);
             const palabras = textoBusqueda.split(' ');
+            // Verificar que TODAS las palabras estén en el TÍTULO
             return palabras.every(palabra => 
-                tituloLimpio.includes(palabra) || letraLimpia.includes(palabra)
+                tituloLimpio.includes(palabra)
             );
         });
     }
