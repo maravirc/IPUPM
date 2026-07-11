@@ -1,6 +1,6 @@
 // ==========================
 // HIMNARIO IPU MOYOBAMBA
-// script.js - VERSIÓN OPTIMIZADA
+// script.js - VERSIÓN COMPLETA OPTIMIZADA
 // ==========================
 
 // ==========================
@@ -8,14 +8,20 @@
 // ==========================
 
 let himnos = [];
-// 🔥 CAMBIO: Guardar favoritos con prefijo
 let favoritos = JSON.parse(localStorage.getItem("favoritos")) || [];
 
-// 🔥 NUEVO: Cache de datos para no recargar cada vez
+// Cache de datos para no recargar cada vez
 let datosHimnosCache = [];
 let datosCorosCache = [];
 let datosActuales = [];
 let tipoActual = 'himnos';
+
+// ==========================
+// VARIABLES DE PAGINACIÓN
+// ==========================
+
+let mostrandoTodos = false;
+const MAX_INICIAL = 30;
 
 const lista = document.getElementById("lista");
 const buscar = document.getElementById("buscar");
@@ -59,18 +65,24 @@ function actualizarTitulo(tipo, cantidad = 0) {
 }
 
 // ==========================
+// RESETEAR PAGINACIÓN
+// ==========================
+
+function resetearPaginacion() {
+    mostrandoTodos = false;
+}
+
+// ==========================
 // CARGAR HIMNOS - UNA SOLA VEZ
 // ==========================
 
 async function cargarHimnos() {
     try {
-        // Cargar himnos una sola vez
         const respuesta = await fetch("data/himnos.json");
         const data = await respuesta.json();
         datosHimnosCache = data.map(h => ({ ...h, tipo: 'himno' }));
         console.log('✅ Himnos cargados:', datosHimnosCache.length);
         
-        // Cargar coros una sola vez
         try {
             const respCoros = await fetch("data/coros.json");
             const dataCoros = await respCoros.json();
@@ -81,7 +93,6 @@ async function cargarHimnos() {
             datosCorosCache = [];
         }
         
-        // Mostrar himnos por defecto
         datosActuales = datosHimnosCache;
         tipoActual = 'himnos';
         mostrarHimnos(datosHimnosCache);
@@ -94,11 +105,8 @@ async function cargarHimnos() {
 }
 
 // ==========================
-// MOSTRAR HIMNOS - CON "VER MÁS" CORREGIDO
+// MOSTRAR HIMNOS - CON "VER MÁS"
 // ==========================
-
-let mostrandoTodos = false;
-const MAX_INICIAL = 30;
 
 function mostrarHimnos(datos) {
     // Guardar referencia
@@ -112,19 +120,19 @@ function mostrarHimnos(datos) {
         return;
     }
     
-    // 🔥 Decidir cuántos mostrar
+    // Decidir cuántos mostrar
     let datosMostrar;
     let mostrarBoton = false;
     
-    if (mostrandoTodos || datos.length <= MAX_INICIAL) {
-        datosMostrar = datos;
-        mostrarBoton = false;
-    } else {
+    if (datos.length > MAX_INICIAL && !mostrandoTodos) {
         datosMostrar = datos.slice(0, MAX_INICIAL);
         mostrarBoton = true;
+    } else {
+        datosMostrar = datos;
+        mostrarBoton = false;
     }
     
-    // 🔥 CONSTRUIR HTML
+    // Construir HTML
     let html = '';
     
     for (let i = 0; i < datosMostrar.length; i++) {
@@ -166,43 +174,42 @@ function mostrarHimnos(datos) {
         `;
     }
     
-    // 🔥 BOTÓN "VER MÁS" - Ahora con evento onclick
+    // Botón "Ver más"
     if (mostrarBoton) {
         const restantes = datos.length - MAX_INICIAL;
         html += `
             <div class="ver-mas">
-                <button class="btn-ver-mas" onclick="cargarMas()">
+                <button class="btn-ver-mas" id="btnVerMas">
                     📖 Ver más (${restantes} restantes)
                 </button>
             </div>
         `;
     }
     
-    // 🔥 ACTUALIZAR DOM
     lista.innerHTML = html;
+    
+    // Event listener para el botón "Ver más"
+    const btnVerMas = document.getElementById('btnVerMas');
+    if (btnVerMas) {
+        btnVerMas.addEventListener('click', function() {
+            mostrandoTodos = true;
+            mostrarHimnos(datosActuales);
+            setTimeout(() => {
+                window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
+            }, 300);
+        });
+    }
 }
 
 // ==========================
-// CARGAR MÁS HIMNOS - FUNCIÓN GLOBAL
-// ==========================
-
-window.cargarMas = function() {
-    console.log('🔄 Cargando más himnos...');
-    mostrandoTodos = true;
-    mostrarHimnos(datosActuales);
-    // Desplazarse al final para ver los nuevos
-    setTimeout(() => {
-        window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
-    }, 300);
-};
-// ==========================
-// BOTÓN ADORACIÓN Y ALABANZAS - INSTANTÁNEO
+// BOTÓN ADORACIÓN Y ALABANZAS - CON RESET
 // ==========================
 
 document.getElementById("btnCoros").addEventListener("click", () => {
     if (datosCorosCache.length > 0) {
         tipoActual = 'coros';
         datosActuales = datosCorosCache;
+        resetearPaginacion();
         mostrarHimnos(datosCorosCache);
         actualizarTitulo('coros', datosCorosCache.length);
         buscar.value = '';
@@ -212,13 +219,14 @@ document.getElementById("btnCoros").addEventListener("click", () => {
 });
 
 // ==========================
-// BOTÓN HIMNOS - INSTANTÁNEO
+// BOTÓN HIMNOS - CON RESET
 // ==========================
 
 document.getElementById("btnHimnos").addEventListener("click", () => {
     if (datosHimnosCache.length > 0) {
         tipoActual = 'himnos';
         datosActuales = datosHimnosCache;
+        resetearPaginacion();
         mostrarHimnos(datosHimnosCache);
         actualizarTitulo('himnos', datosHimnosCache.length);
         buscar.value = '';
@@ -226,12 +234,10 @@ document.getElementById("btnHimnos").addEventListener("click", () => {
 });
 
 // ==========================
-// BOTÓN FAVORITOS - CORREGIDO
+// BOTÓN FAVORITOS - CON RESET
 // ==========================
 
-
 document.getElementById("btnFavoritos").addEventListener("click", () => {
-    // 🔥 OBTENER FAVORITOS DE TODOS LOS DATOS (himnos + coros)
     const todosLosDatos = [...datosHimnosCache, ...datosCorosCache];
     const listaFavoritos = todosLosDatos.filter(h => {
         const prefijo = h.tipo === 'coro' ? 'C' : 'H';
@@ -240,6 +246,7 @@ document.getElementById("btnFavoritos").addEventListener("click", () => {
     
     tipoActual = 'favoritos';
     datosActuales = listaFavoritos;
+    resetearPaginacion();
     mostrarHimnos(listaFavoritos);
     actualizarTitulo('favoritos', listaFavoritos.length);
     buscar.value = '';
@@ -253,7 +260,7 @@ document.getElementById("btnFavoritos").addEventListener("click", () => {
 });
 
 // ==========================
-// BUSCAR - CON DEBOUNCE
+// BUSCAR - CON RESET
 // ==========================
 
 let timeoutBusqueda;
@@ -264,7 +271,7 @@ buscar.addEventListener("keyup", () => {
         const texto = buscar.value.trim().toLowerCase();
         
         if (texto === '') {
-            // Volver a mostrar según el tipo actual
+            resetearPaginacion();
             if (tipoActual === 'himnos') {
                 mostrarHimnos(datosHimnosCache);
                 actualizarTitulo('himnos', datosHimnosCache.length);
@@ -272,7 +279,6 @@ buscar.addEventListener("keyup", () => {
                 mostrarHimnos(datosCorosCache);
                 actualizarTitulo('coros', datosCorosCache.length);
             } else if (tipoActual === 'favoritos') {
-                // 🔥 Recalcular favoritos correctamente
                 const todosLosDatos = [...datosHimnosCache, ...datosCorosCache];
                 const favs = todosLosDatos.filter(h => {
                     const prefijo = h.tipo === 'coro' ? 'C' : 'H';
@@ -296,6 +302,7 @@ buscar.addEventListener("keyup", () => {
             );
         }
         
+        resetearPaginacion();
         mostrarHimnos(resultado);
         
         if (resultado.length > 0) {
@@ -316,38 +323,30 @@ buscar.addEventListener("keyup", () => {
     }, 300);
 });
 
-
 // ==========================
 // FAVORITOS - CORREGIDO CON PREFIJO Y TIPO EXPLÍCITO
 // ==========================
 
 function favorito(numero, tipo) {
-    // 🔥 Usar el tipo pasado como parámetro
     const prefijo = tipo === 'coro' ? 'C' : 'H';
     const idFavorito = `${prefijo}${numero}`;
     
-    // Alternar favorito
     const index = favoritos.indexOf(idFavorito);
     if (index > -1) {
-        favoritos.splice(index, 1);  // Quitar
+        favoritos.splice(index, 1);
     } else {
-        favoritos.push(idFavorito);  // Agregar
+        favoritos.push(idFavorito);
     }
 
-    // Guardar en localStorage
     localStorage.setItem("favoritos", JSON.stringify(favoritos));
     
-    // Recargar según la sección actual
     if (tipoActual === 'himnos') {
         mostrarHimnos(datosHimnosCache);
         actualizarTitulo('himnos', datosHimnosCache.length);
-        
     } else if (tipoActual === 'coros') {
         mostrarHimnos(datosCorosCache);
         actualizarTitulo('coros', datosCorosCache.length);
-        
     } else if (tipoActual === 'favoritos') {
-        // Recalcular favoritos desde cero
         const todosLosDatos = [...datosHimnosCache, ...datosCorosCache];
         const listaFavoritos = todosLosDatos.filter(h => {
             const pref = h.tipo === 'coro' ? 'C' : 'H';
@@ -460,15 +459,3 @@ cargarHimnos();
 // ==========================
 // FIN
 // ==========================
-
-// ==========================
-// EXPONER FUNCIONES GLOBALES
-// ==========================
-
-// Asegurar que las funciones estén disponibles globalmente
-window.cargarMas = cargarMas;
-window.pantallaCompleta = pantallaCompleta;
-window.salirPantallaCompleta = salirPantallaCompleta;
-window.favorito = favorito;
-window.compartir = compartir;
-window.cambiarPagina = cambiarPagina;  // Si usas paginación
