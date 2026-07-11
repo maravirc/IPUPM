@@ -460,3 +460,15 @@ cargarHimnos();
 // ==========================
 // FIN
 // ==========================
+
+// ==========================
+// EXPONER FUNCIONES GLOBALES
+// ==========================
+
+// Asegurar que las funciones estén disponibles globalmente
+window.cargarMas = cargarMas;
+window.pantallaCompleta = pantallaCompleta;
+window.salirPantallaCompleta = salirPantallaCompleta;
+window.favorito = favorito;
+window.compartir = compartir;
+window.cambiarPagina = cambiarPagina;  // Si usas paginación
