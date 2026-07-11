@@ -106,15 +106,7 @@ function mostrarHimnos(datos) {
         card.innerHTML = `
             <div class="cabecera-himno">
                 <div>
-// 🔥 NUEVO CÓDIGO - Detecta el tipo y muestra el texto correcto
-let tipoTexto = '';
-if (himno.tipo === 'coro') {
-    tipoTexto = 'Adoración y Alabanza';
-} else {
-    tipoTexto = 'Himno';
-}
-
-<div class="numero">${icono} ${tipoTexto} ${himno.numero}</div>
+                   <div class="numero">${icono} ${tipoTexto} ${himno.numero}</div>
                 </div>
                 <div class="acciones">
                     <button class="btnPantalla" onclick="pantallaCompleta(${himno.numero})">⛶</button>
