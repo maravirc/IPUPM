@@ -94,8 +94,11 @@ async function cargarHimnos() {
 }
 
 // ==========================
-// MOSTRAR HIMNOS - OPTIMIZADO CON HTML DIRECTO
+// MOSTRAR HIMNOS - CON "VER MÁS" CORREGIDO
 // ==========================
+
+let mostrandoTodos = false;
+const MAX_INICIAL = 30;
 
 function mostrarHimnos(datos) {
     // Guardar referencia
@@ -109,13 +112,24 @@ function mostrarHimnos(datos) {
         return;
     }
     
-    // 🔥 CONSTRUIR HTML DE UNA VEZ (más rápido que crear elementos)
+    // 🔥 Decidir cuántos mostrar
+    let datosMostrar;
+    let mostrarBoton = false;
+    
+    if (mostrandoTodos || datos.length <= MAX_INICIAL) {
+        datosMostrar = datos;
+        mostrarBoton = false;
+    } else {
+        datosMostrar = datos.slice(0, MAX_INICIAL);
+        mostrarBoton = true;
+    }
+    
+    // 🔥 CONSTRUIR HTML
     let html = '';
     
-    for (let i = 0; i < datos.length; i++) {
-        const himno = datos[i];
+    for (let i = 0; i < datosMostrar.length; i++) {
+        const himno = datosMostrar[i];
         
-        // 🔥 Verificar si es favorito con el prefijo correcto
         const prefijo = himno.tipo === 'coro' ? 'C' : 'H';
         const esFavorito = favoritos.includes(`${prefijo}${himno.numero}`);
         
@@ -131,7 +145,6 @@ function mostrarHimnos(datos) {
         
         const btnFav = esFavorito ? '⭐ Quitar' : '🤍 Favorito';
         
-        // 🔥 IMPORTANTE: Pasar el tipo del himno, no el tipo de la sección
         html += `
             <div class="card" data-numero="${himno.numero}">
                 <div class="cabecera-himno">
@@ -153,10 +166,35 @@ function mostrarHimnos(datos) {
         `;
     }
     
-    // 🔥 ACTUALIZAR DOM DE UNA VEZ
+    // 🔥 BOTÓN "VER MÁS" - Ahora con evento onclick
+    if (mostrarBoton) {
+        const restantes = datos.length - MAX_INICIAL;
+        html += `
+            <div class="ver-mas">
+                <button class="btn-ver-mas" onclick="cargarMas()">
+                    📖 Ver más (${restantes} restantes)
+                </button>
+            </div>
+        `;
+    }
+    
+    // 🔥 ACTUALIZAR DOM
     lista.innerHTML = html;
 }
 
+// ==========================
+// CARGAR MÁS HIMNOS - FUNCIÓN GLOBAL
+// ==========================
+
+window.cargarMas = function() {
+    console.log('🔄 Cargando más himnos...');
+    mostrandoTodos = true;
+    mostrarHimnos(datosActuales);
+    // Desplazarse al final para ver los nuevos
+    setTimeout(() => {
+        window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
+    }, 300);
+};
 // ==========================
 // BOTÓN ADORACIÓN Y ALABANZAS - INSTANTÁNEO
 // ==========================
