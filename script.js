@@ -30,7 +30,7 @@ function actualizarTitulo(tipo, cantidad = 0) {
     
     const subtitulos = {
         'himnos': 'Iglesia Pentecostal Unida - Moyobamba - Himnos',
-        'coros': 'Iglesia Pentecostal Unida - Moyobamba - Coros',
+        'coros': 'Iglesia Pentecostal Unida - Moyobamba - Adoración y Alabanzas',
         'favoritos': 'Tus himnos y coros favoritos'
     };
     
