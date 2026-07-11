@@ -1172,6 +1172,15 @@ footer{
     background: rgba(255, 255, 255, 0.15);
 }
 
+.btn-ver-mas {
+    padding: 10px 20px;
+    font-size: 13px;
+    width: 90%;
+    max-width: 280px;
+    min-width: unset;
+    border-radius: 40px;
+}
+
 /* ==========================
    BOTÓN VER MÁS - VERSIÓN SIMPLIFICADA
    ========================== */
