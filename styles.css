@@ -229,6 +229,15 @@ main{
     display:none;
 }
 
+.btn-ver-mas {
+    padding: 10px 20px;
+    font-size: 13px;
+    width: 90%;
+    max-width: 280px;
+    min-width: unset;
+    border-radius: 40px;
+}
+
 /* FOOTER */
 footer{
     text-align:center;
@@ -1172,150 +1181,43 @@ footer{
     background: rgba(255, 255, 255, 0.15);
 }
 
-.btn-ver-mas {
-    padding: 10px 20px;
-    font-size: 13px;
-    width: 90%;
-    max-width: 280px;
-    min-width: unset;
-    border-radius: 40px;
-}
+
 
 /* ==========================
-   BOTÓN VER MÁS - VERSIÓN SIMPLIFICADA
-   ========================== */
-
-   .ver-mas {
-    text-align: center;
-    padding: 20px 0 30px 0;
-    width: 100%;
-}
-
-.btn-ver-mas {
-    background: linear-gradient(135deg, #0d47a1, #1565c0);
-    color: white;
-    border: none;
-    padding: 12px 30px;
-    border-radius: 50px;
-    font-size: 15px;
-    font-weight: 600;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    box-shadow: 0 4px 15px rgba(13, 71, 161, 0.3);
-    letter-spacing: 0.5px;
-}
-
-.btn-ver-mas:hover {
-    transform: translateY(-2px) scale(1.03);
-    box-shadow: 0 6px 25px rgba(13, 71, 161, 0.5);
-    background: linear-gradient(135deg, #1565c0, #0d47a1);
-}
-
-.btn-ver-mas:active {
-    transform: scale(0.95);
-}
-
-/* ==========================
-   MODO OSCURO
-   ========================== */
-
-.dark .btn-ver-mas {
-    background: linear-gradient(135deg, #1a2744, #1e88e5);
-    box-shadow: 0 4px 15px rgba(30, 136, 229, 0.3);
-}
-
-.dark .btn-ver-mas:hover {
-    background: linear-gradient(135deg, #1e88e5, #1565c0);
-    box-shadow: 0 6px 25px rgba(30, 136, 229, 0.5);
-}
-
-/* ==========================
-   TABLET - 768px a 1024px
-   ========================== */
-
-@media (min-width: 768px) {
-    .ver-mas {
-        padding: 30px 0 40px 0;
-    }
-    
-    .btn-ver-mas {
-        padding: 16px 45px;
-        font-size: 17px;
-        min-width: 250px;
-        border-radius: 50px;
-        box-shadow: 0 6px 25px rgba(13, 71, 161, 0.4);
-    }
-    
-    .btn-ver-mas:hover {
-        transform: translateY(-3px) scale(1.04);
-        box-shadow: 0 10px 40px rgba(13, 71, 161, 0.5);
-    }
-}
-
-/* ==========================
-   PC Y ESCRITORIO - 1025px en adelante
-   ========================== */
-
-@media (min-width: 1025px) {
-    .ver-mas {
-        padding: 40px 0 50px 0;
-    }
-    
-    .btn-ver-mas {
-        padding: 20px 60px;
-        font-size: 20px;
-        min-width: 320px;
-        border-radius: 60px;
-        box-shadow: 0 8px 35px rgba(13, 71, 161, 0.45);
-        letter-spacing: 1px;
-    }
-    
-    .btn-ver-mas:hover {
-        transform: translateY(-5px) scale(1.05);
-        box-shadow: 0 15px 55px rgba(13, 71, 161, 0.6);
-    }
-}
-
-/* ==========================
-   PANTALLAS GRANDES - 1400px en adelante
-   ========================== */
-
-@media (min-width: 1400px) {
-    .ver-mas {
-        padding: 45px 0 55px 0;
-    }
-    
-    .btn-ver-mas {
-        padding: 24px 75px;
-        font-size: 22px;
-        min-width: 380px;
-        border-radius: 70px;
-        box-shadow: 0 10px 45px rgba(13, 71, 161, 0.5);
-    }
-    
-    .btn-ver-mas:hover {
-        transform: translateY(-6px) scale(1.05);
-        box-shadow: 0 18px 65px rgba(13, 71, 161, 0.65);
-    }
-}
-
-/* ==========================
-   MÓVILES - 600px o menos
+   RESPONSIVE - MÓVIL
    ========================== */
 
 @media (max-width: 600px) {
     .ver-mas {
-        padding: 15px 0 25px 0;
+        padding: 20px 0 30px 0;
+    }
+    
+    .ver-mas::before {
+        width: 80%;
     }
     
     .btn-ver-mas {
-        padding: 10px 20px;
-        font-size: 13px;
+        padding: 12px 25px;
+        font-size: 14px;
         width: 90%;
-        max-width: 280px;
-        min-width: unset;
+        max-width: 300px;
         border-radius: 40px;
     }
+    
+    .btn-ver-mas .contador-restantes {
+        font-size: 12px;
+        padding: 2px 10px;
+    }
 }
+
+@media (max-width: 400px) {
+    .btn-ver-mas {
+        padding: 10px 20px;
+        font-size: 13px;
+        width: 95%;
+    }
+}
+
+
 
 }
