@@ -278,7 +278,7 @@ document.getElementById("btnFavoritos").addEventListener("click", () => {
 });
 
 // ==========================
-// BUSCAR - CON DEBOUNCE, SIN ACENTOS Y ACTUALIZACIÓN INSTANTÁNEA
+// BUSCAR - CON DEBOUNCE, SIN ACENTOS Y LIMPIEZA DE TEXTO
 // ==========================
 
 let timeoutBusqueda;
@@ -288,11 +288,20 @@ function quitarAcentos(texto) {
     return texto.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
 }
 
+// 🔥 FUNCIÓN PARA LIMPIAR TEXTO (quita signos, comas, puntos, espacios extras)
+function limpiarTexto(texto) {
+    return quitarAcentos(texto)
+        .toLowerCase()
+        .replace(/[.,\/#!$%\^&\*;:{}=\-_`~()]/g, " ")  // Reemplaza signos por espacio
+        .replace(/\s+/g, " ")                           // Reemplaza múltiples espacios por uno
+        .trim();                                        // Quita espacios al inicio y final
+}
+
 // 🔥 CAMBIAR "keyup" por "input" para mejor detección
 buscar.addEventListener("input", function() {
     clearTimeout(timeoutBusqueda);
     
-    // 🔥 Si se borró todo, actualizar inmediatamente
+    // Si se borró todo, actualizar inmediatamente
     if (this.value === '') {
         resetearPaginacion();
         if (tipoActual === 'himnos') {
@@ -317,21 +326,50 @@ buscar.addEventListener("input", function() {
     
     // Esperar 300ms después de escribir
     timeoutBusqueda = setTimeout(() => {
-        const textoOriginal = buscar.value.trim();
-        // 🔥 Quitar acentos para la búsqueda
-        const texto = quitarAcentos(textoOriginal.toLowerCase());
+        // 🔥 Limpiar el texto de búsqueda
+        const textoBusqueda = limpiarTexto(this.value);
         
+        // Si después de limpiar queda vacío, mostrar todo
+        if (textoBusqueda === '') {
+            resetearPaginacion();
+            if (tipoActual === 'himnos') {
+                mostrarHimnos(datosHimnosCache);
+                actualizarTitulo('himnos', datosHimnosCache.length);
+            } else if (tipoActual === 'coros') {
+                mostrarHimnos(datosCorosCache);
+                actualizarTitulo('coros', datosCorosCache.length);
+            } else if (tipoActual === 'favoritos') {
+                const todosLosDatos = [...datosHimnosCache, ...datosCorosCache];
+                const favs = todosLosDatos.filter(h => {
+                    const prefijo = h.tipo === 'coro' ? 'C' : 'H';
+                    return favoritos.includes(`${prefijo}${h.numero}`);
+                });
+                datosActuales = favs;
+                mostrarHimnos(favs);
+                actualizarTitulo('favoritos', favs.length);
+            }
+            window.scrollTo({ top: 0, behavior: "smooth" });
+            return;
+        }
+        
+        // Buscar por número o por texto
         let resultado;
-        if (/^\d+$/.test(texto)) {
+        if (/^\d+$/.test(textoBusqueda)) {
             resultado = datosActuales.filter(h => 
-                h.numero.toString().includes(texto)
+                h.numero.toString().includes(textoBusqueda)
             );
         } else {
+            // 🔥 Buscar en título y letra limpiando el texto del himno
             resultado = datosActuales.filter(h => {
-                // 🔥 Comparar sin acentos
-                const titulo = quitarAcentos(h.titulo.toLowerCase());
-                const letra = quitarAcentos(h.letra.toLowerCase());
-                return titulo.includes(texto) || letra.includes(texto);
+                const tituloLimpio = limpiarTexto(h.titulo);
+                const letraLimpia = limpiarTexto(h.letra);
+                
+                // Dividir la búsqueda en palabras para buscar cada una
+                const palabras = textoBusqueda.split(' ');
+                // Verificar que TODAS las palabras estén en el título o letra
+                return palabras.every(palabra => 
+                    tituloLimpio.includes(palabra) || letraLimpia.includes(palabra)
+                );
             });
         }
         
