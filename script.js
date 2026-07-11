@@ -8,6 +8,7 @@
 // ==========================
 
 let himnos = [];
+// 🔥 CAMBIO: Guardar favoritos con prefijo
 let favoritos = JSON.parse(localStorage.getItem("favoritos")) || [];
 
 // 🔥 NUEVO: Cache de datos para no recargar cada vez
@@ -113,7 +114,10 @@ function mostrarHimnos(datos) {
     
     for (let i = 0; i < datos.length; i++) {
         const himno = datos[i];
-        const esFavorito = favoritos.includes(himno.numero);
+        
+        // 🔥 Verificar si es favorito con el prefijo correcto
+        const prefijo = himno.tipo === 'coro' ? 'C' : 'H';
+        const esFavorito = favoritos.includes(`${prefijo}${himno.numero}`);
         
         let icono = '📖';
         let tipoTexto = 'Himno';
@@ -184,10 +188,14 @@ document.getElementById("btnHimnos").addEventListener("click", () => {
 // BOTÓN FAVORITOS - CORREGIDO
 // ==========================
 
+
 document.getElementById("btnFavoritos").addEventListener("click", () => {
     // 🔥 OBTENER FAVORITOS DE TODOS LOS DATOS (himnos + coros)
     const todosLosDatos = [...datosHimnosCache, ...datosCorosCache];
-    const listaFavoritos = todosLosDatos.filter(h => favoritos.includes(h.numero));
+    const listaFavoritos = todosLosDatos.filter(h => {
+        const prefijo = h.tipo === 'coro' ? 'C' : 'H';
+        return favoritos.includes(`${prefijo}${h.numero}`);
+    });
     
     tipoActual = 'favoritos';
     datosActuales = listaFavoritos;
@@ -223,7 +231,13 @@ buscar.addEventListener("keyup", () => {
                 mostrarHimnos(datosCorosCache);
                 actualizarTitulo('coros', datosCorosCache.length);
             } else if (tipoActual === 'favoritos') {
-                const favs = datosActuales.filter(h => favoritos.includes(h.numero));
+                // 🔥 Recalcular favoritos correctamente
+                const todosLosDatos = [...datosHimnosCache, ...datosCorosCache];
+                const favs = todosLosDatos.filter(h => {
+                    const prefijo = h.tipo === 'coro' ? 'C' : 'H';
+                    return favoritos.includes(`${prefijo}${h.numero}`);
+                });
+                datosActuales = favs;
                 mostrarHimnos(favs);
                 actualizarTitulo('favoritos', favs.length);
             }
@@ -258,39 +272,46 @@ buscar.addEventListener("keyup", () => {
             top: 0,
             behavior: "smooth"
         });
-    }, 300); // Espera 300ms después de escribir
+    }, 300);
 });
 
+
 // ==========================
-// FAVORITOS - CORREGIDO
+// FAVORITOS - CORREGIDO CON PREFIJO
 // ==========================
 
 function favorito(numero) {
+    // 🔥 Crear un identificador único con el tipo actual
+    const prefijo = tipoActual === 'coros' ? 'C' : 'H';
+    const idFavorito = `${prefijo}${numero}`;
+    
     // Alternar favorito
-    if (favoritos.includes(numero)) {
-        favoritos = favoritos.filter(n => n !== numero);
+    const index = favoritos.indexOf(idFavorito);
+    if (index > -1) {
+        favoritos.splice(index, 1);  // Quitar
     } else {
-        favoritos.push(numero);
+        favoritos.push(idFavorito);  // Agregar
     }
 
     // Guardar en localStorage
     localStorage.setItem("favoritos", JSON.stringify(favoritos));
     
-    // 🔥 RECARGAR SEGÚN LA SECCIÓN ACTUAL
+    // Recargar según la sección actual
     if (tipoActual === 'himnos') {
-        // Si estamos en Himnos, recargar himnos
         mostrarHimnos(datosHimnosCache);
         actualizarTitulo('himnos', datosHimnosCache.length);
         
     } else if (tipoActual === 'coros') {
-        // Si estamos en Coros, recargar coros
         mostrarHimnos(datosCorosCache);
         actualizarTitulo('coros', datosCorosCache.length);
         
     } else if (tipoActual === 'favoritos') {
-        // 🔥 SI ESTAMOS EN FAVORITOS - RECALCULAR DESDE CERO
+        // Recalcular favoritos desde cero
         const todosLosDatos = [...datosHimnosCache, ...datosCorosCache];
-        const listaFavoritos = todosLosDatos.filter(h => favoritos.includes(h.numero));
+        const listaFavoritos = todosLosDatos.filter(h => {
+            const prefijo = h.tipo === 'coro' ? 'C' : 'H';
+            return favoritos.includes(`${prefijo}${h.numero}`);
+        });
         datosActuales = listaFavoritos;
         mostrarHimnos(listaFavoritos);
         actualizarTitulo('favoritos', listaFavoritos.length);
