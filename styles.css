@@ -1172,512 +1172,140 @@ footer{
     background: rgba(255, 255, 255, 0.15);
 }
 
-
-
 /* ==========================
-   BOTÓN VER MÁS - VERSIÓN PC
-   ========================== */
-
-.ver-mas {
-    text-align: center;
-    padding: 30px 0 40px 0;
-    width: 100%;
-    position: relative;
-}
-
-/* Línea decorativa superior */
-.ver-mas::before {
-    content: '';
-    display: block;
-    width: 40%;
-    height: 2px;
-    background: linear-gradient(90deg, transparent, #0d47a1, transparent);
-    margin: 0 auto 25px auto;
-    opacity: 0.4;
-}
-
-/* Línea decorativa inferior */
-.ver-mas::after {
-    content: '';
-    display: block;
-    width: 40%;
-    height: 2px;
-    background: linear-gradient(90deg, transparent, #0d47a1, transparent);
-    margin: 25px auto 0 auto;
-    opacity: 0.4;
-}
-
-.btn-ver-mas {
-    background: linear-gradient(135deg, #0d47a1, #1565c0);
-    color: white;
-    border: none;
-    padding: 16px 45px;
-    border-radius: 50px;
-    font-size: 18px;
-    font-weight: 600;
-    cursor: pointer;
-    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-    box-shadow: 0 6px 25px rgba(13, 71, 161, 0.4);
-    letter-spacing: 0.5px;
-    position: relative;
-    overflow: hidden;
-    min-width: 280px;
-}
-
-/* Efecto de brillo al pasar el mouse */
-.btn-ver-mas::before {
-    content: '';
-    position: absolute;
-    top: -50%;
-    left: -50%;
-    width: 200%;
-    height: 200%;
-    background: radial-gradient(circle, rgba(255,255,255,0.15) 0%, transparent 60%);
-    opacity: 0;
-    transition: opacity 0.6s ease;
-    transform: scale(0.8);
-}
-
-.btn-ver-mas:hover::before {
-    opacity: 1;
-    transform: scale(1);
-}
-
-/* Efecto hover PC */
-.btn-ver-mas:hover {
-    transform: translateY(-4px) scale(1.04);
-    box-shadow: 0 12px 45px rgba(13, 71, 161, 0.55);
-    background: linear-gradient(135deg, #1565c0, #0d47a1);
-}
-
-/* Efecto click PC */
-.btn-ver-mas:active {
-    transform: scale(0.96);
-    box-shadow: 0 4px 15px rgba(13, 71, 161, 0.3);
-    transition-duration: 0.1s;
-}
-
-/* Icono del botón */
-.btn-ver-mas .icono {
-    display: inline-block;
-    margin-right: 10px;
-    font-size: 20px;
-    transition: transform 0.4s ease;
-}
-
-.btn-ver-mas:hover .icono {
-    transform: translateY(-2px) scale(1.1);
-}
-
-/* Contador de restantes */
-.btn-ver-mas .contador-restantes {
-    background: rgba(255, 255, 255, 0.2);
-    padding: 3px 14px;
-    border-radius: 20px;
-    font-size: 14px;
-    margin-left: 10px;
-    font-weight: 500;
-    transition: all 0.3s ease;
-}
-
-.btn-ver-mas:hover .contador-restantes {
-    background: rgba(255, 255, 255, 0.3);
-    transform: scale(1.05);
-}
-
-/* ==========================
-   MODO OSCURO - PC
-   ========================== */
-
-.dark .ver-mas::before,
-.dark .ver-mas::after {
-    background: linear-gradient(90deg, transparent, #1e88e5, transparent);
-}
-
-.dark .btn-ver-mas {
-    background: linear-gradient(135deg, #1a2744, #1e88e5);
-    box-shadow: 0 6px 25px rgba(30, 136, 229, 0.35);
-}
-
-.dark .btn-ver-mas:hover {
-    background: linear-gradient(135deg, #1e88e5, #1565c0);
-    box-shadow: 0 12px 45px rgba(30, 136, 229, 0.55);
-}
-
-.dark .btn-ver-mas .contador-restantes {
-    background: rgba(255, 255, 255, 0.15);
-}
-
-.dark .btn-ver-mas:hover .contador-restantes {
-    background: rgba(255, 255, 255, 0.25);
-}
-
-/* ==========================
-   ANIMACIONES ADICIONALES PC
-   ========================== */
-
-/* Efecto de onda al hacer hover */
-@keyframes onda {
-    0% {
-        box-shadow: 0 0 0 0 rgba(13, 71, 161, 0.4);
-    }
-    100% {
-        box-shadow: 0 0 0 20px rgba(13, 71, 161, 0);
-    }
-}
-
-.btn-ver-mas:focus {
-    animation: onda 0.8s ease-out;
-    outline: none;
-}
-
-/* Efecto de carga */
-.btn-ver-mas.cargando {
-    pointer-events: none;
-    opacity: 0.8;
-}
-
-.btn-ver-mas.cargando::after {
-    content: '...';
-    animation: puntos 1.5s steps(4) infinite;
-}
-
-@keyframes puntos {
-    0% { content: ''; }
-    25% { content: '.'; }
-    50% { content: '..'; }
-    75% { content: '...'; }
-}
-
-/* ==========================
-   BOTÓN VER MÁS - VERSIÓN COMPLETA
-   ========================== */
-
-/* ==========================
-   BASE - PARA TODOS LOS DISPOSITIVOS
+   BOTÓN VER MÁS - VERSIÓN SIMPLIFICADA
    ========================== */
 
    .ver-mas {
     text-align: center;
-    padding: 25px 0 35px 0;
+    padding: 20px 0 30px 0;
     width: 100%;
-    position: relative;
-}
-
-/* Línea decorativa superior */
-.ver-mas::before {
-    content: '';
-    display: block;
-    width: 60%;
-    height: 2px;
-    background: linear-gradient(90deg, transparent, #0d47a1, transparent);
-    margin: 0 auto 20px auto;
-    opacity: 0.3;
-}
-
-/* Línea decorativa inferior */
-.ver-mas::after {
-    content: '';
-    display: block;
-    width: 60%;
-    height: 2px;
-    background: linear-gradient(90deg, transparent, #0d47a1, transparent);
-    margin: 20px auto 0 auto;
-    opacity: 0.3;
 }
 
 .btn-ver-mas {
     background: linear-gradient(135deg, #0d47a1, #1565c0);
     color: white;
     border: none;
-    padding: 14px 35px;
+    padding: 12px 30px;
     border-radius: 50px;
-    font-size: 16px;
+    font-size: 15px;
     font-weight: 600;
     cursor: pointer;
     transition: all 0.3s ease;
-    box-shadow: 0 4px 20px rgba(13, 71, 161, 0.35);
+    box-shadow: 0 4px 15px rgba(13, 71, 161, 0.3);
     letter-spacing: 0.5px;
-    position: relative;
-    overflow: hidden;
-    min-width: 200px;
-}
-
-/* Efecto de brillo al pasar el mouse */
-.btn-ver-mas::before {
-    content: '';
-    position: absolute;
-    top: -50%;
-    left: -50%;
-    width: 200%;
-    height: 200%;
-    background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 60%);
-    opacity: 0;
-    transition: opacity 0.5s ease;
-    transform: scale(0.8);
-}
-
-.btn-ver-mas:hover::before {
-    opacity: 1;
-    transform: scale(1);
 }
 
 .btn-ver-mas:hover {
-    transform: translateY(-3px) scale(1.03);
-    box-shadow: 0 8px 35px rgba(13, 71, 161, 0.5);
+    transform: translateY(-2px) scale(1.03);
+    box-shadow: 0 6px 25px rgba(13, 71, 161, 0.5);
     background: linear-gradient(135deg, #1565c0, #0d47a1);
 }
 
 .btn-ver-mas:active {
     transform: scale(0.95);
-    box-shadow: 0 2px 10px rgba(13, 71, 161, 0.3);
-}
-
-/* Icono del botón */
-.btn-ver-mas .icono {
-    display: inline-block;
-    margin-right: 8px;
-    transition: transform 0.3s ease;
-}
-
-.btn-ver-mas:hover .icono {
-    transform: translateY(-2px);
-}
-
-/* Contador de restantes */
-.btn-ver-mas .contador-restantes {
-    background: rgba(255, 255, 255, 0.2);
-    padding: 2px 12px;
-    border-radius: 20px;
-    font-size: 13px;
-    margin-left: 8px;
 }
 
 /* ==========================
    MODO OSCURO
    ========================== */
 
-.dark .ver-mas::before,
-.dark .ver-mas::after {
-    background: linear-gradient(90deg, transparent, #1e88e5, transparent);
-}
-
 .dark .btn-ver-mas {
     background: linear-gradient(135deg, #1a2744, #1e88e5);
-    box-shadow: 0 4px 20px rgba(30, 136, 229, 0.3);
+    box-shadow: 0 4px 15px rgba(30, 136, 229, 0.3);
 }
 
 .dark .btn-ver-mas:hover {
     background: linear-gradient(135deg, #1e88e5, #1565c0);
-    box-shadow: 0 8px 35px rgba(30, 136, 229, 0.5);
-}
-
-.dark .btn-ver-mas .contador-restantes {
-    background: rgba(255, 255, 255, 0.15);
+    box-shadow: 0 6px 25px rgba(30, 136, 229, 0.5);
 }
 
 /* ==========================
-   TABLETS Y LAPTOPS (768px - 1024px)
+   TABLET - 768px a 1024px
    ========================== */
 
-@media (min-width: 768px) and (max-width: 1024px) {
+@media (min-width: 768px) {
     .ver-mas {
-        padding: 28px 0 35px 0;
-    }
-    
-    .ver-mas::before,
-    .ver-mas::after {
-        width: 50%;
+        padding: 30px 0 40px 0;
     }
     
     .btn-ver-mas {
-        padding: 15px 38px;
+        padding: 16px 45px;
         font-size: 17px;
-        min-width: 240px;
+        min-width: 250px;
         border-radius: 50px;
+        box-shadow: 0 6px 25px rgba(13, 71, 161, 0.4);
     }
     
-    .btn-ver-mas .contador-restantes {
-        font-size: 14px;
-        padding: 3px 14px;
+    .btn-ver-mas:hover {
+        transform: translateY(-3px) scale(1.04);
+        box-shadow: 0 10px 40px rgba(13, 71, 161, 0.5);
     }
 }
 
 /* ==========================
-   ESCRITORIO (1025px en adelante)
+   PC Y ESCRITORIO - 1025px en adelante
    ========================== */
 
 @media (min-width: 1025px) {
     .ver-mas {
-        padding: 35px 0 45px 0;
-    }
-    
-    .ver-mas::before,
-    .ver-mas::after {
-        width: 40%;
-        height: 3px;
-        opacity: 0.4;
-    }
-    
-    .ver-mas::before {
-        margin: 0 auto 25px auto;
-    }
-    
-    .ver-mas::after {
-        margin: 25px auto 0 auto;
+        padding: 40px 0 50px 0;
     }
     
     .btn-ver-mas {
-        padding: 18px 50px;
-        font-size: 19px;
-        font-weight: 700;
-        min-width: 300px;
+        padding: 20px 60px;
+        font-size: 20px;
+        min-width: 320px;
         border-radius: 60px;
-        box-shadow: 0 8px 30px rgba(13, 71, 161, 0.4);
+        box-shadow: 0 8px 35px rgba(13, 71, 161, 0.45);
         letter-spacing: 1px;
     }
     
     .btn-ver-mas:hover {
         transform: translateY(-5px) scale(1.05);
-        box-shadow: 0 15px 50px rgba(13, 71, 161, 0.55);
-    }
-    
-    .btn-ver-mas:active {
-        transform: scale(0.95);
-    }
-    
-    .btn-ver-mas .icono {
-        font-size: 22px;
-        margin-right: 12px;
-    }
-    
-    .btn-ver-mas .contador-restantes {
-        font-size: 15px;
-        padding: 4px 16px;
-        margin-left: 12px;
-    }
-    
-    .btn-ver-mas::before {
-        background: radial-gradient(circle, rgba(255,255,255,0.15) 0%, transparent 60%);
+        box-shadow: 0 15px 55px rgba(13, 71, 161, 0.6);
     }
 }
 
 /* ==========================
-   PANTALLAS GRANDES (1400px en adelante)
+   PANTALLAS GRANDES - 1400px en adelante
    ========================== */
 
 @media (min-width: 1400px) {
     .ver-mas {
-        padding: 40px 0 50px 0;
-    }
-    
-    .ver-mas::before,
-    .ver-mas::after {
-        width: 30%;
-        height: 3px;
-        opacity: 0.5;
+        padding: 45px 0 55px 0;
     }
     
     .btn-ver-mas {
-        padding: 20px 60px;
+        padding: 24px 75px;
         font-size: 22px;
-        min-width: 350px;
+        min-width: 380px;
         border-radius: 70px;
-        box-shadow: 0 10px 40px rgba(13, 71, 161, 0.45);
+        box-shadow: 0 10px 45px rgba(13, 71, 161, 0.5);
     }
     
     .btn-ver-mas:hover {
         transform: translateY(-6px) scale(1.05);
-        box-shadow: 0 18px 60px rgba(13, 71, 161, 0.6);
-    }
-    
-    .btn-ver-mas .icono {
-        font-size: 26px;
-        margin-right: 15px;
-    }
-    
-    .btn-ver-mas .contador-restantes {
-        font-size: 17px;
-        padding: 5px 18px;
-        margin-left: 15px;
+        box-shadow: 0 18px 65px rgba(13, 71, 161, 0.65);
     }
 }
 
 /* ==========================
-   MÓVILES PEQUEÑOS (hasta 400px)
+   MÓVILES - 600px o menos
    ========================== */
 
-@media (max-width: 400px) {
+@media (max-width: 600px) {
     .ver-mas {
         padding: 15px 0 25px 0;
-    }
-    
-    .ver-mas::before {
-        width: 85%;
-        margin-bottom: 15px;
-    }
-    
-    .ver-mas::after {
-        display: none;
     }
     
     .btn-ver-mas {
         padding: 10px 20px;
         font-size: 13px;
-        width: 95%;
+        width: 90%;
         max-width: 280px;
         min-width: unset;
-        border-radius: 35px;
-    }
-    
-    .btn-ver-mas .icono {
-        font-size: 14px;
-        margin-right: 5px;
-    }
-    
-    .btn-ver-mas .contador-restantes {
-        font-size: 11px;
-        padding: 2px 8px;
-        margin-left: 5px;
-    }
-}
-
-/* ==========================
-   MÓVILES (600px y menos)
-   ========================== */
-
-@media (max-width: 600px) {
-    .ver-mas {
-        padding: 20px 0 30px 0;
-    }
-    
-    .ver-mas::before {
-        width: 80%;
-        margin-bottom: 18px;
-    }
-    
-    .ver-mas::after {
-        display: none;
-    }
-    
-    .btn-ver-mas {
-        padding: 12px 25px;
-        font-size: 14px;
-        width: 90%;
-        max-width: 300px;
-        min-width: unset;
         border-radius: 40px;
-    }
-    
-    .btn-ver-mas .icono {
-        font-size: 16px;
-        margin-right: 6px;
-    }
-    
-    .btn-ver-mas .contador-restantes {
-        font-size: 12px;
-        padding: 2px 10px;
-        margin-left: 6px;
     }
 }
 
