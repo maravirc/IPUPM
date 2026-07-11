@@ -1,6 +1,6 @@
 // ==========================
 // HIMNARIO IPU MOYOBAMBA
-// script.js - CON TÍTULO DINÁMICO
+// script.js - VERSIÓN COMPLETA
 // ==========================
 
 let himnos = [];
@@ -28,34 +28,62 @@ function actualizarTitulo(tipo, cantidad = 0) {
         'favoritos': 'Favoritos'
     };
     
+    const subtitulos = {
+        'himnos': 'Iglesia Pentecostal Unida - Moyobamba - Himnos',
+        'coros': 'Iglesia Pentecostal Unida - Moyobamba - Coros',
+        'favoritos': 'Tus himnos y coros favoritos'
+    };
+    
     const icono = iconos[tipo] || '📖';
     const texto = textos[tipo] || 'Himnos';
+    const subTexto = subtitulos[tipo] || 'Iglesia Pentecostal Unida - Moyobamba';
     
     if (tipo === 'favoritos') {
         tituloSeccion.innerHTML = `<h2>⭐ Favoritos <span class="contador">(${cantidad})</span></h2>`;
-        subtitulo.textContent = 'Tus himnos y coros favoritos';
     } else {
         tituloSeccion.innerHTML = `<h2>${icono} ${texto} <span class="contador">(${cantidad})</span></h2>`;
-        subtitulo.textContent = `Iglesia Pentecostal Unida - Moyobamba • ${texto}`;
     }
+    
+    subtitulo.textContent = subTexto;
 }
 
 // ==========================
-// CARGAR HIMNOS
+// CARGAR HIMNOS - CON CACHÉ
 // ==========================
 
 async function cargarHimnos() {
     try {
         const respuesta = await fetch("data/himnos.json");
         himnos = await respuesta.json();
-        console.log('Himnos cargados:', himnos.length);
+        console.log('✅ Himnos cargados:', himnos.length);
+        himnos = himnos.map(h => ({ ...h, tipo: 'himno' }));
         mostrarHimnos(himnos);
         actualizarTitulo('himnos', himnos.length);
     } catch (error) {
-        lista.innerHTML = "<h2>No se pudieron cargar los himnos.</h2>";
-        console.error(error);
+        console.error('❌ Error al cargar himnos:', error);
+        // Intentar cargar desde caché como respaldo
+        try {
+            const cache = await caches.open('himnario-ipu-v11');
+            const cachedResponse = await cache.match('data/himnos.json');
+            if (cachedResponse) {
+                himnos = await cachedResponse.json();
+                console.log('✅ Himnos cargados desde caché:', himnos.length);
+                himnos = himnos.map(h => ({ ...h, tipo: 'himno' }));
+                mostrarHimnos(himnos);
+                actualizarTitulo('himnos', himnos.length);
+            } else {
+                lista.innerHTML = "<h2>⚠️ No se pudieron cargar los himnos.</h2><p>Verifica tu conexión a internet.</p>";
+            }
+        } catch (cacheError) {
+            lista.innerHTML = "<h2>⚠️ No se pudieron cargar los himnos.</h2><p>Verifica tu conexión a internet.</p>";
+            console.error('❌ Error al cargar desde caché:', cacheError);
+        }
     }
 }
+
+// ==========================
+// MOSTRAR HIMNOS
+// ==========================
 
 function mostrarHimnos(datos) {
     lista.innerHTML = "";
@@ -63,16 +91,22 @@ function mostrarHimnos(datos) {
     datos.forEach(himno => {
         const card = document.createElement("div");
         card.className = "card";
+        card.dataset.numero = himno.numero;
 
         const esFavorito = favoritos.includes(himno.numero);
         
-        // Detectar si es coro (puedes ajustar según tu estructura)
-        const esCoro = himno.tipo === 'coro' || himno.numero.toString().startsWith('C');
+        let icono = '📖';
+        let tipoTexto = 'Himno';
+        
+        if (himno.tipo === 'coro') {
+            icono = '🎵';
+            tipoTexto = 'Adoración y Alabanza';
+        }
 
         card.innerHTML = `
             <div class="cabecera-himno">
                 <div>
-                    <div class="numero">${esCoro ? 'Adoración y Alabanzas'+'🎵' : 'Himnos'+'📖'} ${himno.numero}</div>
+                    <div class="numero">${icono} ${himno.numero}</div>
                     <div class="titulo">${himno.titulo}</div>
                 </div>
                 <div class="acciones">
@@ -96,26 +130,38 @@ function mostrarHimnos(datos) {
 }
 
 // ==========================
-// BOTÓN COROS
+// BOTÓN ADORACIÓN Y ALABANZAS (COROS)
 // ==========================
 
 document.getElementById("btnCoros").addEventListener("click", async () => {
     try {
         const respuesta = await fetch("data/coros.json");
         himnos = await respuesta.json();
-        console.log('Coros cargados:', himnos.length);
-        
-        // Marcar todos como coros
+        console.log('✅ Coros cargados:', himnos.length);
         himnos = himnos.map(h => ({ ...h, tipo: 'coro' }));
-        
         mostrarHimnos(himnos);
         actualizarTitulo('coros', himnos.length);
-        
-        // Limpiar búsqueda
         buscar.value = '';
     } catch (error) {
-        lista.innerHTML = "<h2>No se pudieron cargar los coros.</h2>";
-        console.error(error);
+        console.error('❌ Error al cargar coros:', error);
+        // Intentar cargar desde caché
+        try {
+            const cache = await caches.open('himnario-ipu-v11');
+            const cachedResponse = await cache.match('data/coros.json');
+            if (cachedResponse) {
+                himnos = await cachedResponse.json();
+                console.log('✅ Coros cargados desde caché:', himnos.length);
+                himnos = himnos.map(h => ({ ...h, tipo: 'coro' }));
+                mostrarHimnos(himnos);
+                actualizarTitulo('coros', himnos.length);
+                buscar.value = '';
+            } else {
+                lista.innerHTML = "<h2>⚠️ No se pudieron cargar los coros.</h2><p>Verifica tu conexión a internet.</p>";
+            }
+        } catch (cacheError) {
+            lista.innerHTML = "<h2>⚠️ No se pudieron cargar los coros.</h2><p>Verifica tu conexión a internet.</p>";
+            console.error('❌ Error al cargar coros desde caché:', cacheError);
+        }
     }
 });
 
@@ -127,18 +173,28 @@ document.getElementById("btnHimnos").addEventListener("click", async () => {
     try {
         const respuesta = await fetch("data/himnos.json");
         himnos = await respuesta.json();
-        console.log('Himnos cargados:', himnos.length);
-        
-        // Marcar todos como himnos
+        console.log('✅ Himnos cargados:', himnos.length);
         himnos = himnos.map(h => ({ ...h, tipo: 'himno' }));
-        
         mostrarHimnos(himnos);
         actualizarTitulo('himnos', himnos.length);
-        
-        // Limpiar búsqueda
         buscar.value = '';
     } catch (error) {
-        console.error(error);
+        console.error('❌ Error al cargar himnos:', error);
+        // Intentar cargar desde caché
+        try {
+            const cache = await caches.open('himnario-ipu-v11');
+            const cachedResponse = await cache.match('data/himnos.json');
+            if (cachedResponse) {
+                himnos = await cachedResponse.json();
+                console.log('✅ Himnos cargados desde caché:', himnos.length);
+                himnos = himnos.map(h => ({ ...h, tipo: 'himno' }));
+                mostrarHimnos(himnos);
+                actualizarTitulo('himnos', himnos.length);
+                buscar.value = '';
+            }
+        } catch (cacheError) {
+            console.error('❌ Error al cargar desde caché:', cacheError);
+        }
     }
 });
 
@@ -150,8 +206,6 @@ document.getElementById("btnFavoritos").addEventListener("click", () => {
     const listaFavoritos = himnos.filter(h => favoritos.includes(h.numero));
     mostrarHimnos(listaFavoritos);
     actualizarTitulo('favoritos', listaFavoritos.length);
-    
-    // Limpiar búsqueda
     buscar.value = '';
 });
 
@@ -174,7 +228,6 @@ buscar.addEventListener("keyup", () => {
 
     mostrarHimnos(resultado);
     
-    // Actualizar título según lo que se está mostrando
     if (resultado.length > 0) {
         const primerItem = resultado[0];
         const tipo = primerItem.tipo === 'coro' ? 'coros' : 'himnos';
@@ -210,10 +263,15 @@ async function compartir(numero) {
     const himno = himnos.find(h => h.numero === numero);
     if (!himno) return;
 
+    let tipoTexto = 'Himno';
+    if (himno.tipo === 'coro') {
+        tipoTexto = 'Adoración y Alabanza';
+    }
+
     if (navigator.share) {
         navigator.share({
             title: himno.titulo,
-            text: `${himno.tipo === 'coro' ? '🎵 Coro' : '📖 Himno'} ${himno.numero}\n\n${himno.titulo}\n\n${himno.letra}`
+            text: `${tipoTexto} ${himno.numero}\n\n${himno.titulo}\n\n${himno.letra}`
         });
     } else {
         alert("Tu navegador no admite compartir.");
@@ -226,11 +284,24 @@ async function compartir(numero) {
 
 function pantallaCompleta(numero) {
     const tarjetas = document.querySelectorAll(".card");
+    let encontrada = false;
+    
     tarjetas.forEach(card => {
-        if (card.innerHTML.includes(`${numero}`)) {
+        if (card.dataset.numero == numero) {
             card.requestFullscreen();
+            encontrada = true;
         }
     });
+    
+    if (!encontrada) {
+        tarjetas.forEach(card => {
+            if (card.innerHTML.includes(`>${numero}<`) || 
+                card.innerHTML.includes(`📖 ${numero}`) ||
+                card.innerHTML.includes(`🎵 ${numero}`)) {
+                card.requestFullscreen();
+            }
+        });
+    }
 }
 
 function salirPantallaCompleta(event) {
@@ -260,73 +331,14 @@ btnInstalar.addEventListener("click", async () => {
     const resultado = await eventoInstalacion.userChoice;
 
     if (resultado.outcome === "accepted") {
-        console.log("Aplicación instalada");
+        console.log("✅ Aplicación instalada");
     } else {
-        console.log("Instalación cancelada");
+        console.log("❌ Instalación cancelada");
     }
 
     eventoInstalacion = null;
     btnInstalar.style.display = "none";
 });
-
-// ==========================
-// BOTÓN DE CIERRE
-// ==========================
-
-// const btnCerrarApp = document.getElementById('btnCerrarApp');
-
-// btnCerrarApp.addEventListener('click', function(e) {
-//     e.preventDefault();
-//     cerrarApp();
-// });
-
-// function cerrarApp() {
-//     console.log('Cerrando aplicación...');
-    
-//     const isAndroid = navigator.userAgent.match(/Android/i);
-//     const isStandalone = window.matchMedia('(display-mode: standalone)').matches;
-    
-//     try { window.close(); } catch(e) {}
-    
-//     if (isAndroid) {
-//         try {
-//             if (window.chrome && window.chrome.app) {
-//                 window.chrome.app.window.current().close();
-//             }
-//         } catch(e) {}
-        
-//         setTimeout(() => {
-//             try { window.location.href = 'about:blank'; } catch(e) {}
-//         }, 300);
-        
-//         setTimeout(() => {
-//             try {
-//                 window.location.href = 'intent://#Intent;action=android.intent.action.MAIN;category=android.intent.category.HOME;end';
-//             } catch(e) {}
-//         }, 600);
-//     }
-    
-//     if (isStandalone) {
-//         setTimeout(() => {
-//             try { window.history.go(-window.history.length); } catch(e) {}
-//         }, 900);
-//     }
-    
-//     setTimeout(() => {
-//         try {
-//             window.location.href = window.location.href.split('?')[0] + '?close=true';
-//         } catch(e) {}
-//     }, 1200);
-// }
-
-// if (window.location.search.includes('close=true')) {
-//     setTimeout(() => {
-//         try { window.close(); } catch(e) {}
-//         setTimeout(() => {
-//             try { window.location.href = 'about:blank'; } catch(e) {}
-//         }, 300);
-//     }, 500);
-// }
 
 // ==========================
 // INICIAR
