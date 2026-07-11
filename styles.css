@@ -1173,6 +1173,181 @@ footer{
 }
 
 /* ==========================
+   BOTÓN VER MÁS - VERSIÓN PC
+   ========================== */
+
+   .ver-mas {
+    text-align: center;
+    padding: 30px 0 40px 0;
+    width: 100%;
+    position: relative;
+}
+
+/* Línea decorativa superior */
+.ver-mas::before {
+    content: '';
+    display: block;
+    width: 40%;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, #0d47a1, transparent);
+    margin: 0 auto 25px auto;
+    opacity: 0.4;
+}
+
+/* Línea decorativa inferior */
+.ver-mas::after {
+    content: '';
+    display: block;
+    width: 40%;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, #0d47a1, transparent);
+    margin: 25px auto 0 auto;
+    opacity: 0.4;
+}
+
+.btn-ver-mas {
+    background: linear-gradient(135deg, #0d47a1, #1565c0);
+    color: white;
+    border: none;
+    padding: 16px 45px;
+    border-radius: 50px;
+    font-size: 18px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 0 6px 25px rgba(13, 71, 161, 0.4);
+    letter-spacing: 0.5px;
+    position: relative;
+    overflow: hidden;
+    min-width: 280px;
+}
+
+/* Efecto de brillo al pasar el mouse */
+.btn-ver-mas::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle, rgba(255,255,255,0.15) 0%, transparent 60%);
+    opacity: 0;
+    transition: opacity 0.6s ease;
+    transform: scale(0.8);
+}
+
+.btn-ver-mas:hover::before {
+    opacity: 1;
+    transform: scale(1);
+}
+
+/* Efecto hover PC */
+.btn-ver-mas:hover {
+    transform: translateY(-4px) scale(1.04);
+    box-shadow: 0 12px 45px rgba(13, 71, 161, 0.55);
+    background: linear-gradient(135deg, #1565c0, #0d47a1);
+}
+
+/* Efecto click PC */
+.btn-ver-mas:active {
+    transform: scale(0.96);
+    box-shadow: 0 4px 15px rgba(13, 71, 161, 0.3);
+    transition-duration: 0.1s;
+}
+
+/* Icono del botón */
+.btn-ver-mas .icono {
+    display: inline-block;
+    margin-right: 10px;
+    font-size: 20px;
+    transition: transform 0.4s ease;
+}
+
+.btn-ver-mas:hover .icono {
+    transform: translateY(-2px) scale(1.1);
+}
+
+/* Contador de restantes */
+.btn-ver-mas .contador-restantes {
+    background: rgba(255, 255, 255, 0.2);
+    padding: 3px 14px;
+    border-radius: 20px;
+    font-size: 14px;
+    margin-left: 10px;
+    font-weight: 500;
+    transition: all 0.3s ease;
+}
+
+.btn-ver-mas:hover .contador-restantes {
+    background: rgba(255, 255, 255, 0.3);
+    transform: scale(1.05);
+}
+
+/* ==========================
+   MODO OSCURO - PC
+   ========================== */
+
+.dark .ver-mas::before,
+.dark .ver-mas::after {
+    background: linear-gradient(90deg, transparent, #1e88e5, transparent);
+}
+
+.dark .btn-ver-mas {
+    background: linear-gradient(135deg, #1a2744, #1e88e5);
+    box-shadow: 0 6px 25px rgba(30, 136, 229, 0.35);
+}
+
+.dark .btn-ver-mas:hover {
+    background: linear-gradient(135deg, #1e88e5, #1565c0);
+    box-shadow: 0 12px 45px rgba(30, 136, 229, 0.55);
+}
+
+.dark .btn-ver-mas .contador-restantes {
+    background: rgba(255, 255, 255, 0.15);
+}
+
+.dark .btn-ver-mas:hover .contador-restantes {
+    background: rgba(255, 255, 255, 0.25);
+}
+
+/* ==========================
+   ANIMACIONES ADICIONALES PC
+   ========================== */
+
+/* Efecto de onda al hacer hover */
+@keyframes onda {
+    0% {
+        box-shadow: 0 0 0 0 rgba(13, 71, 161, 0.4);
+    }
+    100% {
+        box-shadow: 0 0 0 20px rgba(13, 71, 161, 0);
+    }
+}
+
+.btn-ver-mas:focus {
+    animation: onda 0.8s ease-out;
+    outline: none;
+}
+
+/* Efecto de carga */
+.btn-ver-mas.cargando {
+    pointer-events: none;
+    opacity: 0.8;
+}
+
+.btn-ver-mas.cargando::after {
+    content: '...';
+    animation: puntos 1.5s steps(4) infinite;
+}
+
+@keyframes puntos {
+    0% { content: ''; }
+    25% { content: '.'; }
+    50% { content: '..'; }
+    75% { content: '...'; }
+}
+
+/* ==========================
    RESPONSIVE - PC
    ========================== */
 
