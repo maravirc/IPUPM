@@ -1171,7 +1171,6 @@ footer{
 .dark .btn-ver-mas .contador-restantes {
     background: rgba(255, 255, 255, 0.15);
 }
-
 /* ==========================
    BOTÓN VER MÁS - VERSIÓN PC
    ========================== */
@@ -1379,17 +1378,19 @@ footer{
     }
 }
 
-/* ==========================
-   RESPONSIVE - MÓVIL
-   ========================== */
-
+/* Para móviles (ya está en la versión anterior) */
 @media (max-width: 600px) {
     .ver-mas {
         padding: 20px 0 30px 0;
     }
     
-    .ver-mas::before {
+    .ver-mas::before,
+    .ver-mas::after {
         width: 80%;
+    }
+    
+    .ver-mas::after {
+        display: none;
     }
     
     .btn-ver-mas {
@@ -1397,7 +1398,13 @@ footer{
         font-size: 14px;
         width: 90%;
         max-width: 300px;
+        min-width: unset;
         border-radius: 40px;
+    }
+    
+    .btn-ver-mas .icono {
+        font-size: 16px;
+        margin-right: 6px;
     }
     
     .btn-ver-mas .contador-restantes {
