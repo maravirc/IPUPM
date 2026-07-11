@@ -121,14 +121,17 @@ function mostrarHimnos(datos) {
         
         let icono = '📖';
         let tipoTexto = 'Himno';
+        let tipo = 'himno';
         
         if (himno.tipo === 'coro') {
             icono = '🎵';
             tipoTexto = 'Adoración y Alabanza';
+            tipo = 'coro';
         }
         
         const btnFav = esFavorito ? '⭐ Quitar' : '🤍 Favorito';
         
+        // 🔥 IMPORTANTE: Pasar el tipo del himno, no el tipo de la sección
         html += `
             <div class="card" data-numero="${himno.numero}">
                 <div class="cabecera-himno">
@@ -143,7 +146,7 @@ function mostrarHimnos(datos) {
                 </div>
                 <div class="letra">${himno.letra}</div>
                 <div class="botones">
-                    <button onclick="favorito(${himno.numero})">${btnFav}</button>
+                    <button onclick="favorito(${himno.numero}, '${tipo}')">${btnFav}</button>
                     <button onclick="compartir(${himno.numero})">📤 Compartir</button>
                 </div>
             </div>
@@ -280,9 +283,9 @@ buscar.addEventListener("keyup", () => {
 // FAVORITOS - CORREGIDO CON PREFIJO
 // ==========================
 
-function favorito(numero) {
-    // 🔥 Crear un identificador único con el tipo actual
-    const prefijo = tipoActual === 'coros' ? 'C' : 'H';
+function favorito(numero, tipo) {
+    // 🔥 Usar el tipo pasado como parámetro
+    const prefijo = tipo === 'coro' ? 'C' : 'H';
     const idFavorito = `${prefijo}${numero}`;
     
     // Alternar favorito
@@ -309,8 +312,8 @@ function favorito(numero) {
         // Recalcular favoritos desde cero
         const todosLosDatos = [...datosHimnosCache, ...datosCorosCache];
         const listaFavoritos = todosLosDatos.filter(h => {
-            const prefijo = h.tipo === 'coro' ? 'C' : 'H';
-            return favoritos.includes(`${prefijo}${h.numero}`);
+            const pref = h.tipo === 'coro' ? 'C' : 'H';
+            return favoritos.includes(`${pref}${h.numero}`);
         });
         datosActuales = listaFavoritos;
         mostrarHimnos(listaFavoritos);
