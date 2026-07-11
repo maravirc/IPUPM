@@ -278,46 +278,61 @@ document.getElementById("btnFavoritos").addEventListener("click", () => {
 });
 
 // ==========================
-// BUSCAR - CON RESET
+// BUSCAR - CON DEBOUNCE, SIN ACENTOS Y ACTUALIZACIÓN INSTANTÁNEA
 // ==========================
 
 let timeoutBusqueda;
 
-buscar.addEventListener("keyup", () => {
+// 🔥 FUNCIÓN PARA QUITAR ACENTOS
+function quitarAcentos(texto) {
+    return texto.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+}
+
+// 🔥 CAMBIAR "keyup" por "input" para mejor detección
+buscar.addEventListener("input", function() {
     clearTimeout(timeoutBusqueda);
-    timeoutBusqueda = setTimeout(() => {
-        const texto = buscar.value.trim().toLowerCase();
-        
-        if (texto === '') {
-            resetearPaginacion();
-            if (tipoActual === 'himnos') {
-                mostrarHimnos(datosHimnosCache);
-                actualizarTitulo('himnos', datosHimnosCache.length);
-            } else if (tipoActual === 'coros') {
-                mostrarHimnos(datosCorosCache);
-                actualizarTitulo('coros', datosCorosCache.length);
-            } else if (tipoActual === 'favoritos') {
-                const todosLosDatos = [...datosHimnosCache, ...datosCorosCache];
-                const favs = todosLosDatos.filter(h => {
-                    const prefijo = h.tipo === 'coro' ? 'C' : 'H';
-                    return favoritos.includes(`${prefijo}${h.numero}`);
-                });
-                datosActuales = favs;
-                mostrarHimnos(favs);
-                actualizarTitulo('favoritos', favs.length);
-            }
-            window.scrollTo({ top: 0, behavior: "smooth" });
-            return;
+    
+    // 🔥 Si se borró todo, actualizar inmediatamente
+    if (this.value === '') {
+        resetearPaginacion();
+        if (tipoActual === 'himnos') {
+            mostrarHimnos(datosHimnosCache);
+            actualizarTitulo('himnos', datosHimnosCache.length);
+        } else if (tipoActual === 'coros') {
+            mostrarHimnos(datosCorosCache);
+            actualizarTitulo('coros', datosCorosCache.length);
+        } else if (tipoActual === 'favoritos') {
+            const todosLosDatos = [...datosHimnosCache, ...datosCorosCache];
+            const favs = todosLosDatos.filter(h => {
+                const prefijo = h.tipo === 'coro' ? 'C' : 'H';
+                return favoritos.includes(`${prefijo}${h.numero}`);
+            });
+            datosActuales = favs;
+            mostrarHimnos(favs);
+            actualizarTitulo('favoritos', favs.length);
         }
+        window.scrollTo({ top: 0, behavior: "smooth" });
+        return;
+    }
+    
+    // Esperar 300ms después de escribir
+    timeoutBusqueda = setTimeout(() => {
+        const textoOriginal = buscar.value.trim();
+        // 🔥 Quitar acentos para la búsqueda
+        const texto = quitarAcentos(textoOriginal.toLowerCase());
         
         let resultado;
         if (/^\d+$/.test(texto)) {
-            resultado = datosActuales.filter(h => h.numero.toString().includes(texto));
-        } else {
-            resultado = datosActuales.filter(h =>
-                h.titulo.toLowerCase().includes(texto) ||
-                h.letra.toLowerCase().includes(texto)
+            resultado = datosActuales.filter(h => 
+                h.numero.toString().includes(texto)
             );
+        } else {
+            resultado = datosActuales.filter(h => {
+                // 🔥 Comparar sin acentos
+                const titulo = quitarAcentos(h.titulo.toLowerCase());
+                const letra = quitarAcentos(h.letra.toLowerCase());
+                return titulo.includes(texto) || letra.includes(texto);
+            });
         }
         
         resetearPaginacion();
