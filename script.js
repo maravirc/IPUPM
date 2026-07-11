@@ -278,31 +278,29 @@ document.getElementById("btnFavoritos").addEventListener("click", () => {
 });
 
 // ==========================
-// BUSCAR - CON DEBOUNCE, SIN ACENTOS Y LIMPIEZA DE TEXTO
+// BUSCAR - CORREGIDO
 // ==========================
 
 let timeoutBusqueda;
 
-// 🔥 FUNCIÓN PARA QUITAR ACENTOS
 function quitarAcentos(texto) {
     return texto.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
 }
 
-// 🔥 FUNCIÓN PARA LIMPIAR TEXTO (quita signos, comas, puntos, espacios extras)
 function limpiarTexto(texto) {
     return quitarAcentos(texto)
         .toLowerCase()
-        .replace(/[.,\/#!$%\^&\*;:{}=\-_`~()]/g, " ")  // Reemplaza signos por espacio
-        .replace(/\s+/g, " ")                           // Reemplaza múltiples espacios por uno
-        .trim();                                        // Quita espacios al inicio y final
+        .replace(/[.,\/#!$%\^&\*;:{}=\-_`~()]/g, " ")
+        .replace(/\s+/g, " ")
+        .trim();
 }
 
-// 🔥 CAMBIAR "keyup" por "input" para mejor detección
 buscar.addEventListener("input", function() {
     clearTimeout(timeoutBusqueda);
     
-    // Si se borró todo, actualizar inmediatamente
-    if (this.value === '') {
+    const textoOriginal = this.value.trim();
+    
+    if (textoOriginal === '') {
         resetearPaginacion();
         if (tipoActual === 'himnos') {
             mostrarHimnos(datosHimnosCache);
@@ -324,74 +322,69 @@ buscar.addEventListener("input", function() {
         return;
     }
     
-    // Esperar 300ms después de escribir
-    timeoutBusqueda = setTimeout(() => {
-        // 🔥 Limpiar el texto de búsqueda
-        const textoBusqueda = limpiarTexto(this.value);
-        
-        // Si después de limpiar queda vacío, mostrar todo
-        if (textoBusqueda === '') {
-            resetearPaginacion();
-            if (tipoActual === 'himnos') {
-                mostrarHimnos(datosHimnosCache);
-                actualizarTitulo('himnos', datosHimnosCache.length);
-            } else if (tipoActual === 'coros') {
-                mostrarHimnos(datosCorosCache);
-                actualizarTitulo('coros', datosCorosCache.length);
-            } else if (tipoActual === 'favoritos') {
-                const todosLosDatos = [...datosHimnosCache, ...datosCorosCache];
-                const favs = todosLosDatos.filter(h => {
-                    const prefijo = h.tipo === 'coro' ? 'C' : 'H';
-                    return favoritos.includes(`${prefijo}${h.numero}`);
-                });
-                datosActuales = favs;
-                mostrarHimnos(favs);
-                actualizarTitulo('favoritos', favs.length);
-            }
-            window.scrollTo({ top: 0, behavior: "smooth" });
-            return;
-        }
-        
-        // Buscar por número o por texto
-        let resultado;
-        if (/^\d+$/.test(textoBusqueda)) {
-            resultado = datosActuales.filter(h => 
-                h.numero.toString().includes(textoBusqueda)
-            );
-        } else {
-            // 🔥 Buscar en título y letra limpiando el texto del himno
-            resultado = datosActuales.filter(h => {
-                const tituloLimpio = limpiarTexto(h.titulo);
-                const letraLimpia = limpiarTexto(h.letra);
-                
-                // Dividir la búsqueda en palabras para buscar cada una
-                const palabras = textoBusqueda.split(' ');
-                // Verificar que TODAS las palabras estén en el título o letra
-                return palabras.every(palabra => 
-                    tituloLimpio.includes(palabra) || letraLimpia.includes(palabra)
-                );
-            });
-        }
-        
-        resetearPaginacion();
-        mostrarHimnos(resultado);
-        
-        if (resultado.length > 0) {
-            const primerItem = resultado[0];
-            const tipo = primerItem.tipo === 'coro' ? 'coros' : 'himnos';
-            actualizarTitulo(tipo, resultado.length);
-        } else {
-            lista.innerHTML = `<div class="sin-resultados">
-                <h3>🔍 No se encontraron resultados</h3>
-                <p>Intenta con otra palabra o número</p>
-            </div>`;
-        }
-        
-        window.scrollTo({
-            top: 0,
-            behavior: "smooth"
+    let datosABuscar = [];
+    if (tipoActual === 'himnos') {
+        datosABuscar = datosHimnosCache;
+    } else if (tipoActual === 'coros') {
+        datosABuscar = datosCorosCache;
+    } else if (tipoActual === 'favoritos') {
+        const todosLosDatos = [...datosHimnosCache, ...datosCorosCache];
+        datosABuscar = todosLosDatos.filter(h => {
+            const prefijo = h.tipo === 'coro' ? 'C' : 'H';
+            return favoritos.includes(`${prefijo}${h.numero}`);
         });
-    }, 300);
+    }
+    
+    const textoBusqueda = limpiarTexto(textoOriginal);
+    
+    if (textoBusqueda === '') {
+        resetearPaginacion();
+        mostrarHimnos(datosABuscar);
+        if (tipoActual === 'himnos') {
+            actualizarTitulo('himnos', datosABuscar.length);
+        } else if (tipoActual === 'coros') {
+            actualizarTitulo('coros', datosABuscar.length);
+        } else if (tipoActual === 'favoritos') {
+            actualizarTitulo('favoritos', datosABuscar.length);
+        }
+        window.scrollTo({ top: 0, behavior: "smooth" });
+        return;
+    }
+    
+    let resultado;
+    if (/^\d+$/.test(textoBusqueda)) {
+        resultado = datosABuscar.filter(h => 
+            h.numero.toString().includes(textoBusqueda)
+        );
+    } else {
+        resultado = datosABuscar.filter(h => {
+            const tituloLimpio = limpiarTexto(h.titulo);
+            const letraLimpia = limpiarTexto(h.letra);
+            const palabras = textoBusqueda.split(' ');
+            return palabras.every(palabra => 
+                tituloLimpio.includes(palabra) || letraLimpia.includes(palabra)
+            );
+        });
+    }
+    
+    resetearPaginacion();
+    mostrarHimnos(resultado);
+    
+    if (resultado.length > 0) {
+        const primerItem = resultado[0];
+        const tipo = primerItem.tipo === 'coro' ? 'coros' : 'himnos';
+        actualizarTitulo(tipo, resultado.length);
+    } else {
+        lista.innerHTML = `<div class="sin-resultados">
+            <h3>🔍 No se encontraron resultados</h3>
+            <p>Intenta con otra palabra o número</p>
+        </div>`;
+    }
+    
+    window.scrollTo({
+        top: 0,
+        behavior: "smooth"
+    });
 });
 
 // ==========================
