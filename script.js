@@ -106,7 +106,8 @@ function mostrarHimnos(datos) {
         card.innerHTML = `
             <div class="cabecera-himno">
                 <div>
-                   <div class="numero">${icono} ${tipoTexto} ${himno.numero}</div>
+                    <div class="numero">${icono} ${himno.numero}</div>
+                    <div class="titulo">${himno.titulo}</div>
                 </div>
                 <div class="acciones">
                     <button class="btnPantalla" onclick="pantallaCompleta(${himno.numero})">⛶</button>
