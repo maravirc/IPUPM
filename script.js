@@ -178,8 +178,26 @@ function mostrarHimnos(datos) {
     if (mostrarBoton) {
         const restantes = datos.length - MAX_INICIAL;
         html += `
-            <div class="ver-mas">
-                <button class="btn-ver-mas" id="btnVerMas">
+            <div class="ver-mas" style="text-align: center; padding: 25px 0; width: 100%;">
+                <button class="btn-ver-mas" id="btnVerMas" style="
+                    background: linear-gradient(135deg, #0d47a1, #1565c0);
+                    color: white;
+                    border: none;
+                    padding: 14px 35px;
+                    border-radius: 50px;
+                    font-size: 16px;
+                    font-weight: 600;
+                    cursor: pointer;
+                    box-shadow: 0 4px 20px rgba(13, 71, 161, 0.35);
+                    transition: all 0.3s ease;
+                    letter-spacing: 0.5px;
+                    min-width: 200px;
+                "
+                onmouseover="this.style.transform='translateY(-3px) scale(1.03)'; this.style.boxShadow='0 8px 35px rgba(13, 71, 161, 0.5)'; this.style.background='linear-gradient(135deg, #1565c0, #0d47a1)'"
+                onmouseout="this.style.transform='translateY(0) scale(1)'; this.style.boxShadow='0 4px 20px rgba(13, 71, 161, 0.35)'; this.style.background='linear-gradient(135deg, #0d47a1, #1565c0)'"
+                onmousedown="this.style.transform='scale(0.95)'"
+                onmouseup="this.style.transform='translateY(-3px) scale(1.03)'"
+                >
                     📖 Ver más (${restantes} restantes)
                 </button>
             </div>
