@@ -64,11 +64,13 @@ function actualizarTitulo(tipo, cantidad = 0) {
 
 async function cargarHimnos() {
     try {
+        // Cargar himnos una sola vez
         const respuesta = await fetch("data/himnos.json");
         const data = await respuesta.json();
         datosHimnosCache = data.map(h => ({ ...h, tipo: 'himno' }));
         console.log('✅ Himnos cargados:', datosHimnosCache.length);
         
+        // Cargar coros una sola vez
         try {
             const respCoros = await fetch("data/coros.json");
             const dataCoros = await respCoros.json();
@@ -82,7 +84,6 @@ async function cargarHimnos() {
         // Mostrar himnos por defecto
         datosActuales = datosHimnosCache;
         tipoActual = 'himnos';
-        mostrandoTodos = false;  // 🔥 Resetear
         mostrarHimnos(datosHimnosCache);
         actualizarTitulo('himnos', datosHimnosCache.length);
         
@@ -108,16 +109,13 @@ function mostrarHimnos(datos) {
         return;
     }
     
-    // 🔥 SOLUCIÓN SIMPLE: Mostrar solo los primeros 30
-    const maxMostrar = 30;
-    const datosMostrar = datos.slice(0, maxMostrar);
-    
-    // 🔥 CONSTRUIR HTML
+    // 🔥 CONSTRUIR HTML DE UNA VEZ (más rápido que crear elementos)
     let html = '';
     
-    for (let i = 0; i < datosMostrar.length; i++) {
-        const himno = datosMostrar[i];
+    for (let i = 0; i < datos.length; i++) {
+        const himno = datos[i];
         
+        // 🔥 Verificar si es favorito con el prefijo correcto
         const prefijo = himno.tipo === 'coro' ? 'C' : 'H';
         const esFavorito = favoritos.includes(`${prefijo}${himno.numero}`);
         
@@ -133,6 +131,7 @@ function mostrarHimnos(datos) {
         
         const btnFav = esFavorito ? '⭐ Quitar' : '🤍 Favorito';
         
+        // 🔥 IMPORTANTE: Pasar el tipo del himno, no el tipo de la sección
         html += `
             <div class="card" data-numero="${himno.numero}">
                 <div class="cabecera-himno">
@@ -154,32 +153,9 @@ function mostrarHimnos(datos) {
         `;
     }
     
-    // 🔥 Si hay más de 30, mostrar un mensaje
-    if (datos.length > maxMostrar) {
-        html += `
-            <div class="ver-mas" onclick="cargarMas()">
-                <button class="btn-ver-mas">📖 Ver más (${datos.length - maxMostrar} restantes)</button>
-            </div>
-        `;
-    }
-    
+    // 🔥 ACTUALIZAR DOM DE UNA VEZ
     lista.innerHTML = html;
 }
-
-// ==========================
-// CARGAR MÁS HIMNOS
-// ==========================
-
-let mostrandoTodos = false;
-
-function cargarMas() {
-    mostrandoTodos = true;
-    mostrarHimnos(datosActuales);
-    // Ajustar el scroll
-    setTimeout(() => {
-        window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
-    }, 100);
-}   
 
 // ==========================
 // BOTÓN ADORACIÓN Y ALABANZAS - INSTANTÁNEO
@@ -304,7 +280,7 @@ buscar.addEventListener("keyup", () => {
 
 
 // ==========================
-// FAVORITOS - CORREGIDO CON PREFIJO
+// FAVORITOS - CORREGIDO CON PREFIJO Y TIPO EXPLÍCITO
 // ==========================
 
 function favorito(numero, tipo) {
