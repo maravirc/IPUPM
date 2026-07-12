@@ -151,27 +151,32 @@ function mostrarHimnos(datos) {
             tipo = 'coro';
         }
         
-        const btnFav = esFavorito ? '⭐ Quitar' : '🤍 Favorito';
-        
-        html += `
-            <div class="card" data-numero="${himno.numero}">
-                <div class="cabecera-himno">
-                    <div>
-                        <div class="numero">${icono} ${tipoTexto} ${himno.numero}</div>
-                        <div class="titulo">${himno.titulo}</div>
-                    </div>
-                    <div class="acciones">
-                        <button class="btnPantalla" onclick="pantallaCompleta(${himno.numero})">⛶</button>
-                        <button class="btnSalir" onclick="salirPantallaCompleta(event)">✕</button>
-                    </div>
-                </div>
-                <div class="letra">${himno.letra}</div>
-                <div class="botones">
-                    <button onclick="favorito(${himno.numero}, '${tipo}')">${btnFav}</button>
-                    <button onclick="compartir(${himno.numero})">📤 Compartir</button>
-                </div>
+        // Dentro del for donde se crean las tarjetas
+const btnFav = esFavorito ? '⭐ Quitar' : '🤍 Favorito';
+
+html += `
+    <div class="card" data-numero="${himno.numero}">
+        <div class="cabecera-himno">
+            <div>
+                <div class="numero">${icono} ${tipoTexto} ${himno.numero}</div>
+                <div class="titulo">${himno.titulo}</div>
             </div>
-        `;
+            <div class="acciones">
+                <button class="btnPantalla" onclick="pantallaCompleta(${himno.numero})">⛶</button>
+                <button class="btnSalir" onclick="salirPantallaCompleta(event)">✕</button>
+            </div>
+        </div>
+        <div class="letra">${himno.letra}</div>
+        <div class="botones">
+            <button onclick="favorito(${himno.numero}, '${tipo}')">${btnFav}</button>
+            <button onclick="compartir(${himno.numero})">📤 Compartir</button>
+            <button onclick="compartirApp()" class="btn-compartir-app" style="
+                background: linear-gradient(135deg, #e65100, #f57c00);
+                box-shadow: 0 3px 12px rgba(230, 81, 0, 0.3);
+            ">📱 Compartir App</button>
+        </div>
+    </div>
+`;
     }
     
     // Botón "Ver más"
@@ -492,6 +497,49 @@ function salirPantallaCompleta(event) {
     event.stopPropagation();
     if (document.fullscreenElement) {
         document.exitFullscreen();
+    }
+}
+
+// ==========================
+// COMPARTIR APP - DESDE EL BOTÓN
+// ==========================
+
+function compartirApp() {
+    const url = window.location.href;
+    const titulo = '📖 Himnario IPU Moyobamba';
+    const descripcion = 'Descarga el Himnario de la Iglesia Pentecostal Unida - Moyobamba';
+    
+    // Verificar si ya está instalada como PWA
+    const isStandalone = window.matchMedia('(display-mode: standalone)').matches;
+    
+    let mensaje = '';
+    if (isStandalone) {
+        mensaje = '📖 Himnario IPU Moyobamba\n\n✅ Ya tienes la app instalada.\n\n📤 Comparte este enlace con tus hermanos:';
+    } else {
+        mensaje = '📖 Himnario IPU Moyobamba\n\n📲 INSTALACIÓN:\n' +
+                  '1. Abre este enlace en Chrome o Safari\n' +
+                  '2. Presiona el botón "Instalar App" o "Agregar a pantalla de inicio"\n' +
+                  '3. ¡Listo! Tendrás el himnario siempre disponible\n\n' +
+                  '🔗 Enlace: ' + url;
+    }
+    
+    if (navigator.share) {
+        navigator.share({
+            title: titulo,
+            text: mensaje,
+            url: url
+        }).catch(() => {});
+    } else {
+        // Si no soporta compartir, copiar al portapapeles
+        if (navigator.clipboard) {
+            navigator.clipboard.writeText(mensaje + '\n\n🔗 ' + url).then(() => {
+                mostrarToast('✅ Enlace copiado al portapapeles');
+            }).catch(() => {
+                alert(mensaje + '\n\n🔗 ' + url);
+            });
+        } else {
+            alert(mensaje + '\n\n🔗 ' + url);
+        }
     }
 }
 

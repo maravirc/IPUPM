@@ -1290,4 +1290,23 @@ footer{
     }
 }
 
+/* ==========================
+   BOTÓN COMPARTIR APP
+   ========================== */
+
+   .btn-compartir-app {
+    background: linear-gradient(135deg, #e65100, #f57c00) !important;
+    box-shadow: 0 3px 12px rgba(230, 81, 0, 0.3) !important;
+}
+
+.btn-compartir-app:hover {
+    background: linear-gradient(135deg, #f57c00, #e65100) !important;
+    transform: translateY(-2px) !important;
+    box-shadow: 0 6px 20px rgba(230, 81, 0, 0.4) !important;
+}
+
+/* Modo oscuro */
+.dark .btn-compartir-app {
+    background: linear-gradient(135deg, #bf360c, #e65100) !important;
+}
 }
