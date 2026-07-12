@@ -506,7 +506,7 @@ function salirPantallaCompleta(event) {
 
 function compartirApp() {
     const url = window.location.href;
-    const titulo = '📖 Himnario IPU Moyobamba';
+    const titulo = '📖 Himnario IPUP Moyobamba';
     const descripcion = 'Descarga el Himnario de la Iglesia Pentecostal Unida - Moyobamba';
     
     // Verificar si ya está instalada como PWA
@@ -514,9 +514,9 @@ function compartirApp() {
     
     let mensaje = '';
     if (isStandalone) {
-        mensaje = '📖 Himnario IPU Moyobamba\n\n✅ Ya tienes la app instalada.\n\n📤 Comparte este enlace con tus hermanos:';
+        mensaje = '📖 Himnario IPUP Moyobamba\n\n✅ Ya tienes la app instalada.\n\n📤 Comparte este enlace con tus hermanos:';
     } else {
-        mensaje = '📖 Himnario IPU Moyobamba\n\n📲 INSTALACIÓN:\n' +
+        mensaje = '📖 Himnario IPUP Moyobamba\n\n📲 INSTALACIÓN:\n' +
                   '1. Abre este enlace en Chrome o Safari\n' +
                   '2. Presiona el botón "Instalar App" o "Agregar a pantalla de inicio"\n' +
                   '3. ¡Listo! Tendrás el himnario siempre disponible\n\n' +
