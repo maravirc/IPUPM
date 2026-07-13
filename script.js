@@ -664,6 +664,46 @@ if (SpeechRecognition) {
 }
 
 // ==========================
+// CABECERA FIJA - VERSIÓN SIMPLIFICADA
+// ==========================
+
+function fijarCabecera() {
+    const cards = document.querySelectorAll('.card');
+    
+    cards.forEach(card => {
+        const cabecera = card.querySelector('.cabecera-himno');
+        const letra = card.querySelector('.letra');
+        
+        if (!cabecera || !letra) return;
+        
+        // Hacer que la letra tenga scroll
+        letra.style.maxHeight = '65vh';
+        letra.style.overflowY = 'auto';
+        letra.style.paddingBottom = '20px';
+        
+        // La cabecera se queda fija dentro de la card
+        cabecera.style.position = 'sticky';
+        cabecera.style.top = '0';
+        cabecera.style.zIndex = '10';
+        cabecera.style.background = 'linear-gradient(135deg, #f8faff, #eef4fb)';
+        cabecera.style.backdropFilter = 'blur(10px)';
+        cabecera.style.borderBottom = '1px solid rgba(13,71,161,0.1)';
+        
+        // La card debe tener overflow visible
+        card.style.overflow = 'visible';
+    });
+}
+
+// Ejecutar al cargar y al cambiar
+setTimeout(fijarCabecera, 500);
+
+// Observar cambios en la lista
+const observer = new MutationObserver(() => {
+    setTimeout(fijarCabecera, 300);
+});
+observer.observe(lista, { childList: true, subtree: true });
+
+// ==========================
 // INICIAR
 // ==========================
 
