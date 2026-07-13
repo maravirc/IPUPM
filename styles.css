@@ -1311,4 +1311,19 @@ footer{
 .dark .btn-compartir-app {
     background: linear-gradient(135deg, #bf360c, #e65100) !important;
 }
+
+.card {
+    overflow: visible !important;
+}
+
+.cabecera-himno {
+    position: sticky !important;
+    top: 0 !important;
+    z-index: 10 !important;
+}
+
+.letra {
+    max-height: 70vh !important;
+    overflow-y: auto !important;
+}
 }
