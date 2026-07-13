@@ -664,6 +664,32 @@ if (SpeechRecognition) {
 }
 
 // ==========================
+// DETECTAR CABECERA STICKY (OPCIONAL)
+// ==========================
+
+// Esta función agrega una clase cuando la cabecera está fija
+function detectarSticky() {
+    const cabeceras = document.querySelectorAll('.cabecera-himno');
+    
+    cabeceras.forEach(cabecera => {
+        const rect = cabecera.getBoundingClientRect();
+        // Si la cabecera está en la parte superior (sticky activo)
+        if (rect.top <= 0) {
+            cabecera.classList.add('sticky');
+        } else {
+            cabecera.classList.remove('sticky');
+        }
+    });
+}
+
+// Ejecutar al hacer scroll
+window.addEventListener('scroll', detectarSticky);
+window.addEventListener('resize', detectarSticky);
+
+// Ejecutar después de cargar
+setTimeout(detectarSticky, 500);
+
+// ==========================
 // INICIAR
 // ==========================
 
