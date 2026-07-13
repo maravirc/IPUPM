@@ -1341,4 +1341,42 @@ footer{
     background: linear-gradient(135deg, #1a2744, #0d1f3c) !important;
     border-bottom: 1px solid rgba(100, 181, 246, 0.1) !important;
 }
+
+/* ==========================
+   CABECERA FIJA - SOLO CSS
+   ========================== */
+
+   .card {
+    overflow: visible !important;
+    position: relative !important;
+}
+
+.cabecera-himno {
+    position: sticky !important;
+    top: 0 !important;
+    z-index: 10 !important;
+    background: linear-gradient(135deg, #f8faff, #eef4fb) !important;
+    backdrop-filter: blur(10px) !important;
+    border-bottom: 1px solid rgba(13, 71, 161, 0.1) !important;
+    padding: 15px 20px 12px 20px !important;
+}
+
+.letra {
+    max-height: 400px !important;
+    overflow-y: auto !important;
+    padding: 10px 20px 20px 20px !important;
+}
+
+/* Modo oscuro */
+.dark .cabecera-himno {
+    background: linear-gradient(135deg, #1a2744, #0d1f3c) !important;
+    border-bottom: 1px solid rgba(100, 181, 246, 0.1) !important;
+}
+
+/* Responsive */
+@media (max-width: 600px) {
+    .letra {
+        max-height: 300px !important;
+    }
+}
 }
