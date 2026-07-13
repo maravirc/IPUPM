@@ -667,7 +667,87 @@ if (SpeechRecognition) {
 // ==========================
 // INICIAR
 // ==========================
+// ==========================
+// CABECERA DE HIMNO FIJA - CON JAVASCRIPT
+// ==========================
 
+function hacerCabeceraFija() {
+    // Eliminar cabeceras fijas anteriores
+    document.querySelectorAll('.fixed-header-clone').forEach(el => el.remove());
+    
+    // Obtener todas las tarjetas
+    const cards = document.querySelectorAll('.card');
+    const topbarHeight = document.querySelector('.topbar')?.offsetHeight || 280;
+    
+    cards.forEach((card, index) => {
+        const cabecera = card.querySelector('.cabecera-himno');
+        const letra = card.querySelector('.letra');
+        
+        if (!cabecera || !letra) return;
+        
+        // Crear una copia de la cabecera para mostrar cuando esté fija
+        const clone = cabecera.cloneNode(true);
+        clone.className = 'fixed-header-clone';
+        clone.style.cssText = `
+            position: fixed;
+            top: ${topbarHeight}px;
+            left: 0;
+            right: 0;
+            z-index: 100;
+            background: linear-gradient(135deg, #f8faff, #eef4fb);
+            backdrop-filter: blur(10px);
+            border-bottom: 2px solid rgba(13, 71, 161, 0.1);
+            padding: 15px 20px 12px 20px;
+            display: none;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+            margin: 0;
+            width: 100%;
+            box-sizing: border-box;
+        `;
+        
+        // Ocultar botones en la copia
+        const acciones = clone.querySelector('.acciones');
+        if (acciones) acciones.style.display = 'none';
+        
+        document.body.appendChild(clone);
+        
+        // Función para verificar scroll
+        function verificarScroll() {
+            const rect = card.getBoundingClientRect();
+            const cabeceraRect = cabecera.getBoundingClientRect();
+            
+            // Si la cabecera está a punto de salir de la vista
+            if (rect.top < topbarHeight && rect.bottom > topbarHeight + 50) {
+                clone.style.display = 'flex';
+                cabecera.style.visibility = 'hidden';
+            } else {
+                clone.style.display = 'none';
+                cabecera.style.visibility = 'visible';
+            }
+        }
+        
+        // Escuchar eventos
+        window.addEventListener('scroll', verificarScroll);
+        window.addEventListener('resize', verificarScroll);
+        
+        // Verificar al hacer scroll en la letra
+        letra.addEventListener('scroll', function() {
+            setTimeout(verificarScroll, 50);
+        });
+        
+        // Verificar inicialmente
+        setTimeout(verificarScroll, 100);
+    });
+}
+
+// Ejecutar al cargar
+setTimeout(hacerCabeceraFija, 500);
+
+// Observar cambios en la lista
+const observerLista = new MutationObserver(() => {
+    setTimeout(hacerCabeceraFija, 300);
+});
+observerLista.observe(lista, { childList: true, subtree: true });
 cargarHimnos();
 
 // ==========================

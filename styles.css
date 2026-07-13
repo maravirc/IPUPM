@@ -1311,5 +1311,60 @@ footer{
 .dark .btn-compartir-app {
     background: linear-gradient(135deg, #bf360c, #e65100) !important;
 }
+/* ==========================
+   CABECERA FIJA CON JAVASCRIPT
+   ========================== */
 
+   .fixed-header-clone {
+    display: none !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+}
+
+.fixed-header-clone .numero {
+    color: #0d47a1;
+    font-weight: 700;
+    font-size: 22px;
+    background: white;
+    padding: 4px 14px;
+    border-radius: 30px;
+    display: inline-block;
+    box-shadow: 0 2px 8px rgba(13, 71, 161, 0.08);
+}
+
+.fixed-header-clone .titulo {
+    font-size: 22px;
+    font-weight: 800;
+    color: #0a1a2e;
+    margin-top: 4px;
+}
+
+.dark .fixed-header-clone {
+    background: linear-gradient(135deg, #1a2744, #0d1f3c) !important;
+    border-bottom: 1px solid rgba(100, 181, 246, 0.1) !important;
+}
+
+.dark .fixed-header-clone .numero {
+    background: #1a2d4a;
+    color: #64b5f6;
+}
+
+.dark .fixed-header-clone .titulo {
+    color: #f0f6fc;
+}
+
+@media (max-width: 600px) {
+    .fixed-header-clone {
+        padding: 12px 14px 10px 14px !important;
+    }
+    
+    .fixed-header-clone .numero {
+        font-size: 18px !important;
+        padding: 3px 10px !important;
+    }
+    
+    .fixed-header-clone .titulo {
+        font-size: 18px !important;
+    }
+}
 }
