@@ -573,6 +573,114 @@ btnInstalar.addEventListener("click", async () => {
 });
 
 // ==========================
+// BÚSQUEDA POR VOZ
+// ==========================
+
+const btnVoz = document.getElementById('btnVoz');
+let reconocimiento = null;
+let escuchando = false;
+
+// Verificar si el navegador soporta reconocimiento de voz
+const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+
+if (SpeechRecognition) {
+    // Inicializar reconocimiento
+    reconocimiento = new SpeechRecognition();
+    reconocimiento.lang = 'es-ES';  // Idioma español
+    reconocimiento.continuous = false;
+    reconocimiento.interimResults = true;
+    reconocimiento.maxAlternatives = 1;
+
+    // Evento: cuando se obtienen resultados
+    reconocimiento.addEventListener('result', function(event) {
+        const transcript = event.results[0][0].transcript;
+        const esFinal = event.results[0].isFinal;
+        
+        // Mostrar lo que se está diciendo en el buscador
+        document.getElementById('buscar').value = transcript;
+        
+        if (esFinal) {
+            // Cuando termina de hablar, hacer la búsqueda automáticamente
+            escuchando = false;
+            btnVoz.textContent = '🎤';
+            btnVoz.style.background = '#0d47a1';
+            btnVoz.style.boxShadow = 'none';
+            
+            // Disparar el evento de búsqueda
+            const evento = new Event('input');
+            document.getElementById('buscar').dispatchEvent(evento);
+        }
+    });
+
+    // Evento: cuando empieza a escuchar
+    reconocimiento.addEventListener('start', function() {
+        escuchando = true;
+        btnVoz.textContent = '🔴';
+        btnVoz.style.background = '#d32f2f';
+        btnVoz.style.boxShadow = '0 0 20px rgba(211, 47, 47, 0.5)';
+        document.getElementById('buscar').placeholder = '🎤 Escuchando...';
+    });
+
+    // Evento: cuando termina de escuchar
+    reconocimiento.addEventListener('end', function() {
+        if (escuchando) {
+            escuchando = false;
+            btnVoz.textContent = '🎤';
+            btnVoz.style.background = '#0d47a1';
+            btnVoz.style.boxShadow = 'none';
+            document.getElementById('buscar').placeholder = 'Buscar himno o coro...';
+        }
+    });
+
+    // Evento: cuando hay un error
+    reconocimiento.addEventListener('error', function(event) {
+        console.error('Error en reconocimiento de voz:', event.error);
+        escuchando = false;
+        btnVoz.textContent = '🎤';
+        btnVoz.style.background = '#0d47a1';
+        btnVoz.style.boxShadow = 'none';
+        document.getElementById('buscar').placeholder = 'Buscar himno o coro...';
+        
+        if (event.error === 'not-allowed') {
+            mostrarToast('⚠️ Permiso de micrófono denegado');
+        } else if (event.error === 'no-speech') {
+            mostrarToast('🎤 No se detectó voz, intenta de nuevo');
+        } else {
+            mostrarToast('❌ Error: ' + event.error);
+        }
+    });
+
+    // Evento: clic en el botón de micrófono
+    btnVoz.addEventListener('click', function() {
+        if (escuchando) {
+            // Si está escuchando, detener
+            reconocimiento.stop();
+            escuchando = false;
+            btnVoz.textContent = '🎤';
+            btnVoz.style.background = '#0d47a1';
+            btnVoz.style.boxShadow = 'none';
+            document.getElementById('buscar').placeholder = 'Buscar himno o coro...';
+        } else {
+            // Si no está escuchando, empezar
+            try {
+                reconocimiento.start();
+            } catch (e) {
+                // Si ya está corriendo, detener y volver a empezar
+                reconocimiento.stop();
+                setTimeout(() => {
+                    reconocimiento.start();
+                }, 300);
+            }
+        }
+    });
+
+} else {
+    // Si el navegador no soporta reconocimiento de voz
+    btnVoz.style.display = 'none';
+    console.log('⚠️ El navegador no soporta reconocimiento de voz');
+}
+
+// ==========================
 // INICIAR
 // ==========================
 
