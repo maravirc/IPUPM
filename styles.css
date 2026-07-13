@@ -1342,43 +1342,4 @@ footer{
     border-bottom: 1px solid rgba(100, 181, 246, 0.1) !important;
 }
 
-/* ==========================
-   CABECERA STICKY - DINÁMICA Y NATURAL
-   ========================== */
-
-/* La tarjeta NO debe ocultar el desbordamiento */
-.card {
-    overflow: visible !important;
-    position: relative !important;
-}
-
-/* Cabecera sticky - se queda pegada solo cuando llega arriba */
-.cabecera-himno {
-    position: sticky !important;
-    top: 0 !important;
-    z-index: 10 !important;
-    background: linear-gradient(135deg, #f8faff, #eef4fb) !important;
-    backdrop-filter: blur(10px) !important;
-    border-bottom: 1px solid rgba(13, 71, 161, 0.1) !important;
-    padding: 18px 20px 12px 20px !important;
-    /* Transición suave para que no sea brusco */
-    transition: box-shadow 0.3s ease !important;
-}
-
-/* Cuando está fijo, sombra sutil */
-.cabecera-himno.sticky {
-    box-shadow: 0 4px 20px rgba(0,0,0,0.08) !important;
-}
-
-/* La letra SIN límite de altura - fluye naturalmente */
-.letra {
-    padding: 10px 20px 20px 20px !important;
-    /* Sin max-height, sin overflow, fluye naturalmente */
-}
-
-/* Modo oscuro */
-.dark .cabecera-himno {
-    background: linear-gradient(135deg, #1a2744, #0d1f3c) !important;
-    border-bottom: 1px solid rgba(100, 181, 246, 0.1) !important;
-}
 }
