@@ -1,5 +1,5 @@
-const CACHE_NAME = "himnario-ipu-v18"; // Cambia la versión cuando actualices
-const VERSION = "v18";
+const CACHE_NAME = "himnario-ipu-v19"; // Cambia la versión cuando actualices
+const VERSION = "v19";
 
 // 📁 CORREGIDO: La ruta de los JSON debe ser data/
 const urlsToCache = [
