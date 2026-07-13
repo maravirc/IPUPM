@@ -36,14 +36,13 @@
         <p id="subtitulo">Iglesia Pentecostal Unida - Moyobamba</p>
     </header>
 
-    <section class="busqueda" style="display: flex; gap: 10px; align-items: center; padding: 15px;">
+    <section class="busqueda" style="display: flex; gap: 10px; align-items: center; padding: 15px; position: relative;">
         <input
             type="text"
             id="buscar"
             placeholder="Buscar himno o coro..."
             style="flex: 1;"
         >
-        <!-- 🔥 BOTÓN DE MICRÓFONO -->
         <button id="btnVoz" style="
             background: #0d47a1;
             border: none;
@@ -59,10 +58,38 @@
             align-items: center;
             justify-content: center;
             flex-shrink: 0;
+            position: relative;
         ">
             🎤
         </button>
     </section>
+    
+    <!-- 🔥 INDICADOR DE "ESCUCHANDO" -->
+    <div id="indicadorVoz" style="
+        display: none;
+        position: fixed;
+        bottom: 30px;
+        left: 50%;
+        transform: translateX(-50%);
+        background: rgba(0,0,0,0.85);
+        color: white;
+        padding: 12px 24px;
+        border-radius: 50px;
+        font-size: 16px;
+        z-index: 9999;
+        backdrop-filter: blur(10px);
+        box-shadow: 0 4px 30px rgba(0,0,0,0.3);
+        animation: pulseVoz 1s ease-in-out infinite;
+    ">
+        🎤 Escuchando...
+    </div>
+    
+    <style>
+        @keyframes pulseVoz {
+            0%, 100% { transform: translateX(-50%) scale(1); }
+            50% { transform: translateX(-50%) scale(1.05); }
+        }
+    </style>
 
     <nav class="menu">
         <button id="btnHimnos">📖 Himnos</button>
