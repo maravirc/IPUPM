@@ -104,7 +104,7 @@ main{
     box-shadow:0 4px 20px rgba(0,0,0,.06), 0 1px 4px rgba(0,0,0,.03);
     transition:all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     border:1px solid rgba(255,255,255,0.6);
-    overflow:hidden;
+    overflow:visible;
     position:relative;
 }
 
@@ -1313,66 +1313,42 @@ footer{
 }
 
 /* ==========================
-   TÍTULO DE SECCIÓN FIJO
+   CABECERA STICKY - HIMNO ACTUAL
    ========================== */
 
-/* El contenedor del título de sección */
-.titulo-seccion {
+/* La cabecera del himno se queda fija al hacer scroll */
+.cabecera-himno {
     position: sticky !important;
-    top: 270px !important;  /* Ajusta según la altura de tu topbar */
-    z-index: 50 !important;
-    background: #f5f7fb !important;
-    padding: 10px 15px 8px 15px !important;
-    margin: 0 !important;
-    border-bottom: 2px solid rgba(13, 71, 161, 0.1) !important;
+    top: 0px !important;
+    z-index: 10 !important;
+    background: linear-gradient(135deg, #f8faff, #eef4fb) !important;
     backdrop-filter: blur(10px) !important;
+    border-bottom: 1px solid rgba(13, 71, 161, 0.1) !important;
+    padding: 15px 20px 12px 20px !important;
+    transition: box-shadow 0.3s ease !important;
 }
 
-.titulo-seccion h2 {
-    font-size: 22px !important;
-    color: #0d47a1 !important;
-    font-weight: 700 !important;
-    display: flex !important;
-    align-items: center !important;
-    gap: 10px !important;
-    margin: 0 !important;
+/* Cuando la cabecera está fija (sticky activo) */
+.cabecera-himno.sticky {
+    box-shadow: 0 4px 20px rgba(0,0,0,0.08) !important;
 }
 
-.titulo-seccion .contador {
-    font-size: 14px !important;
-    color: #666 !important;
-    font-weight: 400 !important;
+/* La letra fluye naturalmente SIN límites */
+.letra {
+    padding: 10px 20px 20px 20px !important;
+    /* SIN max-height, SIN overflow-y */
 }
 
 /* Modo oscuro */
-.dark .titulo-seccion {
-    background: #121212 !important;
-    border-bottom: 2px solid rgba(100, 181, 246, 0.1) !important;
+.dark .cabecera-himno {
+    background: linear-gradient(135deg, #1a2744, #0d1f3c) !important;
+    border-bottom: 1px solid rgba(100, 181, 246, 0.1) !important;
 }
 
-.dark .titulo-seccion h2 {
-    color: #64b5f6 !important;
-}
-
-.dark .titulo-seccion .contador {
-    color: #999 !important;
-}
-
-/* Responsive */
-@media (max-width: 700px) {
-    .titulo-seccion {
-        top: 290px !important;  /* Más espacio en móvil */
-        padding: 8px 12px 6px 12px !important;
-    }
-    
-    .titulo-seccion h2 {
-        font-size: 18px !important;
-    }
-}
-
-@media (max-width: 480px) {
-    .titulo-seccion {
-        top: 300px !important;
+/* Para móviles */
+@media (max-width: 600px) {
+    .cabecera-himno {
+        padding: 12px 14px 10px 14px !important;
     }
 }
 
