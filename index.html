@@ -36,24 +36,36 @@
         <p id="subtitulo">Iglesia Pentecostal Unida - Moyobamba</p>
     </header>
 
-    <section class="busqueda" style="display: flex; gap: 10px; align-items: center; padding: 15px; position: relative;">
+    <section class="busqueda" style="display: flex; gap: 0; align-items: center; padding: 15px; position: relative;">
         <input
             type="text"
             id="buscar"
             placeholder="Buscar himno o coro..."
-            style="flex: 1; border: 2px solid #ccc; border-right: none; padding: 10px; border-radius: 8px 0 0 8px; outline: none;"
+            style="
+                flex: 1;
+                border: 2px solid #ccc;
+                border-right: none;
+                padding: 10px;
+                border-radius: 8px 0 0 8px;
+                outline: none;
+                height: 48px;
+                font-size: 16px;
+                box-sizing: border-box;
+            "
         >
         
-        <!-- Contenedor cuadrado con borde en 3 lados -->
+        <!-- Contenedor del botón con la misma altura -->
         <div style="
             border: 2px solid #ccc;
-            border-right: none;
+            border-left: none;
             border-radius: 0 8px 8px 0;
-            padding: 6px;
+            padding: 0 6px;
             background: transparent;
             display: flex;
             align-items: center;
             justify-content: center;
+            height: 48px;
+            box-sizing: border-box;
         ">
             <button id="btnVoz" style="
                 background: #0d47a1;
@@ -63,8 +75,8 @@
                 border-radius: 50%;
                 cursor: pointer;
                 transition: all 0.3s ease;
-                width: 48px;
-                height: 48px;
+                width: 36px;
+                height: 36px;
                 display: flex;
                 align-items: center;
                 justify-content: center;
