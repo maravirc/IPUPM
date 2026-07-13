@@ -104,7 +104,7 @@ main{
     box-shadow:0 4px 20px rgba(0,0,0,.06), 0 1px 4px rgba(0,0,0,.03);
     transition:all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     border:1px solid rgba(255,255,255,0.6);
-    overflow:hidden;
+    overflow:visible;
     position:relative;
 }
 
@@ -1313,27 +1313,34 @@ footer{
 }
 
 /* ==========================
-   CABECERA FIJA
+   CABECERA FIJA - STICKY
    ========================== */
 
-   .card {
+/* La tarjeta DEBE tener overflow visible para que sticky funcione */
+.card {
     overflow: visible !important;
-    position: relative !important;
 }
 
+/* Cabecera sticky - se queda fija cuando llega a la parte superior */
 .cabecera-himno {
     position: sticky !important;
-    top: 0 !important;
+    top: 0px !important;
     z-index: 10 !important;
     background: linear-gradient(135deg, #f8faff, #eef4fb) !important;
     backdrop-filter: blur(10px) !important;
     border-bottom: 1px solid rgba(13, 71, 161, 0.1) !important;
+    padding: 15px 20px 10px 20px !important;
 }
 
+/* La letra fluye naturalmente - SIN max-height, SIN overflow */
 .letra {
-    max-height: 65vh !important;
-    overflow-y: auto !important;
-    padding-right: 5px !important;
+    /* No poner max-height, no poner overflow-y */
+    padding: 10px 20px 20px 20px !important;
+}
+
+/* Cuando el sticky está activo, sombra sutil */
+.cabecera-himno.sticky {
+    box-shadow: 0 4px 20px rgba(0,0,0,0.08) !important;
 }
 
 /* Modo oscuro */
