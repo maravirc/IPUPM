@@ -104,7 +104,7 @@ main{
     box-shadow:0 4px 20px rgba(0,0,0,.06), 0 1px 4px rgba(0,0,0,.03);
     transition:all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     border:1px solid rgba(255,255,255,0.6);
-    overflow:visible;
+    overflow:hidden;
     position:relative;
 }
 
@@ -139,9 +139,6 @@ main{
     align-items:center;
     padding:18px 20px 10px 20px;
     background:linear-gradient(135deg, #f8faff, #eef4fb);
-    position:sticky;
-    top:0;
-    z-index:10;
 }
 
 .numero{
@@ -1313,69 +1310,6 @@ footer{
 /* Modo oscuro */
 .dark .btn-compartir-app {
     background: linear-gradient(135deg, #bf360c, #e65100) !important;
-}
-
-/* ==========================
-   TÍTULO DE SECCIÓN FIJO - STICKY
-   ========================== */
-
-   .titulo-seccion {
-    position: sticky !important;
-    top: 275px !important;  /* Ajusta según tu topbar */
-    z-index: 50 !important;
-    background: #f5f7fb !important;
-    padding: 10px 15px 8px 15px !important;
-    margin: 0 !important;
-    border-bottom: 2px solid rgba(13, 71, 161, 0.1) !important;
-    backdrop-filter: blur(10px) !important;
-}
-
-.titulo-seccion h2 {
-    font-size: 22px !important;
-    color: #0d47a1 !important;
-    font-weight: 700 !important;
-    display: flex !important;
-    align-items: center !important;
-    gap: 10px !important;
-    margin: 0 !important;
-}
-
-.titulo-seccion .contador {
-    font-size: 14px !important;
-    color: #666 !important;
-    font-weight: 400 !important;
-}
-
-/* Modo oscuro */
-.dark .titulo-seccion {
-    background: #121212 !important;
-    border-bottom: 2px solid rgba(100, 181, 246, 0.1) !important;
-}
-
-.dark .titulo-seccion h2 {
-    color: #64b5f6 !important;
-}
-
-.dark .titulo-seccion .contador {
-    color: #999 !important;
-}
-
-/* Responsive */
-@media (max-width: 700px) {
-    .titulo-seccion {
-        top: 295px !important;
-        padding: 8px 12px 6px 12px !important;
-    }
-    
-    .titulo-seccion h2 {
-        font-size: 18px !important;
-    }
-}
-
-@media (max-width: 480px) {
-    .titulo-seccion {
-        top: 310px !important;
-    }
 }
 
 }
