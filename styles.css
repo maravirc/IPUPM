@@ -104,7 +104,7 @@ main{
     box-shadow:0 4px 20px rgba(0,0,0,.06), 0 1px 4px rgba(0,0,0,.03);
     transition:all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     border:1px solid rgba(255,255,255,0.6);
-    overflow:visible;  /* 🔥 CAMBIADO: de 'hidden' a 'visible' para que funcione sticky */
+    overflow:hidden;
     position:relative;
 }
 
@@ -139,11 +139,6 @@ main{
     align-items:center;
     padding:18px 20px 10px 20px;
     background:linear-gradient(135deg, #f8faff, #eef4fb);
-    position:sticky;      /* 🔥 NUEVO: Se mantiene fija */
-    top:0;                /* 🔥 NUEVO: Se pega arriba */
-    z-index:10;           /* 🔥 NUEVO: Por encima del contenido */
-    backdrop-filter:blur(10px); /* 🔥 NUEVO: Efecto de vidrio */
-    border-bottom:1px solid rgba(13,71,161,0.1);
 }
 
 .numero{
@@ -173,8 +168,6 @@ main{
     font-size:18px;
     color:#1f2a3f;
     font-weight:400;
-    max-height:70vh;      /* 🔥 NUEVO: Altura máxima para scroll */
-    overflow-y:auto;      /* 🔥 NUEVO: Scroll interno */
 }
 
 /* Botones de acción */
@@ -257,8 +250,8 @@ footer{
     overflow-y:auto;
     border-radius:0;
     border:none;
-    display: flex;
-    flex-direction: column;
+    display: flex;           /* ← NUEVO */
+    flex-direction: column;  /* ← NUEVO */
 }
 
 .card:fullscreen::before{
@@ -266,14 +259,19 @@ footer{
 }
 
 .card:fullscreen .cabecera-himno{
-    position: sticky;
-    top: 0;
-    z-index: 999;
+    /* background:rgba(13,71,161,0.92);
+    backdrop-filter:blur(12px);
+    padding:20px 28px;
+    box-shadow:0 4px 30px rgba(0,0,0,0.3); */
+
+    position: sticky;        /* ← NUEVO: Fija la cabecera */
+    top: 0;                  /* ← NUEVO: Se pega arriba */
+    z-index: 999;            /* ← NUEVO: Por encima del contenido */
     background:rgba(13,71,161,0.95);
     backdrop-filter:blur(12px);
     padding:20px 28px;
     box-shadow:0 4px 30px rgba(0,0,0,0.3);
-    flex-shrink: 0;
+    flex-shrink: 0;          /* ← NUEVO: Evita que se encoja */
 }
 
 .card:fullscreen .numero{
@@ -293,8 +291,8 @@ footer{
     font-size:26px;
     line-height:1.7;
     color:#e3edfb;
-    flex: 1;
-    overflow-y: auto;
+    flex: 1;               /* ← NUEVO: Ocupa el espacio restante */
+    overflow-y: auto;      /* ← NUEVO: Scroll si es necesario */
 }
 
 .card:fullscreen .botones{
@@ -332,7 +330,6 @@ footer{
 
 .dark .cabecera-himno{
     background:linear-gradient(135deg, #1a2744, #0d1f3c);
-    border-bottom:1px solid rgba(100,181,246,0.1); /* 🔥 NUEVO: Modo oscuro */
 }
 
 .dark .numero{
@@ -380,7 +377,6 @@ footer{
         font-size:20px;
         line-height:1.6;
         padding:6px 16px 14px 16px;
-        max-height:60vh;      /* 🔥 NUEVO: Menor altura en móvil */
     }
 
     .cabecera-himno{
@@ -398,8 +394,8 @@ footer{
 
     .menu{
         flex-direction:column;
-        margin-top: -6;
-        padding-top: 0;
+        margin-top: -6;           /* Elimina margen superior */
+        padding-top: 0;          /* Elimina padding superior */
     }
 
     .menu button{
@@ -446,7 +442,6 @@ footer{
         font-size:18px;
         padding:4px 14px 12px 14px;
         line-height:1.6;
-        max-height:55vh;      /* 🔥 NUEVO: Aún menor en móvil pequeño */
     }
 
     .numero{
@@ -825,12 +820,14 @@ footer{
         display: flex;
         align-items: center;
         justify-content: center;
-        padding: 0;
-        margin: 0;
-        line-height: 1;
-        text-align: center;
+        padding: 0;           /* ← Eliminar padding */
+        margin: 0;            /* ← Eliminar margin */
+        line-height: 1;       /* ← Importante para centrar texto */
+        text-align: center;   /* ← Asegura centrado horizontal */
         border-radius: 50%;
+        /* Asegurar que el contenido no se desborde */
         overflow: hidden;
+        /* Evitar que el texto se mueva */
         box-sizing: border-box;
     }
 
@@ -925,17 +922,50 @@ footer{
 .header-actions {
     z-index: 1001;
 }
+/* ==========================
+   BOTÓN DE CIERRE (ENGANCHE)
+   ========================== 
 
+   .header-actions {
+    position: fixed;
+    top: 15px;
+    right: 15px;
+    z-index: 1001;
+}
+
+.btn-engranaje {
+    background: rgba(255, 255, 255, 0.95);
+    border: none;
+    border-radius: 50%;
+    width: 48px;
+    height: 48px;
+    font-size: 22px;
+    cursor: pointer;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255,255,255,0.3);
+    position: relative;
+}
+
+.btn-engranaje:hover {
+    transform: rotate(90deg) scale(1.05);
+    box-shadow: 0 6px 25px rgba(0,0,0,0.3);
+}
+
+.btn-engranaje:active {
+    transform: rotate(90deg) scale(0.95);
+}
+*/
 /* MODO OSCURO */
 .dark .btn-engranaje {
     background: rgba(26, 26, 46, 0.95);
     border-color: rgba(255,255,255,0.1);
     color: #fff;
     box-shadow: 0 4px 15px rgba(0,0,0,0.4);
-}
-
-.dark .btn-engranaje:hover {
-    box-shadow: 0 6px 25px rgba(0,0,0,0.6);
 }
 
 /* RESPONSIVE */
@@ -950,9 +980,7 @@ footer{
         height: 42px;
         font-size: 18px;
     }
-}
-
-/* ==========================
+    /* ==========================
    TÍTULO DE SECCIÓN
    ========================== */
 
@@ -998,23 +1026,160 @@ footer{
 }
 
 /* ==========================
-   BOTÓN COMPARTIR APP
+   BOTÓN VER MÁS
    ========================== */
 
-.btn-compartir-app {
-    background: linear-gradient(135deg, #e65100, #f57c00) !important;
-    box-shadow: 0 3px 12px rgba(230, 81, 0, 0.3) !important;
+   .ver-mas {
+    text-align: center;
+    padding: 20px 0 30px 0;
+    width: 100%;
 }
 
-.btn-compartir-app:hover {
-    background: linear-gradient(135deg, #f57c00, #e65100) !important;
-    transform: translateY(-2px) !important;
-    box-shadow: 0 6px 20px rgba(230, 81, 0, 0.4) !important;
+.btn-ver-mas {
+    background: linear-gradient(135deg, #0d47a1, #1565c0);
+    color: white;
+    border: none;
+    padding: 14px 30px;
+    border-radius: 12px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(13, 71, 161, 0.3);
+    width: auto;
+    min-width: 200px;
 }
 
-/* Modo oscuro */
-.dark .btn-compartir-app {
-    background: linear-gradient(135deg, #bf360c, #e65100) !important;
+.btn-ver-mas:hover {
+    transform: scale(1.05);
+    box-shadow: 0 6px 25px rgba(13, 71, 161, 0.5);
+}
+
+.btn-ver-mas:active {
+    transform: scale(0.95);
+}
+
+/* MODO OSCURO */
+.dark .btn-ver-mas {
+    background: linear-gradient(135deg, #1a2744, #1e88e5);
+}
+
+/* ==========================
+   BOTÓN VER MÁS
+   ========================== */
+
+   .ver-mas {
+    text-align: center;
+    padding: 25px 0 35px 0;
+    width: 100%;
+    position: relative;
+}
+
+/* Línea decorativa antes del botón */
+.ver-mas::before {
+    content: '';
+    display: block;
+    width: 60%;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, #0d47a1, transparent);
+    margin: 0 auto 20px auto;
+    opacity: 0.3;
+}
+
+.btn-ver-mas {
+    background: linear-gradient(135deg, #0d47a1, #1565c0);
+    color: white;
+    border: none;
+    padding: 14px 35px;
+    border-radius: 50px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 20px rgba(13, 71, 161, 0.35);
+    letter-spacing: 0.5px;
+    position: relative;
+    overflow: hidden;
+}
+
+/* Efecto de brillo al pasar el mouse */
+.btn-ver-mas::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 60%);
+    opacity: 0;
+    transition: opacity 0.5s ease;
+    transform: scale(0.8);
+}
+
+.btn-ver-mas:hover::before {
+    opacity: 1;
+    transform: scale(1);
+}
+
+.btn-ver-mas:hover {
+    transform: translateY(-3px) scale(1.03);
+    box-shadow: 0 8px 35px rgba(13, 71, 161, 0.5);
+    background: linear-gradient(135deg, #1565c0, #0d47a1);
+}
+
+.btn-ver-mas:active {
+    transform: scale(0.95);
+    box-shadow: 0 2px 10px rgba(13, 71, 161, 0.3);
+}
+
+/* Icono del botón */
+.btn-ver-mas .icono {
+    display: inline-block;
+    margin-right: 8px;
+    transition: transform 0.3s ease;
+}
+
+.btn-ver-mas:hover .icono {
+    transform: translateY(-2px);
+}
+
+/* Contador de restantes */
+.btn-ver-mas .contador-restantes {
+    background: rgba(255, 255, 255, 0.2);
+    padding: 2px 12px;
+    border-radius: 20px;
+    font-size: 13px;
+    margin-left: 8px;
+}
+
+/* ==========================
+   MODO OSCURO
+   ========================== */
+
+.dark .ver-mas::before {
+    background: linear-gradient(90deg, transparent, #1e88e5, transparent);
+}
+
+.dark .btn-ver-mas {
+    background: linear-gradient(135deg, #1a2744, #1e88e5);
+    box-shadow: 0 4px 20px rgba(30, 136, 229, 0.3);
+}
+
+.dark .btn-ver-mas:hover {
+    background: linear-gradient(135deg, #1e88e5, #1565c0);
+    box-shadow: 0 8px 35px rgba(30, 136, 229, 0.5);
+}
+
+.dark .btn-ver-mas .contador-restantes {
+    background: rgba(255, 255, 255, 0.15);
+}
+
+.btn-ver-mas{
+    padding: 12px 25px;
+    font-size: 14px;
+    width: 90%;
+    max-width: 300px;
+    border-radius: 40px;
 }
 
 /* ==========================
@@ -1125,4 +1290,25 @@ footer{
         font-size: 12px !important;
         width: 95% !important;
     }
+}
+
+/* ==========================
+   BOTÓN COMPARTIR APP
+   ========================== */
+
+   .btn-compartir-app {
+    background: linear-gradient(135deg, #e65100, #f57c00) !important;
+    box-shadow: 0 3px 12px rgba(230, 81, 0, 0.3) !important;
+}
+
+.btn-compartir-app:hover {
+    background: linear-gradient(135deg, #f57c00, #e65100) !important;
+    transform: translateY(-2px) !important;
+    box-shadow: 0 6px 20px rgba(230, 81, 0, 0.4) !important;
+}
+
+/* Modo oscuro */
+.dark .btn-compartir-app {
+    background: linear-gradient(135deg, #bf360c, #e65100) !important;
+}
 }
