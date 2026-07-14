@@ -639,7 +639,7 @@ function detenerReconocimiento() {
         } catch (e) {}
     }
 
-    btnVoz.textContent = '🎤';
+    btnVoz.textContent = '🎙️';
     btnVoz.style.background = '#0d47a1';
     btnVoz.style.boxShadow = 'none';
     indicadorVoz.style.display = 'none';
