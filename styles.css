@@ -173,6 +173,8 @@ main{
     font-size:18px;
     color:#1f2a3f;
     font-weight:400;
+    max-height:400px;    /* 🔥 NUEVO: Altura máxima para scroll */
+    overflow-y:auto;     /* 🔥 NUEVO: Scroll interno */
 }
 
 /* Botones de acción */
