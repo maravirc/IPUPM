@@ -1312,4 +1312,29 @@ footer{
     background: linear-gradient(135deg, #bf360c, #e65100) !important;
 }
 
+/* ==========================
+   BOTÓN ACTIVO - AZUL VERDOSO
+   ========================== */
+
+   .menu button.activo {
+    background: #00897b !important;  /* Azul verdoso/teal */
+    box-shadow: 0 4px 15px rgba(0, 137, 123, 0.4) !important;
+    transform: scale(1.05) !important;
+    transition: all 0.3s ease !important;
+}
+
+.menu button.activo:hover {
+    background: #00796b !important;
+    box-shadow: 0 6px 25px rgba(0, 137, 123, 0.5) !important;
+}
+
+/* MODO OSCURO */
+.dark .menu button.activo {
+    background: #26a69a !important;
+    box-shadow: 0 4px 15px rgba(38, 166, 154, 0.4) !important;
+}
+
+.dark .menu button.activo:hover {
+    background: #2bbbad !important;
+}
 }

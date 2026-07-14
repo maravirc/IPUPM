@@ -73,6 +73,39 @@ function resetearPaginacion() {
 }
 
 // ==========================
+// BOTÓN ACTIVO - MANTENER COLOR AZUL VERDOSO
+// ==========================
+
+function activarBoton(tipo) {
+    // Quitar clase 'activo' de todos los botones
+    document.querySelectorAll('.menu button').forEach(btn => {
+        btn.classList.remove('activo');
+    });
+    
+    // Agregar clase 'activo' al botón correspondiente
+    if (tipo === 'himnos') {
+        const btn = document.getElementById('btnHimnos');
+        if (btn) btn.classList.add('activo');
+    } else if (tipo === 'coros') {
+        const btn = document.getElementById('btnCoros');
+        if (btn) btn.classList.add('activo');
+    } else if (tipo === 'favoritos') {
+        const btn = document.getElementById('btnFavoritos');
+        if (btn) btn.classList.add('activo');
+    }
+}
+
+function restaurarBotonActivo() {
+    if (tipoActual === 'himnos') {
+        activarBoton('himnos');
+    } else if (tipoActual === 'coros') {
+        activarBoton('coros');
+    } else if (tipoActual === 'favoritos') {
+        activarBoton('favoritos');
+    }
+}
+
+// ==========================
 // CARGAR HIMNOS - UNA SOLA VEZ
 // ==========================
 
@@ -97,6 +130,9 @@ async function cargarHimnos() {
         tipoActual = 'himnos';
         mostrarHimnos(datosHimnosCache);
         actualizarTitulo('himnos', datosHimnosCache.length);
+        
+        // Activar botón Himnos por defecto
+        setTimeout(() => activarBoton('himnos'), 100);
         
     } catch (error) {
         console.error('❌ Error al cargar:', error);
@@ -222,6 +258,9 @@ html += `
             }, 300);
         });
     }
+    
+    // Restaurar el botón activo después de renderizar
+    setTimeout(restaurarBotonActivo, 50);
 }
 
 // ==========================
@@ -236,6 +275,7 @@ document.getElementById("btnCoros").addEventListener("click", () => {
         mostrarHimnos(datosCorosCache);
         actualizarTitulo('coros', datosCorosCache.length);
         buscar.value = '';
+        activarBoton('coros');
     } else {
         lista.innerHTML = "<h2>⚠️ No se pudieron cargar los coros.</h2>";
     }
@@ -253,6 +293,7 @@ document.getElementById("btnHimnos").addEventListener("click", () => {
         mostrarHimnos(datosHimnosCache);
         actualizarTitulo('himnos', datosHimnosCache.length);
         buscar.value = '';
+        activarBoton('himnos');
     }
 });
 
@@ -273,6 +314,7 @@ document.getElementById("btnFavoritos").addEventListener("click", () => {
     mostrarHimnos(listaFavoritos);
     actualizarTitulo('favoritos', listaFavoritos.length);
     buscar.value = '';
+    activarBoton('favoritos');
     
     if (listaFavoritos.length === 0) {
         lista.innerHTML = `<div class="sin-resultados">
@@ -327,6 +369,8 @@ buscar.addEventListener("input", function() {
             mostrarHimnos(favs);
             actualizarTitulo('favoritos', favs.length);
         }
+        // Restaurar botón activo después de limpiar búsqueda
+        setTimeout(restaurarBotonActivo, 50);
         window.scrollTo({ top: 0, behavior: "smooth" });
         return;
     }
@@ -359,6 +403,7 @@ buscar.addEventListener("input", function() {
         } else if (tipoActual === 'favoritos') {
             actualizarTitulo('favoritos', datosABuscar.length);
         }
+        setTimeout(restaurarBotonActivo, 50);
         window.scrollTo({ top: 0, behavior: "smooth" });
         return;
     }
@@ -395,6 +440,9 @@ buscar.addEventListener("input", function() {
             <p>Intenta con otra palabra o número</p>
         </div>`;
     }
+    
+    // Restaurar botón activo después de buscar
+    setTimeout(restaurarBotonActivo, 50);
     
     window.scrollTo({
         top: 0,
@@ -663,12 +711,28 @@ if (SpeechRecognition) {
     console.log('⚠️ El navegador no soporta reconocimiento de voz');
 }
 
+// ==========================
+// TOAST
+// ==========================
+
+function mostrarToast(mensaje) {
+    const toastExistente = document.querySelector('.toast-notification');
+    if (toastExistente) toastExistente.remove();
+    
+    const toast = document.createElement('div');
+    toast.className = 'toast-notification';
+    toast.textContent = mensaje;
+    document.body.appendChild(toast);
+    
+    setTimeout(() => {
+        toast.style.opacity = '0';
+        toast.style.transition = 'opacity 0.4s ease';
+        setTimeout(() => toast.remove(), 400);
+    }, 3000);
+}
 
 // ==========================
 // INICIAR
-// ==========================
-// ==========================
-// CABECERA DE HIMNO FIJA - VERSIÓN SIMPLE Y DIRECTA
 // ==========================
 
 cargarHimnos();
