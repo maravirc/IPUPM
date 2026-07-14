@@ -675,11 +675,22 @@ if (SpeechRecognition) {
 // CABECERA DE HIMNO FIJA - VERSIÓN SIMPLIFICADA
 // ==========================
 
+// ==========================
+// CABECERA DE HIMNO FIJA - VERSIÓN DEFINITIVA
+// ==========================
+
 function hacerCabeceraFija() {
     // Eliminar cabeceras fijas anteriores
     document.querySelectorAll('.fixed-header-clone').forEach(el => el.remove());
     
     const cards = document.querySelectorAll('.card');
+    
+    // Obtener altura del topbar
+    const topbar = document.querySelector('.topbar');
+    const topbarHeight = topbar ? topbar.offsetHeight : 280;
+    
+    // 🔥 GUARDAR LA ALTURA EN UNA VARIABLE GLOBAL
+    window.topbarHeight = topbarHeight;
     
     cards.forEach((card) => {
         const cabecera = card.querySelector('.cabecera-himno');
@@ -687,112 +698,152 @@ function hacerCabeceraFija() {
         
         if (!cabecera || !letra) return;
         
-        // Obtener altura del topbar dinámicamente
-        const topbar = document.querySelector('.topbar');
-        const topbarHeight = topbar ? topbar.offsetHeight : 280;
-        
         // Crear copia de la cabecera
         const clone = cabecera.cloneNode(true);
         clone.className = 'fixed-header-clone';
         
-        // Estilos básicos para la copia
+        // 🔥 ESTILOS MEJORADOS PARA MÓVIL
+        const isMobile = window.innerWidth <= 768;
+        const fontSize = isMobile ? '14px' : '18px';
+        const padding = isMobile ? '10px 12px' : '12px 20px';
+        
         clone.style.cssText = `
             position: fixed;
             top: ${topbarHeight}px;
             left: 0;
             right: 0;
-            z-index: 100;
+            z-index: 1000;
             background: linear-gradient(135deg, #f8faff, #eef4fb);
             backdrop-filter: blur(10px);
             border-bottom: 2px solid rgba(13, 71, 161, 0.1);
-            padding: 12px 16px;
+            padding: ${padding};
             display: none;
             box-shadow: 0 4px 20px rgba(0,0,0,0.08);
             box-sizing: border-box;
             align-items: center;
             justify-content: space-between;
             width: 100%;
+            min-height: ${isMobile ? '44px' : '56px'};
         `;
         
         // Ocultar acciones
         const acciones = clone.querySelector('.acciones');
         if (acciones) acciones.style.display = 'none';
         
-        // Ajustar texto para móvil
+        // 🔥 AJUSTAR TEXTO PARA MÓVIL
         const numero = clone.querySelector('.numero');
         const titulo = clone.querySelector('.titulo');
+        const contenido = clone.querySelector('div');
+        
+        if (contenido) {
+            contenido.style.display = 'flex';
+            contenido.style.alignItems = 'center';
+            contenido.style.gap = '8px';
+            contenido.style.minWidth = '0';
+            contenido.style.flex = '1';
+            contenido.style.overflow = 'hidden';
+            contenido.style.maxWidth = '100%';
+        }
         
         if (numero) {
-            numero.style.fontSize = window.innerWidth <= 600 ? '14px' : '18px';
-            numero.style.padding = window.innerWidth <= 600 ? '2px 10px' : '4px 14px';
+            numero.style.fontSize = fontSize;
+            numero.style.padding = isMobile ? '2px 10px' : '4px 14px';
             numero.style.whiteSpace = 'nowrap';
             numero.style.flexShrink = '0';
         }
         
         if (titulo) {
-            titulo.style.fontSize = window.innerWidth <= 600 ? '14px' : '18px';
+            titulo.style.fontSize = fontSize;
             titulo.style.whiteSpace = 'nowrap';
             titulo.style.overflow = 'hidden';
             titulo.style.textOverflow = 'ellipsis';
-            titulo.style.maxWidth = window.innerWidth <= 600 ? '50vw' : '80vw';
+            titulo.style.maxWidth = isMobile ? '55vw' : '80vw';
             titulo.style.margin = '0';
+            titulo.style.flex = '1';
         }
         
         document.body.appendChild(clone);
         
-        // Variable para controlar el estado
-        let isFixed = false;
+        // 🔥 VARIABLE PARA CONTROLAR EL ESTADO
+        let isVisible = false;
         
-        // Función para verificar scroll
+        // 🔥 FUNCIÓN DE VERIFICACIÓN MEJORADA
         function verificarScroll() {
             const rect = card.getBoundingClientRect();
-            const cabeceraRect = cabecera.getBoundingClientRect();
             
-            // Si la cabecera está a punto de salir de la vista
-            if (rect.top < topbarHeight && rect.bottom > topbarHeight + 30) {
-                if (!isFixed) {
+            // 🔥 CONDICIÓN MEJORADA PARA MÓVIL
+            // Si la tarjeta está visible y la cabecera está en la parte superior
+            const cardTop = rect.top;
+            const cardBottom = rect.bottom;
+            const headerHeight = cabecera.offsetHeight || 50;
+            
+            // Mostrar si la cabecera está a punto de salir o ya salió
+            // pero la tarjeta aún es visible
+            const shouldShow = cardTop < topbarHeight && cardBottom > topbarHeight;
+            
+            if (shouldShow) {
+                if (!isVisible) {
                     clone.style.display = 'flex';
                     cabecera.style.visibility = 'hidden';
-                    isFixed = true;
+                    isVisible = true;
                 }
             } else {
-                if (isFixed) {
+                if (isVisible) {
                     clone.style.display = 'none';
                     cabecera.style.visibility = 'visible';
-                    isFixed = false;
+                    isVisible = false;
                 }
             }
         }
         
-        // Escuchar eventos de scroll
-        window.addEventListener('scroll', verificarScroll);
-        window.addEventListener('resize', verificarScroll);
+        // 🔥 EJECUTAR VERIFICACIÓN CON THROTTLE
+        let ticking = false;
+        function onScroll() {
+            if (!ticking) {
+                window.requestAnimationFrame(function() {
+                    verificarScroll();
+                    ticking = false;
+                });
+                ticking = true;
+            }
+        }
+        
+        // Escuchar eventos con throttle
+        window.addEventListener('scroll', onScroll, { passive: true });
+        window.addEventListener('resize', function() {
+            const newTopbarHeight = topbar ? topbar.offsetHeight : 280;
+            clone.style.top = newTopbarHeight + 'px';
+            verificarScroll();
+        });
         
         // Verificar al hacer scroll en la letra
         letra.addEventListener('scroll', function() {
             clearTimeout(this._timeout);
-            this._timeout = setTimeout(verificarScroll, 50);
+            this._timeout = setTimeout(verificarScroll, 100);
         });
         
         // Verificar inicialmente
-        setTimeout(verificarScroll, 200);
+        setTimeout(verificarScroll, 300);
     });
 }
 
-// Ejecutar al cargar
+// Ejecutar al cargar y al cambiar
 setTimeout(hacerCabeceraFija, 500);
 
 // Recalcular al cambiar orientación
 window.addEventListener('orientationchange', function() {
-    setTimeout(hacerCabeceraFija, 600);
+    setTimeout(function() {
+        document.querySelectorAll('.fixed-header-clone').forEach(el => el.remove());
+        setTimeout(hacerCabeceraFija, 400);
+    }, 600);
 });
 
 // Observar cambios en la lista
-if (lista) {
-    const observerLista = new MutationObserver(() => {
+if (document.getElementById('lista')) {
+    const observerLista = new MutationObserver(function() {
         setTimeout(hacerCabeceraFija, 300);
     });
-    observerLista.observe(lista, { childList: true, subtree: true });
+    observerLista.observe(document.getElementById('lista'), { childList: true, subtree: true });
 }
 cargarHimnos();
 
