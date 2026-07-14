@@ -629,6 +629,23 @@ const indicadorVoz = document.getElementById('indicadorVoz');
 let reconocimiento = null;
 let escuchando = false;
 
+// Detener reconocimiento y restaurar la interfaz
+function detenerReconocimiento() {
+    escuchando = false;
+
+    if (reconocimiento) {
+        try {
+            reconocimiento.abort(); // Cancela inmediatamente
+        } catch (e) {}
+    }
+
+    btnVoz.textContent = '🎤';
+    btnVoz.style.background = '#0d47a1';
+    btnVoz.style.boxShadow = 'none';
+    indicadorVoz.style.display = 'none';
+    document.getElementById('buscar').placeholder = 'Buscar himno o coro...';
+}
+
 const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
 
 if (SpeechRecognition) {
@@ -639,18 +656,18 @@ if (SpeechRecognition) {
     reconocimiento.maxAlternatives = 1;
 
     reconocimiento.addEventListener('result', function(event) {
+
+        // Ignora resultados si ya fue detenido
+        if (!escuchando) return;
+
         const transcript = event.results[0][0].transcript;
         const esFinal = event.results[0].isFinal;
-        
+
         document.getElementById('buscar').value = transcript;
-        
+
         if (esFinal) {
-            escuchando = false;
-            btnVoz.textContent = '🎤';
-            btnVoz.style.background = '#0d47a1';
-            btnVoz.style.boxShadow = 'none';
-            indicadorVoz.style.display = 'none';
-            
+            detenerReconocimiento();
+
             const evento = new Event('input');
             document.getElementById('buscar').dispatchEvent(evento);
         }
@@ -666,24 +683,13 @@ if (SpeechRecognition) {
     });
 
     reconocimiento.addEventListener('end', function() {
-        if (escuchando) {
-            escuchando = false;
-            btnVoz.textContent = '🎤';
-            btnVoz.style.background = '#0d47a1';
-            btnVoz.style.boxShadow = 'none';
-            indicadorVoz.style.display = 'none';
-            document.getElementById('buscar').placeholder = 'Buscar himno o coro...';
-        }
+        detenerReconocimiento();
     });
 
     reconocimiento.addEventListener('error', function(event) {
-        escuchando = false;
-        btnVoz.textContent = '🎤';
-        btnVoz.style.background = '#0d47a1';
-        btnVoz.style.boxShadow = 'none';
-        indicadorVoz.style.display = 'none';
-        document.getElementById('buscar').placeholder = 'Buscar himno o coro...';
-        
+
+        detenerReconocimiento();
+
         if (event.error === 'not-allowed') {
             mostrarToast('⚠️ Permiso de micrófono denegado');
         } else if (event.error === 'no-speech') {
@@ -693,14 +699,19 @@ if (SpeechRecognition) {
 
     btnVoz.addEventListener('click', function() {
         if (escuchando) {
-            reconocimiento.stop();
+            detenerReconocimiento();
         } else {
             try {
                 reconocimiento.start();
             } catch (e) {
-                reconocimiento.stop();
+                try {
+                    reconocimiento.abort();
+                } catch (err) {}
+
                 setTimeout(() => {
-                    reconocimiento.start();
+                    try {
+                        reconocimiento.start();
+                    } catch (err) {}
                 }, 300);
             }
         }
