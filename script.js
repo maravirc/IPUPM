@@ -671,13 +671,18 @@ if (SpeechRecognition) {
 // CABECERA DE HIMNO FIJA - CON JAVASCRIPT
 // ==========================
 
+// ==========================
+// CABECERA DE HIMNO FIJA - CON JAVASCRIPT (VERSIÓN MEJORADA)
+// ==========================
+
 function hacerCabeceraFija() {
     // Eliminar cabeceras fijas anteriores
     document.querySelectorAll('.fixed-header-clone').forEach(el => el.remove());
     
     // Obtener todas las tarjetas
     const cards = document.querySelectorAll('.card');
-    const topbarHeight = document.querySelector('.topbar')?.offsetHeight || 280;
+    const topbar = document.querySelector('.topbar');
+    const topbarHeight = topbar ? topbar.offsetHeight : 280;
     
     cards.forEach((card, index) => {
         const cabecera = card.querySelector('.cabecera-himno');
@@ -685,9 +690,20 @@ function hacerCabeceraFija() {
         
         if (!cabecera || !letra) return;
         
-        // Crear una copia de la cabecera para mostrar cuando esté fija
+        // Crear una copia de la cabecera
         const clone = cabecera.cloneNode(true);
         clone.className = 'fixed-header-clone';
+        
+        // Obtener el ancho de la pantalla
+        const windowWidth = window.innerWidth;
+        const isMobile = windowWidth <= 600;
+        const isSmallMobile = windowWidth <= 400;
+        
+        // Ajustar tamaño de fuente según dispositivo
+        let fontSizeNumero = isSmallMobile ? '12px' : isMobile ? '14px' : '18px';
+        let fontSizeTitulo = isSmallMobile ? '12px' : isMobile ? '14px' : '18px';
+        let padding = isSmallMobile ? '8px 10px' : isMobile ? '10px 12px' : '15px 20px 12px 20px';
+        
         clone.style.cssText = `
             position: fixed;
             top: ${topbarHeight}px;
@@ -697,17 +713,53 @@ function hacerCabeceraFija() {
             background: linear-gradient(135deg, #f8faff, #eef4fb);
             backdrop-filter: blur(10px);
             border-bottom: 2px solid rgba(13, 71, 161, 0.1);
-            padding: 15px 20px 12px 20px;
+            padding: ${padding};
             display: none;
             box-shadow: 0 4px 20px rgba(0,0,0,0.08);
             margin: 0;
             width: 100%;
+            max-width: 100vw;
             box-sizing: border-box;
+            overflow: hidden;
+            align-items: center;
+            justify-content: space-between;
         `;
         
-        // Ocultar botones en la copia
+        // Ajustar estilos internos de la copia
+        const numero = clone.querySelector('.numero');
+        const titulo = clone.querySelector('.titulo');
         const acciones = clone.querySelector('.acciones');
-        if (acciones) acciones.style.display = 'none';
+        
+        if (numero) {
+            numero.style.fontSize = fontSizeNumero;
+            numero.style.padding = isSmallMobile ? '2px 8px' : isMobile ? '2px 10px' : '3px 12px';
+            numero.style.whiteSpace = 'nowrap';
+            numero.style.flexShrink = '0';
+        }
+        
+        if (titulo) {
+            titulo.style.fontSize = fontSizeTitulo;
+            titulo.style.whiteSpace = 'nowrap';
+            titulo.style.overflow = 'hidden';
+            titulo.style.textOverflow = 'ellipsis';
+            titulo.style.maxWidth = isMobile ? '60vw' : '80vw';
+            titulo.style.margin = '0';
+        }
+        
+        if (acciones) {
+            acciones.style.display = 'none';
+        }
+        
+        // Crear un contenedor flex para el contenido
+        const contenido = clone.querySelector('div');
+        if (contenido) {
+            contenido.style.display = 'flex';
+            contenido.style.alignItems = 'center';
+            contenido.style.gap = isMobile ? '6px' : '8px';
+            contenido.style.minWidth = '0';
+            contenido.style.flex = '1';
+            contenido.style.overflow = 'hidden';
+        }
         
         document.body.appendChild(clone);
         
@@ -716,7 +768,6 @@ function hacerCabeceraFija() {
             const rect = card.getBoundingClientRect();
             const cabeceraRect = cabecera.getBoundingClientRect();
             
-            // Si la cabecera está a punto de salir de la vista
             if (rect.top < topbarHeight && rect.bottom > topbarHeight + 50) {
                 clone.style.display = 'flex';
                 cabecera.style.visibility = 'hidden';
