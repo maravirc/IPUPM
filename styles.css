@@ -394,7 +394,7 @@ footer{
 
     .menu{
         flex-direction:column;
-        margin-top: -9;           /* Elimina margen superior */
+        margin-top: -10;           /* Elimina margen superior */
         padding-top: 0;          /* Elimina padding superior */
     }
 
