@@ -238,9 +238,7 @@ main{
 /* ==========================
    TARJETAS DE HIMNOS
 =========================== */
-.busqueda {
-    padding: 5px 15px;     /* ← Cambia esto */
-}
+
 .card{
     background:white;
     margin-bottom:20px;
