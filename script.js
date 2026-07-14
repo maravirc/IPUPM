@@ -667,6 +667,44 @@ if (SpeechRecognition) {
 // ==========================
 // INICIAR
 // ==========================
+// ==========================
+// FORZAR STICKY EN CADA HIMNO
+// ==========================
+
+function aplicarSticky() {
+    // Asegurar que las tarjetas tengan overflow visible
+    document.querySelectorAll('.card').forEach(c => {
+        c.style.overflow = 'visible';
+    });
+    
+    // Aplicar sticky a cada cabecera
+    document.querySelectorAll('.cabecera-himno').forEach(h => {
+        h.style.position = 'sticky';
+        h.style.top = '0px';
+        h.style.zIndex = '10';
+    });
+    
+    // Aplicar scroll a cada letra
+    document.querySelectorAll('.letra').forEach(l => {
+        l.style.maxHeight = window.innerWidth <= 600 ? '50vh' : '70vh';
+        l.style.overflowY = 'auto';
+    });
+}
+
+// Ejecutar al cargar
+setTimeout(aplicarSticky, 100);
+
+// Ejecutar cuando cambie la lista
+const observer = new MutationObserver(() => {
+    setTimeout(aplicarSticky, 100);
+});
+const listaEl = document.getElementById('lista');
+if (listaEl) {
+    observer.observe(listaEl, { childList: true, subtree: true });
+}
+
+// Ejecutar al cambiar tamaño de pantalla
+window.addEventListener('resize', aplicarSticky);
 cargarHimnos();
 
 // ==========================
