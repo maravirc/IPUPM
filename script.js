@@ -734,7 +734,30 @@ function mostrarToast(mensaje) {
 // ==========================
 // INICIAR
 // ==========================
+// ==========================
+// BOTÓN ACTIVO - VERSIÓN SIMPLIFICADA
+// ==========================
 
+document.addEventListener('DOMContentLoaded', function() {
+    const botones = document.querySelectorAll('.menu button');
+    
+    // Función para activar un botón
+    function activarBoton(boton) {
+        botones.forEach(b => b.classList.remove('activo'));
+        if (boton) boton.classList.add('activo');
+    }
+    
+    // Asignar evento a cada botón
+    botones.forEach(boton => {
+        boton.addEventListener('click', function() {
+            activarBoton(this);
+        });
+    });
+    
+    // Activar "Himnos" por defecto
+    const btnHimnos = document.getElementById('btnHimnos');
+    if (btnHimnos) activarBoton(btnHimnos);
+});
 cargarHimnos();
 
 // ==========================
