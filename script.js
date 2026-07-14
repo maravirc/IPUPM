@@ -679,6 +679,10 @@ if (SpeechRecognition) {
 // CABECERA DE HIMNO FIJA - VERSIÓN DEFINITIVA
 // ==========================
 
+// ==========================
+// CABECERA DE HIMNO FIJA - CON MEDIA QUERIES EN JS
+// ==========================
+
 function hacerCabeceraFija() {
     // Eliminar cabeceras fijas anteriores
     document.querySelectorAll('.fixed-header-clone').forEach(el => el.remove());
@@ -689,8 +693,70 @@ function hacerCabeceraFija() {
     const topbar = document.querySelector('.topbar');
     const topbarHeight = topbar ? topbar.offsetHeight : 280;
     
-    // 🔥 GUARDAR LA ALTURA EN UNA VARIABLE GLOBAL
-    window.topbarHeight = topbarHeight;
+    // 🔥 OBTENER TAMAÑO DE PANTALLA
+    const screenWidth = window.innerWidth;
+    
+    // 🔥 CONFIGURACIÓN SEGÚN TAMAÑO (como media queries)
+    let config = {};
+    
+    if (screenWidth <= 380) {
+        // Móvil muy pequeño
+        config = {
+            fontSize: '12px',
+            padding: '6px 8px',
+            numeroPadding: '2px 6px',
+            tituloMaxWidth: '45vw',
+            minHeight: '36px'
+        };
+    } else if (screenWidth <= 480) {
+        // Móvil pequeño
+        config = {
+            fontSize: '13px',
+            padding: '8px 10px',
+            numeroPadding: '2px 8px',
+            tituloMaxWidth: '50vw',
+            minHeight: '40px'
+        };
+    } else if (screenWidth <= 600) {
+        // Móvil mediano
+        config = {
+            fontSize: '14px',
+            padding: '10px 12px',
+            numeroPadding: '2px 10px',
+            tituloMaxWidth: '55vw',
+            minHeight: '44px'
+        };
+    } else if (screenWidth <= 768) {
+        // Tablet pequeña
+        config = {
+            fontSize: '15px',
+            padding: '10px 14px',
+            numeroPadding: '3px 10px',
+            tituloMaxWidth: '60vw',
+            minHeight: '48px'
+        };
+    } else if (screenWidth <= 1024) {
+        // Tablet grande
+        config = {
+            fontSize: '16px',
+            padding: '12px 16px',
+            numeroPadding: '3px 12px',
+            tituloMaxWidth: '70vw',
+            minHeight: '52px'
+        };
+    } else {
+        // PC / Escritorio
+        config = {
+            fontSize: '18px',
+            padding: '12px 20px',
+            numeroPadding: '4px 14px',
+            tituloMaxWidth: '80vw',
+            minHeight: '56px'
+        };
+    }
+    
+    // 🔥 GUARDAR LA CONFIGURACIÓN GLOBAL
+    window.configActual = config;
     
     cards.forEach((card) => {
         const cabecera = card.querySelector('.cabecera-himno');
@@ -702,11 +768,7 @@ function hacerCabeceraFija() {
         const clone = cabecera.cloneNode(true);
         clone.className = 'fixed-header-clone';
         
-        // 🔥 ESTILOS MEJORADOS PARA MÓVIL
-        const isMobile = window.innerWidth <= 768;
-        const fontSize = isMobile ? '14px' : '18px';
-        const padding = isMobile ? '10px 12px' : '12px 20px';
-        
+        // 🔥 APLICAR ESTILOS SEGÚN TAMAÑO
         clone.style.cssText = `
             position: fixed;
             top: ${topbarHeight}px;
@@ -716,21 +778,21 @@ function hacerCabeceraFija() {
             background: linear-gradient(135deg, #f8faff, #eef4fb);
             backdrop-filter: blur(10px);
             border-bottom: 2px solid rgba(13, 71, 161, 0.1);
-            padding: ${padding};
+            padding: ${config.padding};
             display: none;
             box-shadow: 0 4px 20px rgba(0,0,0,0.08);
             box-sizing: border-box;
             align-items: center;
             justify-content: space-between;
             width: 100%;
-            min-height: ${isMobile ? '44px' : '56px'};
+            min-height: ${config.minHeight};
         `;
         
         // Ocultar acciones
         const acciones = clone.querySelector('.acciones');
         if (acciones) acciones.style.display = 'none';
         
-        // 🔥 AJUSTAR TEXTO PARA MÓVIL
+        // 🔥 AJUSTAR TEXTO SEGÚN TAMAÑO
         const numero = clone.querySelector('.numero');
         const titulo = clone.querySelector('.titulo');
         const contenido = clone.querySelector('div');
@@ -738,7 +800,7 @@ function hacerCabeceraFija() {
         if (contenido) {
             contenido.style.display = 'flex';
             contenido.style.alignItems = 'center';
-            contenido.style.gap = '8px';
+            contenido.style.gap = '6px';
             contenido.style.minWidth = '0';
             contenido.style.flex = '1';
             contenido.style.overflow = 'hidden';
@@ -746,39 +808,33 @@ function hacerCabeceraFija() {
         }
         
         if (numero) {
-            numero.style.fontSize = fontSize;
-            numero.style.padding = isMobile ? '2px 10px' : '4px 14px';
+            numero.style.fontSize = config.fontSize;
+            numero.style.padding = config.numeroPadding;
             numero.style.whiteSpace = 'nowrap';
             numero.style.flexShrink = '0';
         }
         
         if (titulo) {
-            titulo.style.fontSize = fontSize;
+            titulo.style.fontSize = config.fontSize;
             titulo.style.whiteSpace = 'nowrap';
             titulo.style.overflow = 'hidden';
             titulo.style.textOverflow = 'ellipsis';
-            titulo.style.maxWidth = isMobile ? '55vw' : '80vw';
+            titulo.style.maxWidth = config.tituloMaxWidth;
             titulo.style.margin = '0';
             titulo.style.flex = '1';
         }
         
         document.body.appendChild(clone);
         
-        // 🔥 VARIABLE PARA CONTROLAR EL ESTADO
+        // Variable para controlar el estado
         let isVisible = false;
         
-        // 🔥 FUNCIÓN DE VERIFICACIÓN MEJORADA
+        // Función de verificación
         function verificarScroll() {
             const rect = card.getBoundingClientRect();
-            
-            // 🔥 CONDICIÓN MEJORADA PARA MÓVIL
-            // Si la tarjeta está visible y la cabecera está en la parte superior
             const cardTop = rect.top;
             const cardBottom = rect.bottom;
-            const headerHeight = cabecera.offsetHeight || 50;
             
-            // Mostrar si la cabecera está a punto de salir o ya salió
-            // pero la tarjeta aún es visible
             const shouldShow = cardTop < topbarHeight && cardBottom > topbarHeight;
             
             if (shouldShow) {
@@ -796,7 +852,7 @@ function hacerCabeceraFija() {
             }
         }
         
-        // 🔥 EJECUTAR VERIFICACIÓN CON THROTTLE
+        // Throttle para mejorar rendimiento
         let ticking = false;
         function onScroll() {
             if (!ticking) {
@@ -808,11 +864,79 @@ function hacerCabeceraFija() {
             }
         }
         
-        // Escuchar eventos con throttle
+        // Escuchar eventos
         window.addEventListener('scroll', onScroll, { passive: true });
         window.addEventListener('resize', function() {
+            // Recalcular altura y configuración
             const newTopbarHeight = topbar ? topbar.offsetHeight : 280;
+            const newScreenWidth = window.innerWidth;
+            
+            // 🔥 ACTUALIZAR CONFIGURACIÓN SI CAMBIÓ EL TAMAÑO
+            let newConfig = config;
+            if (newScreenWidth <= 380) {
+                newConfig = {
+                    fontSize: '12px',
+                    padding: '6px 8px',
+                    numeroPadding: '2px 6px',
+                    tituloMaxWidth: '45vw',
+                    minHeight: '36px'
+                };
+            } else if (newScreenWidth <= 480) {
+                newConfig = {
+                    fontSize: '13px',
+                    padding: '8px 10px',
+                    numeroPadding: '2px 8px',
+                    tituloMaxWidth: '50vw',
+                    minHeight: '40px'
+                };
+            } else if (newScreenWidth <= 600) {
+                newConfig = {
+                    fontSize: '14px',
+                    padding: '10px 12px',
+                    numeroPadding: '2px 10px',
+                    tituloMaxWidth: '55vw',
+                    minHeight: '44px'
+                };
+            } else if (newScreenWidth <= 768) {
+                newConfig = {
+                    fontSize: '15px',
+                    padding: '10px 14px',
+                    numeroPadding: '3px 10px',
+                    tituloMaxWidth: '60vw',
+                    minHeight: '48px'
+                };
+            } else if (newScreenWidth <= 1024) {
+                newConfig = {
+                    fontSize: '16px',
+                    padding: '12px 16px',
+                    numeroPadding: '3px 12px',
+                    tituloMaxWidth: '70vw',
+                    minHeight: '52px'
+                };
+            } else {
+                newConfig = {
+                    fontSize: '18px',
+                    padding: '12px 20px',
+                    numeroPadding: '4px 14px',
+                    tituloMaxWidth: '80vw',
+                    minHeight: '56px'
+                };
+            }
+            
+            // Aplicar nueva configuración
             clone.style.top = newTopbarHeight + 'px';
+            clone.style.padding = newConfig.padding;
+            clone.style.minHeight = newConfig.minHeight;
+            
+            if (numero) {
+                numero.style.fontSize = newConfig.fontSize;
+                numero.style.padding = newConfig.numeroPadding;
+            }
+            if (titulo) {
+                titulo.style.fontSize = newConfig.fontSize;
+                titulo.style.maxWidth = newConfig.tituloMaxWidth;
+            }
+            
             verificarScroll();
         });
         
@@ -827,7 +951,7 @@ function hacerCabeceraFija() {
     });
 }
 
-// Ejecutar al cargar y al cambiar
+// Ejecutar al cargar
 setTimeout(hacerCabeceraFija, 500);
 
 // Recalcular al cambiar orientación
@@ -839,11 +963,12 @@ window.addEventListener('orientationchange', function() {
 });
 
 // Observar cambios en la lista
-if (document.getElementById('lista')) {
+const listaElement = document.getElementById('lista');
+if (listaElement) {
     const observerLista = new MutationObserver(function() {
         setTimeout(hacerCabeceraFija, 300);
     });
-    observerLista.observe(document.getElementById('lista'), { childList: true, subtree: true });
+    observerLista.observe(listaElement, { childList: true, subtree: true });
 }
 cargarHimnos();
 
