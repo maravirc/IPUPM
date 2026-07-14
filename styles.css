@@ -1317,24 +1317,24 @@ footer{
    ========================== */
 
    .menu button.activo {
-    background: #00897b !important;  /* Azul verdoso/teal */
+    background: #032263 !important;  /* Azul verdoso/teal */
     box-shadow: 0 4px 15px rgba(0, 137, 123, 0.4) !important;
     transform: scale(1.05) !important;
     transition: all 0.3s ease !important;
 }
 
 .menu button.activo:hover {
-    background: #00796b !important;
+    background: #032263 !important;
     box-shadow: 0 6px 25px rgba(0, 137, 123, 0.5) !important;
 }
 
 /* MODO OSCURO */
 .dark .menu button.activo {
-    background: #26a69a !important;
+    background: #032263 !important;
     box-shadow: 0 4px 15px rgba(38, 166, 154, 0.4) !important;
 }
 
 .dark .menu button.activo:hover {
-    background: #2bbbad !important;
+    background: #032263 !important;
 }
 }
