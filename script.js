@@ -667,6 +667,166 @@ if (SpeechRecognition) {
 // ==========================
 // INICIAR
 // ==========================
+
+// ==========================
+// CABECERA FIJA QUE CAMBIA CON CADA HIMNO
+// ==========================
+
+function actualizarCabeceraFija() {
+    const cabeceras = document.querySelectorAll('.cabecera-himno');
+    const topbar = document.querySelector('.topbar');
+    const topbarHeight = topbar ? topbar.offsetHeight : 280;
+    
+    // Crear una cabecera fija global si no existe
+    let cabeceraFija = document.getElementById('cabeceraGlobalFija');
+    if (!cabeceraFija) {
+        cabeceraFija = document.createElement('div');
+        cabeceraFija.id = 'cabeceraGlobalFija';
+        cabeceraFija.style.cssText = `
+            position: fixed;
+            top: ${topbarHeight}px;
+            left: 0;
+            right: 0;
+            z-index: 999;
+            background: linear-gradient(135deg, #f8faff, #eef4fb);
+            backdrop-filter: blur(10px);
+            border-bottom: 2px solid rgba(13, 71, 161, 0.1);
+            padding: 12px 16px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+            box-sizing: border-box;
+            display: none;
+            align-items: center;
+            justify-content: space-between;
+            width: 100%;
+            min-height: 50px;
+        `;
+        document.body.appendChild(cabeceraFija);
+    }
+    
+    // Función para actualizar el contenido de la cabecera fija
+    function actualizarContenido(cabecera) {
+        if (!cabecera) {
+            cabeceraFija.style.display = 'none';
+            return;
+        }
+        
+        // Clonar el contenido de la cabecera actual
+        const numero = cabecera.querySelector('.numero');
+        const titulo = cabecera.querySelector('.titulo');
+        
+        cabeceraFija.innerHTML = '';
+        
+        // Crear contenedor
+        const container = document.createElement('div');
+        container.style.cssText = `
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            flex: 1;
+            overflow: hidden;
+            min-width: 0;
+        `;
+        
+        // Clonar número
+        if (numero) {
+            const numClone = numero.cloneNode(true);
+            numClone.style.cssText = `
+                font-size: ${window.innerWidth <= 600 ? '14px' : '18px'};
+                padding: ${window.innerWidth <= 600 ? '2px 10px' : '4px 14px'};
+                white-space: nowrap;
+                flex-shrink: 0;
+                color: #0d47a1;
+                font-weight: 700;
+                background: white;
+                border-radius: 30px;
+                box-shadow: 0 2px 8px rgba(13, 71, 161, 0.08);
+            `;
+            container.appendChild(numClone);
+        }
+        
+        // Clonar título
+        if (titulo) {
+            const titClone = titulo.cloneNode(true);
+            titClone.style.cssText = `
+                font-size: ${window.innerWidth <= 600 ? '14px' : '18px'};
+                font-weight: 800;
+                color: #0a1a2e;
+                margin: 0;
+                white-space: nowrap;
+                overflow: hidden;
+                text-overflow: ellipsis;
+                max-width: ${window.innerWidth <= 600 ? '55vw' : '80vw'};
+                flex: 1;
+            `;
+            container.appendChild(titClone);
+        }
+        
+        cabeceraFija.appendChild(container);
+        cabeceraFija.style.display = 'flex';
+    }
+    
+    // Detectar qué cabecera está visible
+    function encontrarCabeceraActiva() {
+        let cabeceraActiva = null;
+        let maxArea = 0;
+        
+        cabeceras.forEach(cabecera => {
+            const rect = cabecera.getBoundingClientRect();
+            const visibleTop = Math.max(0, rect.top);
+            const visibleBottom = Math.min(window.innerHeight, rect.bottom);
+            const visibleHeight = Math.max(0, visibleBottom - visibleTop);
+            const area = visibleHeight * rect.width;
+            
+            // La cabecera más visible es la activa
+            if (area > maxArea && visibleHeight > 20) {
+                maxArea = area;
+                cabeceraActiva = cabecera;
+            }
+        });
+        
+        return cabeceraActiva;
+    }
+    
+    // Función para actualizar todo
+    function actualizar() {
+        const activa = encontrarCabeceraActiva();
+        if (activa) {
+            actualizarContenido(activa);
+        } else {
+            cabeceraFija.style.display = 'none';
+        }
+    }
+    
+    // Escuchar eventos
+    let timeoutId = null;
+    function handleScroll() {
+        if (timeoutId) return;
+        timeoutId = setTimeout(() => {
+            actualizar();
+            timeoutId = null;
+        }, 50);
+    }
+    
+    window.addEventListener('scroll', handleScroll);
+    window.addEventListener('resize', function() {
+        const newTop = document.querySelector('.topbar')?.offsetHeight || 280;
+        cabeceraFija.style.top = newTop + 'px';
+        actualizar();
+    });
+    
+    // Actualizar al cambiar la lista
+    const observer = new MutationObserver(() => {
+        actualizar();
+    });
+    observer.observe(document.getElementById('lista'), { childList: true, subtree: true });
+    
+    // Actualizar inicialmente
+    setTimeout(actualizar, 300);
+    setTimeout(actualizar, 600);
+}
+
+// Ejecutar al cargar
+setTimeout(actualizarCabeceraFija, 500);
 cargarHimnos();
 
 // ==========================
