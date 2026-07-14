@@ -667,7 +667,32 @@ if (SpeechRecognition) {
 // ==========================
 // INICIAR
 // ==========================
+// ==========================
+// FORZAR STICKY EN CABECERAS
+// ==========================
 
+function forzarSticky() {
+    document.querySelectorAll('.cabecera-himno').forEach(cabecera => {
+        cabecera.style.position = 'sticky';
+        cabecera.style.top = '0px';
+        cabecera.style.zIndex = '10';
+        cabecera.style.backdropFilter = 'blur(10px)';
+    });
+    
+    document.querySelectorAll('.card').forEach(card => {
+        card.style.overflow = 'visible';
+    });
+}
+
+setTimeout(forzarSticky, 100);
+
+const observerSticky = new MutationObserver(() => {
+    setTimeout(forzarSticky, 100);
+});
+const listaSticky = document.getElementById('lista');
+if (listaSticky) {
+    observerSticky.observe(listaSticky, { childList: true, subtree: true });
+}
 cargarHimnos();
 
 // ==========================
