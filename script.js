@@ -681,16 +681,7 @@ function mostrarToast(mensaje) {
 // ==========================
 // INICIAR
 // ==========================
-// ==========================
-// FORZAR STICKY - SOLO UNA LÍNEA
-// ==========================
 
-document.querySelectorAll('.card').forEach(c => c.style.overflow = 'visible');
-document.querySelectorAll('.cabecera-himno').forEach(h => {
-    h.style.position = 'sticky';
-    h.style.top = '0px';
-    h.style.zIndex = '10';
-});
 cargarHimnos();
 
 // ==========================
