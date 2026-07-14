@@ -108,8 +108,11 @@ async function cargarHimnos() {
 // MOSTRAR HIMNOS - CON "VER MÁS"
 // ==========================
 
+// ==========================
+// MOSTRAR HIMNOS - CON CABECERA FIJA ÚNICA
+// ==========================
+
 function mostrarHimnos(datos) {
-    // Guardar referencia
     datosActuales = datos;
     
     if (!datos || datos.length === 0) {
@@ -120,7 +123,6 @@ function mostrarHimnos(datos) {
         return;
     }
     
-    // Decidir cuántos mostrar
     let datosMostrar;
     let mostrarBoton = false;
     
@@ -132,7 +134,6 @@ function mostrarHimnos(datos) {
         mostrarBoton = false;
     }
     
-    // Construir HTML
     let html = '';
     
     for (let i = 0; i < datosMostrar.length; i++) {
@@ -151,35 +152,30 @@ function mostrarHimnos(datos) {
             tipo = 'coro';
         }
         
-        // Dentro del for donde se crean las tarjetas
-const btnFav = esFavorito ? '⭐ Quitar' : '🤍 Favorito';
-
-html += `
-    <div class="card" data-numero="${himno.numero}">
-        <div class="cabecera-himno">
-            <div>
-                <div class="numero">${icono} ${tipoTexto} ${himno.numero}</div>
-                <div class="titulo">${himno.titulo}</div>
+        const btnFav = esFavorito ? '⭐ Quitar' : '🤍 Favorito';
+        
+        html += `
+            <div class="card" data-numero="${himno.numero}" data-tipo="${tipo}">
+                <div class="cabecera-himno" style="display:none;">
+                    <div>
+                        <div class="numero">${icono} ${tipoTexto} ${himno.numero}</div>
+                        <div class="titulo">${himno.titulo}</div>
+                    </div>
+                    <div class="acciones">
+                        <button class="btnPantalla" onclick="pantallaCompleta(${himno.numero})">⛶</button>
+                        <button class="btnSalir" onclick="salirPantallaCompleta(event)">✕</button>
+                    </div>
+                </div>
+                <div class="letra">${himno.letra}</div>
+                <div class="botones">
+                    <button onclick="favorito(${himno.numero}, '${tipo}')">${btnFav}</button>
+                    <button onclick="compartir(${himno.numero})">📤 Compartir</button>
+                    <button onclick="compartirApp()" class="btn-compartir-app">📱 Compartir App</button>
+                </div>
             </div>
-            <div class="acciones">
-                <button class="btnPantalla" onclick="pantallaCompleta(${himno.numero})">⛶</button>
-                <button class="btnSalir" onclick="salirPantallaCompleta(event)">✕</button>
-            </div>
-        </div>
-        <div class="letra">${himno.letra}</div>
-        <div class="botones">
-            <button onclick="favorito(${himno.numero}, '${tipo}')">${btnFav}</button>
-            <button onclick="compartir(${himno.numero})">📤 Compartir</button>
-            <button onclick="compartirApp()" class="btn-compartir-app" style="
-                background: linear-gradient(135deg, #e65100, #f57c00);
-                box-shadow: 0 3px 12px rgba(230, 81, 0, 0.3);
-            ">📱 Compartir App</button>
-        </div>
-    </div>
-`;
+        `;
     }
     
-    // Botón "Ver más"
     if (mostrarBoton) {
         const restantes = datos.length - MAX_INICIAL;
         html += `
@@ -197,12 +193,7 @@ html += `
                     transition: all 0.3s ease;
                     letter-spacing: 0.5px;
                     min-width: 200px;
-                "
-                onmouseover="this.style.transform='translateY(-3px) scale(1.03)'; this.style.boxShadow='0 8px 35px rgba(13, 71, 161, 0.5)'; this.style.background='linear-gradient(135deg, #1565c0, #0d47a1)'"
-                onmouseout="this.style.transform='translateY(0) scale(1)'; this.style.boxShadow='0 4px 20px rgba(13, 71, 161, 0.35)'; this.style.background='linear-gradient(135deg, #0d47a1, #1565c0)'"
-                onmousedown="this.style.transform='scale(0.95)'"
-                onmouseup="this.style.transform='translateY(-3px) scale(1.03)'"
-                >
+                ">
                     📖 Ver más (${restantes} restantes)
                 </button>
             </div>
@@ -210,6 +201,9 @@ html += `
     }
     
     lista.innerHTML = html;
+    
+    // 🔥 CREAR UNA SOLA CABECERA FIJA
+    crearCabeceraFija();
     
     // Event listener para el botón "Ver más"
     const btnVerMas = document.getElementById('btnVerMas');
@@ -665,7 +659,125 @@ if (SpeechRecognition) {
 
 
 // =========================
+// ==========================
+// CABECERA FIJA ÚNICA
+// ==========================
 
+let cabeceraFijaGlobal = null;
+
+function crearCabeceraFija() {
+    // Eliminar cabecera fija anterior si existe
+    if (cabeceraFijaGlobal) {
+        cabeceraFijaGlobal.remove();
+        cabeceraFijaGlobal = null;
+    }
+    
+    // Obtener altura del topbar
+    const topbar = document.querySelector('.topbar');
+    const topbarHeight = topbar ? topbar.offsetHeight : 280;
+    
+    // Crear la cabecera fija
+    cabeceraFijaGlobal = document.createElement('div');
+    cabeceraFijaGlobal.id = 'cabeceraFijaUnica';
+    cabeceraFijaGlobal.style.cssText = `
+        position: fixed;
+        top: ${topbarHeight}px;
+        left: 0;
+        right: 0;
+        z-index: 1000;
+        background: linear-gradient(135deg, #f8faff, #eef4fb);
+        backdrop-filter: blur(10px);
+        border-bottom: 2px solid rgba(13, 71, 161, 0.1);
+        padding: 12px 16px;
+        box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+        box-sizing: border-box;
+        display: none;
+        align-items: center;
+        justify-content: space-between;
+        width: 100%;
+        min-height: 50px;
+    `;
+    document.body.appendChild(cabeceraFijaGlobal);
+    
+    // Iniciar el detector de scroll
+    iniciarDetectorScroll();
+}
+
+function iniciarDetectorScroll() {
+    let timeoutId = null;
+    let ultimoNumero = null;
+    
+    function actualizarCabecera() {
+        const cards = document.querySelectorAll('.card');
+        let cabeceraActiva = null;
+        let maxArea = 0;
+        
+        cards.forEach(card => {
+            const rect = card.getBoundingClientRect();
+            const visibleTop = Math.max(0, rect.top);
+            const visibleBottom = Math.min(window.innerHeight, rect.bottom);
+            const visibleHeight = Math.max(0, visibleBottom - visibleTop);
+            
+            if (visibleHeight > 20 && visibleHeight > maxArea) {
+                maxArea = visibleHeight;
+                cabeceraActiva = card;
+            }
+        });
+        
+        if (cabeceraActiva) {
+            const numero = cabeceraActiva.dataset.numero;
+            const tipo = cabeceraActiva.dataset.tipo || 'himno';
+            
+            // Solo actualizar si cambió el himno
+            if (numero !== ultimoNumero) {
+                ultimoNumero = numero;
+                
+                // Obtener los datos del himno
+                const himno = datosActuales.find(h => h.numero == numero);
+                if (himno) {
+                    const icono = himno.tipo === 'coro' ? '🎵' : '📖';
+                    const tipoTexto = himno.tipo === 'coro' ? 'Adoración y Alabanza' : 'Himno';
+                    
+                    cabeceraFijaGlobal.innerHTML = `
+                        <div style="display:flex;align-items:center;gap:8px;flex:1;overflow:hidden;min-width:0;">
+                            <span style="font-size:${window.innerWidth <= 600 ? '14px' : '18px'};padding:${window.innerWidth <= 600 ? '2px 10px' : '4px 14px'};white-space:nowrap;flex-shrink:0;color:#0d47a1;font-weight:700;background:white;border-radius:30px;box-shadow:0 2px 8px rgba(13,71,161,0.08);">
+                                ${icono} ${tipoTexto} ${himno.numero}
+                            </span>
+                            <span style="font-size:${window.innerWidth <= 600 ? '14px' : '18px'};font-weight:800;color:#0a1a2e;margin:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:${window.innerWidth <= 600 ? '50vw' : '70vw'};flex:1;min-width:0;">
+                                ${himno.titulo}
+                            </span>
+                        </div>
+                    `;
+                    cabeceraFijaGlobal.style.display = 'flex';
+                }
+            }
+        } else {
+            cabeceraFijaGlobal.style.display = 'none';
+            ultimoNumero = null;
+        }
+    }
+    
+    function handleScroll() {
+        if (timeoutId) return;
+        timeoutId = setTimeout(() => {
+            actualizarCabecera();
+            timeoutId = null;
+        }, 80);
+    }
+    
+    window.addEventListener('scroll', handleScroll);
+    window.addEventListener('resize', function() {
+        const newTop = document.querySelector('.topbar')?.offsetHeight || 280;
+        if (cabeceraFijaGlobal) {
+            cabeceraFijaGlobal.style.top = newTop + 'px';
+        }
+        actualizarCabecera();
+    });
+    
+    // Actualizar inicialmente
+    setTimeout(actualizarCabecera, 200);
+    setTimeout(actualizarCabecera, 500);
+}
 cargarHimnos();
 
 // ==========================

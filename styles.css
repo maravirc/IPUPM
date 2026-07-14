@@ -1318,4 +1318,30 @@ footer{
 .dark .btn-compartir-app {
     background: linear-gradient(135deg, #bf360c, #e65100) !important;
 }
+
+/* ==========================
+   CABECERA FIJA ÚNICA
+   ========================== */
+
+   #cabeceraFijaUnica {
+    display: none !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+    box-sizing: border-box !important;
+}
+
+/* Modo oscuro */
+.dark #cabeceraFijaUnica {
+    background: linear-gradient(135deg, #1a2744, #0d1f3c) !important;
+    border-bottom: 1px solid rgba(100, 181, 246, 0.1) !important;
+}
+
+.dark #cabeceraFijaUnica span {
+    color: #f0f6fc !important;
+}
+
+.dark #cabeceraFijaUnica span:first-child {
+    background: #1a2d4a !important;
+    color: #64b5f6 !important;
+}
 }
