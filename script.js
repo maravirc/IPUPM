@@ -108,11 +108,8 @@ async function cargarHimnos() {
 // MOSTRAR HIMNOS - CON "VER MÁS"
 // ==========================
 
-// ==========================
-// MOSTRAR HIMNOS - CON CABECERA FIJA ÚNICA
-// ==========================
-
 function mostrarHimnos(datos) {
+    // Guardar referencia
     datosActuales = datos;
     
     if (!datos || datos.length === 0) {
@@ -123,6 +120,7 @@ function mostrarHimnos(datos) {
         return;
     }
     
+    // Decidir cuántos mostrar
     let datosMostrar;
     let mostrarBoton = false;
     
@@ -134,6 +132,7 @@ function mostrarHimnos(datos) {
         mostrarBoton = false;
     }
     
+    // Construir HTML
     let html = '';
     
     for (let i = 0; i < datosMostrar.length; i++) {
@@ -152,30 +151,35 @@ function mostrarHimnos(datos) {
             tipo = 'coro';
         }
         
-        const btnFav = esFavorito ? '⭐ Quitar' : '🤍 Favorito';
-        
-        html += `
-            <div class="card" data-numero="${himno.numero}" data-tipo="${tipo}">
-                <div class="cabecera-himno" style="display:none;">
-                    <div>
-                        <div class="numero">${icono} ${tipoTexto} ${himno.numero}</div>
-                        <div class="titulo">${himno.titulo}</div>
-                    </div>
-                    <div class="acciones">
-                        <button class="btnPantalla" onclick="pantallaCompleta(${himno.numero})">⛶</button>
-                        <button class="btnSalir" onclick="salirPantallaCompleta(event)">✕</button>
-                    </div>
-                </div>
-                <div class="letra">${himno.letra}</div>
-                <div class="botones">
-                    <button onclick="favorito(${himno.numero}, '${tipo}')">${btnFav}</button>
-                    <button onclick="compartir(${himno.numero})">📤 Compartir</button>
-                    <button onclick="compartirApp()" class="btn-compartir-app">📱 Compartir App</button>
-                </div>
+        // Dentro del for donde se crean las tarjetas
+const btnFav = esFavorito ? '⭐ Quitar' : '🤍 Favorito';
+
+html += `
+    <div class="card" data-numero="${himno.numero}">
+        <div class="cabecera-himno">
+            <div>
+                <div class="numero">${icono} ${tipoTexto} ${himno.numero}</div>
+                <div class="titulo">${himno.titulo}</div>
             </div>
-        `;
+            <div class="acciones">
+                <button class="btnPantalla" onclick="pantallaCompleta(${himno.numero})">⛶</button>
+                <button class="btnSalir" onclick="salirPantallaCompleta(event)">✕</button>
+            </div>
+        </div>
+        <div class="letra">${himno.letra}</div>
+        <div class="botones">
+            <button onclick="favorito(${himno.numero}, '${tipo}')">${btnFav}</button>
+            <button onclick="compartir(${himno.numero})">📤 Compartir</button>
+            <button onclick="compartirApp()" class="btn-compartir-app" style="
+                background: linear-gradient(135deg, #e65100, #f57c00);
+                box-shadow: 0 3px 12px rgba(230, 81, 0, 0.3);
+            ">📱 Compartir App</button>
+        </div>
+    </div>
+`;
     }
     
+    // Botón "Ver más"
     if (mostrarBoton) {
         const restantes = datos.length - MAX_INICIAL;
         html += `
@@ -193,7 +197,12 @@ function mostrarHimnos(datos) {
                     transition: all 0.3s ease;
                     letter-spacing: 0.5px;
                     min-width: 200px;
-                ">
+                "
+                onmouseover="this.style.transform='translateY(-3px) scale(1.03)'; this.style.boxShadow='0 8px 35px rgba(13, 71, 161, 0.5)'; this.style.background='linear-gradient(135deg, #1565c0, #0d47a1)'"
+                onmouseout="this.style.transform='translateY(0) scale(1)'; this.style.boxShadow='0 4px 20px rgba(13, 71, 161, 0.35)'; this.style.background='linear-gradient(135deg, #0d47a1, #1565c0)'"
+                onmousedown="this.style.transform='scale(0.95)'"
+                onmouseup="this.style.transform='translateY(-3px) scale(1.03)'"
+                >
                     📖 Ver más (${restantes} restantes)
                 </button>
             </div>
@@ -201,9 +210,6 @@ function mostrarHimnos(datos) {
     }
     
     lista.innerHTML = html;
-    
-    // 🔥 CREAR UNA SOLA CABECERA FIJA
-    crearCabeceraFija();
     
     // Event listener para el botón "Ver más"
     const btnVerMas = document.getElementById('btnVerMas');
@@ -658,7 +664,12 @@ if (SpeechRecognition) {
 }
 
 
-// =========================
+// ==========================
+// INICIAR
+// ==========================
+// ==========================
+// CABECERA DE HIMNO FIJA - VERSIÓN SIMPLE Y DIRECTA
+// ==========================
 
 cargarHimnos();
 
