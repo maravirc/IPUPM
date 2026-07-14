@@ -1318,6 +1318,7 @@ footer{
 
    .menu button.activo {
     background: #032263 !important;
+    color: white !important;
     box-shadow: 0 4px 15px rgba(3, 21, 121, 0.4) !important;
     transform: scale(1.0) !important;
     transition: all 0.3s ease !important;
@@ -1328,10 +1329,7 @@ footer{
     box-shadow: 0 6px 25px rgba(3, 27, 136, 0.5) !important;
 }
 
-/* ==========================
-   MODO OSCURO
-   ========================== */
-
+/* MODO OSCURO */
 .dark .menu button.activo {
     background: #032263 !important;
     box-shadow: 0 4px 15px rgba(4, 18, 97, 0.4) !important;
@@ -1404,13 +1402,11 @@ footer{
    TOUCH DEVICES - MEJOR INTERACCIÓN
    ========================== */
 
-/* Para dispositivos táctiles (celulares y tablets) */
 @media (hover: none) and (pointer: coarse) {
     .menu button.activo {
         background: #032263 !important;
         box-shadow: 0 4px 20px rgba(3, 21, 121, 0.5) !important;
         transform: scale(0.98) !important;
-        /* Feedback táctil */
         -webkit-tap-highlight-color: transparent;
     }
 
@@ -1434,7 +1430,6 @@ footer{
    MODO RETRATO / PAISAJE (celulares)
    ========================== */
 
-/* Celulares en modo retrato */
 @media (max-width: 480px) and (orientation: portrait) {
     .menu button.activo {
         background: #032263 !important;
@@ -1443,7 +1438,6 @@ footer{
         padding: 10px 16px !important;
         font-size: 13px !important;
         width: 100% !important;
-        /* Ocupa todo el ancho en móvil */
     }
 
     .menu button.activo:active {
@@ -1452,7 +1446,6 @@ footer{
     }
 }
 
-/* Celulares en modo paisaje */
 @media (max-width: 850px) and (orientation: landscape) {
     .menu button.activo {
         background: #032263 !important;
