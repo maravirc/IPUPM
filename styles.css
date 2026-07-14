@@ -1269,7 +1269,7 @@ footer{
    RESPONSIVE - MÓVIL
    ========================== */
 
-@media (max-width: 600px) {
+@media (max-width: 700px) {
     .ver-mas {
         padding: 15px 0 !important;
     }
