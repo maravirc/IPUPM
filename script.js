@@ -671,59 +671,31 @@ if (SpeechRecognition) {
 // CABECERA DE HIMNO FIJA - VERSIÓN MEJORADA
 // ==========================
 
+// ==========================
+// CABECERA DE HIMNO FIJA - VERSIÓN SIMPLIFICADA
+// ==========================
+
 function hacerCabeceraFija() {
     // Eliminar cabeceras fijas anteriores
     document.querySelectorAll('.fixed-header-clone').forEach(el => el.remove());
     
-    // Obtener todas las tarjetas
     const cards = document.querySelectorAll('.card');
     
-    // 🔥 CALCULAR ALTURA CORRECTA DEL TOPBAR
-    const topbar = document.querySelector('.topbar');
-    let topbarHeight = 0;
-    
-    if (topbar) {
-        // Obtener la altura total del topbar (header + buscador + menu)
-        topbarHeight = topbar.offsetHeight;
-        console.log('📏 Altura del topbar:', topbarHeight);
-    } else {
-        // Fallback si no encuentra el topbar
-        topbarHeight = window.innerWidth <= 600 ? 280 : 320;
-    }
-    
-    // 🔥 Ajuste para tablet (pantallas medianas)
-    if (window.innerWidth > 768 && window.innerWidth <= 1024) {
-        topbarHeight = topbarHeight - 10; // Ajuste fino para tablet
-    }
-    
-    // 🔥 Ajuste para móvil
-    if (window.innerWidth <= 768) {
-        topbarHeight = topbarHeight + 5; // Pequeño ajuste para móvil
-    }
-    
-    cards.forEach((card, index) => {
+    cards.forEach((card) => {
         const cabecera = card.querySelector('.cabecera-himno');
         const letra = card.querySelector('.letra');
         
         if (!cabecera || !letra) return;
         
-        // Crear una copia de la cabecera
+        // Obtener altura del topbar dinámicamente
+        const topbar = document.querySelector('.topbar');
+        const topbarHeight = topbar ? topbar.offsetHeight : 280;
+        
+        // Crear copia de la cabecera
         const clone = cabecera.cloneNode(true);
         clone.className = 'fixed-header-clone';
         
-        // Obtener el ancho de la pantalla
-        const windowWidth = window.innerWidth;
-        const isMobile = windowWidth <= 768;
-        const isTablet = windowWidth > 768 && windowWidth <= 1024;
-        const isSmallMobile = windowWidth <= 480;
-        
-        // Ajustar tamaño según dispositivo
-        let fontSizeNumero = isSmallMobile ? '13px' : isMobile ? '15px' : isTablet ? '17px' : '18px';
-        let fontSizeTitulo = isSmallMobile ? '13px' : isMobile ? '15px' : isTablet ? '17px' : '18px';
-        let padding = isSmallMobile ? '8px 10px' : isMobile ? '10px 14px' : isTablet ? '12px 16px' : '15px 20px 12px 20px';
-        let maxWidthTitulo = isMobile ? '55vw' : isTablet ? '65vw' : '80vw';
-        
-        // 🔥 ESTABLECER LA POSICIÓN TOP CORRECTA
+        // Estilos básicos para la copia
         clone.style.cssText = `
             position: fixed;
             top: ${topbarHeight}px;
@@ -733,86 +705,68 @@ function hacerCabeceraFija() {
             background: linear-gradient(135deg, #f8faff, #eef4fb);
             backdrop-filter: blur(10px);
             border-bottom: 2px solid rgba(13, 71, 161, 0.1);
-            padding: ${padding};
+            padding: 12px 16px;
             display: none;
             box-shadow: 0 4px 20px rgba(0,0,0,0.08);
-            margin: 0;
-            width: 100%;
-            max-width: 100vw;
             box-sizing: border-box;
-            overflow: hidden;
             align-items: center;
             justify-content: space-between;
+            width: 100%;
         `;
         
-        // Ajustar estilos internos de la copia
+        // Ocultar acciones
+        const acciones = clone.querySelector('.acciones');
+        if (acciones) acciones.style.display = 'none';
+        
+        // Ajustar texto para móvil
         const numero = clone.querySelector('.numero');
         const titulo = clone.querySelector('.titulo');
-        const acciones = clone.querySelector('.acciones');
         
         if (numero) {
-            numero.style.fontSize = fontSizeNumero;
-            numero.style.padding = isSmallMobile ? '2px 8px' : isMobile ? '2px 10px' : '3px 12px';
+            numero.style.fontSize = window.innerWidth <= 600 ? '14px' : '18px';
+            numero.style.padding = window.innerWidth <= 600 ? '2px 10px' : '4px 14px';
             numero.style.whiteSpace = 'nowrap';
             numero.style.flexShrink = '0';
         }
         
         if (titulo) {
-            titulo.style.fontSize = fontSizeTitulo;
+            titulo.style.fontSize = window.innerWidth <= 600 ? '14px' : '18px';
             titulo.style.whiteSpace = 'nowrap';
             titulo.style.overflow = 'hidden';
             titulo.style.textOverflow = 'ellipsis';
-            titulo.style.maxWidth = maxWidthTitulo;
+            titulo.style.maxWidth = window.innerWidth <= 600 ? '50vw' : '80vw';
             titulo.style.margin = '0';
-        }
-        
-        if (acciones) {
-            acciones.style.display = 'none';
-        }
-        
-        // Crear un contenedor flex para el contenido
-        const contenido = clone.querySelector('div');
-        if (contenido) {
-            contenido.style.display = 'flex';
-            contenido.style.alignItems = 'center';
-            contenido.style.gap = isMobile ? '6px' : '8px';
-            contenido.style.minWidth = '0';
-            contenido.style.flex = '1';
-            contenido.style.overflow = 'hidden';
         }
         
         document.body.appendChild(clone);
         
-        // 🔥 FUNCIÓN DE VERIFICACIÓN MEJORADA
+        // Variable para controlar el estado
+        let isFixed = false;
+        
+        // Función para verificar scroll
         function verificarScroll() {
             const rect = card.getBoundingClientRect();
-            const cloneDisplay = clone.style.display;
+            const cabeceraRect = cabecera.getBoundingClientRect();
             
-            // Verificar si la cabecera está visible y en la posición correcta
-            const headerTop = rect.top;
-            const headerBottom = rect.bottom;
-            
-            // 🔥 CONDICIÓN PARA MOSTRAR LA CABECERA FIJA
-            const shouldShow = headerTop < topbarHeight && headerBottom > topbarHeight + 30;
-            
-            if (shouldShow) {
-                clone.style.display = 'flex';
-                cabecera.style.visibility = 'hidden';
+            // Si la cabecera está a punto de salir de la vista
+            if (rect.top < topbarHeight && rect.bottom > topbarHeight + 30) {
+                if (!isFixed) {
+                    clone.style.display = 'flex';
+                    cabecera.style.visibility = 'hidden';
+                    isFixed = true;
+                }
             } else {
-                clone.style.display = 'none';
-                cabecera.style.visibility = 'visible';
+                if (isFixed) {
+                    clone.style.display = 'none';
+                    cabecera.style.visibility = 'visible';
+                    isFixed = false;
+                }
             }
         }
         
-        // Escuchar eventos
+        // Escuchar eventos de scroll
         window.addEventListener('scroll', verificarScroll);
-        window.addEventListener('resize', function() {
-            // Recalcular altura del topbar al cambiar tamaño
-            if (topbar) {
-                topbarHeight = topbar.offsetHeight;
-            }
-            verificarScroll();
-        });
+        window.addEventListener('resize', verificarScroll);
         
         // Verificar al hacer scroll en la letra
         letra.addEventListener('scroll', function() {
@@ -825,20 +779,19 @@ function hacerCabeceraFija() {
     });
 }
 
-// Ejecutar al cargar y al cambiar de tamaño
+// Ejecutar al cargar
 setTimeout(hacerCabeceraFija, 500);
 
-// 🔥 RECALCULAR AL CAMBIAR DE ORIENTACIÓN
+// Recalcular al cambiar orientación
 window.addEventListener('orientationchange', function() {
     setTimeout(hacerCabeceraFija, 600);
 });
 
 // Observar cambios en la lista
-const observerLista = new MutationObserver(() => {
-    setTimeout(hacerCabeceraFija, 300);
-});
-
 if (lista) {
+    const observerLista = new MutationObserver(() => {
+        setTimeout(hacerCabeceraFija, 300);
+    });
     observerLista.observe(lista, { childList: true, subtree: true });
 }
 cargarHimnos();

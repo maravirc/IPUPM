@@ -1312,26 +1312,14 @@ footer{
     background: linear-gradient(135deg, #bf360c, #e65100) !important;
 }
 /* ==========================
-   CABECERA FIJA - ESTILOS MEJORADOS
+   CABECERA FIJA - VERSIÓN SIMPLIFICADA
    ========================== */
 
    .fixed-header-clone {
     display: none !important;
     align-items: center !important;
     justify-content: space-between !important;
-    max-width: 100vw !important;
     box-sizing: border-box !important;
-    overflow: hidden !important;
-    transition: none !important;
-}
-
-.fixed-header-clone > div {
-    display: flex !important;
-    align-items: center !important;
-    gap: 6px !important;
-    min-width: 0 !important;
-    flex: 1 !important;
-    overflow: hidden !important;
 }
 
 .fixed-header-clone .numero {
@@ -1339,7 +1327,6 @@ footer{
     font-weight: 700 !important;
     background: white !important;
     border-radius: 30px !important;
-    display: inline-block !important;
     box-shadow: 0 2px 8px rgba(13, 71, 161, 0.08) !important;
     white-space: nowrap !important;
     flex-shrink: 0 !important;
@@ -1352,7 +1339,6 @@ footer{
     white-space: nowrap !important;
     overflow: hidden !important;
     text-overflow: ellipsis !important;
-    min-width: 0 !important;
 }
 
 .fixed-header-clone .acciones {
