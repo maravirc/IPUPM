@@ -1247,12 +1247,6 @@ footer{
         padding: 16px 45px !important;
         font-size: 17px !important;
         min-width: 250px !important;
-        .menu button.activo {
-            background: #032263 !important;  /* Azul verdoso/teal */
-            box-shadow: 0 4px 15px rgba(3, 21, 121, 0.4) !important;
-            transform: scale(1.0) !important;
-            transition: all 0.3s ease !important;
-        }
     }
 }
 
@@ -1263,12 +1257,6 @@ footer{
         min-width: 320px !important;
         border-radius: 60px !important;
         box-shadow: 0 8px 30px rgba(13, 71, 161, 0.4) !important;
-        .menu button.activo {
-            background: #032263 !important;  /* Azul verdoso/teal */
-            box-shadow: 0 4px 15px rgba(3, 21, 121, 0.4) !important;
-            transform: scale(1.0) !important;
-            transition: all 0.3s ease !important;
-        }
     }
     
     .btn-ver-mas:hover {
@@ -1325,11 +1313,11 @@ footer{
 }
 
 /* ==========================
-   BOTÓN ACTIVO - AZUL VERDOSO
+   BOTÓN ACTIVO - AZUL
    ========================== */
 
    .menu button.activo {
-    background: #032263 !important;  /* Azul verdoso/teal */
+    background: #032263 !important;
     box-shadow: 0 4px 15px rgba(3, 21, 121, 0.4) !important;
     transform: scale(1.0) !important;
     transition: all 0.3s ease !important;
@@ -1340,7 +1328,10 @@ footer{
     box-shadow: 0 6px 25px rgba(3, 27, 136, 0.5) !important;
 }
 
-/* MODO OSCURO */
+/* ==========================
+   MODO OSCURO
+   ========================== */
+
 .dark .menu button.activo {
     background: #032263 !important;
     box-shadow: 0 4px 15px rgba(4, 18, 97, 0.4) !important;
@@ -1348,5 +1339,131 @@ footer{
 
 .dark .menu button.activo:hover {
     background: #032263 !important;
+}
+
+/* ==========================
+   RESPONSIVE - TODOS LOS DISPOSITIVOS
+   ========================== */
+
+/* Tablets y pantallas medianas (768px - 1024px) */
+@media (min-width: 768px) and (max-width: 1024px) {
+    .menu button.activo {
+        background: #032263 !important;
+        box-shadow: 0 4px 20px rgba(3, 21, 121, 0.5) !important;
+        transform: scale(1.02) !important;
+        padding: 12px 20px !important;
+        font-size: 15px !important;
+    }
+}
+
+/* Laptops y pantallas grandes (1025px - 1440px) */
+@media (min-width: 1025px) and (max-width: 1440px) {
+    .menu button.activo {
+        background: #032263 !important;
+        box-shadow: 0 4px 25px rgba(3, 21, 121, 0.5) !important;
+        transform: scale(1.03) !important;
+        padding: 13px 24px !important;
+        font-size: 16px !important;
+    }
+}
+
+/* Pantallas grandes (1441px en adelante) */
+@media (min-width: 1441px) {
+    .menu button.activo {
+        background: #032263 !important;
+        box-shadow: 0 6px 30px rgba(3, 21, 121, 0.6) !important;
+        transform: scale(1.05) !important;
+        padding: 14px 28px !important;
+        font-size: 17px !important;
+    }
+}
+
+/* MODO OSCURO - Responsive */
+@media (min-width: 768px) and (max-width: 1024px) {
+    .dark .menu button.activo {
+        background: #032263 !important;
+        box-shadow: 0 4px 20px rgba(4, 18, 97, 0.6) !important;
+    }
+}
+
+@media (min-width: 1025px) and (max-width: 1440px) {
+    .dark .menu button.activo {
+        background: #032263 !important;
+        box-shadow: 0 4px 25px rgba(4, 18, 97, 0.6) !important;
+    }
+}
+
+@media (min-width: 1441px) {
+    .dark .menu button.activo {
+        background: #032263 !important;
+        box-shadow: 0 6px 30px rgba(4, 18, 97, 0.7) !important;
+    }
+}
+
+/* ==========================
+   TOUCH DEVICES - MEJOR INTERACCIÓN
+   ========================== */
+
+/* Para dispositivos táctiles (celulares y tablets) */
+@media (hover: none) and (pointer: coarse) {
+    .menu button.activo {
+        background: #032263 !important;
+        box-shadow: 0 4px 20px rgba(3, 21, 121, 0.5) !important;
+        transform: scale(0.98) !important;
+        /* Feedback táctil */
+        -webkit-tap-highlight-color: transparent;
+    }
+
+    .menu button.activo:active {
+        transform: scale(0.95) !important;
+        box-shadow: 0 2px 10px rgba(3, 21, 121, 0.3) !important;
+        transition: all 0.1s ease !important;
+    }
+
+    .dark .menu button.activo {
+        background: #032263 !important;
+        box-shadow: 0 4px 20px rgba(4, 18, 97, 0.6) !important;
+    }
+
+    .dark .menu button.activo:active {
+        box-shadow: 0 2px 10px rgba(4, 18, 97, 0.4) !important;
+    }
+}
+
+/* ==========================
+   MODO RETRATO / PAISAJE (celulares)
+   ========================== */
+
+/* Celulares en modo retrato */
+@media (max-width: 480px) and (orientation: portrait) {
+    .menu button.activo {
+        background: #032263 !important;
+        box-shadow: 0 4px 15px rgba(3, 21, 121, 0.4) !important;
+        transform: scale(1.0) !important;
+        padding: 10px 16px !important;
+        font-size: 13px !important;
+        width: 100% !important;
+        /* Ocupa todo el ancho en móvil */
+    }
+
+    .menu button.activo:active {
+        transform: scale(0.95) !important;
+        box-shadow: 0 2px 8px rgba(3, 21, 121, 0.3) !important;
+    }
+}
+
+/* Celulares en modo paisaje */
+@media (max-width: 850px) and (orientation: landscape) {
+    .menu button.activo {
+        background: #032263 !important;
+        box-shadow: 0 4px 15px rgba(3, 21, 121, 0.4) !important;
+        transform: scale(1.0) !important;
+        padding: 8px 14px !important;
+        font-size: 12px !important;
+    }
+
+    .menu button.activo:active {
+        transform: scale(0.95) !important;
+    }
 }
 }
