@@ -1319,7 +1319,7 @@ footer{
    .menu button.activo {
     background: #032263 !important;  /* Azul verdoso/teal */
     box-shadow: 0 4px 15px rgba(0, 137, 123, 0.4) !important;
-    transform: scale(1.05) !important;
+    transform: scale(1.0) !important;
     transition: all 0.3s ease !important;
 }
 
