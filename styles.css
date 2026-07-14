@@ -1312,51 +1312,53 @@ footer{
     background: linear-gradient(135deg, #bf360c, #e65100) !important;
 }
 /* ==========================
-   CABECERA FIJA - ESTILOS BÁSICOS
+   RESPONSIVE - CABECERA STICKY
    ========================== */
 
-   .fixed-header-clone {
-    display: none !important;
-    align-items: center !important;
-    justify-content: space-between !important;
-    box-sizing: border-box !important;
+   @media (max-width: 600px) {
+    .cabecera-himno {
+        padding: 10px 14px 10px 14px !important;
+        min-height: 44px !important;
+    }
+    
+    .cabecera-himno .numero {
+        font-size: 16px !important;
+        padding: 2px 10px !important;
+    }
+    
+    .cabecera-himno .titulo {
+        font-size: 16px !important;
+        max-width: 50vw !important;
+        white-space: nowrap !important;
+        overflow: hidden !important;
+        text-overflow: ellipsis !important;
+    }
+    
+    .letra {
+        font-size: 16px !important;
+        padding: 4px 14px 14px 14px !important;
+    }
 }
 
-.fixed-header-clone .numero {
-    color: #0d47a1 !important;
-    font-weight: 700 !important;
-    background: white !important;
-    border-radius: 30px !important;
-    box-shadow: 0 2px 8px rgba(13, 71, 161, 0.08) !important;
-    white-space: nowrap !important;
-    flex-shrink: 0 !important;
-}
-
-.fixed-header-clone .titulo {
-    font-weight: 800 !important;
-    color: #0a1a2e !important;
-    margin: 0 !important;
-    white-space: nowrap !important;
-    overflow: hidden !important;
-    text-overflow: ellipsis !important;
-}
-
-.fixed-header-clone .acciones {
-    display: none !important;
-}
-
-/* Modo oscuro */
-.dark .fixed-header-clone {
-    background: linear-gradient(135deg, #1a2744, #0d1f3c) !important;
-    border-bottom: 1px solid rgba(100, 181, 246, 0.1) !important;
-}
-
-.dark .fixed-header-clone .numero {
-    background: #1a2d4a !important;
-    color: #64b5f6 !important;
-}
-
-.dark .fixed-header-clone .titulo {
-    color: #f0f6fc !important;
+@media (max-width: 480px) {
+    .cabecera-himno {
+        padding: 8px 10px 8px 10px !important;
+        min-height: 38px !important;
+    }
+    
+    .cabecera-himno .numero {
+        font-size: 14px !important;
+        padding: 2px 8px !important;
+    }
+    
+    .cabecera-himno .titulo {
+        font-size: 14px !important;
+        max-width: 45vw !important;
+    }
+    
+    .letra {
+        font-size: 14px !important;
+        padding: 4px 12px 12px 12px !important;
+    }
 }
 }
