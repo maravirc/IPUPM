@@ -1247,6 +1247,12 @@ footer{
         padding: 16px 45px !important;
         font-size: 17px !important;
         min-width: 250px !important;
+        .menu button.activo {
+            background: #032263 !important;  /* Azul verdoso/teal */
+            box-shadow: 0 4px 15px rgba(3, 21, 121, 0.4) !important;
+            transform: scale(1.0) !important;
+            transition: all 0.3s ease !important;
+        }
     }
 }
 
@@ -1257,6 +1263,12 @@ footer{
         min-width: 320px !important;
         border-radius: 60px !important;
         box-shadow: 0 8px 30px rgba(13, 71, 161, 0.4) !important;
+        .menu button.activo {
+            background: #032263 !important;  /* Azul verdoso/teal */
+            box-shadow: 0 4px 15px rgba(3, 21, 121, 0.4) !important;
+            transform: scale(1.0) !important;
+            transition: all 0.3s ease !important;
+        }
     }
     
     .btn-ver-mas:hover {
@@ -1269,7 +1281,7 @@ footer{
    RESPONSIVE - MÓVIL
    ========================== */
 
-@media (max-width: 700px) {
+@media (max-width: 600px) {
     .ver-mas {
         padding: 15px 0 !important;
     }
