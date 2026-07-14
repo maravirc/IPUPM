@@ -394,7 +394,7 @@ footer{
 
     .menu{
         flex-direction:column;
-        margin-top: -10;           /* Elimina margen superior */
+        margin-top: -10px;           /* Elimina margen superior */
         padding-top: 0;          /* Elimina padding superior */
     }
 
@@ -1318,20 +1318,20 @@ footer{
 
    .menu button.activo {
     background: #032263 !important;  /* Azul verdoso/teal */
-    box-shadow: 0 4px 15px rgba(0, 137, 123, 0.4) !important;
+    box-shadow: 0 4px 15px rgba(3, 21, 121, 0.4) !important;
     transform: scale(1.0) !important;
     transition: all 0.3s ease !important;
 }
 
 .menu button.activo:hover {
     background: #032263 !important;
-    box-shadow: 0 6px 25px rgba(0, 137, 123, 0.5) !important;
+    box-shadow: 0 6px 25px rgba(3, 27, 136, 0.5) !important;
 }
 
 /* MODO OSCURO */
 .dark .menu button.activo {
     background: #032263 !important;
-    box-shadow: 0 4px 15px rgba(38, 166, 154, 0.4) !important;
+    box-shadow: 0 4px 15px rgba(4, 18, 97, 0.4) !important;
 }
 
 .dark .menu button.activo:hover {
