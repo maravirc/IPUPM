@@ -683,6 +683,10 @@ if (SpeechRecognition) {
 // CABECERA DE HIMNO FIJA - CON MEDIA QUERIES EN JS
 // ==========================
 
+// ==========================
+// CABECERA DE HIMNO FIJA - VERSIÓN CORREGIDA
+// ==========================
+
 function hacerCabeceraFija() {
     // Eliminar cabeceras fijas anteriores
     document.querySelectorAll('.fixed-header-clone').forEach(el => el.remove());
@@ -693,70 +697,25 @@ function hacerCabeceraFija() {
     const topbar = document.querySelector('.topbar');
     const topbarHeight = topbar ? topbar.offsetHeight : 280;
     
-    // 🔥 OBTENER TAMAÑO DE PANTALLA
+    // Obtener tamaño de pantalla
     const screenWidth = window.innerWidth;
     
-    // 🔥 CONFIGURACIÓN SEGÚN TAMAÑO (como media queries)
+    // Configuración según tamaño
     let config = {};
     
     if (screenWidth <= 380) {
-        // Móvil muy pequeño
-        config = {
-            fontSize: '12px',
-            padding: '6px 8px',
-            numeroPadding: '2px 6px',
-            tituloMaxWidth: '45vw',
-            minHeight: '36px'
-        };
+        config = { fontSize: '12px', padding: '6px 8px', numeroPadding: '2px 6px', tituloMaxWidth: '45vw', minHeight: '36px' };
     } else if (screenWidth <= 480) {
-        // Móvil pequeño
-        config = {
-            fontSize: '13px',
-            padding: '8px 10px',
-            numeroPadding: '2px 8px',
-            tituloMaxWidth: '50vw',
-            minHeight: '40px'
-        };
+        config = { fontSize: '13px', padding: '8px 10px', numeroPadding: '2px 8px', tituloMaxWidth: '50vw', minHeight: '40px' };
     } else if (screenWidth <= 600) {
-        // Móvil mediano
-        config = {
-            fontSize: '14px',
-            padding: '10px 12px',
-            numeroPadding: '2px 10px',
-            tituloMaxWidth: '55vw',
-            minHeight: '44px'
-        };
+        config = { fontSize: '14px', padding: '10px 12px', numeroPadding: '2px 10px', tituloMaxWidth: '55vw', minHeight: '44px' };
     } else if (screenWidth <= 768) {
-        // Tablet pequeña
-        config = {
-            fontSize: '15px',
-            padding: '10px 14px',
-            numeroPadding: '3px 10px',
-            tituloMaxWidth: '60vw',
-            minHeight: '48px'
-        };
+        config = { fontSize: '15px', padding: '10px 14px', numeroPadding: '3px 10px', tituloMaxWidth: '60vw', minHeight: '48px' };
     } else if (screenWidth <= 1024) {
-        // Tablet grande
-        config = {
-            fontSize: '16px',
-            padding: '12px 16px',
-            numeroPadding: '3px 12px',
-            tituloMaxWidth: '70vw',
-            minHeight: '52px'
-        };
+        config = { fontSize: '16px', padding: '12px 16px', numeroPadding: '3px 12px', tituloMaxWidth: '70vw', minHeight: '52px' };
     } else {
-        // PC / Escritorio
-        config = {
-            fontSize: '18px',
-            padding: '12px 20px',
-            numeroPadding: '4px 14px',
-            tituloMaxWidth: '80vw',
-            minHeight: '56px'
-        };
+        config = { fontSize: '18px', padding: '12px 20px', numeroPadding: '4px 14px', tituloMaxWidth: '80vw', minHeight: '56px' };
     }
-    
-    // 🔥 GUARDAR LA CONFIGURACIÓN GLOBAL
-    window.configActual = config;
     
     cards.forEach((card) => {
         const cabecera = card.querySelector('.cabecera-himno');
@@ -768,7 +727,7 @@ function hacerCabeceraFija() {
         const clone = cabecera.cloneNode(true);
         clone.className = 'fixed-header-clone';
         
-        // 🔥 APLICAR ESTILOS SEGÚN TAMAÑO
+        // Estilos de la copia
         clone.style.cssText = `
             position: fixed;
             top: ${topbarHeight}px;
@@ -792,7 +751,7 @@ function hacerCabeceraFija() {
         const acciones = clone.querySelector('.acciones');
         if (acciones) acciones.style.display = 'none';
         
-        // 🔥 AJUSTAR TEXTO SEGÚN TAMAÑO
+        // Ajustar texto
         const numero = clone.querySelector('.numero');
         const titulo = clone.querySelector('.titulo');
         const contenido = clone.querySelector('div');
@@ -826,16 +785,24 @@ function hacerCabeceraFija() {
         
         document.body.appendChild(clone);
         
-        // Variable para controlar el estado
+        // 🔥 VARIABLE PARA CONTROLAR EL ESTADO
         let isVisible = false;
+        let lastScrollY = window.scrollY;
         
-        // Función de verificación
+        // 🔥 FUNCIÓN DE VERIFICACIÓN MEJORADA
         function verificarScroll() {
             const rect = card.getBoundingClientRect();
+            
+            // 🔥 CALCULAR SI LA CABECERA DEBE SER FIJA
+            // La tarjeta está visible y su cabecera está en la parte superior
             const cardTop = rect.top;
             const cardBottom = rect.bottom;
+            const headerHeight = cabecera.offsetHeight || 50;
             
-            const shouldShow = cardTop < topbarHeight && cardBottom > topbarHeight;
+            // 🔥 CONDICIÓN MEJORADA: Mostrar cuando la cabecera está en la zona superior
+            // O cuando la tarjeta está visible y la cabecera ya pasó
+            const shouldShow = (cardTop < topbarHeight && cardBottom > topbarHeight + 20) ||
+                              (cardTop < topbarHeight && cardBottom > 0 && cardTop > -headerHeight);
             
             if (shouldShow) {
                 if (!isVisible) {
@@ -852,7 +819,7 @@ function hacerCabeceraFija() {
             }
         }
         
-        // Throttle para mejorar rendimiento
+        // 🔥 FUNCIÓN CON THROTTLE
         let ticking = false;
         function onScroll() {
             if (!ticking) {
@@ -867,67 +834,28 @@ function hacerCabeceraFija() {
         // Escuchar eventos
         window.addEventListener('scroll', onScroll, { passive: true });
         window.addEventListener('resize', function() {
-            // Recalcular altura y configuración
             const newTopbarHeight = topbar ? topbar.offsetHeight : 280;
-            const newScreenWidth = window.innerWidth;
+            clone.style.top = newTopbarHeight + 'px';
             
-            // 🔥 ACTUALIZAR CONFIGURACIÓN SI CAMBIÓ EL TAMAÑO
+            // Actualizar configuración si cambió tamaño
+            const newWidth = window.innerWidth;
             let newConfig = config;
-            if (newScreenWidth <= 380) {
-                newConfig = {
-                    fontSize: '12px',
-                    padding: '6px 8px',
-                    numeroPadding: '2px 6px',
-                    tituloMaxWidth: '45vw',
-                    minHeight: '36px'
-                };
-            } else if (newScreenWidth <= 480) {
-                newConfig = {
-                    fontSize: '13px',
-                    padding: '8px 10px',
-                    numeroPadding: '2px 8px',
-                    tituloMaxWidth: '50vw',
-                    minHeight: '40px'
-                };
-            } else if (newScreenWidth <= 600) {
-                newConfig = {
-                    fontSize: '14px',
-                    padding: '10px 12px',
-                    numeroPadding: '2px 10px',
-                    tituloMaxWidth: '55vw',
-                    minHeight: '44px'
-                };
-            } else if (newScreenWidth <= 768) {
-                newConfig = {
-                    fontSize: '15px',
-                    padding: '10px 14px',
-                    numeroPadding: '3px 10px',
-                    tituloMaxWidth: '60vw',
-                    minHeight: '48px'
-                };
-            } else if (newScreenWidth <= 1024) {
-                newConfig = {
-                    fontSize: '16px',
-                    padding: '12px 16px',
-                    numeroPadding: '3px 12px',
-                    tituloMaxWidth: '70vw',
-                    minHeight: '52px'
-                };
+            if (newWidth <= 380) {
+                newConfig = { fontSize: '12px', padding: '6px 8px', numeroPadding: '2px 6px', tituloMaxWidth: '45vw', minHeight: '36px' };
+            } else if (newWidth <= 480) {
+                newConfig = { fontSize: '13px', padding: '8px 10px', numeroPadding: '2px 8px', tituloMaxWidth: '50vw', minHeight: '40px' };
+            } else if (newWidth <= 600) {
+                newConfig = { fontSize: '14px', padding: '10px 12px', numeroPadding: '2px 10px', tituloMaxWidth: '55vw', minHeight: '44px' };
+            } else if (newWidth <= 768) {
+                newConfig = { fontSize: '15px', padding: '10px 14px', numeroPadding: '3px 10px', tituloMaxWidth: '60vw', minHeight: '48px' };
+            } else if (newWidth <= 1024) {
+                newConfig = { fontSize: '16px', padding: '12px 16px', numeroPadding: '3px 12px', tituloMaxWidth: '70vw', minHeight: '52px' };
             } else {
-                newConfig = {
-                    fontSize: '18px',
-                    padding: '12px 20px',
-                    numeroPadding: '4px 14px',
-                    tituloMaxWidth: '80vw',
-                    minHeight: '56px'
-                };
+                newConfig = { fontSize: '18px', padding: '12px 20px', numeroPadding: '4px 14px', tituloMaxWidth: '80vw', minHeight: '56px' };
             }
             
-            // Aplicar nueva configuración
-            clone.style.top = newTopbarHeight + 'px';
             clone.style.padding = newConfig.padding;
             clone.style.minHeight = newConfig.minHeight;
-            
             if (numero) {
                 numero.style.fontSize = newConfig.fontSize;
                 numero.style.padding = newConfig.numeroPadding;
@@ -946,8 +874,9 @@ function hacerCabeceraFija() {
             this._timeout = setTimeout(verificarScroll, 100);
         });
         
-        // Verificar inicialmente
-        setTimeout(verificarScroll, 300);
+        // 🔥 VERIFICAR INICIALMENTE DESPUÉS DE UN TIEMPO
+        setTimeout(verificarScroll, 100);
+        setTimeout(verificarScroll, 500);
     });
 }
 
