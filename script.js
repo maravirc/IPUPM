@@ -682,124 +682,15 @@ function mostrarToast(mensaje) {
 // INICIAR
 // ==========================
 // ==========================
-// CABECERA FIJA ÚNICA
+// FORZAR STICKY - SOLO UNA LÍNEA
 // ==========================
 
-let cabeceraFijaGlobal = null;
-
-function crearCabeceraFija() {
-    // Eliminar cabecera fija anterior si existe
-    if (cabeceraFijaGlobal) {
-        cabeceraFijaGlobal.remove();
-        cabeceraFijaGlobal = null;
-    }
-    
-    // Obtener altura del topbar
-    const topbar = document.querySelector('.topbar');
-    const topbarHeight = topbar ? topbar.offsetHeight : 280;
-    
-    // Crear la cabecera fija
-    cabeceraFijaGlobal = document.createElement('div');
-    cabeceraFijaGlobal.id = 'cabeceraFijaUnica';
-    cabeceraFijaGlobal.style.cssText = `
-        position: fixed;
-        top: ${topbarHeight}px;
-        left: 0;
-        right: 0;
-        z-index: 1000;
-        background: linear-gradient(135deg, #f8faff, #eef4fb);
-        backdrop-filter: blur(10px);
-        border-bottom: 2px solid rgba(13, 71, 161, 0.1);
-        padding: 12px 16px;
-        box-shadow: 0 4px 20px rgba(0,0,0,0.08);
-        box-sizing: border-box;
-        display: none;
-        align-items: center;
-        justify-content: space-between;
-        width: 100%;
-        min-height: 50px;
-    `;
-    document.body.appendChild(cabeceraFijaGlobal);
-    
-    // Iniciar el detector de scroll
-    iniciarDetectorScroll();
-}
-
-function iniciarDetectorScroll() {
-    let timeoutId = null;
-    let ultimoNumero = null;
-    
-    function actualizarCabecera() {
-        const cards = document.querySelectorAll('.card');
-        let cabeceraActiva = null;
-        let maxArea = 0;
-        
-        cards.forEach(card => {
-            const rect = card.getBoundingClientRect();
-            const visibleTop = Math.max(0, rect.top);
-            const visibleBottom = Math.min(window.innerHeight, rect.bottom);
-            const visibleHeight = Math.max(0, visibleBottom - visibleTop);
-            
-            if (visibleHeight > 20 && visibleHeight > maxArea) {
-                maxArea = visibleHeight;
-                cabeceraActiva = card;
-            }
-        });
-        
-        if (cabeceraActiva) {
-            const numero = cabeceraActiva.dataset.numero;
-            const tipo = cabeceraActiva.dataset.tipo || 'himno';
-            
-            // Solo actualizar si cambió el himno
-            if (numero !== ultimoNumero) {
-                ultimoNumero = numero;
-                
-                // Obtener los datos del himno
-                const himno = datosActuales.find(h => h.numero == numero);
-                if (himno) {
-                    const icono = himno.tipo === 'coro' ? '🎵' : '📖';
-                    const tipoTexto = himno.tipo === 'coro' ? 'Adoración y Alabanza' : 'Himno';
-                    
-                    cabeceraFijaGlobal.innerHTML = `
-                        <div style="display:flex;align-items:center;gap:8px;flex:1;overflow:hidden;min-width:0;">
-                            <span style="font-size:${window.innerWidth <= 600 ? '14px' : '18px'};padding:${window.innerWidth <= 600 ? '2px 10px' : '4px 14px'};white-space:nowrap;flex-shrink:0;color:#0d47a1;font-weight:700;background:white;border-radius:30px;box-shadow:0 2px 8px rgba(13,71,161,0.08);">
-                                ${icono} ${tipoTexto} ${himno.numero}
-                            </span>
-                            <span style="font-size:${window.innerWidth <= 600 ? '14px' : '18px'};font-weight:800;color:#0a1a2e;margin:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:${window.innerWidth <= 600 ? '50vw' : '70vw'};flex:1;min-width:0;">
-                                ${himno.titulo}
-                            </span>
-                        </div>
-                    `;
-                    cabeceraFijaGlobal.style.display = 'flex';
-                }
-            }
-        } else {
-            cabeceraFijaGlobal.style.display = 'none';
-            ultimoNumero = null;
-        }
-    }
-    
-    function handleScroll() {
-        if (timeoutId) return;
-        timeoutId = setTimeout(() => {
-            actualizarCabecera();
-            timeoutId = null;
-        }, 80);
-    }
-    
-    window.addEventListener('scroll', handleScroll);
-    window.addEventListener('resize', function() {
-        const newTop = document.querySelector('.topbar')?.offsetHeight || 280;
-        if (cabeceraFijaGlobal) {
-            cabeceraFijaGlobal.style.top = newTop + 'px';
-        }
-        actualizarCabecera();
-    });
-    
-    // Actualizar inicialmente
-    setTimeout(actualizarCabecera, 200);
-    setTimeout(actualizarCabecera, 500);
-}
+document.querySelectorAll('.card').forEach(c => c.style.overflow = 'visible');
+document.querySelectorAll('.cabecera-himno').forEach(h => {
+    h.style.position = 'sticky';
+    h.style.top = '0px';
+    h.style.zIndex = '10';
+});
 cargarHimnos();
 
 // ==========================
