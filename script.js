@@ -668,11 +668,7 @@ if (SpeechRecognition) {
 // INICIAR
 // ==========================
 // ==========================
-// CABECERA DE HIMNO FIJA - CON JAVASCRIPT
-// ==========================
-
-// ==========================
-// CABECERA DE HIMNO FIJA - CON JAVASCRIPT (VERSIÓN MEJORADA)
+// CABECERA DE HIMNO FIJA - VERSIÓN MEJORADA
 // ==========================
 
 function hacerCabeceraFija() {
@@ -681,8 +677,29 @@ function hacerCabeceraFija() {
     
     // Obtener todas las tarjetas
     const cards = document.querySelectorAll('.card');
+    
+    // 🔥 CALCULAR ALTURA CORRECTA DEL TOPBAR
     const topbar = document.querySelector('.topbar');
-    const topbarHeight = topbar ? topbar.offsetHeight : 280;
+    let topbarHeight = 0;
+    
+    if (topbar) {
+        // Obtener la altura total del topbar (header + buscador + menu)
+        topbarHeight = topbar.offsetHeight;
+        console.log('📏 Altura del topbar:', topbarHeight);
+    } else {
+        // Fallback si no encuentra el topbar
+        topbarHeight = window.innerWidth <= 600 ? 280 : 320;
+    }
+    
+    // 🔥 Ajuste para tablet (pantallas medianas)
+    if (window.innerWidth > 768 && window.innerWidth <= 1024) {
+        topbarHeight = topbarHeight - 10; // Ajuste fino para tablet
+    }
+    
+    // 🔥 Ajuste para móvil
+    if (window.innerWidth <= 768) {
+        topbarHeight = topbarHeight + 5; // Pequeño ajuste para móvil
+    }
     
     cards.forEach((card, index) => {
         const cabecera = card.querySelector('.cabecera-himno');
@@ -696,14 +713,17 @@ function hacerCabeceraFija() {
         
         // Obtener el ancho de la pantalla
         const windowWidth = window.innerWidth;
-        const isMobile = windowWidth <= 600;
-        const isSmallMobile = windowWidth <= 400;
+        const isMobile = windowWidth <= 768;
+        const isTablet = windowWidth > 768 && windowWidth <= 1024;
+        const isSmallMobile = windowWidth <= 480;
         
-        // Ajustar tamaño de fuente según dispositivo
-        let fontSizeNumero = isSmallMobile ? '12px' : isMobile ? '14px' : '18px';
-        let fontSizeTitulo = isSmallMobile ? '12px' : isMobile ? '14px' : '18px';
-        let padding = isSmallMobile ? '8px 10px' : isMobile ? '10px 12px' : '15px 20px 12px 20px';
+        // Ajustar tamaño según dispositivo
+        let fontSizeNumero = isSmallMobile ? '13px' : isMobile ? '15px' : isTablet ? '17px' : '18px';
+        let fontSizeTitulo = isSmallMobile ? '13px' : isMobile ? '15px' : isTablet ? '17px' : '18px';
+        let padding = isSmallMobile ? '8px 10px' : isMobile ? '10px 14px' : isTablet ? '12px 16px' : '15px 20px 12px 20px';
+        let maxWidthTitulo = isMobile ? '55vw' : isTablet ? '65vw' : '80vw';
         
+        // 🔥 ESTABLECER LA POSICIÓN TOP CORRECTA
         clone.style.cssText = `
             position: fixed;
             top: ${topbarHeight}px;
@@ -742,7 +762,7 @@ function hacerCabeceraFija() {
             titulo.style.whiteSpace = 'nowrap';
             titulo.style.overflow = 'hidden';
             titulo.style.textOverflow = 'ellipsis';
-            titulo.style.maxWidth = isMobile ? '60vw' : '80vw';
+            titulo.style.maxWidth = maxWidthTitulo;
             titulo.style.margin = '0';
         }
         
@@ -763,12 +783,19 @@ function hacerCabeceraFija() {
         
         document.body.appendChild(clone);
         
-        // Función para verificar scroll
+        // 🔥 FUNCIÓN DE VERIFICACIÓN MEJORADA
         function verificarScroll() {
             const rect = card.getBoundingClientRect();
-            const cabeceraRect = cabecera.getBoundingClientRect();
+            const cloneDisplay = clone.style.display;
             
-            if (rect.top < topbarHeight && rect.bottom > topbarHeight + 50) {
+            // Verificar si la cabecera está visible y en la posición correcta
+            const headerTop = rect.top;
+            const headerBottom = rect.bottom;
+            
+            // 🔥 CONDICIÓN PARA MOSTRAR LA CABECERA FIJA
+            const shouldShow = headerTop < topbarHeight && headerBottom > topbarHeight + 30;
+            
+            if (shouldShow) {
                 clone.style.display = 'flex';
                 cabecera.style.visibility = 'hidden';
             } else {
@@ -779,26 +806,41 @@ function hacerCabeceraFija() {
         
         // Escuchar eventos
         window.addEventListener('scroll', verificarScroll);
-        window.addEventListener('resize', verificarScroll);
+        window.addEventListener('resize', function() {
+            // Recalcular altura del topbar al cambiar tamaño
+            if (topbar) {
+                topbarHeight = topbar.offsetHeight;
+            }
+            verificarScroll();
+        });
         
         // Verificar al hacer scroll en la letra
         letra.addEventListener('scroll', function() {
-            setTimeout(verificarScroll, 50);
+            clearTimeout(this._timeout);
+            this._timeout = setTimeout(verificarScroll, 50);
         });
         
         // Verificar inicialmente
-        setTimeout(verificarScroll, 100);
+        setTimeout(verificarScroll, 200);
     });
 }
 
-// Ejecutar al cargar
+// Ejecutar al cargar y al cambiar de tamaño
 setTimeout(hacerCabeceraFija, 500);
+
+// 🔥 RECALCULAR AL CAMBIAR DE ORIENTACIÓN
+window.addEventListener('orientationchange', function() {
+    setTimeout(hacerCabeceraFija, 600);
+});
 
 // Observar cambios en la lista
 const observerLista = new MutationObserver(() => {
     setTimeout(hacerCabeceraFija, 300);
 });
-observerLista.observe(lista, { childList: true, subtree: true });
+
+if (lista) {
+    observerLista.observe(lista, { childList: true, subtree: true });
+}
 cargarHimnos();
 
 // ==========================
