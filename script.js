@@ -1,15 +1,24 @@
 // ==========================
 // HIMNARIO IPU MOYOBAMBA
-// script.js - VERSIÓN CON CABECERA FIJA ÚNICA
+// script.js - VERSIÓN COMPLETA OPTIMIZADA
+// ==========================
+
+// ==========================
+// CACHE EN MEMORIA - PARA VELOCIDAD
 // ==========================
 
 let himnos = [];
 let favoritos = JSON.parse(localStorage.getItem("favoritos")) || [];
 
+// Cache de datos para no recargar cada vez
 let datosHimnosCache = [];
 let datosCorosCache = [];
 let datosActuales = [];
 let tipoActual = 'himnos';
+
+// ==========================
+// VARIABLES DE PAGINACIÓN
+// ==========================
 
 let mostrandoTodos = false;
 const MAX_INICIAL = 30;
@@ -24,8 +33,18 @@ const subtitulo = document.getElementById("subtitulo");
 // ==========================
 
 function actualizarTitulo(tipo, cantidad = 0) {
-    const iconos = { 'himnos': '📖', 'coros': '🎵', 'favoritos': '⭐' };
-    const textos = { 'himnos': 'Himnos', 'coros': 'Adoración y Alabanzas', 'favoritos': 'Favoritos' };
+    const iconos = {
+        'himnos': '📖',
+        'coros': '🎵',
+        'favoritos': '⭐'
+    };
+    
+    const textos = {
+        'himnos': 'Himnos',
+        'coros': 'Adoración y Alabanzas',
+        'favoritos': 'Favoritos'
+    };
+    
     const subtitulos = {
         'himnos': 'Iglesia Pentecostal Unida - Moyobamba - Himnos',
         'coros': 'Iglesia Pentecostal Unida - Moyobamba - Adoración y Alabanzas',
@@ -41,15 +60,20 @@ function actualizarTitulo(tipo, cantidad = 0) {
     } else {
         tituloSeccion.innerHTML = `<h2>${icono} ${texto} <span class="contador">(${cantidad})</span></h2>`;
     }
+    
     subtitulo.textContent = subTexto;
 }
+
+// ==========================
+// RESETEAR PAGINACIÓN
+// ==========================
 
 function resetearPaginacion() {
     mostrandoTodos = false;
 }
 
 // ==========================
-// CARGAR HIMNOS
+// CARGAR HIMNOS - UNA SOLA VEZ
 // ==========================
 
 async function cargarHimnos() {
@@ -65,6 +89,7 @@ async function cargarHimnos() {
             datosCorosCache = dataCoros.map(h => ({ ...h, tipo: 'coro' }));
             console.log('✅ Coros cargados:', datosCorosCache.length);
         } catch (e) {
+            console.log('⚠️ No se pudieron cargar coros');
             datosCorosCache = [];
         }
         
@@ -75,15 +100,16 @@ async function cargarHimnos() {
         
     } catch (error) {
         console.error('❌ Error al cargar:', error);
-        lista.innerHTML = "<h2>⚠️ No se pudieron cargar los himnos.</h2>";
+        lista.innerHTML = "<h2>⚠️ No se pudieron cargar los himnos.</h2><p>Verifica tu conexión a internet.</p>";
     }
 }
 
 // ==========================
-// MOSTRAR HIMNOS
+// MOSTRAR HIMNOS - CON "VER MÁS"
 // ==========================
 
 function mostrarHimnos(datos) {
+    // Guardar referencia
     datosActuales = datos;
     
     if (!datos || datos.length === 0) {
@@ -94,6 +120,7 @@ function mostrarHimnos(datos) {
         return;
     }
     
+    // Decidir cuántos mostrar
     let datosMostrar;
     let mostrarBoton = false;
     
@@ -105,6 +132,7 @@ function mostrarHimnos(datos) {
         mostrarBoton = false;
     }
     
+    // Construir HTML
     let html = '';
     
     for (let i = 0; i < datosMostrar.length; i++) {
@@ -123,23 +151,35 @@ function mostrarHimnos(datos) {
             tipo = 'coro';
         }
         
-        const btnFav = esFavorito ? '⭐ Quitar' : '🤍 Favorito';
-        
-        html += `
-            <div class="card" data-numero="${himno.numero}" data-tipo="${tipo}">
-                <div class="letra">${himno.letra}</div>
-                <div class="botones">
-                    <button onclick="favorito(${himno.numero}, '${tipo}')">${btnFav}</button>
-                    <button onclick="compartir(${himno.numero})">📤 Compartir</button>
-                    <button onclick="compartirApp()" class="btn-compartir-app" style="
-                        background: linear-gradient(135deg, #e65100, #f57c00);
-                        box-shadow: 0 3px 12px rgba(230, 81, 0, 0.3);
-                    ">📱 Compartir App</button>
-                </div>
+        // Dentro del for donde se crean las tarjetas
+const btnFav = esFavorito ? '⭐ Quitar' : '🤍 Favorito';
+
+html += `
+    <div class="card" data-numero="${himno.numero}">
+        <div class="cabecera-himno">
+            <div>
+                <div class="numero">${icono} ${tipoTexto} ${himno.numero}</div>
+                <div class="titulo">${himno.titulo}</div>
             </div>
-        `;
+            <div class="acciones">
+                <button class="btnPantalla" onclick="pantallaCompleta(${himno.numero})">⛶</button>
+                <button class="btnSalir" onclick="salirPantallaCompleta(event)">✕</button>
+            </div>
+        </div>
+        <div class="letra">${himno.letra}</div>
+        <div class="botones">
+            <button onclick="favorito(${himno.numero}, '${tipo}')">${btnFav}</button>
+            <button onclick="compartir(${himno.numero})">📤 Compartir</button>
+            <button onclick="compartirApp()" class="btn-compartir-app" style="
+                background: linear-gradient(135deg, #e65100, #f57c00);
+                box-shadow: 0 3px 12px rgba(230, 81, 0, 0.3);
+            ">📱 Compartir App</button>
+        </div>
+    </div>
+`;
     }
     
+    // Botón "Ver más"
     if (mostrarBoton) {
         const restantes = datos.length - MAX_INICIAL;
         html += `
@@ -157,7 +197,12 @@ function mostrarHimnos(datos) {
                     transition: all 0.3s ease;
                     letter-spacing: 0.5px;
                     min-width: 200px;
-                ">
+                "
+                onmouseover="this.style.transform='translateY(-3px) scale(1.03)'; this.style.boxShadow='0 8px 35px rgba(13, 71, 161, 0.5)'; this.style.background='linear-gradient(135deg, #1565c0, #0d47a1)'"
+                onmouseout="this.style.transform='translateY(0) scale(1)'; this.style.boxShadow='0 4px 20px rgba(13, 71, 161, 0.35)'; this.style.background='linear-gradient(135deg, #0d47a1, #1565c0)'"
+                onmousedown="this.style.transform='scale(0.95)'"
+                onmouseup="this.style.transform='translateY(-3px) scale(1.03)'"
+                >
                     📖 Ver más (${restantes} restantes)
                 </button>
             </div>
@@ -166,9 +211,7 @@ function mostrarHimnos(datos) {
     
     lista.innerHTML = html;
     
-    // 🔥 CREAR CABECERA FIJA ÚNICA
-    crearCabeceraFija();
-    
+    // Event listener para el botón "Ver más"
     const btnVerMas = document.getElementById('btnVerMas');
     if (btnVerMas) {
         btnVerMas.addEventListener('click', function() {
@@ -182,118 +225,7 @@ function mostrarHimnos(datos) {
 }
 
 // ==========================
-// CABECERA FIJA ÚNICA
-// ==========================
-
-let cabeceraFija = null;
-let cabeceraActivaTimeout = null;
-
-function crearCabeceraFija() {
-    if (cabeceraFija) {
-        cabeceraFija.remove();
-        cabeceraFija = null;
-    }
-    
-    const topbar = document.querySelector('.topbar');
-    const topbarHeight = topbar ? topbar.offsetHeight : 280;
-    
-    cabeceraFija = document.createElement('div');
-    cabeceraFija.id = 'cabeceraFijaUnica';
-    cabeceraFija.style.cssText = `
-        position: fixed;
-        top: ${topbarHeight}px;
-        left: 0;
-        right: 0;
-        z-index: 1000;
-        background: linear-gradient(135deg, #f8faff, #eef4fb);
-        backdrop-filter: blur(10px);
-        border-bottom: 2px solid rgba(13, 71, 161, 0.1);
-        padding: 12px 16px;
-        box-shadow: 0 4px 20px rgba(0,0,0,0.08);
-        box-sizing: border-box;
-        display: none;
-        align-items: center;
-        justify-content: space-between;
-        width: 100%;
-        min-height: 50px;
-    `;
-    document.body.appendChild(cabeceraFija);
-    
-    iniciarDetectorHimno();
-}
-
-function iniciarDetectorHimno() {
-    let ultimoNumero = null;
-    
-    function actualizarCabecera() {
-        const cards = document.querySelectorAll('.card');
-        let cardActiva = null;
-        let maxArea = 0;
-        
-        cards.forEach(card => {
-            const rect = card.getBoundingClientRect();
-            const visibleTop = Math.max(0, rect.top);
-            const visibleBottom = Math.min(window.innerHeight, rect.bottom);
-            const visibleHeight = Math.max(0, visibleBottom - visibleTop);
-            
-            if (visibleHeight > 20 && visibleHeight > maxArea) {
-                maxArea = visibleHeight;
-                cardActiva = card;
-            }
-        });
-        
-        if (cardActiva) {
-            const numero = cardActiva.dataset.numero;
-            const tipo = cardActiva.dataset.tipo || 'himno';
-            
-            if (numero !== ultimoNumero) {
-                ultimoNumero = numero;
-                
-                const himno = datosActuales.find(h => h.numero == numero);
-                if (himno) {
-                    const icono = himno.tipo === 'coro' ? '🎵' : '📖';
-                    const tipoTexto = himno.tipo === 'coro' ? 'Adoración y Alabanza' : 'Himno';
-                    
-                    cabeceraFija.innerHTML = `
-                        <div style="display:flex;align-items:center;gap:8px;flex:1;overflow:hidden;min-width:0;">
-                            <span style="font-size:${window.innerWidth <= 600 ? '14px' : '18px'};padding:${window.innerWidth <= 600 ? '2px 10px' : '4px 14px'};white-space:nowrap;flex-shrink:0;color:#0d47a1;font-weight:700;background:white;border-radius:30px;box-shadow:0 2px 8px rgba(13,71,161,0.08);">
-                                ${icono} ${tipoTexto} ${himno.numero}
-                            </span>
-                            <span style="font-size:${window.innerWidth <= 600 ? '14px' : '18px'};font-weight:800;color:#0a1a2e;margin:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:${window.innerWidth <= 600 ? '50vw' : '70vw'};flex:1;min-width:0;">
-                                ${himno.titulo}
-                            </span>
-                        </div>
-                    `;
-                    cabeceraFija.style.display = 'flex';
-                }
-            }
-        } else {
-            cabeceraFija.style.display = 'none';
-            ultimoNumero = null;
-        }
-    }
-    
-    function handleScroll() {
-        if (cabeceraActivaTimeout) return;
-        cabeceraActivaTimeout = setTimeout(() => {
-            actualizarCabecera();
-            cabeceraActivaTimeout = null;
-        }, 80);
-    }
-    
-    window.addEventListener('scroll', handleScroll);
-    window.addEventListener('resize', function() {
-        const newTop = document.querySelector('.topbar')?.offsetHeight || 280;
-        if (cabeceraFija) cabeceraFija.style.top = newTop + 'px';
-        actualizarCabecera();
-    });
-    
-    setTimeout(actualizarCabecera, 200);
-    setTimeout(actualizarCabecera, 500);
-}
-
-// ==========================
-// BOTONES DE NAVEGACIÓN
+// BOTÓN ADORACIÓN Y ALABANZAS - CON RESET
 // ==========================
 
 document.getElementById("btnCoros").addEventListener("click", () => {
@@ -304,8 +236,14 @@ document.getElementById("btnCoros").addEventListener("click", () => {
         mostrarHimnos(datosCorosCache);
         actualizarTitulo('coros', datosCorosCache.length);
         buscar.value = '';
+    } else {
+        lista.innerHTML = "<h2>⚠️ No se pudieron cargar los coros.</h2>";
     }
 });
+
+// ==========================
+// BOTÓN HIMNOS - CON RESET
+// ==========================
 
 document.getElementById("btnHimnos").addEventListener("click", () => {
     if (datosHimnosCache.length > 0) {
@@ -318,30 +256,44 @@ document.getElementById("btnHimnos").addEventListener("click", () => {
     }
 });
 
+// ==========================
+// BOTÓN FAVORITOS - CON RESET
+// ==========================
+
 document.getElementById("btnFavoritos").addEventListener("click", () => {
     const todosLosDatos = [...datosHimnosCache, ...datosCorosCache];
     const listaFavoritos = todosLosDatos.filter(h => {
         const prefijo = h.tipo === 'coro' ? 'C' : 'H';
         return favoritos.includes(`${prefijo}${h.numero}`);
     });
+    
     tipoActual = 'favoritos';
     datosActuales = listaFavoritos;
     resetearPaginacion();
     mostrarHimnos(listaFavoritos);
     actualizarTitulo('favoritos', listaFavoritos.length);
     buscar.value = '';
+    
+    if (listaFavoritos.length === 0) {
+        lista.innerHTML = `<div class="sin-resultados">
+            <h3>⭐ Sin favoritos</h3>
+            <p>Agrega himnos o coros a tus favoritos presionando el corazón ❤️</p>
+        </div>`;
+    }
 });
 
 // ==========================
-// BUSCAR
+// BUSCAR - CORREGIDO (BUSCA POR TÍTULO)
 // ==========================
 
 let timeoutBusqueda;
 
+// 🔥 FUNCIÓN PARA QUITAR ACENTOS
 function quitarAcentos(texto) {
     return texto.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
 }
 
+// 🔥 FUNCIÓN PARA LIMPIAR TEXTO (quita signos, comas, puntos, espacios extras)
 function limpiarTexto(texto) {
     return quitarAcentos(texto)
         .toLowerCase()
@@ -350,10 +302,13 @@ function limpiarTexto(texto) {
         .trim();
 }
 
+// 🔥 BUSCADOR EN TIEMPO REAL - SOLO POR TÍTULO
 buscar.addEventListener("input", function() {
     clearTimeout(timeoutBusqueda);
+    
     const textoOriginal = this.value.trim();
     
+    // Si se borró todo, mostrar todos los datos
     if (textoOriginal === '') {
         resetearPaginacion();
         if (tipoActual === 'himnos') {
@@ -376,67 +331,92 @@ buscar.addEventListener("input", function() {
         return;
     }
     
-    timeoutBusqueda = setTimeout(() => {
-        let datosABuscar = [];
-        if (tipoActual === 'himnos') datosABuscar = datosHimnosCache;
-        else if (tipoActual === 'coros') datosABuscar = datosCorosCache;
-        else if (tipoActual === 'favoritos') {
-            const todosLosDatos = [...datosHimnosCache, ...datosCorosCache];
-            datosABuscar = todosLosDatos.filter(h => {
-                const prefijo = h.tipo === 'coro' ? 'C' : 'H';
-                return favoritos.includes(`${prefijo}${h.numero}`);
-            });
-        }
-        
-        const textoBusqueda = limpiarTexto(textoOriginal);
-        if (textoBusqueda === '') {
-            resetearPaginacion();
-            mostrarHimnos(datosABuscar);
-            if (tipoActual === 'himnos') actualizarTitulo('himnos', datosABuscar.length);
-            else if (tipoActual === 'coros') actualizarTitulo('coros', datosABuscar.length);
-            else if (tipoActual === 'favoritos') actualizarTitulo('favoritos', datosABuscar.length);
-            window.scrollTo({ top: 0, behavior: "smooth" });
-            return;
-        }
-        
-        let resultado;
-        if (/^\d+$/.test(textoBusqueda)) {
-            resultado = datosABuscar.filter(h => h.numero.toString().includes(textoBusqueda));
-        } else {
-            resultado = datosABuscar.filter(h => {
-                const tituloLimpio = limpiarTexto(h.titulo);
-                const palabras = textoBusqueda.split(' ');
-                return palabras.every(palabra => tituloLimpio.includes(palabra));
-            });
-        }
-        
+    // 🔥 IMPORTANTE: Usar los datos correctos según la sección
+    let datosABuscar = [];
+    if (tipoActual === 'himnos') {
+        datosABuscar = datosHimnosCache;
+    } else if (tipoActual === 'coros') {
+        datosABuscar = datosCorosCache;
+    } else if (tipoActual === 'favoritos') {
+        const todosLosDatos = [...datosHimnosCache, ...datosCorosCache];
+        datosABuscar = todosLosDatos.filter(h => {
+            const prefijo = h.tipo === 'coro' ? 'C' : 'H';
+            return favoritos.includes(`${prefijo}${h.numero}`);
+        });
+    }
+    
+    // Limpiar el texto de búsqueda
+    const textoBusqueda = limpiarTexto(textoOriginal);
+    
+    // Si después de limpiar queda vacío, mostrar todo
+    if (textoBusqueda === '') {
         resetearPaginacion();
-        mostrarHimnos(resultado);
-        
-        if (resultado.length > 0) {
-            const primerItem = resultado[0];
-            const tipo = primerItem.tipo === 'coro' ? 'coros' : 'himnos';
-            actualizarTitulo(tipo, resultado.length);
-        } else {
-            lista.innerHTML = `<div class="sin-resultados">
-                <h3>🔍 No se encontraron resultados</h3>
-                <p>Intenta con otra palabra o número</p>
-            </div>`;
+        mostrarHimnos(datosABuscar);
+        if (tipoActual === 'himnos') {
+            actualizarTitulo('himnos', datosABuscar.length);
+        } else if (tipoActual === 'coros') {
+            actualizarTitulo('coros', datosABuscar.length);
+        } else if (tipoActual === 'favoritos') {
+            actualizarTitulo('favoritos', datosABuscar.length);
         }
         window.scrollTo({ top: 0, behavior: "smooth" });
-    }, 300);
+        return;
+    }
+    
+    // 🔥 BUSCAR SOLO POR TÍTULO (no en la letra)
+    let resultado;
+    if (/^\d+$/.test(textoBusqueda)) {
+        // Si es número, buscar por número
+        resultado = datosABuscar.filter(h => 
+            h.numero.toString().includes(textoBusqueda)
+        );
+    } else {
+        // Buscar solo en el TÍTULO
+        resultado = datosABuscar.filter(h => {
+            const tituloLimpio = limpiarTexto(h.titulo);
+            const palabras = textoBusqueda.split(' ');
+            // Verificar que TODAS las palabras estén en el TÍTULO
+            return palabras.every(palabra => 
+                tituloLimpio.includes(palabra)
+            );
+        });
+    }
+    
+    resetearPaginacion();
+    mostrarHimnos(resultado);
+    
+    if (resultado.length > 0) {
+        const primerItem = resultado[0];
+        const tipo = primerItem.tipo === 'coro' ? 'coros' : 'himnos';
+        actualizarTitulo(tipo, resultado.length);
+    } else {
+        lista.innerHTML = `<div class="sin-resultados">
+            <h3>🔍 No se encontraron resultados</h3>
+            <p>Intenta con otra palabra o número</p>
+        </div>`;
+    }
+    
+    window.scrollTo({
+        top: 0,
+        behavior: "smooth"
+    });
 });
 
 // ==========================
-// FAVORITOS
+// FAVORITOS - CORREGIDO CON PREFIJO Y TIPO EXPLÍCITO
 // ==========================
 
 function favorito(numero, tipo) {
     const prefijo = tipo === 'coro' ? 'C' : 'H';
     const idFavorito = `${prefijo}${numero}`;
+    
     const index = favoritos.indexOf(idFavorito);
-    if (index > -1) favoritos.splice(index, 1);
-    else favoritos.push(idFavorito);
+    if (index > -1) {
+        favoritos.splice(index, 1);
+    } else {
+        favoritos.push(idFavorito);
+    }
+
     localStorage.setItem("favoritos", JSON.stringify(favoritos));
     
     if (tipoActual === 'himnos') {
@@ -454,6 +434,7 @@ function favorito(numero, tipo) {
         datosActuales = listaFavoritos;
         mostrarHimnos(listaFavoritos);
         actualizarTitulo('favoritos', listaFavoritos.length);
+        
         if (listaFavoritos.length === 0) {
             lista.innerHTML = `<div class="sin-resultados">
                 <h3>⭐ Sin favoritos</h3>
@@ -470,7 +451,12 @@ function favorito(numero, tipo) {
 async function compartir(numero) {
     const himno = datosActuales.find(h => h.numero === numero);
     if (!himno) return;
-    let tipoTexto = himno.tipo === 'coro' ? 'Adoración y Alabanza' : 'Himno';
+
+    let tipoTexto = 'Himno';
+    if (himno.tipo === 'coro') {
+        tipoTexto = 'Adoración y Alabanza';
+    }
+
     if (navigator.share) {
         navigator.share({
             title: himno.titulo,
@@ -482,51 +468,79 @@ async function compartir(numero) {
 }
 
 // ==========================
-// COMPARTIR APP
-// ==========================
-
-function compartirApp() {
-    const url = window.location.href;
-    const mensaje = '📖 Himnario IPUP Moyobamba\n\n📲 INSTALACIÓN:\n1. Abre este enlace en Chrome o Safari\n2. Presiona el botón "Instalar App"\n3. ¡Listo!\n\n🔗 ' + url;
-    if (navigator.share) {
-        navigator.share({ title: '📖 Himnario IPUP Moyobamba', text: mensaje, url: url }).catch(() => {});
-    } else if (navigator.clipboard) {
-        navigator.clipboard.writeText(mensaje).then(() => mostrarToast('✅ Enlace copiado'));
-    } else {
-        alert(mensaje);
-    }
-}
-
-// ==========================
 // PANTALLA COMPLETA
 // ==========================
 
 function pantallaCompleta(numero) {
     const tarjetas = document.querySelectorAll(".card");
+    let encontrada = false;
+    
     tarjetas.forEach(card => {
-        if (card.dataset.numero == numero) card.requestFullscreen();
+        if (card.dataset.numero == numero) {
+            card.requestFullscreen();
+            encontrada = true;
+        }
     });
+    
+    if (!encontrada) {
+        tarjetas.forEach(card => {
+            if (card.innerHTML.includes(`>${numero}<`) || 
+                card.innerHTML.includes(`📖 ${numero}`) ||
+                card.innerHTML.includes(`🎵 ${numero}`)) {
+                card.requestFullscreen();
+            }
+        });
+    }
 }
 
 function salirPantallaCompleta(event) {
     event.stopPropagation();
-    if (document.fullscreenElement) document.exitFullscreen();
+    if (document.fullscreenElement) {
+        document.exitFullscreen();
+    }
 }
 
 // ==========================
-// TOAST
+// COMPARTIR APP - DESDE EL BOTÓN
 // ==========================
 
-function mostrarToast(mensaje) {
-    const toast = document.createElement('div');
-    toast.className = 'toast-notification';
-    toast.textContent = mensaje;
-    document.body.appendChild(toast);
-    setTimeout(() => {
-        toast.style.opacity = '0';
-        toast.style.transition = 'opacity 0.4s ease';
-        setTimeout(() => toast.remove(), 400);
-    }, 3000);
+function compartirApp() {
+    const url = window.location.href;
+    const titulo = '📖 Himnario IPUP Moyobamba';
+    const descripcion = 'Descarga el Himnario de la Iglesia Pentecostal Unida - Moyobamba';
+    
+    // Verificar si ya está instalada como PWA
+    const isStandalone = window.matchMedia('(display-mode: standalone)').matches;
+    
+    let mensaje = '';
+    if (isStandalone) {
+        mensaje = '📖 Himnario IPUP Moyobamba\n\n✅ Ya tienes la app instalada.\n\n📤 Comparte este enlace con tus hermanos:';
+    } else {
+        mensaje = '📖 Himnario IPUP Moyobamba\n\n📲 INSTALACIÓN:\n' +
+                  '1. Abre este enlace en Chrome o Safari\n' +
+                  '2. Presiona el botón "Instalar App" o "Agregar a pantalla de inicio"\n' +
+                  '3. ¡Listo! Tendrás el himnario siempre disponible\n\n' +
+                  '🔗 Enlace: ' + url;
+    }
+    
+    if (navigator.share) {
+        navigator.share({
+            title: titulo,
+            text: mensaje,
+            url: url
+        }).catch(() => {});
+    } else {
+        // Si no soporta compartir, copiar al portapapeles
+        if (navigator.clipboard) {
+            navigator.clipboard.writeText(mensaje + '\n\n🔗 ' + url).then(() => {
+                mostrarToast('✅ Enlace copiado al portapapeles');
+            }).catch(() => {
+                alert(mensaje + '\n\n🔗 ' + url);
+            });
+        } else {
+            alert(mensaje + '\n\n🔗 ' + url);
+        }
+    }
 }
 
 // ==========================
@@ -544,14 +558,22 @@ window.addEventListener("beforeinstallprompt", (e) => {
 
 btnInstalar.addEventListener("click", async () => {
     if (!eventoInstalacion) return;
+
     eventoInstalacion.prompt();
     const resultado = await eventoInstalacion.userChoice;
+
+    if (resultado.outcome === "accepted") {
+        console.log("✅ Aplicación instalada");
+    } else {
+        console.log("❌ Instalación cancelada");
+    }
+
     eventoInstalacion = null;
     btnInstalar.style.display = "none";
 });
 
 // ==========================
-// BÚSQUEDA POR VOZ
+// BÚSQUEDA POR VOZ - CON INDICADOR
 // ==========================
 
 const btnVoz = document.getElementById('btnVoz');
@@ -571,13 +593,16 @@ if (SpeechRecognition) {
     reconocimiento.addEventListener('result', function(event) {
         const transcript = event.results[0][0].transcript;
         const esFinal = event.results[0].isFinal;
+        
         document.getElementById('buscar').value = transcript;
+        
         if (esFinal) {
             escuchando = false;
             btnVoz.textContent = '🎤';
             btnVoz.style.background = '#0d47a1';
             btnVoz.style.boxShadow = 'none';
             indicadorVoz.style.display = 'none';
+            
             const evento = new Event('input');
             document.getElementById('buscar').dispatchEvent(evento);
         }
@@ -603,6 +628,21 @@ if (SpeechRecognition) {
         }
     });
 
+    reconocimiento.addEventListener('error', function(event) {
+        escuchando = false;
+        btnVoz.textContent = '🎤';
+        btnVoz.style.background = '#0d47a1';
+        btnVoz.style.boxShadow = 'none';
+        indicadorVoz.style.display = 'none';
+        document.getElementById('buscar').placeholder = 'Buscar himno o coro...';
+        
+        if (event.error === 'not-allowed') {
+            mostrarToast('⚠️ Permiso de micrófono denegado');
+        } else if (event.error === 'no-speech') {
+            mostrarToast('🎤 No se detectó voz, intenta de nuevo');
+        }
+    });
+
     btnVoz.addEventListener('click', function() {
         if (escuchando) {
             reconocimiento.stop();
@@ -611,16 +651,24 @@ if (SpeechRecognition) {
                 reconocimiento.start();
             } catch (e) {
                 reconocimiento.stop();
-                setTimeout(() => reconocimiento.start(), 300);
+                setTimeout(() => {
+                    reconocimiento.start();
+                }, 300);
             }
         }
     });
+
 } else {
     btnVoz.style.display = 'none';
+    console.log('⚠️ El navegador no soporta reconocimiento de voz');
 }
+
 
 // ==========================
 // INICIAR
+// ==========================
+// ==========================
+// CABECERA DE HIMNO FIJA - VERSIÓN SIMPLE Y DIRECTA
 // ==========================
 
 cargarHimnos();
