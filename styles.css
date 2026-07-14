@@ -48,8 +48,9 @@ header p{
 }
 
 /* BUSCADOR */
-.busqueda{
-    padding:15px;
+.busqueda {
+    padding: 0 15px;
+    overflow: hidden;     /* ← Agrega esto si aún se desborda */
 }
 
 #buscar{
