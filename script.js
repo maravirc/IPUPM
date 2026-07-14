@@ -668,42 +668,45 @@ if (SpeechRecognition) {
 // INICIAR
 // ==========================
 // ==========================
-// CABECERA FIJA CON JAVASCRIPT - VERSIÓN MEJORADA
+// CABECERA FIJA CON JAVASCRIPT - VERSIÓN CORREGIDA
 // ==========================
 
 function iniciarCabeceraFija() {
     // Eliminar cabeceras fijas anteriores
     document.querySelectorAll('.fixed-header-clone').forEach(el => el.remove());
     
+    // 🔥 ELIMINAR CUALQUIER CABECERA FIJA ANTERIOR
+    const existente = document.getElementById('cabeceraGlobalFija');
+    if (existente) {
+        existente.remove();
+    }
+    
     // Obtener altura del topbar
     const topbar = document.querySelector('.topbar');
     const topbarHeight = topbar ? topbar.offsetHeight : 280;
     
     // Crear una sola cabecera fija
-    let cabeceraFija = document.getElementById('cabeceraGlobalFija');
-    if (!cabeceraFija) {
-        cabeceraFija = document.createElement('div');
-        cabeceraFija.id = 'cabeceraGlobalFija';
-        cabeceraFija.style.cssText = `
-            position: fixed;
-            top: ${topbarHeight}px;
-            left: 0;
-            right: 0;
-            z-index: 1000;
-            background: linear-gradient(135deg, #f8faff, #eef4fb);
-            backdrop-filter: blur(10px);
-            border-bottom: 2px solid rgba(13, 71, 161, 0.1);
-            padding: 12px 16px;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
-            box-sizing: border-box;
-            display: none;
-            align-items: center;
-            justify-content: space-between;
-            width: 100%;
-            min-height: 50px;
-        `;
-        document.body.appendChild(cabeceraFija);
-    }
+    const cabeceraFija = document.createElement('div');
+    cabeceraFija.id = 'cabeceraGlobalFija';
+    cabeceraFija.style.cssText = `
+        position: fixed;
+        top: ${topbarHeight}px;
+        left: 0;
+        right: 0;
+        z-index: 1000;
+        background: linear-gradient(135deg, #f8faff, #eef4fb);
+        backdrop-filter: blur(10px);
+        border-bottom: 2px solid rgba(13, 71, 161, 0.1);
+        padding: 12px 16px;
+        box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+        box-sizing: border-box;
+        display: none;
+        align-items: center;
+        justify-content: space-between;
+        width: 100%;
+        min-height: 50px;
+    `;
+    document.body.appendChild(cabeceraFija);
     
     // Función para actualizar el contenido de la cabecera fija
     function actualizarContenido(cabecera) {
@@ -769,7 +772,7 @@ function iniciarCabeceraFija() {
         cabeceraFija.style.display = 'flex';
     }
     
-    // Función para encontrar la cabecera más visible
+    // 🔥 FUNCIÓN MEJORADA PARA ENCONTRAR LA CABECERA ACTIVA
     function encontrarCabeceraActiva() {
         const cabeceras = document.querySelectorAll('.card .cabecera-himno');
         let cabeceraActiva = null;
@@ -791,14 +794,24 @@ function iniciarCabeceraFija() {
         return cabeceraActiva;
     }
     
-    // Función principal de actualización
+    // 🔥 FUNCIÓN PRINCIPAL DE ACTUALIZACIÓN
     let timeoutId = null;
+    let ultimaCabecera = null;
+    
     function actualizar() {
         const activa = encontrarCabeceraActiva();
+        
         if (activa) {
-            actualizarContenido(activa);
+            // Solo actualizar si cambió la cabecera activa
+            if (activa !== ultimaCabecera) {
+                ultimaCabecera = activa;
+                actualizarContenido(activa);
+            }
         } else {
-            cabeceraFija.style.display = 'none';
+            if (ultimaCabecera !== null) {
+                ultimaCabecera = null;
+                cabeceraFija.style.display = 'none';
+            }
         }
     }
     
@@ -842,10 +855,9 @@ function iniciarCabeceraFija() {
         observer.observe(lista, { childList: true, subtree: true });
     }
     
-    // Actualizar inicialmente
+    // 🔥 ACTUALIZAR INICIALMENTE
     setTimeout(actualizar, 200);
     setTimeout(actualizar, 500);
-    setTimeout(actualizar, 1000);
 }
 
 // Iniciar cuando la página esté lista
