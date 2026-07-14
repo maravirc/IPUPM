@@ -104,7 +104,7 @@ main{
     box-shadow:0 4px 20px rgba(0,0,0,.06), 0 1px 4px rgba(0,0,0,.03);
     transition:all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     border:1px solid rgba(255,255,255,0.6);
-    overflow:visible;  /* ✅ CAMBIADO de 'hidden' a 'visible' */
+    overflow:hidden;
     position:relative;
 }
 
@@ -139,11 +139,6 @@ main{
     align-items:center;
     padding:18px 20px 10px 20px;
     background:linear-gradient(135deg, #f8faff, #eef4fb);
-    position:sticky;    /* ✅ NUEVO */
-    top:0;              /* ✅ NUEVO */
-    z-index:10;         /* ✅ NUEVO */
-    backdrop-filter:blur(10px);
-    border-bottom:1px solid rgba(13,71,161,0.08);
 }
 
 .numero{
@@ -173,8 +168,6 @@ main{
     font-size:18px;
     color:#1f2a3f;
     font-weight:400;
-    max-height:400px;    /* 🔥 NUEVO: Altura máxima para scroll */
-    overflow-y:auto;     /* 🔥 NUEVO: Scroll interno */
 }
 
 /* Botones de acción */
