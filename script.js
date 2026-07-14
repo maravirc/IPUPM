@@ -668,23 +668,7 @@ if (SpeechRecognition) {
 // INICIAR
 // ==========================
 // ==========================
-// CABECERA DE HIMNO FIJA - VERSIÓN MEJORADA
-// ==========================
-
-// ==========================
-// CABECERA DE HIMNO FIJA - VERSIÓN SIMPLIFICADA
-// ==========================
-
-// ==========================
-// CABECERA DE HIMNO FIJA - VERSIÓN DEFINITIVA
-// ==========================
-
-// ==========================
-// CABECERA DE HIMNO FIJA - CON MEDIA QUERIES EN JS
-// ==========================
-
-// ==========================
-// CABECERA DE HIMNO FIJA - VERSIÓN CORREGIDA
+// CABECERA DE HIMNO FIJA - VERSIÓN SIMPLE Y DIRECTA
 // ==========================
 
 function hacerCabeceraFija() {
@@ -697,25 +681,9 @@ function hacerCabeceraFija() {
     const topbar = document.querySelector('.topbar');
     const topbarHeight = topbar ? topbar.offsetHeight : 280;
     
-    // Obtener tamaño de pantalla
-    const screenWidth = window.innerWidth;
-    
-    // Configuración según tamaño
-    let config = {};
-    
-    if (screenWidth <= 380) {
-        config = { fontSize: '12px', padding: '6px 8px', numeroPadding: '2px 6px', tituloMaxWidth: '45vw', minHeight: '36px' };
-    } else if (screenWidth <= 480) {
-        config = { fontSize: '13px', padding: '8px 10px', numeroPadding: '2px 8px', tituloMaxWidth: '50vw', minHeight: '40px' };
-    } else if (screenWidth <= 600) {
-        config = { fontSize: '14px', padding: '10px 12px', numeroPadding: '2px 10px', tituloMaxWidth: '55vw', minHeight: '44px' };
-    } else if (screenWidth <= 768) {
-        config = { fontSize: '15px', padding: '10px 14px', numeroPadding: '3px 10px', tituloMaxWidth: '60vw', minHeight: '48px' };
-    } else if (screenWidth <= 1024) {
-        config = { fontSize: '16px', padding: '12px 16px', numeroPadding: '3px 12px', tituloMaxWidth: '70vw', minHeight: '52px' };
-    } else {
-        config = { fontSize: '18px', padding: '12px 20px', numeroPadding: '4px 14px', tituloMaxWidth: '80vw', minHeight: '56px' };
-    }
+    // Configuración para móvil
+    const isMobile = window.innerWidth <= 768;
+    const isSmallMobile = window.innerWidth <= 480;
     
     cards.forEach((card) => {
         const cabecera = card.querySelector('.cabecera-himno');
@@ -727,24 +695,27 @@ function hacerCabeceraFija() {
         const clone = cabecera.cloneNode(true);
         clone.className = 'fixed-header-clone';
         
-        // Estilos de la copia
+        // Tamaños según dispositivo
+        const fontSize = isSmallMobile ? '13px' : isMobile ? '14px' : '18px';
+        const padding = isSmallMobile ? '8px 10px' : isMobile ? '10px 14px' : '12px 20px';
+        
+        // Estilos básicos
         clone.style.cssText = `
             position: fixed;
             top: ${topbarHeight}px;
             left: 0;
             right: 0;
-            z-index: 1000;
+            z-index: 999;
             background: linear-gradient(135deg, #f8faff, #eef4fb);
             backdrop-filter: blur(10px);
             border-bottom: 2px solid rgba(13, 71, 161, 0.1);
-            padding: ${config.padding};
+            padding: ${padding};
             display: none;
             box-shadow: 0 4px 20px rgba(0,0,0,0.08);
             box-sizing: border-box;
             align-items: center;
             justify-content: space-between;
             width: 100%;
-            min-height: ${config.minHeight};
         `;
         
         // Ocultar acciones
@@ -754,129 +725,72 @@ function hacerCabeceraFija() {
         // Ajustar texto
         const numero = clone.querySelector('.numero');
         const titulo = clone.querySelector('.titulo');
-        const contenido = clone.querySelector('div');
-        
-        if (contenido) {
-            contenido.style.display = 'flex';
-            contenido.style.alignItems = 'center';
-            contenido.style.gap = '6px';
-            contenido.style.minWidth = '0';
-            contenido.style.flex = '1';
-            contenido.style.overflow = 'hidden';
-            contenido.style.maxWidth = '100%';
-        }
         
         if (numero) {
-            numero.style.fontSize = config.fontSize;
-            numero.style.padding = config.numeroPadding;
+            numero.style.fontSize = fontSize;
+            numero.style.padding = isSmallMobile ? '2px 8px' : isMobile ? '2px 10px' : '4px 14px';
             numero.style.whiteSpace = 'nowrap';
             numero.style.flexShrink = '0';
         }
         
         if (titulo) {
-            titulo.style.fontSize = config.fontSize;
+            titulo.style.fontSize = fontSize;
             titulo.style.whiteSpace = 'nowrap';
             titulo.style.overflow = 'hidden';
             titulo.style.textOverflow = 'ellipsis';
-            titulo.style.maxWidth = config.tituloMaxWidth;
+            titulo.style.maxWidth = isMobile ? '55vw' : '80vw';
             titulo.style.margin = '0';
-            titulo.style.flex = '1';
         }
         
         document.body.appendChild(clone);
         
-        // 🔥 VARIABLE PARA CONTROLAR EL ESTADO
-        let isVisible = false;
-        let lastScrollY = window.scrollY;
+        // 🔥 VARIABLE PARA SABER SI ESTÁ VISIBLE
+        let estaVisible = false;
         
-        // 🔥 FUNCIÓN DE VERIFICACIÓN MEJORADA
-        function verificarScroll() {
+        // 🔥 FUNCIÓN SIMPLE PARA VERIFICAR
+        function verificar() {
             const rect = card.getBoundingClientRect();
             
-            // 🔥 CALCULAR SI LA CABECERA DEBE SER FIJA
-            // La tarjeta está visible y su cabecera está en la parte superior
-            const cardTop = rect.top;
-            const cardBottom = rect.bottom;
-            const headerHeight = cabecera.offsetHeight || 50;
-            
-            // 🔥 CONDICIÓN MEJORADA: Mostrar cuando la cabecera está en la zona superior
-            // O cuando la tarjeta está visible y la cabecera ya pasó
-            const shouldShow = (cardTop < topbarHeight && cardBottom > topbarHeight + 20) ||
-                              (cardTop < topbarHeight && cardBottom > 0 && cardTop > -headerHeight);
-            
-            if (shouldShow) {
-                if (!isVisible) {
+            // Si la tarjeta está visible y su parte superior está arriba del topbar
+            if (rect.top < topbarHeight && rect.bottom > topbarHeight + 20) {
+                // Mostrar la copia fija
+                if (!estaVisible) {
                     clone.style.display = 'flex';
                     cabecera.style.visibility = 'hidden';
-                    isVisible = true;
+                    estaVisible = true;
                 }
             } else {
-                if (isVisible) {
+                // Ocultar la copia fija
+                if (estaVisible) {
                     clone.style.display = 'none';
                     cabecera.style.visibility = 'visible';
-                    isVisible = false;
+                    estaVisible = false;
                 }
             }
         }
         
-        // 🔥 FUNCIÓN CON THROTTLE
-        let ticking = false;
-        function onScroll() {
-            if (!ticking) {
-                window.requestAnimationFrame(function() {
-                    verificarScroll();
-                    ticking = false;
-                });
-                ticking = true;
-            }
+        // Escuchar scroll con throttle
+        let timeout = null;
+        function handleScroll() {
+            if (timeout) return;
+            timeout = setTimeout(() => {
+                verificar();
+                timeout = null;
+            }, 50);
         }
         
-        // Escuchar eventos
-        window.addEventListener('scroll', onScroll, { passive: true });
-        window.addEventListener('resize', function() {
-            const newTopbarHeight = topbar ? topbar.offsetHeight : 280;
-            clone.style.top = newTopbarHeight + 'px';
-            
-            // Actualizar configuración si cambió tamaño
-            const newWidth = window.innerWidth;
-            let newConfig = config;
-            if (newWidth <= 380) {
-                newConfig = { fontSize: '12px', padding: '6px 8px', numeroPadding: '2px 6px', tituloMaxWidth: '45vw', minHeight: '36px' };
-            } else if (newWidth <= 480) {
-                newConfig = { fontSize: '13px', padding: '8px 10px', numeroPadding: '2px 8px', tituloMaxWidth: '50vw', minHeight: '40px' };
-            } else if (newWidth <= 600) {
-                newConfig = { fontSize: '14px', padding: '10px 12px', numeroPadding: '2px 10px', tituloMaxWidth: '55vw', minHeight: '44px' };
-            } else if (newWidth <= 768) {
-                newConfig = { fontSize: '15px', padding: '10px 14px', numeroPadding: '3px 10px', tituloMaxWidth: '60vw', minHeight: '48px' };
-            } else if (newWidth <= 1024) {
-                newConfig = { fontSize: '16px', padding: '12px 16px', numeroPadding: '3px 12px', tituloMaxWidth: '70vw', minHeight: '52px' };
-            } else {
-                newConfig = { fontSize: '18px', padding: '12px 20px', numeroPadding: '4px 14px', tituloMaxWidth: '80vw', minHeight: '56px' };
-            }
-            
-            clone.style.padding = newConfig.padding;
-            clone.style.minHeight = newConfig.minHeight;
-            if (numero) {
-                numero.style.fontSize = newConfig.fontSize;
-                numero.style.padding = newConfig.numeroPadding;
-            }
-            if (titulo) {
-                titulo.style.fontSize = newConfig.fontSize;
-                titulo.style.maxWidth = newConfig.tituloMaxWidth;
-            }
-            
-            verificarScroll();
-        });
+        window.addEventListener('scroll', handleScroll);
+        window.addEventListener('resize', handleScroll);
         
         // Verificar al hacer scroll en la letra
         letra.addEventListener('scroll', function() {
-            clearTimeout(this._timeout);
-            this._timeout = setTimeout(verificarScroll, 100);
+            clearTimeout(this._timer);
+            this._timer = setTimeout(verificar, 100);
         });
         
-        // 🔥 VERIFICAR INICIALMENTE DESPUÉS DE UN TIEMPO
-        setTimeout(verificarScroll, 100);
-        setTimeout(verificarScroll, 500);
+        // Verificar inicialmente
+        setTimeout(verificar, 300);
+        setTimeout(verificar, 600);
     });
 }
 
