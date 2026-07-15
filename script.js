@@ -980,15 +980,19 @@ function mostrarAvisoActualizacion(worker){
 
 }
 
-document
-.getElementById("btnActualizarApp")
-.addEventListener("click",()=>{
+const btnActualizarApp = document.getElementById("btnActualizarApp");
 
-    if(!nuevaVersion)return;
+if (btnActualizarApp) {
 
-    nuevaVersion.postMessage("skipWaiting");
+    btnActualizarApp.addEventListener("click",()=>{
 
-});
+        if(!nuevaVersion) return;
+
+        nuevaVersion.postMessage("skipWaiting");
+
+    });
+
+}
 
 navigator.serviceWorker.addEventListener("controllerchange",()=>{
 
