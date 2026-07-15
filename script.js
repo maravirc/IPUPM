@@ -144,10 +144,6 @@ async function cargarHimnos() {
 // MOSTRAR HIMNOS - CON "VER MÁS"
 // ==========================
 
-// ==========================
-// MOSTRAR HIMNOS - CON STICKY Y "VER MÁS"
-// ==========================
-
 function mostrarHimnos(datos) {
     // Guardar referencia
     datosActuales = datos;
@@ -191,31 +187,32 @@ function mostrarHimnos(datos) {
             tipo = 'coro';
         }
         
-        const btnFav = esFavorito ? '⭐ Quitar' : '🤍 Favorito';
-        
-        html += `
-            <div class="card" data-numero="${himno.numero}" data-tipo="${tipo}">
-                <div class="cabecera-himno">
-                    <div>
-                        <div class="numero">${icono} ${tipoTexto} ${himno.numero}</div>
-                        <div class="titulo">${himno.titulo}</div>
-                    </div>
-                    <div class="acciones">
-                        <button class="btnPantalla" onclick="pantallaCompleta(${himno.numero})">⛶</button>
-                        <button class="btnSalir" onclick="salirPantallaCompleta(event)">✕</button>
-                    </div>
-                </div>
-                <div class="letra">${himno.letra}</div>
-                <div class="botones">
-                    <button onclick="favorito(${himno.numero}, '${tipo}')">${btnFav}</button>
-                    <button onclick="compartir(${himno.numero})">📤 Compartir</button>
-                    <button onclick="compartirApp()" class="btn-compartir-app" style="
-                        background: linear-gradient(135deg, #e65100, #f57c00);
-                        box-shadow: 0 3px 12px rgba(230, 81, 0, 0.3);
-                    ">📱 Compartir App</button>
-                </div>
+        // Dentro del for donde se crean las tarjetas
+const btnFav = esFavorito ? '⭐ Quitar' : '🤍 Favorito';
+
+html += `
+    <div class="card" data-numero="${himno.numero}">
+        <div class="cabecera-himno">
+            <div>
+                <div class="numero">${icono} ${tipoTexto} ${himno.numero}</div>
+                <div class="titulo">${himno.titulo}</div>
             </div>
-        `;
+            <div class="acciones">
+                <button class="btnPantalla" onclick="pantallaCompleta(${himno.numero})">⛶</button>
+                <button class="btnSalir" onclick="salirPantallaCompleta(event)">✕</button>
+            </div>
+        </div>
+        <div class="letra">${himno.letra}</div>
+        <div class="botones">
+            <button onclick="favorito(${himno.numero}, '${tipo}')">${btnFav}</button>
+            <button onclick="compartir(${himno.numero})">📤 Compartir</button>
+            <button onclick="compartirApp()" class="btn-compartir-app" style="
+                background: linear-gradient(135deg, #e65100, #f57c00);
+                box-shadow: 0 3px 12px rgba(230, 81, 0, 0.3);
+            ">📱 Compartir App</button>
+        </div>
+    </div>
+`;
     }
     
     // Botón "Ver más"
