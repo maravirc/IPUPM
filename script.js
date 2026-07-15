@@ -745,7 +745,191 @@ function mostrarToast(mensaje) {
 // ==========================
 // INICIAR
 // ==========================
+// ==========================
+// CABECERA FIJA CON JAVASCRIPT
+// ==========================
 
+let cabeceraFija = null;
+let cabeceraClon = null;
+let timeoutCabecera = null;
+
+function crearCabeceraFija() {
+    // Si ya existe, no la creamos de nuevo
+    if (cabeceraFija) return;
+    
+    // Crear el contenedor de la cabecera fija
+    cabeceraFija = document.createElement('div');
+    cabeceraFija.id = 'cabeceraFija';
+    cabeceraFija.style.cssText = `
+        position: fixed;
+        top: 226px;              /* ← Altura de tu topbar */
+        left: 0;
+        right: 0;
+        z-index: 999;
+        background: linear-gradient(135deg, #f8faff, #eef4fb);
+        padding: 14px 20px 10px 20px;
+        border-bottom: 2px solid #0d47a1;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+        display: none;
+        transition: all 0.3s ease;
+    `;
+    
+    // Contenido interno de la cabecera fija
+    cabeceraFija.innerHTML = `
+        <div style="display: flex; justify-content: space-between; align-items: center; max-width: 1200px; margin: 0 auto;">
+            <div>
+                <div id="cabeceraNumeroFijo" style="
+                    color: #0d47a1;
+                    font-weight: 700;
+                    font-size: 18px;
+                    background: white;
+                    padding: 4px 14px;
+                    border-radius: 30px;
+                    display: inline-block;
+                    box-shadow: 0 2px 8px rgba(13, 71, 161, 0.08);
+                ">Himno 1</div>
+                <div id="cabeceraTituloFijo" style="
+                    font-size: 20px;
+                    font-weight: 800;
+                    color: #0a1a2e;
+                    margin-top: 4px;
+                ">El aposento alto</div>
+            </div>
+            <button id="btnCerrarCabeceraFija" style="
+                background: none;
+                border: none;
+                font-size: 24px;
+                cursor: pointer;
+                color: #999;
+                padding: 5px 10px;
+                border-radius: 50%;
+                transition: all 0.3s ease;
+            ">✕</button>
+        </div>
+    `;
+    
+    document.body.appendChild(cabeceraFija);
+    
+    // Botón para cerrar la cabecera fija
+    document.getElementById('btnCerrarCabeceraFija').addEventListener('click', function() {
+        cabeceraFija.style.display = 'none';
+        cabeceraClon = null;
+    });
+}
+
+// Función para actualizar la cabecera fija con los datos del himno visible
+function actualizarCabeceraFija() {
+    const cards = document.querySelectorAll('.card');
+    if (!cards.length) return;
+    
+    const topbarHeight = document.querySelector('.topbar')?.offsetHeight || 226;
+    const scrollY = window.scrollY;
+    const windowHeight = window.innerHeight;
+    
+    let himnoVisible = null;
+    let cardVisible = null;
+    let menorDistancia = Infinity;
+    
+    cards.forEach(card => {
+        const rect = card.getBoundingClientRect();
+        const centroCard = rect.top + rect.height / 2;
+        const centroVentana = windowHeight / 2;
+        const distancia = Math.abs(centroCard - centroVentana);
+        
+        // También verificamos si la card está visible en la pantalla
+        const estaVisible = rect.top < windowHeight && rect.bottom > 0;
+        
+        if (estaVisible && distancia < menorDistancia) {
+            menorDistancia = distancia;
+            cardVisible = card;
+        }
+    });
+    
+    // Si no hay card visible, usar la primera
+    if (!cardVisible) {
+        cardVisible = cards[0];
+    }
+    
+    if (cardVisible) {
+        const numero = cardVisible.querySelector('.numero');
+        const titulo = cardVisible.querySelector('.titulo');
+        
+        if (numero && titulo) {
+            // Actualizar la cabecera fija
+            const numeroFijo = document.getElementById('cabeceraNumeroFijo');
+            const tituloFijo = document.getElementById('cabeceraTituloFijo');
+            
+            if (numeroFijo) numeroFijo.textContent = numero.textContent;
+            if (tituloFijo) tituloFijo.textContent = titulo.textContent;
+            
+            // Mostrar la cabecera fija
+            if (cabeceraFija) {
+                cabeceraFija.style.display = 'block';
+                
+                // Ajustar top según la topbar
+                cabeceraFija.style.top = topbarHeight + 'px';
+            }
+            
+            cabeceraClon = cardVisible;
+        }
+    }
+}
+
+// Función para manejar el scroll con debounce
+function manejarScrollCabecera() {
+    clearTimeout(timeoutCabecera);
+    timeoutCabecera = setTimeout(() => {
+        actualizarCabeceraFija();
+    }, 50);
+}
+
+// Inicializar la cabecera fija cuando se cargan los himnos
+function iniciarCabeceraFija() {
+    crearCabeceraFija();
+    
+    // Esperar a que los himnos se carguen
+    const observer = new MutationObserver(() => {
+        const cards = document.querySelectorAll('.card');
+        if (cards.length > 0) {
+            observer.disconnect();
+            setTimeout(actualizarCabeceraFija, 500);
+        }
+    });
+    
+    observer.observe(document.getElementById('lista'), { childList: true, subtree: true });
+    
+    // Event listeners
+    window.addEventListener('scroll', manejarScrollCabecera);
+    window.addEventListener('resize', manejarScrollCabecera);
+    
+    // Actualizar cuando cambie la lista
+    const lista = document.getElementById('lista');
+    if (lista) {
+        const observerLista = new MutationObserver(() => {
+            setTimeout(actualizarCabeceraFija, 300);
+        });
+        observerLista.observe(lista, { childList: true, subtree: true });
+    }
+}
+
+// Modificar la función mostrarHimnos para actualizar la cabecera
+const mostrarHimnosOriginal = mostrarHimnos;
+mostrarHimnos = function(datos) {
+    mostrarHimnosOriginal(datos);
+    setTimeout(actualizarCabeceraFija, 400);
+};
+
+// Iniciar después de cargar los himnos
+document.addEventListener('DOMContentLoaded', function() {
+    setTimeout(iniciarCabeceraFija, 1000);
+});
+
+// También actualizar cuando se haga clic en los botones del menú
+document.querySelectorAll('.menu button').forEach(btn => {
+    btn.addEventListener('click', function() {
+        setTimeout(actualizarCabeceraFija, 500);
+    });
+});
 cargarHimnos();
 
 // ==========================
