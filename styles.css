@@ -1254,3 +1254,66 @@ footer{
 .dark .btn-compartir-app {
     background: linear-gradient(135deg, #bf360c, #e65100) !important;
 }
+
+/* ==========================
+   HIMNO FIJO (STICKY)
+   ========================== */
+
+/* Contenedor principal */
+main {
+    padding: 0;
+    margin-top: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+}
+
+/* Cada tarjeta de himno */
+.card {
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    background: white;
+    margin-bottom: 0;
+    border-radius: 0;
+    border-bottom: 2px solid #e0e0e0;
+    transition: all 0.3s ease;
+}
+
+/* Cabecera del himno (también sticky dentro de la tarjeta) */
+.card .cabecera-himno {
+    position: sticky;
+    top: 0;
+    z-index: 11;
+    background: white;
+    padding: 18px 20px 10px 20px;
+    background: linear-gradient(135deg, #f8faff, #eef4fb);
+    border-bottom: 1px solid rgba(0,0,0,0.05);
+}
+
+/* Para que la letra tenga scroll interno si es muy larga */
+.card .letra {
+    max-height: 60vh;
+    overflow-y: auto;
+    padding: 8px 20px 16px 20px;
+}
+
+/* MODO OSCURO */
+.dark .card {
+    background: #161b22;
+    border-bottom-color: #30363d;
+}
+
+.dark .card .cabecera-himno {
+    background: linear-gradient(135deg, #1a2744, #0d1f3c);
+    border-bottom-color: rgba(255,255,255,0.05);
+}
+
+.dark .card .letra {
+    color: #d0d7de;
+}
+
+/* Borde superior degradado (opcional, lo puedes mantener) */
+.card::before {
+    display: none;  /* O lo mantienes si quieres */
+}
