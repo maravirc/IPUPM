@@ -1,5 +1,5 @@
-const CACHE_NAME = "himnario-ipu-v46"; // Cambia la versión cuando actualices
-const VERSION = "v46";
+const CACHE_NAME = "himnario-ipu-v47"; // Cambia la versión cuando actualices
+const VERSION = "v47";
 
 // 📁 CORREGIDO: La ruta de los JSON debe ser data/
 const urlsToCache = [
@@ -116,9 +116,15 @@ return fetch(event.request)
 
 // MENSAJES DESDE LA APP
 self.addEventListener('message', event => {
-    if (event.data === 'skipWaiting') {
+
+    if(event.data.action === "skipWaiting"){
+
+        console.log("[SW] Activando nueva versión");
+
         self.skipWaiting();
+
     }
+
 });
 
 console.log(`[SW] Service Worker ${VERSION} cargado`);

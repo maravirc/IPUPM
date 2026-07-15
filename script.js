@@ -982,13 +982,25 @@ function mostrarAvisoActualizacion(worker){
 
 const btnActualizarApp = document.getElementById("btnActualizarApp");
 
-if (btnActualizarApp) {
+if(btnActualizarApp){
 
     btnActualizarApp.addEventListener("click",()=>{
 
-        if(!nuevaVersion) return;
+        console.log("Botón actualizar presionado");
 
-        nuevaVersion.postMessage("skipWaiting");
+        if(nuevaVersion){
+
+            nuevaVersion.postMessage({
+                action:"skipWaiting"
+            });
+
+        }else{
+
+            console.log("No hay nueva versión esperando");
+
+            location.reload();
+
+        }
 
     });
 

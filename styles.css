@@ -1263,11 +1263,11 @@ footer{
 
     position:fixed;
 
-    top: 120px;
+    bottom:30px;
 
     left:50%;
 
-    transform:translateX(-50%) translateY(120px);
+    transform:translateX(-50%);
 
     width:min(90%,420px);
 
@@ -1283,13 +1283,14 @@ footer{
 
     z-index:99999;
 
-    transition:.35s;
+    display:none;
 
 }
 
+
 .update-banner.show{
 
-    transform:translateX(-50%) translateY(0);
+    display:block;
 
 }
 
