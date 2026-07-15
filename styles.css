@@ -1255,10 +1255,10 @@ footer{
     background: linear-gradient(135deg, #bf360c, #e65100) !important;
 }
 /* ==========================
-   HIMNO STICKY - SOLO TÍTULO FIJO
+   CABECERA DE HIMNO FIJA (STICKY)
    ========================== */
 
-/* Cada tarjeta ocupa su espacio normal */
+/* Cada tarjeta de himno */
 .card {
     background: white;
     margin-bottom: 20px;
@@ -1271,15 +1271,15 @@ footer{
     position: relative;
 }
 
-/* La cabecera (título + número) se queda pegada arriba */
+/* La cabecera (título + número) se queda PEGADA ARRIBA */
 .card .cabecera-himno {
     position: sticky;
-    top: 190px;               /* ← Ajusta según la altura de tu topbar */
+    top: 226px;                    /* ← Altura de tu topbar (header + buscador + menú) */
     z-index: 100;
     background: linear-gradient(135deg, #f8faff, #eef4fb);
     padding: 18px 20px 10px 20px;
     border-bottom: 1px solid rgba(0, 0, 0, 0.05);
-    transition: all 0.3s ease;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
 }
 
 /* La letra scrollea normalmente */
@@ -1309,5 +1309,30 @@ footer{
 
 .dark .card .letra {
     color: #d0d7de;
+}
+
+/* Eliminar el borde superior animado de las tarjetas (opcional) */
+.card::before {
+    display: none;
+}
+
+@media (max-width: 700px) {
+    .card .cabecera-himno {
+        top: 248px;                /* ← Altura de topbar en móvil */
+    }
+    
+    main {
+        margin-top: 248px;
+    }
+}
+
+@media (max-width: 480px) {
+    .card .cabecera-himno {
+        top: 240px;                /* ← Altura de topbar en móvil */
+    }
+    
+    main {
+        margin-top: 240px;
+    }
 }
 
