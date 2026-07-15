@@ -67,12 +67,16 @@ self.addEventListener("fetch", event => {
                 // Si no está en caché, buscar en red
                 return fetch(event.request, { cache: 'no-store' })
                 .then(networkResponse => {
-                    // Guardar en caché para futuras veces
+                
+                    const copiaRespuesta = networkResponse.clone();
+                
                     caches.open(CACHE_NAME)
-                        .then(cache => {
-                            cache.put(event.request, networkResponse.clone());
-                        });
+                    .then(cache => {
+                        cache.put(event.request, copiaRespuesta);
+                    });
+                
                     return networkResponse;
+                
                 })
                 .catch(() => {
                     console.error(`[SW] Error al cargar JSON: ${url.pathname}`);
