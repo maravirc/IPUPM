@@ -1254,22 +1254,3 @@ footer{
 .dark .btn-compartir-app {
     background: linear-gradient(135deg, #bf360c, #e65100) !important;
 }
-
-/* HEADER - Reducir espacio */
-header {
-    padding: 8px 20px;        /* ← Reduce de 20px a 8px */
-}
-
-header h1 {
-    font-size: 22px;          /* ← Reduce tamaño del título */
-}
-
-header p {
-    font-size: 13px;          /* ← Reduce tamaño del subtítulo */
-    margin-top: 2px;          /* ← Reduce margen superior */
-}
-
-/* BUSCADOR - Reducir espacio */
-.busqueda {
-    padding: 5px 12px !important;   /* ← Reduce de 12px a 5px */
-}
