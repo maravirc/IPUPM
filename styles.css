@@ -1255,5 +1255,68 @@ footer{
     background: linear-gradient(135deg, #bf360c, #e65100) !important;
 }
 
+/* ==========================
+   AVISO NUEVA VERSION
+========================== */
 
+
+#updateBanner{
+
+    position:fixed;
+
+    bottom:20px;
+
+    left:50%;
+
+    transform:translateX(-50%);
+
+    width:90%;
+
+    max-width:420px;
+
+    background:#0d47a1;
+
+    color:white;
+
+    padding:18px;
+
+    border-radius:18px;
+
+    display:none;
+
+    z-index:999999;
+
+    box-shadow:0 10px 35px rgba(0,0,0,.35);
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    gap:15px;
+
+}
+
+
+#updateBanner.mostrar{
+
+    display:flex;
+
+}
+
+
+#updateBanner button{
+
+    background:white;
+
+    color:#0d47a1;
+
+    border:none;
+
+    padding:10px 16px;
+
+    border-radius:10px;
+
+    font-weight:bold;
+
+}
 
