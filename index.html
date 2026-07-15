@@ -29,50 +29,54 @@
 <!-- ========================== -->
 <!-- CONTENIDO PRINCIPAL -->
 <!-- ========================== -->
+
 <div class="topbar">
-    <header style="padding: 8px 20px;">
-        <h1 style="font-size: 22px;">📖 Himnario IPUP</h1>
-        <p id="subtitulo" style="font-size: 13px; margin-top: 2px;">Iglesia Pentecostal Unida - Moyobamba</p>
+    <header>
+        <h1>📖 Himnario IPUP</h1>
+        <p id="subtitulo">Iglesia Pentecostal Unida - Moyobamba</p>
     </header>
 
-    <section class="busqueda" style="display: flex; align-items: center; padding: 5px 15px; position: relative;">
-        <!-- Contenedor con borde completo -->
+    <section class="busqueda" style="display: flex; gap: 0; align-items: center; padding: 12px; position: relative;">
+        <input
+            type="text"
+            id="buscar"
+            placeholder="Buscar por numero o nombre..."
+            style="
+                flex: 1;
+                border: 2px solid #106dd6;
+                border-right: none; 
+                padding: 10px;
+                border-radius: 8px 0 0 8px;
+                outline: none;
+                height: 48px;
+                font-size: 16px;
+                box-sizing: border-box;
+            "
+        >
+        
+        <!-- Contenedor del botón con la misma altura -->
         <div style="
-            display: flex;
-            flex: 1;
             border: 2px solid #106dd6;
-            border-radius: 8px;
-            overflow: hidden;
-            background: white;
+            border-left: none;
+            border-radius: 0 8px 8px 0;
+            padding: 0 6px;
+            background: transparent;
+            display: flex;
+            align-items: center;
+            justify-content: center;
             height: 48px;
             box-sizing: border-box;
         ">
-            <input
-                type="text"
-                id="buscar"
-                placeholder="Buscar por numero o nombre..."
-                style="
-                    flex: 1;
-                    border: none;
-                    padding: 0 10px;
-                    outline: none;
-                    height: 100%;
-                    font-size: 16px;
-                    box-sizing: border-box;
-                    background: transparent;
-                "
-            >
-            
-            <!-- Botón de voz -->
             <button id="btnVoz" style="
                 background: #0d47a1;
                 border: none;
                 color: white;
-                font-size: 20px;
+                font-size: 24px;
+                border-radius: 50%;
                 cursor: pointer;
                 transition: all 0.3s ease;
-                width: 48px;
-                height: 100%;
+                width: 36px;
+                height: 36px;
                 display: flex;
                 align-items: center;
                 justify-content: center;
@@ -83,8 +87,23 @@
         </div>
     </section>
     
-    <!-- Indicador de voz -->
-    <div id="indicadorVoz" style="display: none; position: fixed; bottom: 30px; left: 50%; transform: translateX(-50%); background: rgba(0,0,0,0.85); color: white; padding: 12px 24px; border-radius: 50px; font-size: 16px; z-index: 9999; backdrop-filter: blur(10px); box-shadow: 0 4px 30px rgba(0,0,0,0.3); animation: pulseVoz 1s ease-in-out infinite;">
+    <!-- 🔥 INDICADOR DE "ESCUCHANDO" -->
+    <div id="indicadorVoz" style="
+        display: none;
+        position: fixed;
+        bottom: 30px;
+        left: 50%;
+        transform: translateX(-50%);
+        background: rgba(0,0,0,0.85);
+        color: white;
+        padding: 12px 24px;
+        border-radius: 50px;
+        font-size: 16px;
+        z-index: 9999;
+        backdrop-filter: blur(10px);
+        box-shadow: 0 4px 30px rgba(0,0,0,0.3);
+        animation: pulseVoz 1s ease-in-out infinite;
+    ">
         🎤 Escuchando...
     </div>
     
