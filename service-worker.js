@@ -23,7 +23,7 @@ self.addEventListener("install", event => {
         })
         .then(() => {
             console.log("[SW] Instalación completada");
-            return self.skipWaiting();
+            return;
         })
     );
 });
