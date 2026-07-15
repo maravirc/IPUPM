@@ -930,6 +930,71 @@ document.querySelectorAll('.menu button').forEach(btn => {
         setTimeout(actualizarCabeceraFija, 500);
     });
 });
+
+//=========================================
+// ACTUALIZACIÓN AUTOMÁTICA DE LA PWA
+//=========================================
+
+let nuevaVersion = null;
+
+if ("serviceWorker" in navigator) {
+
+    navigator.serviceWorker.ready.then(registration => {
+
+        if (registration.waiting) {
+
+            mostrarAvisoActualizacion(registration.waiting);
+
+        }
+
+        registration.addEventListener("updatefound", () => {
+
+            const nuevoWorker = registration.installing;
+
+            nuevoWorker.addEventListener("statechange", () => {
+
+                if (
+                    nuevoWorker.state === "installed" &&
+                    navigator.serviceWorker.controller
+                ) {
+
+                    mostrarAvisoActualizacion(nuevoWorker);
+
+                }
+
+            });
+
+        });
+
+    });
+
+}
+
+function mostrarAvisoActualizacion(worker){
+
+    nuevaVersion = worker;
+
+    document
+        .getElementById("updateBanner")
+        .classList.add("show");
+
+}
+
+document
+.getElementById("btnActualizarApp")
+.addEventListener("click",()=>{
+
+    if(!nuevaVersion)return;
+
+    nuevaVersion.postMessage("skipWaiting");
+
+});
+
+navigator.serviceWorker.addEventListener("controllerchange",()=>{
+
+    window.location.reload();
+
+});
 cargarHimnos();
 
 // ==========================
