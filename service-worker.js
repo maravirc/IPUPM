@@ -1,5 +1,5 @@
-const CACHE_NAME = "himnario-ipu-v48"; // Cambia la versión cuando actualices
-const VERSION = "v48";
+const CACHE_NAME = "himnario-ipu-v41"; // Cambia la versión cuando actualices
+const VERSION = "v41";
 
 // 📁 CORREGIDO: La ruta de los JSON debe ser data/
 const urlsToCache = [
@@ -64,19 +64,16 @@ self.addEventListener("fetch", event => {
                     console.log(`[SW] JSON desde caché: ${url.pathname}`);
                     return cachedResponse;
                 }
-return fetch(event.request, { cache: 'no-store' })
-.then(networkResponse => {
-
-    const responseClone = networkResponse.clone();
-
-    caches.open(CACHE_NAME)
-    .then(cache => {
-        cache.put(event.request, responseClone);
-    });
-
-    return networkResponse;
-
-})
+                // Si no está en caché, buscar en red
+                return fetch(event.request, { cache: 'no-store' })
+                .then(networkResponse => {
+                    // Guardar en caché para futuras veces
+                    caches.open(CACHE_NAME)
+                        .then(cache => {
+                            cache.put(event.request, networkResponse.clone());
+                        });
+                    return networkResponse;
+                })
                 .catch(() => {
                     console.error(`[SW] Error al cargar JSON: ${url.pathname}`);
                     // Devolver JSON vacío en caso de error
@@ -97,34 +94,24 @@ return fetch(event.request, { cache: 'no-store' })
                 return cachedResponse;
             }
             // Si no está en caché, buscar en red
-return fetch(event.request)
-.then(networkResponse => {
-
-    const responseClone = networkResponse.clone();
-
-    caches.open(CACHE_NAME)
-    .then(cache => {
-        cache.put(event.request, responseClone);
-    });
-
-    return networkResponse;
-
-});
+            return fetch(event.request)
+            .then(networkResponse => {
+                // Guardar en caché para futuras veces
+                caches.open(CACHE_NAME)
+                    .then(cache => {
+                        cache.put(event.request, networkResponse.clone());
+                    });
+                return networkResponse;
+            });
         })
     );
 });
 
 // MENSAJES DESDE LA APP
 self.addEventListener('message', event => {
-
-    if(event.data.action === "skipWaiting"){
-
-        console.log("[SW] Activando nueva versión");
-
+    if (event.data === 'skipWaiting') {
         self.skipWaiting();
-
     }
-
 });
 
 console.log(`[SW] Service Worker ${VERSION} cargado`);

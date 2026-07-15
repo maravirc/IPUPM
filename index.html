@@ -125,34 +125,11 @@
 
 <script src="script.js"></script>
 
-<!-- ==========================
-     ACTUALIZACIÓN DISPONIBLE
-========================== -->
-
-<div id="updateBanner" class="update-banner">
-    <div class="update-content">
-        <div>
-            <strong>🚀 Nueva actualización disponible</strong>
-            <p>Hay mejoras y correcciones para el Himnario.</p>
-        </div>
-
-        <button id="btnActualizarApp">
-            Actualizar
-        </button>
-    </div>
-</div>
-
 <script>
-if ("serviceWorker" in navigator) {
-
-    window.addEventListener("load", async () => {
-
-        const registro = await navigator.serviceWorker.register("service-worker.js");
-
-        registro.update();
-
+if("serviceWorker" in navigator){
+    window.addEventListener("load",()=>{
+        navigator.serviceWorker.register("service-worker.js");
     });
-
 }
 </script>
 
