@@ -35,49 +35,44 @@
         <p id="subtitulo" style="font-size: 13px; margin-top: 2px;">Iglesia Pentecostal Unida - Moyobamba</p>
     </header>
 
-    <section class="busqueda" style="display: flex; gap: 0; align-items: center; padding: 5px 12px; position: relative;">
-        <input
-            type="text"
-            id="buscar"
-            placeholder="Buscar por numero o nombre..."
-            style="
-                flex: 1;
-                border: 2px solid #106dd6;
-                border-right: none;
-                border-top: none;
-                padding: 8px 10px;
-                border-radius: 8px 0 0 8px;
-                outline: none;
-                height: 42px;
-                font-size: 15px;
-                box-sizing: border-box;
-            "
-        >
-        
-        <!-- Contenedor del botón con la misma altura -->
+    <section class="busqueda" style="display: flex; align-items: center; padding: 5px 15px; position: relative;">
+        <!-- Contenedor con borde completo -->
         <div style="
-            border: 2px solid #106dd6;
-            border-left: none;
-            border-top: none;
-            border-radius: 0 8px 8px 0;
-            padding: 0 6px;
-            background: transparent;
             display: flex;
-            align-items: center;
-            justify-content: center;
-            height: 42px;
+            flex: 1;
+            border: 2px solid #106dd6;
+            border-radius: 8px;
+            overflow: hidden;
+            background: white;
+            height: 48px;
             box-sizing: border-box;
         ">
+            <input
+                type="text"
+                id="buscar"
+                placeholder="Buscar por numero o nombre..."
+                style="
+                    flex: 1;
+                    border: none;
+                    padding: 0 10px;
+                    outline: none;
+                    height: 100%;
+                    font-size: 16px;
+                    box-sizing: border-box;
+                    background: transparent;
+                "
+            >
+            
+            <!-- Botón de voz -->
             <button id="btnVoz" style="
                 background: #0d47a1;
                 border: none;
                 color: white;
                 font-size: 20px;
-                border-radius: 50%;
                 cursor: pointer;
                 transition: all 0.3s ease;
-                width: 32px;
-                height: 32px;
+                width: 48px;
+                height: 100%;
                 display: flex;
                 align-items: center;
                 justify-content: center;
