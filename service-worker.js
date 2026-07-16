@@ -1,4 +1,4 @@
-const VERSION = "v56";
+const VERSION = "v57";
 const CACHE_NAME = "himnario-ipu-" + VERSION; // Cambia la versión cuando actualices
 
 // 📁 CORREGIDO: La ruta de los JSON debe ser data/
