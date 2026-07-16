@@ -345,6 +345,7 @@ function limpiarTexto(texto) {
 }
 
 // 🔥 BUSCADOR EN TIEMPO REAL - SOLO POR TÍTULO
+// 🔥 BUSCADOR EN TIEMPO REAL
 buscar.addEventListener("input", function() {
     clearTimeout(timeoutBusqueda);
     
@@ -369,13 +370,19 @@ buscar.addEventListener("input", function() {
             mostrarHimnos(favs);
             actualizarTitulo('favoritos', favs.length);
         }
-        // Restaurar botón activo después de limpiar búsqueda
+        
+        // 🔥 Mostrar cabecera fija cuando se borra la búsqueda
+        const cabeceraFija = document.getElementById('cabeceraFijaUnica');
+        if (cabeceraFija) {
+            cabeceraFija.style.display = 'flex';
+        }
+        
         setTimeout(restaurarBotonActivo, 50);
         window.scrollTo({ top: 0, behavior: "smooth" });
         return;
     }
     
-    // 🔥 IMPORTANTE: Usar los datos correctos según la sección
+    // Usar los datos correctos según la sección
     let datosABuscar = [];
     if (tipoActual === 'himnos') {
         datosABuscar = datosHimnosCache;
@@ -403,24 +410,40 @@ buscar.addEventListener("input", function() {
         } else if (tipoActual === 'favoritos') {
             actualizarTitulo('favoritos', datosABuscar.length);
         }
+        
+        // 🔥 Mostrar cabecera fija
+        const cabeceraFija = document.getElementById('cabeceraFijaUnica');
+        if (cabeceraFija) {
+            cabeceraFija.style.display = 'flex';
+        }
+        
         setTimeout(restaurarBotonActivo, 50);
         window.scrollTo({ top: 0, behavior: "smooth" });
         return;
     }
     
-    // 🔥 BUSCAR SOLO POR TÍTULO (no en la letra)
+    // 🔥 BUSCAR POR NÚMERO (COINCIDENCIA EXACTA) O TÍTULO
     let resultado;
+    
     if (/^\d+$/.test(textoBusqueda)) {
-        // Si es número, buscar por número
-        resultado = datosABuscar.filter(h => 
-            h.numero.toString().includes(textoBusqueda)
-        );
+        // Buscar coincidencia EXACTA del número
+        resultado = datosABuscar.filter(h => {
+            const numStr = h.numero.toString();
+            return numStr === textoBusqueda;
+        });
+        
+        // Si no hay coincidencia exacta, buscar en el título
+        if (resultado.length === 0) {
+            resultado = datosABuscar.filter(h => {
+                const tituloLimpio = limpiarTexto(h.titulo);
+                return tituloLimpio.includes(textoBusqueda);
+            });
+        }
     } else {
         // Buscar solo en el TÍTULO
         resultado = datosABuscar.filter(h => {
             const tituloLimpio = limpiarTexto(h.titulo);
             const palabras = textoBusqueda.split(' ');
-            // Verificar que TODAS las palabras estén en el TÍTULO
             return palabras.every(palabra => 
                 tituloLimpio.includes(palabra)
             );
@@ -430,24 +453,33 @@ buscar.addEventListener("input", function() {
     resetearPaginacion();
     mostrarHimnos(resultado);
     
+    // 🔥 CONTROL DE CABECERA FIJA
+    const cabeceraFija = document.getElementById('cabeceraFijaUnica');
+    
     if (resultado.length > 0) {
         const primerItem = resultado[0];
         const tipo = primerItem.tipo === 'coro' ? 'coros' : 'himnos';
         actualizarTitulo(tipo, resultado.length);
+        
+        // ✅ MOSTRAR cabecera fija
+        if (cabeceraFija) {
+            cabeceraFija.style.display = 'flex';
+        }
     } else {
+        // ✅ Mostrar mensaje de "No se encontraron resultados"
         lista.innerHTML = `<div class="sin-resultados">
             <h3>🔍 No se encontraron resultados</h3>
             <p>Intenta con otra palabra o número</p>
         </div>`;
+        
+        // ❌ OCULTAR cabecera fija
+        if (cabeceraFija) {
+            cabeceraFija.style.display = 'none';
+        }
     }
     
-    // Restaurar botón activo después de buscar
     setTimeout(restaurarBotonActivo, 50);
-    
-    window.scrollTo({
-        top: 0,
-        behavior: "smooth"
-    });
+    window.scrollTo({ top: 0, behavior: "smooth" });
 });
 
 // ==========================
