@@ -761,175 +761,175 @@ function mostrarToast(mensaje) {
 // ==========================
 // INICIAR
 // ==========================
-// CABECERA FIJA - VERSIÓN CORREGIDA
-// ==========================
+// // CABECERA FIJA - VERSIÓN CORREGIDA
+// // ==========================
 
-let cabeceraFija = null;
-let timeoutCabecera = null;
+// let cabeceraFija = null;
+// let timeoutCabecera = null;
 
-function crearCabeceraFija() {
-    if (cabeceraFija) return;
+// function crearCabeceraFija() {
+//     if (cabeceraFija) return;
     
-    const topbar = document.querySelector('.topbar');
-    const topbarHeight = topbar ? topbar.offsetHeight : 280;
+//     const topbar = document.querySelector('.topbar');
+//     const topbarHeight = topbar ? topbar.offsetHeight : 280;
     
-    cabeceraFija = document.createElement('div');
-    cabeceraFija.id = 'cabeceraFija';
-    cabeceraFija.style.cssText = `
-        position: fixed;
-        top: ${topbarHeight}px;
-        left: 0;
-        right: 0;
-        z-index: 999;
-        background: linear-gradient(135deg, #f8faff, #eef4fb);
-        backdrop-filter: blur(10px);
-        padding: 12px 16px;
-        border-bottom: 2px solid rgba(13, 71, 161, 0.1);
-        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
-        display: none;
-        transition: all 0.3s ease;
-        box-sizing: border-box;
-        align-items: center;
-        justify-content: space-between;
-        width: 100%;
-        min-height: 50px;
-    `;
+//     cabeceraFija = document.createElement('div');
+//     cabeceraFija.id = 'cabeceraFija';
+//     cabeceraFija.style.cssText = `
+//         position: fixed;
+//         top: ${topbarHeight}px;
+//         left: 0;
+//         right: 0;
+//         z-index: 999;
+//         background: linear-gradient(135deg, #f8faff, #eef4fb);
+//         backdrop-filter: blur(10px);
+//         padding: 12px 16px;
+//         border-bottom: 2px solid rgba(13, 71, 161, 0.1);
+//         box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+//         display: none;
+//         transition: all 0.3s ease;
+//         box-sizing: border-box;
+//         align-items: center;
+//         justify-content: space-between;
+//         width: 100%;
+//         min-height: 50px;
+//     `;
     
-    cabeceraFija.innerHTML = `
-        <div style="display:flex;align-items:center;gap:8px;flex:1;overflow:hidden;min-width:0;">
-            <span id="cabeceraNumeroFijo" style="
-                font-size:${window.innerWidth <= 600 ? '14px' : '18px'};
-                padding:${window.innerWidth <= 600 ? '2px 10px' : '4px 14px'};
-                white-space:nowrap;
-                flex-shrink:0;
-                color:#0d47a1;
-                font-weight:700;
-                background:white;
-                border-radius:30px;
-                box-shadow:0 2px 8px rgba(13,71,161,0.08);
-            ">📖 Himno 1</span>
-            <span id="cabeceraTituloFijo" style="
-                font-size:${window.innerWidth <= 600 ? '14px' : '18px'};
-                font-weight:800;
-                color:#0a1a2e;
-                margin:0;
-                white-space:nowrap;
-                overflow:hidden;
-                text-overflow:ellipsis;
-                max-width:${window.innerWidth <= 600 ? '50vw' : '70vw'};
-                flex:1;
-                min-width:0;
-            ">El aposento alto</span>
-        </div>
-        <button id="btnCerrarCabeceraFija" style="
-            background: none;
-            border: none;
-            font-size: 20px;
-            cursor: pointer;
-            color: #999;
-            padding: 5px 10px;
-            border-radius: 50%;
-            transition: all 0.3s ease;
-            flex-shrink:0;
-        ">✕</button>
-    `;
+//     cabeceraFija.innerHTML = `
+//         <div style="display:flex;align-items:center;gap:8px;flex:1;overflow:hidden;min-width:0;">
+//             <span id="cabeceraNumeroFijo" style="
+//                 font-size:${window.innerWidth <= 600 ? '14px' : '18px'};
+//                 padding:${window.innerWidth <= 600 ? '2px 10px' : '4px 14px'};
+//                 white-space:nowrap;
+//                 flex-shrink:0;
+//                 color:#0d47a1;
+//                 font-weight:700;
+//                 background:white;
+//                 border-radius:30px;
+//                 box-shadow:0 2px 8px rgba(13,71,161,0.08);
+//             ">📖 Himno 1</span>
+//             <span id="cabeceraTituloFijo" style="
+//                 font-size:${window.innerWidth <= 600 ? '14px' : '18px'};
+//                 font-weight:800;
+//                 color:#0a1a2e;
+//                 margin:0;
+//                 white-space:nowrap;
+//                 overflow:hidden;
+//                 text-overflow:ellipsis;
+//                 max-width:${window.innerWidth <= 600 ? '50vw' : '70vw'};
+//                 flex:1;
+//                 min-width:0;
+//             ">El aposento alto</span>
+//         </div>
+//         <button id="btnCerrarCabeceraFija" style="
+//             background: none;
+//             border: none;
+//             font-size: 20px;
+//             cursor: pointer;
+//             color: #999;
+//             padding: 5px 10px;
+//             border-radius: 50%;
+//             transition: all 0.3s ease;
+//             flex-shrink:0;
+//         ">✕</button>
+//     `;
     
-    document.body.appendChild(cabeceraFija);
+//     document.body.appendChild(cabeceraFija);
     
-    document.getElementById('btnCerrarCabeceraFija').addEventListener('click', function(e) {
-        e.stopPropagation();
-        cabeceraFija.style.display = 'none';
-    });
-}
+//     document.getElementById('btnCerrarCabeceraFija').addEventListener('click', function(e) {
+//         e.stopPropagation();
+//         cabeceraFija.style.display = 'none';
+//     });
+// }
 
-function actualizarCabeceraFija() {
-    if (!cabeceraFija) return;
+// function actualizarCabeceraFija() {
+//     if (!cabeceraFija) return;
     
-    // 🔥 OCULTAR SI HAY MENSAJE DE "SIN RESULTADOS"
-    const sinResultados = document.querySelector('.sin-resultados');
-    if (sinResultados) {
-        cabeceraFija.style.display = 'none';
-        return;
-    }
+//     // 🔥 OCULTAR SI HAY MENSAJE DE "SIN RESULTADOS"
+//     const sinResultados = document.querySelector('.sin-resultados');
+//     if (sinResultados) {
+//         cabeceraFija.style.display = 'none';
+//         return;
+//     }
     
-    const cards = document.querySelectorAll('.card');
-    if (!cards.length) {
-        cabeceraFija.style.display = 'none';
-        return;
-    }
+//     const cards = document.querySelectorAll('.card');
+//     if (!cards.length) {
+//         cabeceraFija.style.display = 'none';
+//         return;
+//     }
     
-    // Buscar la tarjeta más visible
-    let cardVisible = null;
-    let maxArea = 0;
-    const windowHeight = window.innerHeight;
+//     // Buscar la tarjeta más visible
+//     let cardVisible = null;
+//     let maxArea = 0;
+//     const windowHeight = window.innerHeight;
     
-    cards.forEach(card => {
-        const rect = card.getBoundingClientRect();
-        const visibleTop = Math.max(0, rect.top);
-        const visibleBottom = Math.min(windowHeight, rect.bottom);
-        const visibleHeight = Math.max(0, visibleBottom - visibleTop);
-        const area = visibleHeight * rect.width;
+//     cards.forEach(card => {
+//         const rect = card.getBoundingClientRect();
+//         const visibleTop = Math.max(0, rect.top);
+//         const visibleBottom = Math.min(windowHeight, rect.bottom);
+//         const visibleHeight = Math.max(0, visibleBottom - visibleTop);
+//         const area = visibleHeight * rect.width;
         
-        if (area > maxArea && visibleHeight > 20) {
-            maxArea = area;
-            cardVisible = card;
-        }
-    });
+//         if (area > maxArea && visibleHeight > 20) {
+//             maxArea = area;
+//             cardVisible = card;
+//         }
+//     });
     
-    if (!cardVisible) {
-        cardVisible = cards[0];
-    }
+//     if (!cardVisible) {
+//         cardVisible = cards[0];
+//     }
     
-    const numero = cardVisible.querySelector('.numero');
-    const titulo = cardVisible.querySelector('.titulo');
+//     const numero = cardVisible.querySelector('.numero');
+//     const titulo = cardVisible.querySelector('.titulo');
     
-    if (numero && titulo) {
-        const numeroFijo = document.getElementById('cabeceraNumeroFijo');
-        const tituloFijo = document.getElementById('cabeceraTituloFijo');
+//     if (numero && titulo) {
+//         const numeroFijo = document.getElementById('cabeceraNumeroFijo');
+//         const tituloFijo = document.getElementById('cabeceraTituloFijo');
         
-        if (numeroFijo) numeroFijo.textContent = numero.textContent;
-        if (tituloFijo) tituloFijo.textContent = titulo.textContent;
+//         if (numeroFijo) numeroFijo.textContent = numero.textContent;
+//         if (tituloFijo) tituloFijo.textContent = titulo.textContent;
         
-        cabeceraFija.style.display = 'flex';
-    }
-}
+//         cabeceraFija.style.display = 'flex';
+//     }
+// }
 
-function manejarScrollCabecera() {
-    clearTimeout(timeoutCabecera);
-    timeoutCabecera = setTimeout(actualizarCabeceraFija, 80);
-}
+// function manejarScrollCabecera() {
+//     clearTimeout(timeoutCabecera);
+//     timeoutCabecera = setTimeout(actualizarCabeceraFija, 80);
+// }
 
-function iniciarCabeceraFija() {
-    crearCabeceraFija();
+// function iniciarCabeceraFija() {
+//     crearCabeceraFija();
     
-    window.addEventListener('scroll', manejarScrollCabecera);
-    window.addEventListener('resize', function() {
-        const topbar = document.querySelector('.topbar');
-        if (cabeceraFija && topbar) {
-            cabeceraFija.style.top = topbar.offsetHeight + 'px';
-        }
-        actualizarCabeceraFija();
-    });
+//     window.addEventListener('scroll', manejarScrollCabecera);
+//     window.addEventListener('resize', function() {
+//         const topbar = document.querySelector('.topbar');
+//         if (cabeceraFija && topbar) {
+//             cabeceraFija.style.top = topbar.offsetHeight + 'px';
+//         }
+//         actualizarCabeceraFija();
+//     });
     
-    // Observar cambios en la lista
-    const listaElement = document.getElementById('lista');
-    if (listaElement) {
-        const observer = new MutationObserver(() => {
-            setTimeout(actualizarCabeceraFija, 200);
-        });
-        observer.observe(listaElement, { childList: true, subtree: true });
-    }
+//     // Observar cambios en la lista
+//     const listaElement = document.getElementById('lista');
+//     if (listaElement) {
+//         const observer = new MutationObserver(() => {
+//             setTimeout(actualizarCabeceraFija, 200);
+//         });
+//         observer.observe(listaElement, { childList: true, subtree: true });
+//     }
     
-    // Actualizar al buscar
-    document.getElementById('buscar').addEventListener('input', function() {
-        setTimeout(actualizarCabeceraFija, 200);
-    });
+//     // Actualizar al buscar
+//     document.getElementById('buscar').addEventListener('input', function() {
+//         setTimeout(actualizarCabeceraFija, 200);
+//     });
     
-    setTimeout(actualizarCabeceraFija, 500);
-}
+//     setTimeout(actualizarCabeceraFija, 500);
+// }
 
-// Iniciar después de cargar
-setTimeout(iniciarCabeceraFija, 800);
+// // Iniciar después de cargar
+// setTimeout(iniciarCabeceraFija, 800);
 
 cargarHimnos();
 
