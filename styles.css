@@ -1411,7 +1411,7 @@ footer{
 /* Móviles */
 @media (max-width: 768px) {
     .card .cabecera-himno {
-        top: 230px;
+        top: 253px;
     }
 }
 
