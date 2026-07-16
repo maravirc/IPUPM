@@ -1,6 +1,6 @@
 // ==========================
 // HIMNARIO IPU MOYOBAMBA
-// script.js - VERSIÓN COMPLETA OPTIMIZADA
+// script.js - VERSIÓN COMPLETA
 // ==========================
 
 // ==========================
@@ -77,12 +77,10 @@ function resetearPaginacion() {
 // ==========================
 
 function activarBoton(tipo) {
-    // Quitar clase 'activo' de todos los botones
     document.querySelectorAll('.menu button').forEach(btn => {
         btn.classList.remove('activo');
     });
     
-    // Agregar clase 'activo' al botón correspondiente
     if (tipo === 'himnos') {
         const btn = document.getElementById('btnHimnos');
         if (btn) btn.classList.add('activo');
@@ -131,7 +129,6 @@ async function cargarHimnos() {
         mostrarHimnos(datosHimnosCache);
         actualizarTitulo('himnos', datosHimnosCache.length);
         
-        // Activar botón Himnos por defecto
         setTimeout(() => activarBoton('himnos'), 100);
         
     } catch (error) {
@@ -141,11 +138,10 @@ async function cargarHimnos() {
 }
 
 // ==========================
-// MOSTRAR HIMNOS - CON "VER MÁS"
+// MOSTRAR HIMNOS
 // ==========================
 
 function mostrarHimnos(datos) {
-    // Guardar referencia
     datosActuales = datos;
     
     if (!datos || datos.length === 0) {
@@ -156,7 +152,6 @@ function mostrarHimnos(datos) {
         return;
     }
     
-    // Decidir cuántos mostrar
     let datosMostrar;
     let mostrarBoton = false;
     
@@ -168,7 +163,6 @@ function mostrarHimnos(datos) {
         mostrarBoton = false;
     }
     
-    // Construir HTML
     let html = '';
     
     for (let i = 0; i < datosMostrar.length; i++) {
@@ -187,35 +181,30 @@ function mostrarHimnos(datos) {
             tipo = 'coro';
         }
         
-        // Dentro del for donde se crean las tarjetas
-const btnFav = esFavorito ? '⭐ Quitar' : '🤍 Favorito';
-
-html += `
-    <div class="card" data-numero="${himno.numero}">
-        <div class="cabecera-himno">
-            <div>
-                <div class="numero">${icono} ${tipoTexto} ${himno.numero}</div>
-                <div class="titulo">${himno.titulo}</div>
+        const btnFav = esFavorito ? '⭐ Quitar' : '🤍 Favorito';
+        
+        html += `
+            <div class="card" data-numero="${himno.numero}">
+                <div class="cabecera-himno">
+                    <div>
+                        <div class="numero">${icono} ${tipoTexto} ${himno.numero}</div>
+                        <div class="titulo">${himno.titulo}</div>
+                    </div>
+                    <div class="acciones">
+                        <button class="btnPantalla" onclick="pantallaCompleta(${himno.numero})">⛶</button>
+                        <button class="btnSalir" onclick="salirPantallaCompleta(event)">✕</button>
+                    </div>
+                </div>
+                <div class="letra">${himno.letra}</div>
+                <div class="botones">
+                    <button onclick="favorito(${himno.numero}, '${tipo}')">${btnFav}</button>
+                    <button onclick="compartir(${himno.numero})">📤 Compartir</button>
+                    <button onclick="compartirApp()" class="btn-compartir-app">📱 Compartir App</button>
+                </div>
             </div>
-            <div class="acciones">
-                <button class="btnPantalla" onclick="pantallaCompleta(${himno.numero})">⛶</button>
-                <button class="btnSalir" onclick="salirPantallaCompleta(event)">✕</button>
-            </div>
-        </div>
-        <div class="letra">${himno.letra}</div>
-        <div class="botones">
-            <button onclick="favorito(${himno.numero}, '${tipo}')">${btnFav}</button>
-            <button onclick="compartir(${himno.numero})">📤 Compartir</button>
-            <button onclick="compartirApp()" class="btn-compartir-app" style="
-                background: linear-gradient(135deg, #e65100, #f57c00);
-                box-shadow: 0 3px 12px rgba(230, 81, 0, 0.3);
-            ">📱 Compartir App</button>
-        </div>
-    </div>
-`;
+        `;
     }
     
-    // Botón "Ver más"
     if (mostrarBoton) {
         const restantes = datos.length - MAX_INICIAL;
         html += `
@@ -233,12 +222,7 @@ html += `
                     transition: all 0.3s ease;
                     letter-spacing: 0.5px;
                     min-width: 200px;
-                "
-                onmouseover="this.style.transform='translateY(-3px) scale(1.03)'; this.style.boxShadow='0 8px 35px rgba(13, 71, 161, 0.5)'; this.style.background='linear-gradient(135deg, #1565c0, #0d47a1)'"
-                onmouseout="this.style.transform='translateY(0) scale(1)'; this.style.boxShadow='0 4px 20px rgba(13, 71, 161, 0.35)'; this.style.background='linear-gradient(135deg, #0d47a1, #1565c0)'"
-                onmousedown="this.style.transform='scale(0.95)'"
-                onmouseup="this.style.transform='translateY(-3px) scale(1.03)'"
-                >
+                ">
                     📖 Ver más (${restantes} restantes)
                 </button>
             </div>
@@ -247,7 +231,6 @@ html += `
     
     lista.innerHTML = html;
     
-    // Event listener para el botón "Ver más"
     const btnVerMas = document.getElementById('btnVerMas');
     if (btnVerMas) {
         btnVerMas.addEventListener('click', function() {
@@ -259,12 +242,11 @@ html += `
         });
     }
     
-    // Restaurar el botón activo después de renderizar
     setTimeout(restaurarBotonActivo, 50);
 }
 
 // ==========================
-// BOTÓN ADORACIÓN Y ALABANZAS - CON RESET
+// BOTONES DE NAVEGACIÓN
 // ==========================
 
 document.getElementById("btnCoros").addEventListener("click", () => {
@@ -281,10 +263,6 @@ document.getElementById("btnCoros").addEventListener("click", () => {
     }
 });
 
-// ==========================
-// BOTÓN HIMNOS - CON RESET
-// ==========================
-
 document.getElementById("btnHimnos").addEventListener("click", () => {
     if (datosHimnosCache.length > 0) {
         tipoActual = 'himnos';
@@ -296,10 +274,6 @@ document.getElementById("btnHimnos").addEventListener("click", () => {
         activarBoton('himnos');
     }
 });
-
-// ==========================
-// BOTÓN FAVORITOS - CON RESET
-// ==========================
 
 document.getElementById("btnFavoritos").addEventListener("click", () => {
     const todosLosDatos = [...datosHimnosCache, ...datosCorosCache];
@@ -325,17 +299,15 @@ document.getElementById("btnFavoritos").addEventListener("click", () => {
 });
 
 // ==========================
-// BUSCAR - CORREGIDO (BUSCA POR TÍTULO)
+// BUSCAR
 // ==========================
 
 let timeoutBusqueda;
 
-// 🔥 FUNCIÓN PARA QUITAR ACENTOS
 function quitarAcentos(texto) {
     return texto.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
 }
 
-// 🔥 FUNCIÓN PARA LIMPIAR TEXTO (quita signos, comas, puntos, espacios extras)
 function limpiarTexto(texto) {
     return quitarAcentos(texto)
         .toLowerCase()
@@ -344,14 +316,11 @@ function limpiarTexto(texto) {
         .trim();
 }
 
-// 🔥 BUSCADOR EN TIEMPO REAL - SOLO POR TÍTULO
-// 🔥 BUSCADOR EN TIEMPO REAL
 buscar.addEventListener("input", function() {
     clearTimeout(timeoutBusqueda);
     
     const textoOriginal = this.value.trim();
     
-    // Si se borró todo, mostrar todos los datos
     if (textoOriginal === '') {
         resetearPaginacion();
         if (tipoActual === 'himnos') {
@@ -370,13 +339,11 @@ buscar.addEventListener("input", function() {
             mostrarHimnos(favs);
             actualizarTitulo('favoritos', favs.length);
         }
-        // Restaurar botón activo después de limpiar búsqueda
         setTimeout(restaurarBotonActivo, 50);
         window.scrollTo({ top: 0, behavior: "smooth" });
         return;
     }
     
-    // 🔥 IMPORTANTE: Usar los datos correctos según la sección
     let datosABuscar = [];
     if (tipoActual === 'himnos') {
         datosABuscar = datosHimnosCache;
@@ -390,10 +357,8 @@ buscar.addEventListener("input", function() {
         });
     }
     
-    // Limpiar el texto de búsqueda
     const textoBusqueda = limpiarTexto(textoOriginal);
     
-    // Si después de limpiar queda vacío, mostrar todo
     if (textoBusqueda === '') {
         resetearPaginacion();
         mostrarHimnos(datosABuscar);
@@ -409,19 +374,15 @@ buscar.addEventListener("input", function() {
         return;
     }
     
-    // 🔥 BUSCAR SOLO POR TÍTULO (no en la letra)
     let resultado;
     if (/^\d+$/.test(textoBusqueda)) {
-        // Si es número, buscar por número
         resultado = datosABuscar.filter(h => 
-            h.numero.toString().includes(textoBusqueda)
+            h.numero.toString() === textoBusqueda
         );
     } else {
-        // Buscar solo en el TÍTULO
         resultado = datosABuscar.filter(h => {
             const tituloLimpio = limpiarTexto(h.titulo);
             const palabras = textoBusqueda.split(' ');
-            // Verificar que TODAS las palabras estén en el TÍTULO
             return palabras.every(palabra => 
                 tituloLimpio.includes(palabra)
             );
@@ -442,17 +403,12 @@ buscar.addEventListener("input", function() {
         </div>`;
     }
     
-    // Restaurar botón activo después de buscar
     setTimeout(restaurarBotonActivo, 50);
-    
-    window.scrollTo({
-        top: 0,
-        behavior: "smooth"
-    });
+    window.scrollTo({ top: 0, behavior: "smooth" });
 });
 
 // ==========================
-// FAVORITOS - CORREGIDO CON PREFIJO Y TIPO EXPLÍCITO
+// FAVORITOS
 // ==========================
 
 function favorito(numero, tipo) {
@@ -522,24 +478,11 @@ async function compartir(numero) {
 
 function pantallaCompleta(numero) {
     const tarjetas = document.querySelectorAll(".card");
-    let encontrada = false;
-    
     tarjetas.forEach(card => {
         if (card.dataset.numero == numero) {
             card.requestFullscreen();
-            encontrada = true;
         }
     });
-    
-    if (!encontrada) {
-        tarjetas.forEach(card => {
-            if (card.innerHTML.includes(`>${numero}<`) || 
-                card.innerHTML.includes(`📖 ${numero}`) ||
-                card.innerHTML.includes(`🎵 ${numero}`)) {
-                card.requestFullscreen();
-            }
-        });
-    }
 }
 
 function salirPantallaCompleta(event) {
@@ -550,177 +493,26 @@ function salirPantallaCompleta(event) {
 }
 
 // ==========================
-// COMPARTIR APP - DESDE EL BOTÓN
+// COMPARTIR APP
 // ==========================
 
 function compartirApp() {
     const url = window.location.href;
-    const titulo = '📖 Himnario IPUP Moyobamba';
-    const descripcion = 'Descarga el Himnario de la Iglesia Pentecostal Unida - Moyobamba';
-    
-    // Verificar si ya está instalada como PWA
-    const isStandalone = window.matchMedia('(display-mode: standalone)').matches;
-    
-    let mensaje = '';
-    if (isStandalone) {
-        mensaje = '📖 Himnario IPUP Moyobamba\n\n✅ Ya tienes la app instalada.\n\n📤 Comparte este enlace con tus hermanos:';
-    } else {
-        mensaje = '📖 Himnario IPUP Moyobamba\n\n📲 INSTALACIÓN:\n' +
-                  '1. Abre este enlace en Chrome o Safari\n' +
-                  '2. Presiona el botón "Instalar App" o "Agregar a pantalla de inicio"\n' +
-                  '3. ¡Listo! Tendrás el himnario siempre disponible\n\n' +
-                  '🔗 Enlace: ' + url;
-    }
+    const mensaje = '📖 Himnario IPUP Moyobamba\n\n📲 INSTALACIÓN:\n1. Abre este enlace en Chrome o Safari\n2. Presiona "Instalar App"\n3. ¡Listo!\n\n🔗 ' + url;
     
     if (navigator.share) {
         navigator.share({
-            title: titulo,
+            title: '📖 Himnario IPUP Moyobamba',
             text: mensaje,
             url: url
         }).catch(() => {});
+    } else if (navigator.clipboard) {
+        navigator.clipboard.writeText(mensaje).then(() => {
+            mostrarToast('✅ Enlace copiado');
+        });
     } else {
-        // Si no soporta compartir, copiar al portapapeles
-        if (navigator.clipboard) {
-            navigator.clipboard.writeText(mensaje + '\n\n🔗 ' + url).then(() => {
-                mostrarToast('✅ Enlace copiado al portapapeles');
-            }).catch(() => {
-                alert(mensaje + '\n\n🔗 ' + url);
-            });
-        } else {
-            alert(mensaje + '\n\n🔗 ' + url);
-        }
+        alert(mensaje);
     }
-}
-
-// ==========================
-// INSTALAR PWA
-// ==========================
-
-let eventoInstalacion;
-const btnInstalar = document.getElementById("btnInstalar");
-
-window.addEventListener("beforeinstallprompt", (e) => {
-    e.preventDefault();
-    eventoInstalacion = e;
-    btnInstalar.style.display = "block";
-});
-
-btnInstalar.addEventListener("click", async () => {
-    if (!eventoInstalacion) return;
-
-    eventoInstalacion.prompt();
-    const resultado = await eventoInstalacion.userChoice;
-
-    if (resultado.outcome === "accepted") {
-        console.log("✅ Aplicación instalada");
-    } else {
-        console.log("❌ Instalación cancelada");
-    }
-
-    eventoInstalacion = null;
-    btnInstalar.style.display = "none";
-});
-
-// ==========================
-// BÚSQUEDA POR VOZ - CON INDICADOR
-// ==========================
-
-const btnVoz = document.getElementById('btnVoz');
-const indicadorVoz = document.getElementById('indicadorVoz');
-let reconocimiento = null;
-let escuchando = false;
-
-// Detener reconocimiento y restaurar la interfaz
-function detenerReconocimiento() {
-    escuchando = false;
-
-    if (reconocimiento) {
-        try {
-            reconocimiento.abort(); // Cancela inmediatamente
-        } catch (e) {}
-    }
-
-    btnVoz.textContent = '🎙️';
-    btnVoz.style.background = '#0d47a1';
-    btnVoz.style.boxShadow = 'none';
-    indicadorVoz.style.display = 'none';
-    document.getElementById('buscar').placeholder = 'Buscar himno o coro...';
-}
-
-const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
-
-if (SpeechRecognition) {
-    reconocimiento = new SpeechRecognition();
-    reconocimiento.lang = 'es-ES';
-    reconocimiento.continuous = false;
-    reconocimiento.interimResults = true;
-    reconocimiento.maxAlternatives = 1;
-
-    reconocimiento.addEventListener('result', function(event) {
-
-        // Ignora resultados si ya fue detenido
-        if (!escuchando) return;
-
-        const transcript = event.results[0][0].transcript;
-        const esFinal = event.results[0].isFinal;
-
-        document.getElementById('buscar').value = transcript;
-
-        if (esFinal) {
-            detenerReconocimiento();
-
-            const evento = new Event('input');
-            document.getElementById('buscar').dispatchEvent(evento);
-        }
-    });
-
-    reconocimiento.addEventListener('start', function() {
-        escuchando = true;
-        btnVoz.textContent = '🔴';
-        btnVoz.style.background = '#d32f2f';
-        btnVoz.style.boxShadow = '0 0 20px rgba(211, 47, 47, 0.5)';
-        indicadorVoz.style.display = 'block';
-        document.getElementById('buscar').placeholder = '🎤 Escuchando...';
-    });
-
-    reconocimiento.addEventListener('end', function() {
-        detenerReconocimiento();
-    });
-
-    reconocimiento.addEventListener('error', function(event) {
-
-        detenerReconocimiento();
-
-        if (event.error === 'not-allowed') {
-            mostrarToast('⚠️ Permiso de micrófono denegado');
-        } else if (event.error === 'no-speech') {
-            mostrarToast('🎤 No se detectó voz, intenta de nuevo');
-        }
-    });
-
-    btnVoz.addEventListener('click', function() {
-        if (escuchando) {
-            detenerReconocimiento();
-        } else {
-            try {
-                reconocimiento.start();
-            } catch (e) {
-                try {
-                    reconocimiento.abort();
-                } catch (err) {}
-
-                setTimeout(() => {
-                    try {
-                        reconocimiento.start();
-                    } catch (err) {}
-                }, 300);
-            }
-        }
-    });
-
-} else {
-    btnVoz.style.display = 'none';
-    console.log('⚠️ El navegador no soporta reconocimiento de voz');
 }
 
 // ==========================
@@ -744,301 +536,240 @@ function mostrarToast(mensaje) {
 }
 
 // ==========================
-// INICIAR
-// ==========================
-// ==========================
-// CABECERA FIJA CON JAVASCRIPT
+// INSTALAR PWA
 // ==========================
 
-let cabeceraFija = null;
-let cabeceraClon = null;
+let eventoInstalacion;
+const btnInstalar = document.getElementById("btnInstalar");
+
+window.addEventListener("beforeinstallprompt", (e) => {
+    e.preventDefault();
+    eventoInstalacion = e;
+    btnInstalar.style.display = "block";
+});
+
+btnInstalar.addEventListener("click", async () => {
+    if (!eventoInstalacion) return;
+    eventoInstalacion.prompt();
+    const resultado = await eventoInstalacion.userChoice;
+    eventoInstalacion = null;
+    btnInstalar.style.display = "none";
+});
+
+// ==========================
+// CABECERA FIJA
+// ==========================
+
+let cabeceraFijaElement = null;
 let timeoutCabecera = null;
 
 function crearCabeceraFija() {
-    // Si ya existe, no la creamos de nuevo
-    if (cabeceraFija) return;
+    if (cabeceraFijaElement) return;
     
-    // Crear el contenedor de la cabecera fija
-    cabeceraFija = document.createElement('div');
-    cabeceraFija.id = 'cabeceraFija';
-    cabeceraFija.style.cssText = `
+    const topbar = document.querySelector('.topbar');
+    const topbarHeight = topbar ? topbar.offsetHeight : 280;
+    
+    cabeceraFijaElement = document.createElement('div');
+    cabeceraFijaElement.id = 'cabeceraFijaUnica';
+    cabeceraFijaElement.style.cssText = `
         position: fixed;
-        top: 226px;              /* ← Altura de tu topbar */
+        top: ${topbarHeight}px;
         left: 0;
         right: 0;
-        z-index: 999;
+        z-index: 1000;
         background: linear-gradient(135deg, #f8faff, #eef4fb);
-        padding: 14px 20px 10px 20px;
-        border-bottom: 2px solid #0d47a1;
-        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+        backdrop-filter: blur(10px);
+        border-bottom: 2px solid rgba(13, 71, 161, 0.1);
+        padding: 12px 16px;
+        box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+        box-sizing: border-box;
         display: none;
-        transition: all 0.3s ease;
+        align-items: center;
+        justify-content: space-between;
+        width: 100%;
+        min-height: 50px;
     `;
     
-    // Contenido interno de la cabecera fija
-    cabeceraFija.innerHTML = `
-        <div style="display: flex; justify-content: space-between; align-items: center; max-width: 1200px; margin: 0 auto;">
-            <div>
-                <div id="cabeceraNumeroFijo" style="
-                    color: #0d47a1;
-                    font-weight: 700;
-                    font-size: 18px;
-                    background: white;
-                    padding: 4px 14px;
-                    border-radius: 30px;
-                    display: inline-block;
-                    box-shadow: 0 2px 8px rgba(13, 71, 161, 0.08);
-                ">Himno 1</div>
-                <div id="cabeceraTituloFijo" style="
-                    font-size: 20px;
-                    font-weight: 800;
-                    color: #0a1a2e;
-                    margin-top: 4px;
-                ">El aposento alto</div>
-            </div>
-            <button id="btnCerrarCabeceraFija" style="
-                background: none;
-                border: none;
-                font-size: 24px;
-                cursor: pointer;
-                color: #999;
-                padding: 5px 10px;
-                border-radius: 50%;
-                transition: all 0.3s ease;
-            ">✕</button>
-        </div>
-    `;
-    
-    document.body.appendChild(cabeceraFija);
-    
-    // Botón para cerrar la cabecera fija
-    document.getElementById('btnCerrarCabeceraFija').addEventListener('click', function() {
-        cabeceraFija.style.display = 'none';
-        cabeceraClon = null;
-    });
+    document.body.appendChild(cabeceraFijaElement);
 }
 
-// Función para actualizar la cabecera fija con los datos del himno visible
 function actualizarCabeceraFija() {
-    const cards = document.querySelectorAll('.card');
-    if (!cards.length) return;
+    if (!cabeceraFijaElement) return;
     
-    const topbarHeight = document.querySelector('.topbar')?.offsetHeight || 226;
-    const scrollY = window.scrollY;
-    const windowHeight = window.innerHeight;
-    
-    let himnoVisible = null;
-    let cardVisible = null;
-    let menorDistancia = Infinity;
-    
-    cards.forEach(card => {
-        const rect = card.getBoundingClientRect();
-        const centroCard = rect.top + rect.height / 2;
-        const centroVentana = windowHeight / 2;
-        const distancia = Math.abs(centroCard - centroVentana);
-        
-        // También verificamos si la card está visible en la pantalla
-        const estaVisible = rect.top < windowHeight && rect.bottom > 0;
-        
-        if (estaVisible && distancia < menorDistancia) {
-            menorDistancia = distancia;
-            cardVisible = card;
-        }
-    });
-    
-    // Si no hay card visible, usar la primera
-    if (!cardVisible) {
-        cardVisible = cards[0];
+    // 🔥 SI HAY MENSAJE DE "SIN RESULTADOS", OCULTAR CABECERA
+    const sinResultados = document.querySelector('.sin-resultados');
+    if (sinResultados) {
+        cabeceraFijaElement.style.display = 'none';
+        return;
     }
     
-    if (cardVisible) {
-        const numero = cardVisible.querySelector('.numero');
-        const titulo = cardVisible.querySelector('.titulo');
-        
-        if (numero && titulo) {
-            // Actualizar la cabecera fija
-            const numeroFijo = document.getElementById('cabeceraNumeroFijo');
-            const tituloFijo = document.getElementById('cabeceraTituloFijo');
-            
-            if (numeroFijo) numeroFijo.textContent = numero.textContent;
-            if (tituloFijo) tituloFijo.textContent = titulo.textContent;
-            
-            // Mostrar la cabecera fija
-            if (cabeceraFija) {
-                cabeceraFija.style.display = 'block';
-                
-                // Ajustar top según la topbar
-                cabeceraFija.style.top = topbarHeight + 'px';
-            }
-            
-            cabeceraClon = cardVisible;
+    const cards = document.querySelectorAll('.card');
+    let cardActiva = null;
+    
+    for (const card of cards) {
+        const rect = card.getBoundingClientRect();
+        if (rect.top < window.innerHeight && rect.bottom > 50) {
+            cardActiva = card;
+            break;
         }
+    }
+    
+    if (cardActiva) {
+        const numero = cardActiva.dataset.numero;
+        const himno = datosActuales.find(h => h.numero == numero);
+        
+        if (himno) {
+            const icono = himno.tipo === 'coro' ? '🎵' : '📖';
+            const tipoTexto = himno.tipo === 'coro' ? 'Adoración y Alabanza' : 'Himno';
+            const isMobile = window.innerWidth <= 600;
+            
+            cabeceraFijaElement.innerHTML = `
+                <div style="display:flex;align-items:center;gap:8px;flex:1;overflow:hidden;min-width:0;">
+                    <span style="font-size:${isMobile ? '14px' : '18px'};padding:${isMobile ? '2px 10px' : '4px 14px'};white-space:nowrap;flex-shrink:0;color:#0d47a1;font-weight:700;background:white;border-radius:30px;box-shadow:0 2px 8px rgba(13,71,161,0.08);">
+                        ${icono} ${tipoTexto} ${himno.numero}
+                    </span>
+                    <span style="font-size:${isMobile ? '14px' : '18px'};font-weight:800;color:#0a1a2e;margin:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:${isMobile ? '50vw' : '70vw'};flex:1;min-width:0;">
+                        ${himno.titulo}
+                    </span>
+                </div>
+            `;
+            cabeceraFijaElement.style.display = 'flex';
+        }
+    } else {
+        cabeceraFijaElement.style.display = 'none';
     }
 }
 
-// Función para manejar el scroll con debounce
 function manejarScrollCabecera() {
     clearTimeout(timeoutCabecera);
-    timeoutCabecera = setTimeout(() => {
-        actualizarCabeceraFija();
-    }, 50);
+    timeoutCabecera = setTimeout(actualizarCabeceraFija, 80);
 }
 
-// Inicializar la cabecera fija cuando se cargan los himnos
 function iniciarCabeceraFija() {
     crearCabeceraFija();
     
-    // Esperar a que los himnos se carguen
-    const observer = new MutationObserver(() => {
-        const cards = document.querySelectorAll('.card');
-        if (cards.length > 0) {
-            observer.disconnect();
-            setTimeout(actualizarCabeceraFija, 500);
+    window.addEventListener('scroll', manejarScrollCabecera);
+    window.addEventListener('resize', function() {
+        const topbar = document.querySelector('.topbar');
+        if (cabeceraFijaElement && topbar) {
+            cabeceraFijaElement.style.top = topbar.offsetHeight + 'px';
         }
+        actualizarCabeceraFija();
     });
     
-    observer.observe(document.getElementById('lista'), { childList: true, subtree: true });
+    const listaElement = document.getElementById('lista');
+    if (listaElement) {
+        const observer = new MutationObserver(() => {
+            setTimeout(actualizarCabeceraFija, 200);
+        });
+        observer.observe(listaElement, { childList: true, subtree: true });
+    }
     
-    // Event listeners
-    window.addEventListener('scroll', manejarScrollCabecera);
-    window.addEventListener('resize', manejarScrollCabecera);
-    
-    // Actualizar cuando cambie la lista
-    const lista = document.getElementById('lista');
-    if (lista) {
-        const observerLista = new MutationObserver(() => {
+    document.querySelectorAll('.menu button').forEach(btn => {
+        btn.addEventListener('click', function() {
             setTimeout(actualizarCabeceraFija, 300);
         });
-        observerLista.observe(lista, { childList: true, subtree: true });
+    });
+    
+    document.getElementById('buscar').addEventListener('input', function() {
+        setTimeout(actualizarCabeceraFija, 200);
+    });
+    
+    setTimeout(actualizarCabeceraFija, 500);
+}
+
+// ==========================
+// BÚSQUEDA POR VOZ
+// ==========================
+
+const btnVoz = document.getElementById('btnVoz');
+const indicadorVoz = document.getElementById('indicadorVoz');
+let reconocimiento = null;
+let escuchando = false;
+
+function detenerReconocimiento() {
+    escuchando = false;
+    if (reconocimiento) {
+        try { reconocimiento.abort(); } catch (e) {}
+    }
+    if (btnVoz) {
+        btnVoz.textContent = '🎤';
+        btnVoz.style.background = '#0d47a1';
+        btnVoz.style.boxShadow = 'none';
+    }
+    if (indicadorVoz) {
+        indicadorVoz.style.display = 'none';
+    }
+    if (document.getElementById('buscar')) {
+        document.getElementById('buscar').placeholder = 'Buscar himno o coro...';
     }
 }
 
-// Modificar la función mostrarHimnos para actualizar la cabecera
-const mostrarHimnosOriginal = mostrarHimnos;
-mostrarHimnos = function(datos) {
-    mostrarHimnosOriginal(datos);
-    setTimeout(actualizarCabeceraFija, 400);
-};
+const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
 
-// Iniciar después de cargar los himnos
-document.addEventListener('DOMContentLoaded', function() {
-    setTimeout(iniciarCabeceraFija, 1000);
-});
+if (SpeechRecognition && btnVoz) {
+    reconocimiento = new SpeechRecognition();
+    reconocimiento.lang = 'es-ES';
+    reconocimiento.continuous = false;
+    reconocimiento.interimResults = true;
 
-// También actualizar cuando se haga clic en los botones del menú
-document.querySelectorAll('.menu button').forEach(btn => {
-    btn.addEventListener('click', function() {
-        setTimeout(actualizarCabeceraFija, 500);
+    reconocimiento.addEventListener('result', function(event) {
+        if (!escuchando) return;
+        const transcript = event.results[0][0].transcript;
+        const esFinal = event.results[0].isFinal;
+        document.getElementById('buscar').value = transcript;
+        if (esFinal) {
+            detenerReconocimiento();
+            const evento = new Event('input');
+            document.getElementById('buscar').dispatchEvent(evento);
+        }
     });
-});
+
+    reconocimiento.addEventListener('start', function() {
+        escuchando = true;
+        btnVoz.textContent = '🔴';
+        btnVoz.style.background = '#d32f2f';
+        btnVoz.style.boxShadow = '0 0 20px rgba(211, 47, 47, 0.5)';
+        indicadorVoz.style.display = 'block';
+        document.getElementById('buscar').placeholder = '🎤 Escuchando...';
+    });
+
+    reconocimiento.addEventListener('end', detenerReconocimiento);
+
+    reconocimiento.addEventListener('error', function(event) {
+        detenerReconocimiento();
+        if (event.error === 'not-allowed') {
+            mostrarToast('⚠️ Permiso de micrófono denegado');
+        } else if (event.error === 'no-speech') {
+            mostrarToast('🎤 No se detectó voz, intenta de nuevo');
+        }
+    });
+
+    btnVoz.addEventListener('click', function() {
+        if (escuchando) {
+            detenerReconocimiento();
+        } else {
+            try {
+                reconocimiento.start();
+            } catch (e) {
+                try { reconocimiento.abort(); } catch (err) {}
+                setTimeout(() => {
+                    try { reconocimiento.start(); } catch (err) {}
+                }, 300);
+            }
+        }
+    });
+} else if (btnVoz) {
+    btnVoz.style.display = 'none';
+}
+
+// ==========================
+// INICIAR
+// ==========================
 
 cargarHimnos();
+setTimeout(iniciarCabeceraFija, 800);
 
 // ==========================
 // FIN
 // ==========================
-// =================================
-// VERIFICAR NUEVA VERSION
-// =================================
-
-
-let versionInstalada =
-localStorage.getItem("versionApp") || "v0";
-
-
-async function comprobarVersion(){
-
-
-try{
-
-
-const respuesta =
-await fetch("version.json?"+Date.now());
-
-
-const datos =
-await respuesta.json();
-
-
-const versionNueva =
-datos.version;
-
-
-
-console.log(
-"Actual:",
-versionInstalada,
-"Nueva:",
-versionNueva
-);
-
-
-
-if(versionInstalada !== versionNueva){
-
-
-const banner =
-document.getElementById("updateBanner");
-
-
-if(banner){
-
-
-banner.querySelector(".versiones").innerHTML =
-`
-Versión actual: ${versionInstalada}<br>
-Nueva versión: ${versionNueva}
-`;
-
-banner.dataset.version = versionNueva;
-
-
-banner.classList.add("mostrar");
-
-
-}
-
-
-}
-
-
-
-}catch(error){
-
-console.log(
-"No se pudo comprobar versión",
-error
-);
-
-}
-
-}
-
-document.addEventListener(
-"click",
-function(e){
-
-
-if(e.target.id==="btnActualizarApp"){
-
-
-const banner =
-document.getElementById("updateBanner");
-
-
-localStorage.setItem(
-"versionApp",
-banner.dataset.version
-);
-
-
-location.reload();
-
-
-}
-
-
-});
-
-
-comprobarVersion();
