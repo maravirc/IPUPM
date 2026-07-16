@@ -936,7 +936,44 @@ cargarHimnos();
 // ==========================
 // FIN
 // ==========================
+// ==========================
+// CONTROL DE CABECERA FIJA - DEFINITIVO
+// ==========================
 
+function controlarCabeceraFija() {
+    const cabecera = document.getElementById('cabeceraFijaUnica');
+    if (!cabecera) return;
+    
+    // Verificar si hay mensaje de "sin resultados"
+    const sinResultados = document.querySelector('.sin-resultados');
+    const cards = document.querySelectorAll('.card');
+    
+    if (sinResultados || cards.length === 0) {
+        // Si hay mensaje de "sin resultados" o no hay tarjetas
+        cabecera.style.display = 'none';
+    } else {
+        // Si hay tarjetas, mostrar cabecera
+        cabecera.style.display = 'flex';
+    }
+}
+
+// Ejecutar después de cada cambio en la lista
+const observerControl = new MutationObserver(() => {
+    setTimeout(controlarCabeceraFija, 100);
+});
+
+if (lista) {
+    observerControl.observe(lista, { childList: true, subtree: true });
+}
+
+// Ejecutar al hacer scroll (por si la cabecera queda visible)
+window.addEventListener('scroll', function() {
+    setTimeout(controlarCabeceraFija, 50);
+});
+
+// Ejecutar al cargar
+setTimeout(controlarCabeceraFija, 300);
+setTimeout(controlarCabeceraFija, 800);
 // =================================
 // VERIFICAR NUEVA VERSION
 // =================================
