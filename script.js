@@ -434,24 +434,11 @@ buscar.addEventListener("input", function() {
         const primerItem = resultado[0];
         const tipo = primerItem.tipo === 'coro' ? 'coros' : 'himnos';
         actualizarTitulo(tipo, resultado.length);
-        
-        // 🔥 MOSTRAR cabecera fija si hay resultados
-        const cabeceraFija = document.getElementById('cabeceraFijaUnica');
-        if (cabeceraFija) {
-            cabeceraFija.style.display = 'flex';
-        }
-        
     } else {
         lista.innerHTML = `<div class="sin-resultados">
             <h3>🔍 No se encontraron resultados</h3>
             <p>Intenta con otra palabra o número</p>
         </div>`;
-        
-        // 🔥 OCULTAR cabecera fija si NO hay resultados
-        const cabeceraFija = document.getElementById('cabeceraFijaUnica');
-        if (cabeceraFija) {
-            cabeceraFija.style.display = 'none';
-        }
     }
     
     // Restaurar botón activo después de buscar
