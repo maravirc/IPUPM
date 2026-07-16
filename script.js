@@ -346,6 +346,7 @@ function limpiarTexto(texto) {
 
 // 🔥 BUSCADOR EN TIEMPO REAL - SOLO POR TÍTULO
 // 🔥 BUSCADOR EN TIEMPO REAL
+// 🔥 BUSCADOR EN TIEMPO REAL - CORREGIDO
 buscar.addEventListener("input", function() {
     clearTimeout(timeoutBusqueda);
     
@@ -370,13 +371,13 @@ buscar.addEventListener("input", function() {
             mostrarHimnos(favs);
             actualizarTitulo('favoritos', favs.length);
         }
-        // Restaurar botón activo después de limpiar búsqueda
+        // Restaurar botón activo
         setTimeout(restaurarBotonActivo, 50);
         window.scrollTo({ top: 0, behavior: "smooth" });
         return;
     }
     
-    // 🔥 IMPORTANTE: Usar los datos correctos según la sección
+    // Usar los datos correctos según la sección
     let datosABuscar = [];
     if (tipoActual === 'himnos') {
         datosABuscar = datosHimnosCache;
@@ -409,19 +410,20 @@ buscar.addEventListener("input", function() {
         return;
     }
     
-    // 🔥 BUSCAR SOLO POR TÍTULO (no en la letra)
+    // 🔥 BUSCAR POR NÚMERO EXACTO O TÍTULO
     let resultado;
+    
     if (/^\d+$/.test(textoBusqueda)) {
-        // Si es número, buscar por número
-        resultado = datosABuscar.filter(h => 
-            h.numero.toString().includes(textoBusqueda)
-        );
+        // 🔥 SOLO COINCIDENCIA EXACTA del número
+        resultado = datosABuscar.filter(h => {
+            const numStr = h.numero.toString();
+            return numStr === textoBusqueda;
+        });
     } else {
         // Buscar solo en el TÍTULO
         resultado = datosABuscar.filter(h => {
             const tituloLimpio = limpiarTexto(h.titulo);
             const palabras = textoBusqueda.split(' ');
-            // Verificar que TODAS las palabras estén en el TÍTULO
             return palabras.every(palabra => 
                 tituloLimpio.includes(palabra)
             );
@@ -431,15 +433,29 @@ buscar.addEventListener("input", function() {
     resetearPaginacion();
     mostrarHimnos(resultado);
     
+    // 🔥 CONTROL DE CABECERA FIJA
+    const cabecera = document.getElementById('cabeceraFijaUnica');
+    
     if (resultado.length > 0) {
         const primerItem = resultado[0];
         const tipo = primerItem.tipo === 'coro' ? 'coros' : 'himnos';
         actualizarTitulo(tipo, resultado.length);
+        
+        // Mostrar cabecera
+        if (cabecera) {
+            cabecera.style.display = 'flex';
+        }
     } else {
+        // Mostrar mensaje de "No se encontraron resultados"
         lista.innerHTML = `<div class="sin-resultados">
             <h3>🔍 No se encontraron resultados</h3>
             <p>Intenta con otra palabra o número</p>
         </div>`;
+        
+        // 🔥 OCULTAR cabecera
+        if (cabecera) {
+            cabecera.style.display = 'none';
+        }
     }
     
     // Restaurar botón activo después de buscar
