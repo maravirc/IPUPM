@@ -1338,7 +1338,7 @@ footer{
 /* La cabecera se pega en la parte superior del viewport */
 .card .cabecera-himno {
     position: sticky;
-    top: 185px; /* Debajo del menú de navegación */
+    top: 255px; /* Debajo del menú de navegación */
     z-index: 50;
     background: linear-gradient(135deg, #f8faff, #eef4fb);
     padding: 18px 20px 10px 20px;
