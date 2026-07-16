@@ -1075,5 +1075,40 @@ location.reload();
 });
 
 
-
 comprobarVersion();
+
+// ==========================
+// FORZAR OCULTAR CABECERA FIJA
+// ==========================
+
+// Función para ocultar la cabecera fija
+function ocultarCabeceraFija() {
+    const cabecera = document.getElementById('cabeceraFijaUnica');
+    if (cabecera) {
+        cabecera.style.display = 'none';
+    }
+}
+
+// Función para mostrar la cabecera fija
+function mostrarCabeceraFija() {
+    const cabecera = document.getElementById('cabeceraFijaUnica');
+    if (cabecera) {
+        cabecera.style.display = 'flex';
+    }
+}
+
+// Modificar la búsqueda para que controle la cabecera
+const buscarOriginal = buscar.addEventListener;
+buscar.addEventListener('input', function(e) {
+    // Esperar a que termine el renderizado
+    setTimeout(() => {
+        const sinResultados = document.querySelector('.sin-resultados');
+        if (sinResultados) {
+            // Si hay mensaje de "sin resultados", ocultar cabecera
+            ocultarCabeceraFija();
+        } else {
+            // Si hay resultados, mostrar cabecera
+            mostrarCabeceraFija();
+        }
+    }, 100);
+});
