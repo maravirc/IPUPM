@@ -578,7 +578,7 @@ function compartirApp() {
     
     let mensaje = '';
     if (isStandalone) {
-        mensaje = '📖 Himnario IPUP Moyobamba\n\n✅ Ya tienes la app instalada.\n\n📤 Comparte este enlace con tus hermanos:';
+        mensaje = '📖 Himnario IPUP Moyobamba\n\n✅ IPUP-Moyobamba.\n\n📤 Instala la app desde este enlace:';
     } else {
         mensaje = '📖 Himnario IPUP Moyobamba\n\n📲 INSTALACIÓN:\n' +
                   '1. Abre este enlace en Chrome o Safari\n' +
