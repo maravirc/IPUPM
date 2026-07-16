@@ -768,7 +768,7 @@ if (SpeechRecognition && btnVoz) {
 // ==========================
 
 cargarHimnos();
-setTimeout(iniciarCabeceraFija, 800);
+setTimeout(iniciarCabeceraFija, 300);
 
 // ==========================
 // FIN
