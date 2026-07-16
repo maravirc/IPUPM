@@ -773,3 +773,108 @@ setTimeout(iniciarCabeceraFija, 800);
 // ==========================
 // FIN
 // ==========================
+// =================================
+// VERIFICAR NUEVA VERSION
+// =================================
+
+
+let versionInstalada =
+localStorage.getItem("versionApp") || "v0";
+
+
+async function comprobarVersion(){
+
+
+try{
+
+
+const respuesta =
+await fetch("version.json?"+Date.now());
+
+
+const datos =
+await respuesta.json();
+
+
+const versionNueva =
+datos.version;
+
+
+
+console.log(
+"Actual:",
+versionInstalada,
+"Nueva:",
+versionNueva
+);
+
+
+
+if(versionInstalada !== versionNueva){
+
+
+const banner =
+document.getElementById("updateBanner");
+
+
+if(banner){
+
+
+banner.querySelector(".versiones").innerHTML =
+`
+Versión actual: ${versionInstalada}<br>
+Nueva versión: ${versionNueva}
+`;
+
+banner.dataset.version = versionNueva;
+
+
+banner.classList.add("mostrar");
+
+
+}
+
+
+}
+
+
+
+}catch(error){
+
+console.log(
+"No se pudo comprobar versión",
+error
+);
+
+}
+
+}
+
+document.addEventListener(
+"click",
+function(e){
+
+
+if(e.target.id==="btnActualizarApp"){
+
+
+const banner =
+document.getElementById("updateBanner");
+
+
+localStorage.setItem(
+"versionApp",
+banner.dataset.version
+);
+
+
+location.reload();
+
+
+}
+
+
+});
+
+
+comprobarVersion();
