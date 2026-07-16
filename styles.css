@@ -1319,4 +1319,137 @@ footer{
     font-weight:bold;
 
 }
+/* ==========================
+   CABECERA PEGAJOSA POR TARJETA
+   ========================== */
 
+/* La tarjeta debe tener position relative */
+.card {
+    position: relative;
+    overflow: visible; /* Cambiar de hidden a visible */
+}
+
+/* La cabecera se vuelve pegajosa dentro de la tarjeta */
+.card .cabecera-himno {
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    background: linear-gradient(135deg, #f8faff, #eef4fb);
+    padding: 18px 20px 10px 20px;
+    border-bottom: 2px solid rgba(13, 71, 161, 0.1);
+    transition: all 0.2s ease;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.02);
+}
+
+/* Efecto cuando está pegada (sombra más pronunciada) */
+.card .cabecera-himno.sticky-active {
+    box-shadow: 0 4px 20px rgba(13, 71, 161, 0.12);
+    border-bottom-color: #0d47a1;
+}
+
+/* La letra debe tener espacio */
+.card .letra {
+    padding: 8px 20px 16px 20px;
+    white-space: pre-line;
+    line-height: 1.7;
+    font-size: 18px;
+    color: #1f2a3f;
+    font-weight: 400;
+    max-height: 400px; /* Altura máxima para que se vea el efecto */
+    overflow-y: auto;  /* Scroll dentro de la tarjeta */
+    scroll-behavior: smooth;
+}
+
+/* La tarjeta debe tener altura fija para que el sticky funcione */
+.card {
+    height: auto;
+    max-height: 500px; /* Altura máxima de la tarjeta */
+    display: flex;
+    flex-direction: column;
+}
+
+/* Los botones quedan abajo */
+.card .botones {
+    margin-top: auto;
+    padding: 0 20px 18px 20px;
+}
+
+/* ==========================
+   MODO OSCURO - CABECERA PEGAJOSA
+   ========================== */
+
+.dark .card .cabecera-himno {
+    background: linear-gradient(135deg, #1a2744, #0d1f3c);
+    border-bottom-color: rgba(100, 181, 246, 0.15);
+}
+
+.dark .card .cabecera-himno.sticky-active {
+    box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+    border-bottom-color: #64b5f6;
+}
+
+/* ==========================
+   RESPONSIVE
+   ========================== */
+
+@media (max-width: 700px) {
+    .card .cabecera-himno {
+        padding: 14px 16px 8px 16px;
+    }
+    
+    .card .letra {
+        padding: 6px 16px 14px 16px;
+        font-size: 18px;
+        max-height: 300px;
+    }
+    
+    .card {
+        max-height: 420px;
+    }
+}
+
+@media (max-width: 480px) {
+    .card .cabecera-himno {
+        padding: 12px 14px 6px 14px;
+    }
+    
+    .card .letra {
+        padding: 4px 14px 12px 14px;
+        font-size: 16px;
+        max-height: 250px;
+    }
+    
+    .card {
+        max-height: 380px;
+    }
+}
+
+/* ==========================
+   PANTALLA COMPLETA - ANULAR STICKY
+   ========================== */
+
+.card:fullscreen {
+    max-height: 100vh !important;
+    height: 100vh !important;
+}
+
+.card:fullscreen .cabecera-himno {
+    position: sticky !important;
+    top: 0 !important;
+    background: rgba(13, 71, 161, 0.95) !important;
+    backdrop-filter: blur(12px) !important;
+    border-bottom: none !important;
+    box-shadow: 0 4px 30px rgba(0,0,0,0.3) !important;
+}
+
+.card:fullscreen .letra {
+    max-height: none !important;
+    overflow-y: auto !important;
+    flex: 1;
+    padding: 30px 35px 40px !important;
+    font-size: 26px !important;
+}
+
+.card:fullscreen .cabecera-himno.sticky-active {
+    box-shadow: 0 4px 30px rgba(0,0,0,0.3) !important;
+}
