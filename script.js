@@ -931,6 +931,109 @@ document.querySelectorAll('.menu button').forEach(btn => {
         setTimeout(actualizarCabeceraFija, 500);
     });
 });
+// ==========================
+// CABECERA FIJA SIMPLE - SOLO CUANDO HAY RESULTADOS
+// ==========================
+
+function crearCabeceraSimple() {
+    // Eliminar cabecera anterior si existe
+    const vieja = document.getElementById('cabeceraSimple');
+    if (vieja) vieja.remove();
+    
+    const topbar = document.querySelector('.topbar');
+    const topbarHeight = topbar ? topbar.offsetHeight : 280;
+    
+    const cabecera = document.createElement('div');
+    cabecera.id = 'cabeceraSimple';
+    cabecera.style.cssText = `
+        position: fixed;
+        top: ${topbarHeight}px;
+        left: 0;
+        right: 0;
+        z-index: 1000;
+        background: linear-gradient(135deg, #f8faff, #eef4fb);
+        backdrop-filter: blur(10px);
+        border-bottom: 2px solid rgba(13, 71, 161, 0.1);
+        padding: 12px 16px;
+        box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+        box-sizing: border-box;
+        display: none;
+        align-items: center;
+        justify-content: space-between;
+        width: 100%;
+        min-height: 50px;
+    `;
+    document.body.appendChild(cabecera);
+    return cabecera;
+}
+
+let cabeceraSimple = null;
+
+function actualizarCabeceraSimple() {
+    if (!cabeceraSimple) {
+        cabeceraSimple = crearCabeceraSimple();
+    }
+    
+    // Buscar la primera tarjeta visible
+    const cards = document.querySelectorAll('.card');
+    let cardActiva = null;
+    
+    for (const card of cards) {
+        const rect = card.getBoundingClientRect();
+        if (rect.top < window.innerHeight && rect.bottom > 50) {
+            cardActiva = card;
+            break;
+        }
+    }
+    
+    if (cardActiva) {
+        const numero = cardActiva.dataset.numero;
+        const himno = datosActuales.find(h => h.numero == numero);
+        
+        if (himno) {
+            const icono = himno.tipo === 'coro' ? '🎵' : '📖';
+            const tipoTexto = himno.tipo === 'coro' ? 'Adoración y Alabanza' : 'Himno';
+            
+            cabeceraSimple.innerHTML = `
+                <div style="display:flex;align-items:center;gap:8px;flex:1;overflow:hidden;min-width:0;">
+                    <span style="font-size:${window.innerWidth <= 600 ? '14px' : '18px'};padding:${window.innerWidth <= 600 ? '2px 10px' : '4px 14px'};white-space:nowrap;flex-shrink:0;color:#0d47a1;font-weight:700;background:white;border-radius:30px;box-shadow:0 2px 8px rgba(13,71,161,0.08);">
+                        ${icono} ${tipoTexto} ${himno.numero}
+                    </span>
+                    <span style="font-size:${window.innerWidth <= 600 ? '14px' : '18px'};font-weight:800;color:#0a1a2e;margin:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:${window.innerWidth <= 600 ? '50vw' : '70vw'};flex:1;min-width:0;">
+                        ${himno.titulo}
+                    </span>
+                </div>
+            `;
+            cabeceraSimple.style.display = 'flex';
+        }
+    } else {
+        cabeceraSimple.style.display = 'none';
+    }
+}
+
+// Detectar scroll y actualizar
+let timeoutSimple = null;
+window.addEventListener('scroll', function() {
+    if (timeoutSimple) return;
+    timeoutSimple = setTimeout(() => {
+        actualizarCabeceraSimple();
+        timeoutSimple = null;
+    }, 100);
+});
+
+// Actualizar al cambiar la lista
+const observerSimple = new MutationObserver(() => {
+    setTimeout(actualizarCabeceraSimple, 200);
+});
+if (lista) {
+    observerSimple.observe(lista, { childList: true, subtree: true });
+}
+
+// Ejecutar al cargar
+setTimeout(() => {
+    cabeceraSimple = crearCabeceraSimple();
+    setTimeout(actualizarCabeceraSimple, 300);
+}, 500);
 cargarHimnos();
 
 // ==========================
