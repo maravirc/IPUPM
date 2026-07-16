@@ -931,6 +931,100 @@ function mostrarToast(mensaje) {
 // // Iniciar después de cargar
 // setTimeout(iniciarCabeceraFija, 800);
 
+// ==========================
+// DETECTAR CABECERA STICKY - UNA SOLA A LA VEZ
+// ==========================
+
+function detectarCabecerasSticky() {
+    const cabeceras = document.querySelectorAll('.card .cabecera-himno');
+    const stickyTop = window.innerWidth <= 768 ? 230 : 185;
+    
+    // Primero, quitar la clase sticky-active de todas
+    cabeceras.forEach(c => c.classList.remove('sticky-active'));
+    
+    // Recorrer de abajo hacia arriba para encontrar la primera que esté en posición
+    let cabeceraEncontrada = null;
+    
+    for (let i = cabeceras.length - 1; i >= 0; i--) {
+        const cabecera = cabeceras[i];
+        const card = cabecera.closest('.card');
+        if (!card) continue;
+        
+        const rect = card.getBoundingClientRect();
+        const cabeceraRect = cabecera.getBoundingClientRect();
+        
+        // La cabecera está visible y su top está en la posición sticky
+        if (rect.bottom > stickyTop + 50 && rect.top < stickyTop + 100) {
+            if (cabeceraRect.top <= stickyTop + 10) {
+                cabeceraEncontrada = cabecera;
+                break;
+            }
+        }
+    }
+    
+    // Si encontramos una cabecera, activarla
+    if (cabeceraEncontrada) {
+        cabeceraEncontrada.classList.add('sticky-active');
+    }
+}
+
+// ==========================
+// INICIALIZAR
+// ==========================
+
+// Variable para controlar el scroll
+let scrollTimeout2;
+
+// Detectar al hacer scroll
+document.addEventListener('scroll', function() {
+    clearTimeout(scrollTimeout2);
+    scrollTimeout2 = setTimeout(detectarCabecerasSticky, 10);
+}, { passive: true });
+
+// Detectar al redimensionar
+window.addEventListener('resize', function() {
+    setTimeout(detectarCabecerasSticky, 100);
+});
+
+// Inicializar después de cargar
+setTimeout(detectarCabecerasSticky, 500);
+
+// ==========================
+// ACTUALIZAR AL RENDERIZAR HIMNOS
+// ==========================
+
+// Guardar referencia a la función original
+const mostrarHimnosOriginalSticky = window.mostrarHimnos;
+
+// Modificar mostrarHimnos
+window.mostrarHimnos = function(datos) {
+    mostrarHimnosOriginalSticky(datos);
+    
+    // Esperar a que se rendericen las tarjetas
+    setTimeout(() => {
+        detectarCabecerasSticky();
+    }, 300);
+};
+
+// También al hacer clic en "Ver más"
+document.addEventListener('click', function(e) {
+    if (e.target.id === 'btnVerMas' || e.target.closest('#btnVerMas')) {
+        setTimeout(detectarCabecerasSticky, 400);
+    }
+});
+
+// ==========================
+// REINICIAR AL CAMBIAR SECCIÓN
+// ==========================
+
+function reiniciarSticky() {
+    document.querySelectorAll('.card .cabecera-himno').forEach(c => {
+        c.classList.remove('sticky-active');
+    });
+    setTimeout(detectarCabecerasSticky, 200);
+}
+
+window.reiniciarSticky = reiniciarSticky;
 cargarHimnos();
 
 // ==========================

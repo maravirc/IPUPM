@@ -1320,3 +1320,163 @@ footer{
 
 }
 
+/* ==========================
+   CABECERA STICKY - CADA HIMNO
+   ========================== */
+
+/* La tarjeta debe ser el contenedor de referencia */
+.card {
+    position: relative;
+    overflow: visible !important;
+    margin-bottom: 20px;
+    border-radius: 20px;
+    background: white;
+    box-shadow: 0 4px 20px rgba(0,0,0,.06);
+    border: 1px solid rgba(255,255,255,0.6);
+}
+
+/* La cabecera se pega en la parte superior del viewport */
+.card .cabecera-himno {
+    position: sticky;
+    top: 185px; /* Debajo del menú de navegación */
+    z-index: 50;
+    background: linear-gradient(135deg, #f8faff, #eef4fb);
+    padding: 18px 20px 10px 20px;
+    border-bottom: 2px solid rgba(13, 71, 161, 0.1);
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.02);
+    backdrop-filter: blur(8px);
+    border-radius: 20px 20px 0 0;
+    width: 100%;
+}
+
+/* Cuando está pegada (estática) */
+.card .cabecera-himno.sticky-active {
+    box-shadow: 0 4px 25px rgba(13, 71, 161, 0.2);
+    border-bottom: 3px solid #0d47a1;
+    background: linear-gradient(135deg, #ffffff, #f0f6ff);
+    border-radius: 0;
+}
+
+/* La letra fluye normalmente */
+.card .letra {
+    padding: 8px 20px 16px 20px;
+    white-space: pre-line;
+    line-height: 1.7;
+    font-size: 18px;
+    color: #1f2a3f;
+    font-weight: 400;
+}
+
+/* Los botones */
+.card .botones {
+    padding: 0 20px 18px 20px;
+    margin-top: 10px;
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+/* ==========================
+   MODO OSCURO
+   ========================== */
+
+.dark .card {
+    background: #161b22;
+    border-color: #30363d;
+}
+
+.dark .card .cabecera-himno {
+    background: linear-gradient(135deg, #1a2744, #0d1f3c);
+    border-bottom-color: rgba(100, 181, 246, 0.15);
+}
+
+.dark .card .cabecera-himno.sticky-active {
+    box-shadow: 0 4px 25px rgba(0,0,0,0.5);
+    border-bottom-color: #64b5f6;
+    background: linear-gradient(135deg, #1a2a4a, #0d1f3c);
+}
+
+/* ==========================
+   RESPONSIVE - AJUSTAR TOP
+   ========================== */
+
+/* Tablets */
+@media (min-width: 769px) and (max-width: 1024px) {
+    .card .cabecera-himno {
+        top: 170px;
+    }
+}
+
+/* Móviles */
+@media (max-width: 768px) {
+    .card .cabecera-himno {
+        top: 230px;
+    }
+}
+
+@media (max-width: 480px) {
+    .card .cabecera-himno {
+        top: 215px;
+        padding: 12px 14px 8px 14px;
+    }
+    
+    .card .cabecera-himno .titulo {
+        font-size: 18px !important;
+    }
+    
+    .card .cabecera-himno .numero {
+        font-size: 18px !important;
+    }
+}
+
+/* ==========================
+   PANTALLA COMPLETA
+   ========================== */
+
+.card:fullscreen .cabecera-himno {
+    position: sticky !important;
+    top: 0 !important;
+    background: rgba(13, 71, 161, 0.95) !important;
+    backdrop-filter: blur(12px) !important;
+    border-bottom: 2px solid rgba(255,255,255,0.2) !important;
+    border-radius: 0 !important;
+}
+
+.card:fullscreen .cabecera-himno.sticky-active {
+    box-shadow: 0 4px 30px rgba(0,0,0,0.3) !important;
+    border-bottom: 2px solid rgba(255,255,255,0.3) !important;
+}
+
+.card:fullscreen .letra {
+    font-size: 26px !important;
+    padding: 30px 35px 40px !important;
+}
+
+/* ==========================
+   BORDE SUPERIOR DEGRADADO
+   ========================== */
+
+.card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, #0d47a1, #42a5f5, #0d47a1);
+    background-size: 200% 100%;
+    animation: shimmer 3s ease-in-out infinite;
+    z-index: 51;
+    border-radius: 20px 20px 0 0;
+}
+
+@keyframes shimmer {
+    0%, 100% { background-position: 0% 0%; }
+    50% { background-position: 100% 0%; }
+}
+
+/* Cuando la cabecera está pegada, el borde superior sigue visible */
+.card .cabecera-himno.sticky-active ~ .card::before {
+    z-index: 52;
+}
