@@ -1012,10 +1012,7 @@ error
 
 }
 
-
 }
-
-
 
 document.addEventListener(
 "click",
@@ -1043,43 +1040,5 @@ location.reload();
 
 });
 
-// ==========================
-// CONTROL FINAL DE CABECERA FIJA
-// ==========================
 
-function controlarCabeceraFinal() {
-    const cabecera = document.getElementById('cabeceraFijaUnica');
-    if (!cabecera) return;
-    
-    // Buscar si hay mensaje de "sin resultados"
-    const sinResultados = document.querySelector('.sin-resultados');
-    const cards = document.querySelectorAll('.card');
-    
-    // Ocultar si: hay mensaje "sin resultados" O no hay tarjetas
-    if (sinResultados || cards.length === 0) {
-        cabecera.style.display = 'none';
-    } else {
-        cabecera.style.display = 'flex';
-    }
-}
-
-// Evento de búsqueda
-document.getElementById('buscar').addEventListener('input', function() {
-    setTimeout(controlarCabeceraFinal, 150);
-});
-
-// Observar cambios en la lista
-const observerFinal2 = new MutationObserver(() => {
-    setTimeout(controlarCabeceraFinal, 100);
-});
-observerFinal2.observe(lista, { childList: true, subtree: true });
-
-// Ejecutar al cargar
-setTimeout(controlarCabeceraFinal, 300);
-setTimeout(controlarCabeceraFinal, 800);
-
-// También al hacer scroll (por si queda visible)
-window.addEventListener('scroll', function() {
-    setTimeout(controlarCabeceraFinal, 50);
-});
 comprobarVersion();
