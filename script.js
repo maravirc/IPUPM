@@ -930,46 +930,7 @@ function mostrarToast(mensaje) {
 
 // // Iniciar después de cargar
 // setTimeout(iniciarCabeceraFija, 800);
-// ==========================
-// DETECTAR CUANDO LA CABECERA ESTÁ PEGADA
-// ==========================
 
-function detectarCabecerasPegajosas() {
-    document.querySelectorAll('.card .cabecera-himno').forEach(cabecera => {
-        const card = cabecera.closest('.card');
-        if (!card) return;
-        
-        const rect = card.getBoundingClientRect();
-        const cabeceraRect = cabecera.getBoundingClientRect();
-        
-        // Si la cabecera está pegada al borde superior de la tarjeta
-        if (cabeceraRect.top <= rect.top + 5) {
-            cabecera.classList.add('sticky-active');
-        } else {
-            cabecera.classList.remove('sticky-active');
-        }
-    });
-}
-
-// Ejecutar al hacer scroll
-document.addEventListener('scroll', function() {
-    detectarCabecerasPegajosas();
-}, { passive: true });
-
-// Ejecutar después de cargar
-setTimeout(detectarCabecerasPegajosas, 500);
-
-// Ejecutar después de renderizar himnos
-function inicializarCabecerasSticky() {
-    setTimeout(detectarCabecerasPegajosas, 200);
-}
-
-// Modificar mostrarHimnos para inicializar
-const mostrarHimnosOriginal2 = window.mostrarHimnos;
-window.mostrarHimnos = function(datos) {
-    mostrarHimnosOriginal2(datos);
-    setTimeout(inicializarCabecerasSticky, 300);
-};
 cargarHimnos();
 
 // ==========================
