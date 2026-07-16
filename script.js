@@ -435,11 +435,26 @@ buscar.addEventListener("input", function() {
         const primerItem = resultado[0];
         const tipo = primerItem.tipo === 'coro' ? 'coros' : 'himnos';
         actualizarTitulo(tipo, resultado.length);
+        
+        // Mostrar cabecera fija
+        const cabecera = document.getElementById('cabeceraFija');
+        if (cabecera) cabecera.style.display = 'flex';
+        
     } else {
+        // 🔥 ACTUALIZAR CONTADOR A 0
+        const icono = tipoActual === 'himnos' ? '📖' : tipoActual === 'coros' ? '🎵' : '⭐';
+        const texto = tipoActual === 'himnos' ? 'Himnos' : tipoActual === 'coros' ? 'Adoración y Alabanzas' : 'Favoritos';
+        tituloSeccion.innerHTML = `<h2>${icono} ${texto} <span class="contador">(0)</span></h2>`;
+        
+        // Mostrar mensaje
         lista.innerHTML = `<div class="sin-resultados">
             <h3>🔍 No se encontraron resultados</h3>
             <p>Intenta con otra palabra o número</p>
         </div>`;
+        
+        // Ocultar cabecera fija
+        const cabecera = document.getElementById('cabeceraFija');
+        if (cabecera) cabecera.style.display = 'none';
     }
     
     // Restaurar botón activo después de buscar
