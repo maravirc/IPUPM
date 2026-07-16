@@ -1319,4 +1319,138 @@ footer{
     font-weight:bold;
 
 }
+/* ==========================
+   STICKY HIMNO INFO - NUEVO
+=========================== */
 
+.sticky-himno-info {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: linear-gradient(135deg, #0d47a1, #1565c0);
+    color: white;
+    padding: 12px 20px;
+    margin: 0 -15px 20px -15px;
+    box-shadow: 0 4px 20px rgba(13, 71, 161, 0.3);
+    display: none;
+    border-radius: 0 0 12px 12px;
+    transition: all 0.3s ease;
+}
+
+.sticky-himno-info.mostrar {
+    display: block;
+}
+
+.sticky-himno-info .sticky-contenido {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    max-width: 800px;
+    margin: 0 auto;
+    gap: 10px;
+}
+
+.sticky-himno-info .sticky-numero {
+    font-size: 14px;
+    opacity: 0.9;
+    background: rgba(255,255,255,0.15);
+    padding: 4px 14px;
+    border-radius: 20px;
+    font-weight: 600;
+    white-space: nowrap;
+}
+
+.sticky-himno-info .sticky-titulo {
+    font-size: 18px;
+    font-weight: 700;
+    flex: 1;
+    margin: 0 10px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    text-align: center;
+}
+
+.sticky-himno-info .sticky-indicador {
+    font-size: 12px;
+    opacity: 0.7;
+    background: rgba(255,255,255,0.1);
+    padding: 4px 12px;
+    border-radius: 20px;
+    white-space: nowrap;
+}
+
+/* Animación de entrada */
+.sticky-himno-info.mostrar {
+    animation: slideDownSticky 0.4s ease;
+}
+
+@keyframes slideDownSticky {
+    from {
+        opacity: 0;
+        transform: translateY(-15px) scale(0.98);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+/* Modo oscuro */
+.dark .sticky-himno-info {
+    background: linear-gradient(135deg, #0a1a35, #0d47a1);
+    box-shadow: 0 4px 20px rgba(0,0,0,0.5);
+}
+
+.dark .sticky-himno-info .sticky-numero {
+    background: rgba(255,255,255,0.08);
+}
+
+.dark .sticky-himno-info .sticky-indicador {
+    background: rgba(255,255,255,0.06);
+}
+
+/* Responsive */
+@media (max-width: 700px) {
+    .sticky-himno-info {
+        padding: 10px 14px;
+        margin: 0 -10px 15px -10px;
+        border-radius: 0 0 10px 10px;
+        position: sticky;
+        top: 0;
+    }
+    
+    .sticky-himno-info .sticky-titulo {
+        font-size: 15px;
+        margin: 0 8px;
+    }
+    
+    .sticky-himno-info .sticky-numero {
+        font-size: 12px;
+        padding: 3px 10px;
+    }
+    
+    .sticky-himno-info .sticky-indicador {
+        font-size: 10px;
+        padding: 3px 10px;
+        display: none; /* Ocultar en móvil para más espacio */
+    }
+}
+
+@media (max-width: 480px) {
+    .sticky-himno-info {
+        padding: 8px 12px;
+        margin: 0 -8px 12px -8px;
+        border-radius: 0 0 8px 8px;
+    }
+    
+    .sticky-himno-info .sticky-titulo {
+        font-size: 13px;
+        margin: 0 6px;
+    }
+    
+    .sticky-himno-info .sticky-numero {
+        font-size: 11px;
+        padding: 2px 8px;
+    }
+}

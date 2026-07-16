@@ -1041,3 +1041,226 @@ location.reload();
 
 
 comprobarVersion();
+
+// ==========================
+// STICKY HIMNO INFO - DETECTA HIMNO VISIBLE
+// ==========================
+
+let observadorSticky = null;
+let ultimoHimnoVisible = null;
+let timeoutSticky = null;
+
+function inicializarObservadorSticky() {
+    // Limpiar observador anterior si existe
+    if (observadorSticky) {
+        observadorSticky.disconnect();
+        observadorSticky = null;
+    }
+
+    const opciones = {
+        root: null,
+        rootMargin: '-100px 0px -70% 0px',
+        threshold: 0
+    };
+
+    observadorSticky = new IntersectionObserver((entradas) => {
+        // Encontrar la primera tarjeta que está intersectando
+        let primerHimno = null;
+        
+        for (const entrada of entradas) {
+            if (entrada.isIntersecting) {
+                const card = entrada.target;
+                const numero = card.dataset.numero;
+                const titulo = card.querySelector('.titulo')?.textContent || 'Sin título';
+                const tipo = card.querySelector('.numero')?.textContent || '📖';
+                
+                // Extraer solo el número (sin el prefijo H o C)
+                const numLimpio = numero.toString().replace(/[^0-9]/g, '');
+                const tipoLimpio = tipo.includes('🎵') ? '🎵 Coro' : '📖 Himno';
+                
+                primerHimno = {
+                    numero: numLimpio,
+                    titulo: titulo,
+                    tipo: tipoLimpio,
+                    card: card
+                };
+                break;
+            }
+        }
+
+        if (primerHimno) {
+            actualizarSticky(primerHimno);
+        }
+    }, opciones);
+
+    // Observar todas las tarjetas
+    document.querySelectorAll('.card').forEach(card => {
+        observadorSticky.observe(card);
+    });
+}
+
+function actualizarSticky(primerHimno) {
+    const stickyNumero = document.getElementById('stickyNumero');
+    const stickyTitulo = document.getElementById('stickyTitulo');
+    const stickyIndicador = document.getElementById('stickyIndicador');
+    const sticky = document.getElementById('stickyHimnoInfo');
+
+    if (!stickyNumero || !stickyTitulo) return;
+
+    // Solo actualizar si cambió el número
+    if (ultimoHimnoVisible === primerHimno.numero) return;
+    
+    ultimoHimnoVisible = primerHimno.numero;
+
+    // Actualizar contenido
+    stickyNumero.textContent = `${primerHimno.tipo} ${primerHimno.numero}`;
+    stickyTitulo.textContent = primerHimno.titulo;
+    stickyIndicador.textContent = `⬇ Himno ${primerHimno.numero}`;
+
+    // Mostrar el sticky con animación
+    if (!sticky.classList.contains('mostrar')) {
+        sticky.classList.add('mostrar');
+        // Resetear animación
+        sticky.style.animation = 'none';
+        sticky.offsetHeight; // Trigger reflow
+        sticky.style.animation = 'slideDownSticky 0.4s ease';
+    }
+}
+
+function ocultarSticky() {
+    const sticky = document.getElementById('stickyHimnoInfo');
+    if (sticky) {
+        sticky.classList.remove('mostrar');
+        sticky.style.animation = 'none';
+    }
+    ultimoHimnoVisible = null;
+}
+
+// ==========================
+// MODIFICAR mostrarHimnos PARA INICIALIZAR STICKY
+// ==========================
+
+// Guardar referencia a la función original
+const mostrarHimnosOriginal = window.mostrarHimnos;
+
+// Reemplazar la función mostrarHimnos
+window.mostrarHimnos = function(datos) {
+    // Llamar a la función original
+    mostrarHimnosOriginal(datos);
+    
+    // Inicializar sticky después de renderizar
+    setTimeout(() => {
+        const cards = document.querySelectorAll('.card');
+        if (cards.length > 0) {
+            inicializarObservadorSticky();
+            // Activar el primer himno visible
+            const primeraCard = cards[0];
+            if (primeraCard) {
+                const numero = primeraCard.dataset.numero;
+                const titulo = primeraCard.querySelector('.titulo')?.textContent || 'Sin título';
+                const tipo = primeraCard.querySelector('.numero')?.textContent || '📖';
+                const numLimpio = numero.toString().replace(/[^0-9]/g, '');
+                const tipoLimpio = tipo.includes('🎵') ? '🎵 Coro' : '📖 Himno';
+                
+                document.getElementById('stickyNumero').textContent = `${tipoLimpio} ${numLimpio}`;
+                document.getElementById('stickyTitulo').textContent = titulo;
+                document.getElementById('stickyIndicador').textContent = `⬇ Himno ${numLimpio}`;
+                
+                // Mostrar sticky solo si hay muchos himnos (más de 3)
+                if (cards.length > 3) {
+                    const sticky = document.getElementById('stickyHimnoInfo');
+                    sticky.classList.add('mostrar');
+                }
+            }
+        } else {
+            ocultarSticky();
+        }
+    }, 150);
+};
+
+// ==========================
+// OCULTAR STICKY AL BUSCAR O CAMBIAR SECCIÓN
+// ==========================
+
+// Modificar evento de búsqueda - buscar esta parte en tu código:
+// Dentro del evento 'input' del buscador, donde dice:
+// if (resultado.length > 0) { ... } else { ... }
+
+// Reemplaza el else por esto:
+else {
+    // 🔥 ACTUALIZAR CONTADOR A 0
+    const icono = tipoActual === 'himnos' ? '📖' : tipoActual === 'coros' ? '🎵' : '⭐';
+    const texto = tipoActual === 'himnos' ? 'Himnos' : tipoActual === 'coros' ? 'Adoración y Alabanzas' : 'Favoritos';
+    tituloSeccion.innerHTML = `<h2>${icono} ${texto} <span class="contador">(0)</span></h2>`;
+    
+    // Mostrar mensaje
+    lista.innerHTML = `<div class="sin-resultados">
+        <h3>🔍 No se encontraron resultados</h3>
+        <p>Intenta con otra palabra o número</p>
+    </div>`;
+    
+    // 🔥 OCULTAR STICKY
+    ocultarSticky();
+    
+    // Ocultar cabecera fija
+    const cabecera = document.getElementById('cabeceraFija');
+    if (cabecera) cabecera.style.display = 'none';
+}
+
+// Y también en los botones de navegación:
+
+// Modificar btnHimnos
+document.getElementById("btnHimnos").addEventListener("click", () => {
+    ocultarSticky(); // 🔥 AÑADIR ESTO
+    if (datosHimnosCache.length > 0) {
+        tipoActual = 'himnos';
+        datosActuales = datosHimnosCache;
+        resetearPaginacion();
+        window.mostrarHimnos(datosHimnosCache);
+        actualizarTitulo('himnos', datosHimnosCache.length);
+        buscar.value = '';
+        activarBoton('himnos');
+    }
+});
+
+// Modificar btnCoros
+document.getElementById("btnCoros").addEventListener("click", () => {
+    ocultarSticky(); // 🔥 AÑADIR ESTO
+    if (datosCorosCache.length > 0) {
+        tipoActual = 'coros';
+        datosActuales = datosCorosCache;
+        resetearPaginacion();
+        window.mostrarHimnos(datosCorosCache);
+        actualizarTitulo('coros', datosCorosCache.length);
+        buscar.value = '';
+        activarBoton('coros');
+    } else {
+        lista.innerHTML = "<h2>⚠️ No se pudieron cargar los coros.</h2>";
+    }
+});
+
+// Modificar btnFavoritos
+document.getElementById("btnFavoritos").addEventListener("click", () => {
+    ocultarSticky(); // 🔥 AÑADIR ESTO
+    const todosLosDatos = [...datosHimnosCache, ...datosCorosCache];
+    const listaFavoritos = todosLosDatos.filter(h => {
+        const prefijo = h.tipo === 'coro' ? 'C' : 'H';
+        return favoritos.includes(`${prefijo}${h.numero}`);
+    });
+    
+    tipoActual = 'favoritos';
+    datosActuales = listaFavoritos;
+    resetearPaginacion();
+    window.mostrarHimnos(listaFavoritos);
+    actualizarTitulo('favoritos', listaFavoritos.length);
+    buscar.value = '';
+    activarBoton('favoritos');
+    
+    if (listaFavoritos.length === 0) {
+        ocultarSticky(); // 🔥 OCULTAR SI NO HAY FAVORITOS
+        lista.innerHTML = `<div class="sin-resultados">
+            <h3>⭐ Sin favoritos</h3>
+            <p>Agrega himnos o coros a tus favoritos presionando el corazón ❤️</p>
+        </div>`;
+    }
+});
