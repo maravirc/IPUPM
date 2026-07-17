@@ -1025,38 +1025,6 @@ function reiniciarSticky() {
 }
 
 window.reiniciarSticky = reiniciarSticky;
-
-const buttons = document.querySelectorAll('.menu button');
-const subtitulo1 = document.getElementById('subtitulo');
-
-buttons.forEach(button => {
-    // Cuando el botón tiene focus
-    button.addEventListener('focus', function() {
-        subtitulo1.style.fontSize = '10px'; // Cambia al tamaño que quieras
-    });
-    
-    // Cuando el botón pierde focus
-    button.addEventListener('blur', function() {
-        subtitulo1.style.fontSize = ''; // Vuelve al tamaño original
-    });
-    
-    // Cuando el botón está activo (click presionado)
-    button.addEventListener('mousedown', function() {
-        subtitulo1.style.fontSize = '10px';
-    });
-    
-    // Cuando se suelta el click
-    button.addEventListener('mouseup', function() {
-        subtitulo1.style.fontSize = '';
-    });
-    
-    // Cuando el mouse sale del botón (por si acaso)
-    button.addEventListener('mouseleave', function() {
-        if (document.activeElement !== this) {
-            subtitulo1.style.fontSize = '';
-        }
-    });
-});
 cargarHimnos();
 
 // ==========================
