@@ -1480,9 +1480,3 @@ footer{
 .card .cabecera-himno.sticky-active ~ .card::before {
     z-index: 52;
 }
-/* Esto NO funcionaría porque CSS no puede afectar a otros elementos basado en el focus de otro */
-/* Pero puedes usar :focus-within si el botón y el subtítulo están en el mismo contenedor */
-
-.menu:focus-within #subtitulo {
-    font-size: 10px;
-}
