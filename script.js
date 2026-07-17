@@ -1032,7 +1032,7 @@ const subtitulo1 = document.getElementById('subtitulo');
 buttons.forEach(button => {
     // Cuando el botón tiene focus
     button.addEventListener('focus', function() {
-        subtitulo1.style.fontSize = '12px'; // Cambia al tamaño que quieras
+        subtitulo1.style.fontSize = '10px'; // Cambia al tamaño que quieras
     });
     
     // Cuando el botón pierde focus
@@ -1042,7 +1042,7 @@ buttons.forEach(button => {
     
     // Cuando el botón está activo (click presionado)
     button.addEventListener('mousedown', function() {
-        subtitulo1.style.fontSize = '12px';
+        subtitulo1.style.fontSize = '10px';
     });
     
     // Cuando se suelta el click
