@@ -216,48 +216,65 @@ html += `
     }
     
     // Botón "Ver más"
-    if (mostrarBoton) {
-        const restantes = datos.length - MAX_INICIAL;
-        html += `
-            <div class="ver-mas" style="text-align: center; padding: 25px 0; width: 100%;">
-                <button class="btn-ver-mas" id="btnVerMas" style="
-                    background: linear-gradient(135deg, #0d47a1, #1565c0);
-                    color: white;
-                    border: none;
-                    padding: 14px 35px;
-                    border-radius: 50px;
-                    font-size: 16px;
-                    font-weight: 600;
-                    cursor: pointer;
-                    box-shadow: 0 4px 20px rgba(13, 71, 161, 0.35);
-                    transition: all 0.3s ease;
-                    letter-spacing: 0.5px;
-                    min-width: 200px;
-                "
-                onmouseover="this.style.transform='translateY(-3px) scale(1.03)'; this.style.boxShadow='0 8px 35px rgba(13, 71, 161, 0.5)'; this.style.background='linear-gradient(135deg, #1565c0, #0d47a1)'"
-                onmouseout="this.style.transform='translateY(0) scale(1)'; this.style.boxShadow='0 4px 20px rgba(13, 71, 161, 0.35)'; this.style.background='linear-gradient(135deg, #0d47a1, #1565c0)'"
-                onmousedown="this.style.transform='scale(0.95)'"
-                onmouseup="this.style.transform='translateY(-3px) scale(1.03)'"
-                >
-                    📖 Ver más (${restantes} restantes)
-                </button>
-            </div>
-        `;
-    }
+// Botón "Ver más" - CON GUARDADO DE POSICIÓN
+if (mostrarBoton) {
+    const restantes = datos.length - MAX_INICIAL;
+    html += `
+        <div class="ver-mas" style="text-align: center; padding: 25px 0; width: 100%;">
+            <button class="btn-ver-mas" id="btnVerMas" style="
+                background: linear-gradient(135deg, #0d47a1, #1565c0);
+                color: white;
+                border: none;
+                padding: 14px 35px;
+                border-radius: 50px;
+                font-size: 16px;
+                font-weight: 600;
+                cursor: pointer;
+                box-shadow: 0 4px 20px rgba(13, 71, 161, 0.35);
+                transition: all 0.3s ease;
+                letter-spacing: 0.5px;
+                min-width: 200px;
+            "
+            onmouseover="this.style.transform='translateY(-3px) scale(1.03)'; this.style.boxShadow='0 8px 35px rgba(13, 71, 161, 0.5)'; this.style.background='linear-gradient(135deg, #1565c0, #0d47a1)'"
+            onmouseout="this.style.transform='translateY(0) scale(1)'; this.style.boxShadow='0 4px 20px rgba(13, 71, 161, 0.35)'; this.style.background='linear-gradient(135deg, #0d47a1, #1565c0)'"
+            onmousedown="this.style.transform='scale(0.95)'"
+            onmouseup="this.style.transform='translateY(-3px) scale(1.03)'"
+            >
+                📖 Ver más (${restantes} restantes)
+            </button>
+        </div>
+    `;
+}
     
     lista.innerHTML = html;
     
     // Event listener para el botón "Ver más"
-    const btnVerMas = document.getElementById('btnVerMas');
-    if (btnVerMas) {
-        btnVerMas.addEventListener('click', function() {
-            mostrandoTodos = true;
-            mostrarHimnos(datosActuales);
-            setTimeout(() => {
-                window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
-            }, 300);
-        });
-    }
+// Event listener para el botón "Ver más" - CON GUARDADO DE POSICIÓN
+const btnVerMas = document.getElementById('btnVerMas');
+if (btnVerMas) {
+    btnVerMas.addEventListener('click', function(e) {
+        // 1. Guardar la posición actual del scroll
+        const scrollY = window.scrollY;
+        
+        // 2. Guardar la referencia del botón que se presionó
+        const boton = e.currentTarget;
+        const botonRect = boton.getBoundingClientRect();
+        const offsetDesdeArriba = botonRect.top + window.scrollY;
+        
+        // 3. Expandir la lista
+        mostrandoTodos = true;
+        mostrarHimnos(datosActuales);
+        
+        // 4. Restaurar la posición después de renderizar
+        setTimeout(() => {
+            // Volver a la posición donde estaba el botón
+            window.scrollTo({ 
+                top: offsetDesdeArriba - 50, // -50 para dejar un poco de margen
+                behavior: 'smooth' 
+            });
+        }, 100);
+    });
+}   
     
     // Restaurar el botón activo después de renderizar
     setTimeout(restaurarBotonActivo, 50);
