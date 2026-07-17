@@ -1484,5 +1484,5 @@ footer{
 /* Pero puedes usar :focus-within si el botón y el subtítulo están en el mismo contenedor */
 
 .menu:focus-within #subtitulo {
-    font-size: 20px;
+    font-size: 10px;
 }
