@@ -1048,107 +1048,175 @@ cargarHimnos();
 // FIN
 // ==========================
 // =================================
-// VERIFICAR NUEVA VERSION
+// =================================
+// VERIFICAR NUEVA VERSION - MEJORADO
 // =================================
 
+// Obtener la versión instalada
+let versionInstalada = localStorage.getItem("versionApp") || "v0";
 
-let versionInstalada =
-localStorage.getItem("versionApp") || "v0";
+// Controlar si ya se mostró el banner en esta sesión
+let bannerMostradoEnSesion = false;
 
+// Controlar si ya se verificó en esta sesión
+let yaVerificado = false;
 
-async function comprobarVersion(){
+// Controlar si estamos mostrando el banner
+let bannerVisible = false;
 
+async function comprobarVersion() {
+    // Si ya se verificó en esta sesión, no hacer nada
+    if (yaVerificado) {
+        console.log('✅ Ya verificado en esta sesión');
+        return;
+    }
+    
+    // Si no hay internet, NO hacer nada (sin errores)
+    if (!navigator.onLine) {
+        console.log('📡 Sin conexión - No se verifica versión');
+        return;
+    }
+    
+    try {
+        console.log('🔍 Verificando versión...');
+        
+        const respuesta = await fetch("version.json?" + Date.now());
+        
+        // Si la respuesta no es exitosa, salir
+        if (!respuesta.ok) {
+            console.log('⚠️ No se pudo obtener version.json');
+            return;
+        }
+        
+        const datos = await respuesta.json();
+        const versionNueva = datos.version;
 
-try{
+        console.log("📱 Actual:", versionInstalada);
+        console.log("📱 Nueva:", versionNueva);
 
-
-const respuesta =
-await fetch("version.json?"+Date.now());
-
-
-const datos =
-await respuesta.json();
-
-
-const versionNueva =
-datos.version;
-
-
-
-console.log(
-"Actual:",
-versionInstalada,
-"Nueva:",
-versionNueva
-);
-
-
-
-if(versionInstalada !== versionNueva){
-
-
-const banner =
-document.getElementById("updateBanner");
-
-
-if(banner){
-
-
-banner.querySelector(".versiones").innerHTML =
-`
-Versión actual: ${versionInstalada}<br>
-Nueva versión: ${versionNueva}
-`;
-
-banner.dataset.version = versionNueva;
-
-
-banner.classList.add("mostrar");
-
-
+        // Si la versión es diferente y NO se ha mostrado el banner en esta sesión
+        if (versionInstalada !== versionNueva && !bannerMostradoEnSesion) {
+            const banner = document.getElementById("updateBanner");
+            
+            if (banner) {
+                // Actualizar la información del banner
+                const versionesElement = banner.querySelector(".versiones");
+                if (versionesElement) {
+                    versionesElement.innerHTML = `
+                        Versión actual: ${versionInstalada}<br>
+                        Nueva versión: ${versionNueva}
+                    `;
+                }
+                
+                banner.dataset.version = versionNueva;
+                banner.classList.add("mostrar");
+                bannerVisible = true;
+                
+                // Marcar que ya se mostró en esta sesión
+                bannerMostradoEnSesion = true;
+                
+                console.log('✅ Banner mostrado');
+                
+                // Ocultar automáticamente después de 30 segundos
+                setTimeout(() => {
+                    if (banner.classList.contains('mostrar')) {
+                        banner.classList.remove('mostrar');
+                        bannerVisible = false;
+                        console.log('⏰ Banner ocultado automáticamente');
+                    }
+                }, 30000);
+            }
+        }
+        
+        // Marcar como verificado (no se volverá a verificar en esta sesión)
+        yaVerificado = true;
+        
+    } catch (error) {
+        console.log("❌ Error al verificar versión:", error.message);
+        // Si hay error, NO marcar como verificado para que pueda intentar de nuevo
+    }
 }
 
+// ==========================
+// EVENTO PARA ACTUALIZAR
+// ==========================
 
-}
-
-
-
-}catch(error){
-
-console.log(
-"No se pudo comprobar versión",
-error
-);
-
-}
-
-}
-
-document.addEventListener(
-"click",
-function(e){
-
-
-if(e.target.id==="btnActualizarApp"){
-
-
-const banner =
-document.getElementById("updateBanner");
-
-
-localStorage.setItem(
-"versionApp",
-banner.dataset.version
-);
-
-
-location.reload();
-
-
-}
-
-
+document.addEventListener("click", function(e) {
+    if (e.target.id === "btnActualizarApp") {
+        const banner = document.getElementById("updateBanner");
+        
+        if (banner && banner.dataset.version) {
+            // Guardar la nueva versión
+            localStorage.setItem("versionApp", banner.dataset.version);
+            versionInstalada = banner.dataset.version;
+            
+            // Ocultar el banner
+            banner.classList.remove('mostrar');
+            bannerVisible = false;
+            
+            console.log('✅ Actualizando a versión:', versionInstalada);
+            
+            // Mostrar mensaje de éxito (opcional)
+            mostrarToast('✅ Actualizando aplicación...');
+            
+            // Recargar la página después de 1 segundo
+            setTimeout(() => {
+                location.reload();
+            }, 1000);
+        }
+    }
 });
 
+// ==========================
+// ESCUCHAR CAMBIOS DE CONEXIÓN
+// ==========================
 
-comprobarVersion();
+// Cuando vuelve el internet, verificar versión (solo si no se ha verificado)
+window.addEventListener('online', function() {
+    console.log('📡 Conexión restablecida');
+    
+    // Si el banner estaba visible por error, ocultarlo
+    const banner = document.getElementById('updateBanner');
+    if (banner && banner.classList.contains('mostrar') && !bannerMostradoEnSesion) {
+        banner.classList.remove('mostrar');
+        bannerVisible = false;
+    }
+    
+    // Verificar versión si no se ha verificado
+    if (!yaVerificado) {
+        console.log('🔄 Verificando versión...');
+        setTimeout(comprobarVersion, 2000);
+    }
+});
+
+// Cuando se pierde el internet, ocultar el banner si está visible
+window.addEventListener('offline', function() {
+    console.log('📡 Sin conexión - Ocultando banner');
+    const banner = document.getElementById('updateBanner');
+    if (banner) {
+        banner.classList.remove('mostrar');
+        bannerVisible = false;
+    }
+});
+
+// ==========================
+// INICIALIZAR AL CARGAR
+// ==========================
+
+// Esperar a que la página cargue completamente
+window.addEventListener('load', function() {
+    console.log('🚀 Página cargada - Iniciando verificación...');
+    // Esperar 3 segundos antes de verificar
+    setTimeout(comprobarVersion, 3000);
+});
+
+// También verificar después de 8 segundos por si acaso
+setTimeout(function() {
+    if (!yaVerificado) {
+        console.log('🔄 Segunda verificación...');
+        comprobarVersion();
+    }
+}, 8000);
+
+console.log('✅ Sistema de versiones inicializado');
+console.log('📱 Versión instalada:', versionInstalada);
