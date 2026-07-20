@@ -1486,3 +1486,61 @@ footer{
 .card .cabecera-himno.sticky-active ~ .card::before {
     z-index: 52;
 }
+
+/* ==========================
+   BOTÓN LIMPIAR BUSCADOR
+=========================== */
+
+#btnLimpiar {
+    position: absolute;
+    right: 42px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    color: #999;
+    font-size: 18px;
+    cursor: pointer;
+    padding: 4px 8px;
+    border-radius: 50%;
+    display: none;
+    transition: all 0.3s ease;
+    z-index: 2;
+}
+
+#btnLimpiar:hover {
+    color: #d32f2f;
+    background: rgba(211, 47, 47, 0.08);
+    transform: translateY(-50%) scale(1.1);
+}
+
+#btnLimpiar:active {
+    transform: translateY(-50%) scale(0.9);
+}
+
+/* MODO OSCURO */
+.dark #btnLimpiar {
+    color: #777;
+}
+
+.dark #btnLimpiar:hover {
+    color: #ef5350;
+    background: rgba(239, 83, 80, 0.12);
+}
+
+/* RESPONSIVE */
+@media (max-width: 700px) {
+    #btnLimpiar {
+        right: 38px;
+        font-size: 16px;
+        padding: 3px 6px;
+    }
+}
+
+@media (max-width: 480px) {
+    #btnLimpiar {
+        right: 34px;
+        font-size: 14px;
+        padding: 2px 5px;
+    }
+}

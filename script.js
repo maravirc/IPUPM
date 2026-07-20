@@ -1042,6 +1042,80 @@ function reiniciarSticky() {
 }
 
 window.reiniciarSticky = reiniciarSticky;
+
+// ==========================
+// BOTÓN LIMPIAR BÚSQUEDA
+// ==========================
+
+const btnLimpiar = document.getElementById('btnLimpiar');
+const inputBuscar = document.getElementById('buscar');
+
+// Función para mostrar/ocultar el botón limpiar
+function toggleBtnLimpiar() {
+    const texto = inputBuscar.value.trim();
+    if (texto.length > 0) {
+        btnLimpiar.style.display = 'block';
+    } else {
+        btnLimpiar.style.display = 'none';
+    }
+}
+
+// Escuchar eventos en el input
+if (inputBuscar) {
+    inputBuscar.addEventListener('input', toggleBtnLimpiar);
+    inputBuscar.addEventListener('keyup', toggleBtnLimpiar);
+}
+
+// Limpiar el texto al hacer clic en el botón
+if (btnLimpiar) {
+    btnLimpiar.addEventListener('click', function() {
+        inputBuscar.value = '';
+        inputBuscar.focus();
+        toggleBtnLimpiar();
+        
+        // Disparar evento 'input' para actualizar la búsqueda
+        const event = new Event('input', { bubbles: true });
+        inputBuscar.dispatchEvent(event);
+        
+        // Opcional: mostrar notificación
+        // mostrarToast('🧹 Búsqueda limpiada');
+    });
+}
+
+// Verificar estado inicial al cargar
+document.addEventListener('DOMContentLoaded', function() {
+    setTimeout(toggleBtnLimpiar, 100);
+});
+
+// También al presionar Escape se limpia
+if (inputBuscar) {
+    inputBuscar.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape') {
+            this.value = '';
+            toggleBtnLimpiar();
+            this.blur();
+            const event = new Event('input', { bubbles: true });
+            this.dispatchEvent(event);
+        }
+    });
+}
+
+// Al cambiar de sección (Himnos, Coros, Favoritos) también ocultar el botón
+const btnHimnos = document.getElementById('btnHimnos');
+const btnCoros = document.getElementById('btnCoros');
+const btnFavoritos = document.getElementById('btnFavoritos');
+
+if (btnHimnos) btnHimnos.addEventListener('click', function() {
+    setTimeout(toggleBtnLimpiar, 50);
+});
+
+if (btnCoros) btnCoros.addEventListener('click', function() {
+    setTimeout(toggleBtnLimpiar, 50);
+});
+
+if (btnFavoritos) btnFavoritos.addEventListener('click', function() {
+    setTimeout(toggleBtnLimpiar, 50);
+});
 cargarHimnos();
 
 // ==========================
