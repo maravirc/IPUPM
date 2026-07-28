@@ -1238,7 +1238,8 @@ footer{
 @media (max-width: 387px) {
     .btn-compartir-app {
  width: 130px;      /* mismo ancho */
-    height: 40px;      /* mismo alto */
+    height: 35px;      /* mismo alto */
+    font-size: 12px;
     }
 }
 
