@@ -33,7 +33,7 @@
 <div class="topbar">
     <header style="padding: 10px 20px;">
         <h1 style="font-size: 22px;">📖 Himnario IPUP</h1>
-        <p id="subtitulo" style="font-size: 16px; margin-top: 2px;">Iglesia Pentecostal Unida - Moyobamba</p>
+        <p id="subtitulo" style="font-size: 13px; margin-top: 2px;">Iglesia Pentecostal Unida - Moyobamba</p>
     </header>
 
     <section class="busqueda" style="display: flex; align-items: center; padding: 5px 11px; position: relative;">
@@ -63,6 +63,30 @@
                     background: transparent;
                 "
             >
+
+            <!-- Botón de limpiar (✕) -->  
+            <button id="btnLimpiar" style="
+            position: absolute;
+            right: 57px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 36px;
+            height: 36px;
+            background: rgba(13, 71, 161, 1);
+            border: 2px solid rgba(13, 71, 161, 1);
+            border-radius: 50%;
+            color: #fff;
+            font-size: 22px;
+            font-weight: 900;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            padding: 0;
+            line-height: 1;
+        ">
+            ✕
+        </button>
             
             <!-- Botón de voz -->
             <button id="btnVoz" style="
@@ -123,36 +147,26 @@
     <p>© 2026 Iglesia Pentecostal Unida - Moyobamba</p>
 </footer>
 
-<script src="script.js"></script>
+<div id="updateBanner">
 
-<!-- ==========================
-     ACTUALIZACIÓN DISPONIBLE
-========================== -->
-
-<div id="updateBanner" class="update-banner">
-    <div class="update-content">
-        <div>
-            <strong>🚀 Nueva actualización disponible</strong>
-            <p>Hay mejoras y correcciones para el Himnario.</p>
-        </div>
-
-        <button id="btnActualizarApp">
-            Actualizar
-        </button>
+    <div>
+        <strong>� Nueva actualización disponible</strong>
+        <p class="versiones"></p>
     </div>
+
+    <button id="btnActualizarApp">
+        Actualizar
+    </button>
+
 </div>
 
+<script src="script.js"></script>
+
 <script>
-if ("serviceWorker" in navigator) {
-
-    window.addEventListener("load", async () => {
-
-        const registro = await navigator.serviceWorker.register("service-worker.js");
-
-        registro.update();
-
+if("serviceWorker" in navigator){
+    window.addEventListener("load",()=>{
+        navigator.serviceWorker.register("service-worker.js");
     });
-
 }
 </script>
 

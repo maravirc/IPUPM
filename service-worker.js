@@ -1,5 +1,5 @@
-const CACHE_NAME = "himnario-ipu-v45"; // Cambia la versión cuando actualices
-const VERSION = "v45";
+const VERSION = "v72";
+const CACHE_NAME = "himnario-ipu-" + VERSION; // Cambia la versión cuando actualices
 
 // 📁 CORREGIDO: La ruta de los JSON debe ser data/
 const urlsToCache = [
@@ -64,19 +64,20 @@ self.addEventListener("fetch", event => {
                     console.log(`[SW] JSON desde caché: ${url.pathname}`);
                     return cachedResponse;
                 }
-return fetch(event.request, { cache: 'no-store' })
-.then(networkResponse => {
-
-    const responseClone = networkResponse.clone();
-
-    caches.open(CACHE_NAME)
-    .then(cache => {
-        cache.put(event.request, responseClone);
-    });
-
-    return networkResponse;
-
-})
+                // Si no está en caché, buscar en red
+                return fetch(event.request, { cache: 'no-store' })
+                .then(networkResponse => {
+                
+                    const copiaRespuesta = networkResponse.clone();
+                
+                    caches.open(CACHE_NAME)
+                    .then(cache => {
+                        cache.put(event.request, copiaRespuesta);
+                    });
+                
+                    return networkResponse;
+                
+                })
                 .catch(() => {
                     console.error(`[SW] Error al cargar JSON: ${url.pathname}`);
                     // Devolver JSON vacío en caso de error
@@ -97,19 +98,19 @@ return fetch(event.request, { cache: 'no-store' })
                 return cachedResponse;
             }
             // Si no está en caché, buscar en red
-return fetch(event.request)
-.then(networkResponse => {
-
-    const responseClone = networkResponse.clone();
-
-    caches.open(CACHE_NAME)
-    .then(cache => {
-        cache.put(event.request, responseClone);
-    });
-
-    return networkResponse;
-
-});
+            return fetch(event.request)
+            .then(networkResponse => {
+            
+                const copiaRespuesta = networkResponse.clone();
+            
+                caches.open(CACHE_NAME)
+                .then(cache => {
+                    cache.put(event.request, copiaRespuesta);
+                });
+            
+                return networkResponse;
+            
+            });
         })
     );
 });
